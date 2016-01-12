@@ -1,0 +1,32 @@
+.no-padding {
+padding-left: 0 !important;
+padding-right: 0 !important;
+}
+
+/* No collapse navbar fix */
+
+.navbar-no-collapse .navbar-nav > li {
+    float: left;
+}
+.navbar-no-collapse .navbar-form .form-group {
+    display: inline-block;
+}
+.navbar-no-collapse .navbar-left {
+    float: left !important;
+}
+.navbar-no-collapse .navbar-right {
+    float: right !important;
+}
+.navbar-no-collapse .navbar-form .form-control {
+    display: inline-block;
+	width: auto;
+}
+.navbar-no-collapse  .navbar-form {
+    width: auto;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+}

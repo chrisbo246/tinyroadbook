@@ -1,0 +1,51 @@
+.absolute-background-image:before, .absolute-background-image:after, .background-image:before, .background-image:after {
+	content: "";
+	position: absolute;
+	top: 50px;
+	margin-bottom: -70px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.absolute-background-image:after, .background-image:after {
+	z-index: -1;
+}
+.absolute-background-image:before, .background-image:before {
+	opacity: .5;
+	z-index: -1;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-attachment: relative;
+	background-size: cover;
+	filter: blur(5px) saturate(0.1);
+}
+.absolute-background-image:after, .background-image:after {
+	background-image: url(../images/backgrounds/pixel.png);
+	background-repeat: repeat;
+	opacity: .4;
+}
+.background-image {
+	.modal-content {
+		background-color: fade($modal-content-bg, 80%);
+	}
+	.table-striped>tbody>tr:nth-of-type(odd) {
+		background-color: fade($table-bg-accent, 40%);
+	}
+	.table-hover>tbody>tr:hover {
+		background-color: fade($table-bg-hover, 40%);
+	}
+	.list-group-item {
+		background-color: fade($list-group-bg, 40%);
+		&.active, &.active:hover, &.active:focus {
+			background-color: fade($list-group-active-bg, 40%);
+			border-color: fade($list-group-active-border, 40%);
+		}
+	}
+   .jumbotron {
+	    background-color: fade($jumbotron-bg, 40%);
+	}
+}
+#home.absolute-background-image:before, #home.background-image:before {
+	background-image: url(../images/backgrounds/turn-right.jpg);
+}

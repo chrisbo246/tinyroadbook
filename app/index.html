@@ -1,0 +1,348 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta name="msvalidate.01" content="93EAF08B55AC3C1EAD6FC56407B2D32A" />
+        <meta name="google-site-verification" content="zqEqsiPlmpNz2yZJ3A8ythPCkPXaR-v4P8sX5KW3Hd0" />
+        <meta name='yandex-verification' content='417bd8d59fedca40' />
+        <meta charset="utf-8">
+        <title>TinyRoadBook - Quick and minimalist roadbook editor</title>
+        <meta name="description" content="Create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&close;</button>
+            <h4>Warning!</h4>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        </div>
+        <![endif]-->
+        <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="."><small class="text-primary">Tiny</small><span>RoadBook</span>
+                    <sup class="text-warning">beta</sup></a>
+                </div>
+                <p class="navbar-text navbar-left hidden-xs hidden">
+                &ldquo;A small road map editor for bigger adventures...&rdquo;</p>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#home" data-toggle="tab">
+                            <i class="glyphicon glyphicon-home"></i> Home</a></li>
+                        <li><a href="#picker" data-toggle="tab">
+                            <i class="glyphicon glyphicon-edit"></i> Editor</a></li>
+                        <li><a href="#settings" data-toggle="tab">
+                            <i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+                    </ul>
+                    <div class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <div class="addthis_sharing_toolbox" data-url="http://www.tinyroadbook.tk" data-title="I'm doing a tiny road book for my next tour"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="mainTabContent" class="tab-content">
+            <div id="home" class="tab-pane fade active in absolute-background-image" >
+                <div class="container">
+                    <div class="jumbotron">
+                        <h1>Tiny roadbook editor</h1>
+                        <p class="lead">A small application that allows you to create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!</p>
+                        <p>
+                            <a class="btn btn-primary btn-lg start-editing"><i class="glyphicon glyphicon-log-in"></i> Start now</a>
+                            <a class="btn btn-default btn-lg hidden start-tour"><i class="glyphicon glyphicon-play"></i> Quick tour</a>
+                        </p>
+                    </div>
+                    <div class="text-center -text-muted">
+                        <p>Made with <i class="glyphicon glyphicon-heart"></i>
+                        by a homeless nerd and bike tour enthusiast killing time by coding
+                        useless applications. You can make a small <a href="https://paypal.me/chrisbo1975" target="_blank"> donation</a> to promote a pro hosting/domain, a ad-free application, or for my daily pittance. Feel free to send your comments, suggestions, bug reports and other messages via this <a href="https://docs.google.com/forms/d/1uaCUT8lPsKDI9lgLJUMtlywup-Lne8yrS83CNpKdX30/viewform?edit_requested=true" target="_blank">contact</a> form. This application is powered by
+                        <a href="http://www.openstreetmap.org">openstreetmap.org</a> and the fair use Nominatim geocoding web service.<br/>Use it without abusing... and don't forget to share!</p>
+                    </div>
+                </div>
+            </div>
+            <div id="picker" class="tab-pane fade in" >
+                <div class="col-md-6 -no-padding">
+                    <div id="map" class="map"></div>
+                </div>
+                <div class="col-md-6">
+                    <nav id="editor_toolbar" class="navbar navbar-default navbar-no-collapse" >
+                        <div class="container-fluid">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li><a href="" class="ql-bold"><b>B</b></a></li>
+                                <li><a href="" class="ql-italic"><i>I</i></a></li>
+                                <li><a href="" class="ql-underline"><ins>U</ins></a></li>
+                                <li><a href="" class="ql-strike"><del>S</del></a></li>
+                            </ul>
+                            <div class="navbar-form navbar-left text-center hidden-xs hidden-md">
+                                <div class="form-group">
+                                    <label class="-hidden"><i class="glyphicon glyphicon-text-size"></i></label>
+                                    <select class="ql-size form-control -input-sm">
+                                        <option value="" selected>&nbsp;</option>
+                                        <option value="xx-small" style="font-size: xx-small">XXS</option>
+                                        <option value="x-small" style="font-size: x-small">XS</option>
+                                        <option value="smaller" style="font-size: smaller">Smaller</option>
+                                        <option value="small" style="font-size: small">Small</option>
+                                        <option value="normal" style="font-size: normal">Normal</option>
+                                        <option value="large" style="font-size: large">Large</option>
+                                        <option value="larger" style="font-size: larger">Larger</option>
+                                        <option value="x-large" style="font-size: x-large">XL</option>
+                                        <option value="xx-large" style="font-size: xx-large">XXL</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="glyphicon glyphicon-text-color"></i></label>
+                                    <select class="ql-color form-control -input-sm">
+                                        <option value="" selected>&nbsp;</option>
+                                        <option value="black">Black</option>
+                                        <option value="gray" style="color: gray">Gray</option>
+                                        <!--<option value="silver" style="color: silver">Silver </option>-->
+                                        <option value="lightgray" style="color: lightgray">Light</option>
+                                        <!--<option value="whitesmoke" style="color: whitesmoke">Smoke</option>-->
+                                        <option value="red" style="color: red">Red</option>
+                                        <option value="orange" style="color: orange">Orange</option>
+                                        <option value="yellow" style="color: yellow">Yellow</option>
+                                        <option value="lime" style="color: lime">Lime</option>
+                                        <option value="cyan" style="color: cyan">Cyan</option>
+                                        <option value="blue" style="color: blue">Blue</option>
+                                        <option value="magenta" style="color: magenta">Magenta</option>
+                                    </select>
+                                </div>
+                                <div class="form-group hidden">
+                                    <label><i class="glyphicon glyphicon-text-background"></i></label>
+                                    <select class="ql-background form-control -input-sm">
+                                        <option value="" selected>&nbsp;</option>
+                                        <option value="black">Black</option>
+                                        <option value="gray" style="color: gray">Gray</option>
+                                        <option value="lightgray " style="color: lightgray">LightGray </option>
+                                        <option value="red" style="color: red">Red</option>
+                                        <option value="orange" style="color: orange">Orange</option>
+                                        <option value="yellow" style="color: yellow">Yellow</option>
+                                        <option value="lime" style="color: lime">Lime</option>
+                                        <option value="cyan" style="color: cyan">Cyan</option>
+                                        <option value="blue" style="color: blue">Blue</option>
+                                        <option value="magenta" style="color: magenta">Magenta</option>
+                                    </select>
+                                </div>
+                                <div class="form-group hidden">
+                                    <label><i class="glyphicon glyphicon-align-left"></i></label>
+                                    <select class="ql-align form-control -input-sm">
+                                        <option value="left" selected>Left</option>
+                                        <option value="center">Center</option>
+                                        <option value="right">Right</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="print_editor" href="#print">
+                                    <i class="glyphicon glyphicon-print"></i> Print</a></li>
+                                <li><a id="erase_editor" href="#erase">
+                                    <i class="glyphicon glyphicon-erase"></i> Erase</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="editor"></div>
+                        </div>
+                    </div>
+                    <!--
+                    <div id="get_started_alert" class="alert alert-dismissible alert-info" style="-display: none;">
+                        <button type="button" class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></button>
+                        <h4><i class="glyphicon glyphicon-info-sign"></i> Let's get started!</h4>
+                        Zoom the map then click on your way-points. The city names will be inserted in the edition zone at cursor position.
+                    </div>
+                    -->
+                    <form>
+                        <input id="stored_roadbook" type="hidden" />
+                    </form>
+                </div>
+            </div>
+            <div id="settings" class="tab-pane fade in" >
+                <div class="container">
+                    <form id="settings_form" data-persist="garlic">
+                        <div class="row">
+                            <fieldset class="col-md-6">
+                                <legend><i class="glyphicon glyphicon-pushpin"></i> Picker</legend>
+                                <!--
+                                <div class="form-group">
+                                    <label>Smallest area</label>
+                                    <select id="smallest_area_type" class="form-control">
+                                        <option value="hamlet">Hamlet</option>
+                                        <option value="village" selected>Village</option>
+                                        <option value="town">Town</option>
+                                        <option value="city_district">City district</option>
+                                        <option value="city">City</option>
+                                        <option value="county">County</option>
+                                        <option value="state_district">State district</option>
+                                        <option value="state">State</option>
+                                        <option value="country">Country</option>
+                                    </select>
+                                    <span class="help-block">The smallest area that will be returned (eg. select "city" if you don't care about small villages, or "Country" if you want to list only countries).</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Zoom level</label>
+                                    <input id="zoom_level_extraction" type="number" min="-1" max="18" value="10" class="form-control">
+                                    <span class="help-block">-1 = continents, 18 = villages.</span>
+                                </div>
+                                -->
+                                <div class="form-group">
+                                    <label for="separator">Separator</label>
+                                    <textarea id="separator" rows="1" class="form-control">, </textarea>
+                                    <span class="help-block">Text to append after each insertion.
+                                    It can be a comma, a line break or whatever.</span>
+                                </div>
+                                <label>Include</label>
+                                <div class="checkbox">
+                                    <label><input id="insert_local_name" type="checkbox" checked value="icon">
+                                    Local name</label>
+                                    <!--<br/><label><input id="insert_icon" type="checkbox" value="icon">
+                                    Administrative area icon</label>-->
+                                </div>
+                                <label>Auto-format</label>
+                                <div class="checkbox">
+                                    <label><input id="font_size_proportional" type="checkbox" value="population">Font size proportional to population</label><br>
+                                    <label><input id="font_color_proportional" type="checkbox" value="population">Font color proportional to population</label>
+                                </div>
+                                <span class="help-block hidden"><i class="glyphicon glyphicon-alert text-warning"></i> This may reduce name
+                                extraction speed.</span>
+                            </fieldset>
+                            <fieldset class="col-md-6">
+                                <legend><i class="glyphicon glyphicon-globe"></i> Map</legend>
+                                <div class="form-group">
+                                    <label for="gpx_file_path">GPS track</label>
+                                    <input id="gpx_file_path" class="form-control" type="file" accept=".gpx" />
+                                    <span class="help-block">Visualize your route by uploading a GPS track file (.gpx).</span>
+                                </div>
+                            </fieldset>
+                            <!--
+                            <fieldset class="col-md-6">
+                                <legend><i class="glyphicon glyphicon-asterisk"></i>
+                                Miscellaneous</legend>
+                                <label>Display / hide</label>
+                                <div class="checkbox">
+                                  <label><input id="editor_toolbar_visibility" type="checkbox" value="toolbar">Editor toolbar</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="export_direction">Printing direction</label>
+                                    <select id="export_direction" class="form-control">
+                                        <option value="inline" selected>Inline (comma separated)</option>
+                                        <option value="vertical">Vertical (line breaks)</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                            -->
+                            <fieldset class="col-md-6">
+                                <legend><i class="glyphicon glyphicon-refresh"></i> Reset</legend>
+                                <button id="reset_settings" type="button" class="btn btn-default btn-block">Restore settings</button>
+                                <button id="reset_all" type="button" class="btn btn-default btn-block btn-warning">Delete all data</button>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="about" class="tab-pane fade in" >
+                <div class="container">
+                    <div class="page-header">
+                        <h1>About</h1>
+                    </div>
+                </div>
+            </div>
+            <div id="help" class="tab-pane fade in" >
+                <div class="container">
+                    <div class="page-header">
+                        <h1>Help</h1>
+                    </div>
+                </div>
+            </div>
+            <div id="contact" class="tab-pane fade in" >
+                <div class="container">
+                    <div class="page-header">
+                        <h1>Contact</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav id="ad_container" class="navbar navbar-default -navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid text-center">
+                <ins class="adsbygoogle"></ins>
+            </div>
+        </nav>
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
+        <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
+        <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
+        <!-- endbower -->
+        <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="/bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+        <!-- build:js(.) scripts/vendor.js -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":false};
+        </script>         
+        <!-- bower:js -->
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/bower-ol3/build/ol.js"></script>
+        <script src="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
+        <script src="/bower_components/garlicjs/dist/garlic.min.js"></script>
+        <script src="/bower_components/quill/dist/quill.js"></script>
+        <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="/bower_components/cookieconsent2/cookieconsent.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js(.) scripts/plugins.js -->
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+        <!-- build:js scripts/main.js -->
+        <script src="scripts/mapModule.js"></script>
+        <script src="scripts/mapLayersModule.js"></script>
+        <script src="scripts/mapControlsModule.js"></script>
+        <script src="scripts/mapInputsModule.js"></script>
+        <script src="scripts/mapDrawModule.js"></script>
+        <script src="scripts/cityPickerModule.js"></script>
+        <script src="scripts/adsenseModule.js"></script>
+        <script src="scripts/geocodeModule.js"></script>
+        <script src="scripts/tabModule.js"></script>
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927" async="async"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-72237495-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>
