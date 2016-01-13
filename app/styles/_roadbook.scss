@@ -1,24 +1,8 @@
 
-#mainTabContent{
-height:100%;
-}
-
 #picker, #picker > div {
 height:100%;
 overflow: auto;
 }
-
-#editor .ql-editor{
-background-color: #fff; 
-background-image: 
-linear-gradient(transparent .95em, #eee 1em);
-background-size: 100% 1em;
-background-position: left top;
-padding: 0 1em;
-min-height: 350px;
-}
-
-
 
 /* Settings */
 #separator {
@@ -26,7 +10,6 @@ min-height: 350px;
     overflow: hidden;
     resize: none;
 }
-
 
 
 /* City names style */

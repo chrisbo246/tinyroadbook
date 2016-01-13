@@ -1,0 +1,59 @@
+
+@import "./_roadbook";
+
+
+/* ol3 */
+.map {
+	width: 100%;
+	height: 100%;
+	min-height: 420px;
+	margin: 0;
+	padding: 0;
+}
+.map:-moz-full-screen {
+	height: 100%;
+}
+.map:-webkit-full-screen {
+	height: 100%;
+}
+.map:-ms-fullscreen {
+	height: 100%;
+}
+.map:fullscreen {
+	height: 100%;
+}
+.ol-attribution ul {
+    font-size: 1rem;
+}
+
+
+/* ol3-layerswitcher */
+.layer-switcher {
+	top: 2.5em;
+}
+.layer-switcher button{
+    height: 1.375em;
+    width: 1.375em;
+	background-size: 100%;
+	background-position: 0;
+}
+
+
+/* Google Adsense */
+.adsbygoogle {
+	display: block;
+	overflow: hidden;
+}
+
+
+/* Quill */
+
+.ql-editor{
+background-color: #fff; 
+background-image: 
+linear-gradient(transparent .95em, #eee 1em);
+background-size: 100% 1em;
+background-position: left top;
+padding: 0 1em;
+min-height: 350px;
+}

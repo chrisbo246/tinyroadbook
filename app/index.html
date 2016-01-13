@@ -11,15 +11,6 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
-        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
-        <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
-        <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
-        <!-- endbower -->
-        <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
-        <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
-        <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -68,7 +59,7 @@
         <div id="mainTabContent" class="tab-content">
             <div id="home" class="tab-pane fade active in absolute-background-image" >
                 <div class="container">
-                    <div class="jumbotron">
+                    <div class="jumbotron text-center">
                         <h1>Tiny roadbook editor</h1>
                         <p class="lead">A small application that allows you to create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!</p>
                         <p>
@@ -291,13 +282,23 @@
                 <ins class="adsbygoogle"></ins>
             </div>
         </nav>
+
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
+        <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
+        <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
+        <!-- endbower -->
+        <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
+        <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/override.css -->
+        <link rel="stylesheet" href="styles/override.css">
+        <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="/bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
         <!-- build:js(.) scripts/vendor.js -->
-        <script type="text/javascript">
-            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":null};
-        </script>         
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/bower-ol3/build/ol.js"></script>
@@ -307,6 +308,9 @@
         <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/bower_components/cookieconsent2/cookieconsent.js"></script>
         <!-- endbower -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":false};
+        </script>         
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
