@@ -5,12 +5,24 @@
         <meta name="google-site-verification" content="zqEqsiPlmpNz2yZJ3A8ythPCkPXaR-v4P8sX5KW3Hd0" />
         <meta name='yandex-verification' content='417bd8d59fedca40' />
         <meta charset="utf-8">
-        <title>TinyRoadBook - Quick and minimalist roadbook editor</title>
+        <title>TinyRoadBook - Minimalist roadbook editor</title>
         <meta name="description" content="Create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
+        <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
+        <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
+        <!-- endbower -->
+        <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
+        <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -279,24 +291,12 @@
                 <ins class="adsbygoogle"></ins>
             </div>
         </nav>
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
-        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
-        <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
-        <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
-        <!-- endbower -->
-        <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
-        <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="/bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
         <!-- build:js(.) scripts/vendor.js -->
         <script type="text/javascript">
-            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":false};
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":null};
         </script>         
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
