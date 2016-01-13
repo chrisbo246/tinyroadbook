@@ -392,7 +392,7 @@ module.exports = function (grunt) {
       },
       assets: {
         files: [{
-          src: ['index.html']
+          src: ['<%= config.dist %>/index.html']
         }]
       }
     }
@@ -449,7 +449,6 @@ module.exports = function (grunt) {
     'modernizr',
     'filerev',
     'usemin',
-    'cacheBust',
     'htmlmin'
   ]);
 
