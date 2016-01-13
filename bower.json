@@ -2,8 +2,8 @@
   "name": "tinyroadbook",
   "private": true,
   "dependencies": {
-    "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.3",
+    "bootstrap-sass": "~3.3.6",
     "bower-ol3": "ol3#~3.4.0",
     "ol3-layerswitcher": "~1.0.4",
     "garlicjs": "~1.2.4",
@@ -19,5 +19,9 @@
         "assets/javascripts/bootstrap.js"
       ]
     }
+  },
+  "devDependencies": {
+    "chai": "~3.4.2",
+    "mocha": "~2.3.4"
   }
 }
