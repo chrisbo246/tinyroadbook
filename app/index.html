@@ -11,9 +11,7 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -282,7 +280,9 @@
                 <ins class="adsbygoogle"></ins>
             </div>
         </nav>
-
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
         <!-- build:css(.) styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
@@ -299,6 +299,9 @@
         <script src="/bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
         <!-- build:js(.) scripts/vendor.js -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":false};
+        </script>    
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/bower-ol3/build/ol.js"></script>
@@ -307,10 +310,7 @@
         <script src="/bower_components/quill/dist/quill.js"></script>
         <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/bower_components/cookieconsent2/cookieconsent.js"></script>
-        <!-- endbower -->
-        <script type="text/javascript">
-            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"OK","learnMore":"More info","link":null,"theme":false};
-        </script>         
+        <!-- endbower -->     
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
