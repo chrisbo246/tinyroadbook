@@ -381,7 +381,22 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
+    },
+    
+    cacheBust: {
+      options: {
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 16,
+        deleteOriginals: true
+      },
+      assets: {
+        files: [{
+          src: ['index.html']
+        }]
+      }
     }
+    
   });
 
 
@@ -434,6 +449,7 @@ module.exports = function (grunt) {
     'modernizr',
     'filerev',
     'usemin',
+    'cacheBust',
     'htmlmin'
   ]);
 
