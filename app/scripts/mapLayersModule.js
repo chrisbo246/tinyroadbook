@@ -106,7 +106,7 @@ var mapLayersModule = (function () {
     layers.openStreetMapHumanitarian = function () {
         return new ol.layer.Tile({
             name: 'openStreetMapHumanitarian',
-            title: 'Humanitarian <small>(OpenStreetMap)</small>',
+            title: 'Humanitarian <small>(by OpenStreetMap)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [
@@ -148,7 +148,7 @@ var mapLayersModule = (function () {
     layers.openCycleMap = function () {
         return new ol.layer.Tile({
             name: 'openCycleMap',
-            title: 'Cycling roads<small> (OpenCycleMap)</small>',
+            title: 'Cycling roads<small> (by OpenCycleMap)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [
@@ -167,7 +167,7 @@ var mapLayersModule = (function () {
     layers.thunderforestTransport = function () {
         return new ol.layer.Tile({
             name: 'thunderforestTransport',
-            title: 'Transports<small> (ThunderForest)</small>',
+            title: 'Transports<small> (by ThunderForest)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [
@@ -186,7 +186,7 @@ var mapLayersModule = (function () {
     layers.thunderforestTransportDark = function () {
         return new ol.layer.Tile({
             name: 'thunderforestTransportDark',
-            title: 'Transport dark<small> (ThunderForest)</small>',
+            title: 'Transport dark<small> (by ThunderForest)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [
@@ -205,7 +205,7 @@ var mapLayersModule = (function () {
     layers.thunderforestLandscape = function () {
         return new ol.layer.Tile({
             name: 'thunderforestLandscape',
-            title: 'Landscape<small> (ThunderForest)</small>',
+            title: 'Landscape<small> (by ThunderForest)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [
@@ -224,7 +224,7 @@ var mapLayersModule = (function () {
     layers.thunderforestOutdoor = function () {
         return new ol.layer.Tile({
             name: 'thunderforestOutdoor',
-            title: 'Outdoor activities<small> (ThunderForest)</small>',
+            title: 'Outdoor activities<small> (by ThunderForest)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [

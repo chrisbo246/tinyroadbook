@@ -1,7 +1,429 @@
+
+/* ===[ cursor ]=== */
+
+.clickable {
+cursor:pointer; 
+}
+
+/* ===[ Font & icon size ]=== */
+
+//@media (min-width: 768px){
+
+.list-number-lg li:before,
+.text-lg {
+font-size: (4em / 3);
+}
+
+.list-number-2x li:before,
+.text-2x {
+font-size: 2em;
+}
+
+.list-number-3x li:before,
+.text-3x {
+font-size: 3em;
+}
+
+.list-number-4x li:before,
+.text-4x {
+font-size: 4em;
+}
+
+.list-number-5x li:before,
+.text-5x {
+font-size: 5em;
+}
+
+.list-number-10x li:before,
+.text-10x {
+font-size: 10em;
+}
+
+.list-number-15x li:before,
+.text-15x {
+font-size: 15em;
+}
+
+//}
+
+/* ===[ Icons ]=== */
+
+/*
+.nav .glyphicon {
+
+  .glyphicon-lg {
+    line-height: (3em / 4);
+    vertical-align: -15%;
+  }
+  
+  &.pull-left { margin-right: .3em; }
+  &.pull-right { margin-left: .3em; }
+  
+  .glyphicon-border {
+    padding: .2em .25em .15em;
+    border: solid .08em $table-border-color;
+    border-radius: .1em;
+  }
+  
+}
+*/
+
+/* ===[ Unstyled ]=== */
+
+.link-unstyled, .link-unstyled:hover, .link-unstyled:focus {
+color: $text-color;
+text-decoration: none!important;
+}
+.link-unstyled:focus {
+  outline: none;
+}
+  
+table a.link-unstyled:not(.btn), .table a.link-unstyled:not(.btn) {
+  color: $text-color;
+}
+
+/* ===[ Block ]=== */
+
+.link-block {
+  display: block;
+  height: 100%;
+}
+
+
+/* ===[ No padding ]=== */
+
 .no-padding {
 padding-left: 0 !important;
 padding-right: 0 !important;
 }
+
+/* ===[ Condensed ]=== */
+
+.form-condensed {
+.form-group {
+margin-bottom: $table-condensed-cell-padding;
+//padding: $table-condensed-cell-padding;
+}
+}
+
+.list-condensed {
+margin-bottom: $table-condensed-cell-padding;
+}
+
+@media (max-width: 768px){
+.nav-justified-not-stacked > li {
+display: table-cell;
+width: 1%;
+}
+
+.nav-stacked-width-only {
+  > li {
+    float: none;
+    + li {
+      margin-top: 2px;
+      margin-left: 0; // no need for this gap between nav items
+    }
+  }
+}
+}
+
+/* ===[ ol with styled numbers ]=== */
+
+.list-number-surrounded {
+counter-reset: section;
+list-style-type: none;
+}
+
+.list-number-surrounded li:before {
+counter-increment: section;
+content: counter(section) " ";
+margin-right: 1em;
+float:left;
+vertical-align: -15%;
+}
+
+
+/* ===[ Surrounded icon or number ]=== */
+
+.list-number-surrounded li:before,
+.surrounded{
+display:inline-block;
+text-align: center;
+border: solid 2px;
+width: 1em;
+height: 1em;
+line-height: .85em!important;
+}
+
+.list-number-surrounded-lg li:before,
+.surrounded-lg{
+width: (4em / 3);
+height: (4em / 3);
+line-height: 1.2em!important;
+}
+
+.list-number-surrounded-2x li:before,
+.surrounded-2x{
+width: 2em;
+height: 2em;
+line-height: 1.8em!important;
+}
+
+.list-number-surrounded-3x li:before,
+.surrounded-3x{
+width: 3em;
+height: 3em;
+line-height: 2.9em!important;
+}
+
+.list-number-surrounded-4x li:before,
+.surrounded-4x{
+width: 4em;
+height: 4em;
+line-height: 4em!important;
+}
+
+.list-number-surrounded-5x li:before,
+.surrounded-5x {
+width: 5em;
+height: 5em;
+line-height: 5em!important;
+}
+.list-number-surrounded li,
+.list-number li {
+float: left;
+}
+/*
+.list-number-surrounded-lg li {
+line-height: 1.2em;
+}
+.list-number-surrounded-2x li {
+line-height: 2em;
+}
+.list-number-surrounded-3x li {
+line-height: 3em;
+}
+.list-number-surrounded-4x li {
+line-height: 4em;
+}
+.list-number-surrounded-5x li {
+line-height: 5em;
+}
+*/
+.list-number-surrounded-circle li:before,
+.surrounded-circle {
+border-radius: 50%;
+}
+
+
+/* ICONS ======================================================================================== */
+
+// Variables
+// --------------------------
+
+$icon-font-size-base:   $font-size-base;
+$icon-border-color:     darken($body-bg, 15%);
+$icon-inverse:          $body-bg;
+$icon-li-width:         (30em / 14);
+
+// Base Class Definition
+// -------------------------
+
+/*.glyphicon {
+  display: inline-block;
+  font: normal normal normal $icon-font-size-base/1 FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+}*/
+
+// Icon Sizes
+// -------------------------
+.glyphicon-lg {
+  font-size: (4em / 3);
+  line-height: (3em / 4);
+  vertical-align: -15%;
+}
+.glyphicon-2x { font-size: 2em; }
+.glyphicon-3x { font-size: 3em; }
+.glyphicon-4x { font-size: 4em; }
+.glyphicon-5x { font-size: 5em; }
+
+// List Icons
+// -------------------------
+
+.glyphicon-ul {
+  padding-left: 0;
+  margin-left: $icon-li-width;
+  list-style-type: none;
+  > li { position: relative; }
+}
+.glyphicon-li {
+  position: absolute;
+  left: -$icon-li-width;
+  width: $icon-li-width;
+  top: (2em / 14);
+  text-align: center;
+  &.glyphicon-lg {
+    left: (-$icon-li-width + (4em / 14));
+  }
+}
+// Bordered & Pulled
+// -------------------------
+
+.glyphicon-border {
+  padding: .2em .25em .15em;
+  border: solid .08em $icon-border-color;
+  border-radius: .1em;
+}
+
+.glyphicon {
+  &.pull-left { margin-right: .3em; }
+  &.pull-right { margin-left: .3em; }
+}
+
+// Fixed Width Icons
+// -------------------------
+.glyphicon-fw {
+  width: (18em / 14);
+  text-align: center;
+}
+
+// Stacked Icons
+// -------------------------
+
+.glyphicon-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+.glyphicon-stack-1x, .glyphicon-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.glyphicon-stack-1x { line-height: inherit; }
+.glyphicon-stack-2x { font-size: 2em; }
+.glyphicon-inverse { color: $icon-inverse; }
+
+// Mixins
+// --------------------------
+
+@mixin glyphicon-icon() {
+  display: inline-block;
+  font: normal normal normal $icon-font-size-base/1 FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+}
+
+@mixin glyphicon-icon-rotate($degrees, $rotation) {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$rotation);
+  -webkit-transform: rotate($degrees);
+      -ms-transform: rotate($degrees);
+          transform: rotate($degrees);
+}
+
+@mixin glyphicon-icon-flip($horiz, $vert, $rotation) {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$rotation, mirror=1);
+  -webkit-transform: scale($horiz, $vert);
+      -ms-transform: scale($horiz, $vert);
+          transform: scale($horiz, $vert);
+}
+
+// Animated Icons
+// --------------------------
+
+.glyphicon-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.glyphicon-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+/* ============================================================================================== */
+
+/* columns of same height styles */
+
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
 
 /* No collapse navbar fix */
 

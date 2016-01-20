@@ -155,6 +155,7 @@ var appModule = (function () {
         });
 
         // excluded: 'input[type="file"], input[type="hidden"], input[type="submit"], [data-persist="false"]'
+        $('input[type="hidden"]').trigger('change');
         // Garlic reset buttons
         $('#reset_settings').click(function () {
             $('#settings form').garlic('destroy');

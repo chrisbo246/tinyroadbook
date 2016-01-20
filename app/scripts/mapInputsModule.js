@@ -9,57 +9,260 @@
  * @module
  * @returns {Object} mapModule
  */
-var mapInputsModule = (function (mapModule) {
+var mapInputsModule = (function () {
     'use strict';
 
-    /**
-     * Layer switcher
-     * @param {string} selector - Select input ID
-     * @param {Object} map - OL3 map
-     */
-    mapModule.addLayerSwitcher = function (selector, map) {
+    /** @private */
+    var map;
 
-        var $el = $(selector);
-        if (!$el) {
+    /** @private */
+    var inputs = {};
+
+
+
+    /**
+     * Create a new input using predefined settings
+     * @public
+     * @param {string} name - Predefined input (variable name)
+     * @returns {Object} OL3 layer
+     */
+    var create = function (name, selector, map) {
+
+        if (!inputs[name]) {
+            console.warn(name + ' input definition does not exists');
             return;
         }
 
-        var layers = map.getLayers();
+        var input = inputs[name](selector);
 
-        $el.change(function () {
-            var name = $el.find(':selected').val();
-            layers.forEach(function (layer) {
-                layer.set('visible', (layer.get('name') === name));
+        return input;
+
+    };
+
+
+
+    /**
+     * Base layer select
+     * @param {string} selector - Select input ID
+     * @param {Object} map - OL3 map
+     */
+    inputs.layer = function (selector) {
+        var $input = $(selector);
+        if ($input) {
+            map.getLayers().forEach(function (layer) {
+                if (layer.get('visible')) {
+                    $input.val(layer.get('name'));
+                }
             });
-        });
-
-        $el.trigger('change');
-
+            $input.on('change', function () {
+                var name = $input.find(':selected').val();
+                map.getLayers().forEach(function (layer) {
+                    layer.set('visible', (layer.get('name') === name));
+                });
+            });
+        }
     };
 
 
 
     /**
-     * Zoom switcher
-     * @param {string} selector - Select input ID
+     * Map zoom input
+     * @param {string} selector - Input ID or class
      * @param {Object} map - OL3 map
      */
-    mapModule.addZoomSwitcher = function (selector, map) {
-
-        var $el = $(selector);
-        if (!$el) {
-            return;
+    inputs.zoom = function (selector) {
+        var $input = $(selector);
+        if ($input) {
+            $input.val(this.getZoom());
+            $input.on('change', function () {
+                var val = $input.val();
+                if (val || val === 0) {
+                    map.getView().setZoom(val);
+                }
+            });
+            map.getView().on('change:resolution', function () {
+                $input.val(this.getZoom());
+            });
         }
+    };
 
-        var view = map.getView();
-        view.on('change:resolution', function () {
-            var zoom = view.getZoom();
-            $el.val(zoom);
+
+
+    /**
+     * Map resolution input
+     * @param {string} selector - Input ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.resolution = function (selector) {
+        var $input = $(selector);
+        if ($input) {
+            $input.val(this.getResolution());
+            $input.on('change', function () {
+                var val = $input.val();
+                if (val || val === 0) {
+                    map.getView().setResolution(val);
+                }
+            });
+            map.getView().on('change:resolution', function () {
+                $input.val(this.getResolution());
+            });
+        }
+    };
+
+
+
+    /**
+     * Map rotation input
+     * @param {string} selector - Input ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.rotation = function (selector) {
+        var $input = $(selector);
+        $input.on('change', function () {
+            var val = $input.val();
+            if (val || val === 0) {
+                map.getView().setRotation(val);
+            }
+        });
+        map.getView().on('change:rotation', function () {
+            $input.val(this.getRotation());
         });
     };
 
 
 
-    return mapModule;
+    /**
+     * Map X center input
+     * @param {string} selector - Input ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.centerX = function (selector) {
+        var $input = $(Xselector);
+        $input.on('change', function () {
+            var val = $input.val();
+            if (val || val === 0) {
+                // map.getView().setCenter($centerX.val(), $centerY.val());
+            }
+        });
+        map.getView().on('change:center', function () {
+            var lonLat = this.getCenter();
+            $input.val(lonLat[0]); // .toFixed(2)
+        });
+    };
 
-})(mapModule || {});
+
+
+    /**
+     * Map Y center input
+     * @param {string} selector - Input ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.centerY = function (selector) {
+        var $input = $(selector);
+        $input.on('change', function () {
+            var val = $input.val();
+            if (val || val === 0) {
+                //map.getView().setCenter($centerX.val(), val);
+            }
+        });
+        map.getView().on('change:center', function () {
+            var lonLat = this.getCenter();
+            $input.val(lonLat[1]); // .toFixed(2)
+        });
+    };
+
+
+
+    /**
+     * Map XY center input
+     * @param {string} selector - Input ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.center = function (Xselector, Yselector) {
+        var $centerX = $(Xselector);
+        var $centerY = $(Yselector);
+        map.getView().on('change:center', function () {
+            var lonLat = this.getCenter();
+            if (lonLat) {
+                $centerX.val(lonLat[0].toFixed(2));
+                $centerY.val(lonLat[1].toFixed(2));
+            }
+        });
+        $(Xselector + ', ' + Yselector).on('change', function () {
+            if (($centerX.val() || $centerX.val() === 0) && ($centerY.val() || $centerY.val() === 0)) {
+                map.getView().setCenter($centerX.val(), $centerY.val());
+            }
+        });
+    };
+
+
+
+    /**
+     * Export map as PNG
+     * @param {string} selector - Link ID or class
+     * @param {Object} map - OL3 map
+     */
+    inputs.exportPNG = function (selector) {
+        var $input = document.getElementById('export-png');
+        if ($input) {
+            $input.on('click', function () {
+                map.once('postcompose', function (event) {
+                    var canvas = event.context.canvas;
+                    $input.attr('href', canvas.toDataURL('image/png'));
+                });
+                // map.renderSync();
+            });
+        }
+    };
+
+
+
+    /**
+     * Update layer source url from a file input
+     * <input id="gpx_file_path" type="file" accept=".gpx" />
+     * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
+     * @public
+     * @param {string} selector - File input ID
+     * @param {Object} layer - OL3 vector layer
+     */
+    inputs.GPXSource = function (selector, layer) {
+
+        if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+            console.warn('The File APIs are not fully supported in this browser.');
+        }
+
+        var $filePath = $(selector);
+        $filePath.on('change', function (e) {
+
+            var files = e.target.files;
+            files.forEach(function (f) {
+
+                var reader = new FileReader();
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        layer.setProperties({
+                            title: escape(theFile.name),
+                            source: new ol.source.Vector({
+                                url: e.target.result,
+                                format: new ol.format.GPX()
+                            }),
+                            visible: true
+                        });
+                    };
+                })(f);
+
+                reader.readAsDataURL(f);
+
+            });
+
+        });
+
+    };
+
+    
+    
+    return {
+        create: create
+    };
+
+})();

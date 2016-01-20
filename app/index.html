@@ -5,15 +5,13 @@
         <meta name="google-site-verification" content="zqEqsiPlmpNz2yZJ3A8ythPCkPXaR-v4P8sX5KW3Hd0" />
         <meta name='yandex-verification' content='417bd8d59fedca40' />
         <meta charset="utf-8">
-        <title>TinyRoadBook - Minimalist roadbook editor</title>
+        <title>TinyRoadBook - A minimalist road book editor for an unforgettable road trips</title>
         <meta name="description" content="Create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/above_the_fold.css -->
-        <link rel="stylesheet" href="styles/above_the_fold.css">
-        <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -33,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="."><small class="text-primary">Tiny</small><span>RoadBook</span>
+                    <a class="navbar-brand" href=".">Tiny<span>RoadBook</span>
                     <sup class="text-warning">beta</sup></a>
                 </div>
                 <p class="navbar-text navbar-left hidden-xs hidden">
@@ -57,21 +55,46 @@
             </div>
         </nav>
         <div id="mainTabContent" class="tab-content">
-            <div id="home" class="tab-pane fade active in absolute-background-image" >
+            <div id="home" class="tab-pane fade active in -absolute-background-image" >
                 <div class="container">
-                    <div class="jumbotron text-center">
-                        <h1>Tiny roadbook editor</h1>
-                        <p class="lead">A small application that allows you to create a minimalist roadbook with just few click on a map. Extract city names, freely edit your roadbook, print it... You're ready to leave in minutes!</p>
-                        <p>
-                            <a class="btn btn-primary btn-lg start-editing"><i class="glyphicon glyphicon-log-in"></i> Start now</a>
-                            <a class="btn btn-default btn-lg hidden start-tour"><i class="glyphicon glyphicon-play"></i> Quick tour</a>
-                        </p>
+                    <div class="jumbotron -text-center">
+                        <i class="material-icons text-15x text-muted pull-left hidden-xs">directions</i>
+                        <h1>Minimalist road book editor</h1>
+                        <p class="lead">Why having a too detailed road book when looking for adventure?
+                        This application simply allows you to extract city names with just few click on a map then freely edit your road book as you see fit. You're ready to leave in minutes!</p>
                     </div>
-                    <div class="text-center -text-muted">
-                        <p>Made with <i class="glyphicon glyphicon-heart"></i>
-                        by a homeless nerd and bike tour enthusiast killing time by coding
-                        useless applications. You can make a small <a href="https://paypal.me/chrisbo1975" target="_blank"> donation</a> to promote a pro hosting/domain, a ad-free application, or for my daily pittance. Feel free to send your comments, suggestions, bug reports and other messages via this <a href="https://docs.google.com/forms/d/1uaCUT8lPsKDI9lgLJUMtlywup-Lne8yrS83CNpKdX30/viewform?edit_requested=true" target="_blank">contact</a> form. This application is powered by
-                        <a href="http://www.openstreetmap.org">openstreetmap.org</a> and the fair use Nominatim geocoding web service.<br/>Use it without abusing... and don't forget to share!</p>
+                    <div class="row">
+                        <div class="row-same-height">
+                            <div class="col-md-4 col-md-height text-center">
+                                <div class="-well">
+                                    <i class="material-icons text-5x text-muted">directions_bike</i>
+                                    <h2>Cycle route planner</h2>
+                                    <p>You likes bike touring? This application is provided with the Opencyclemap bikemap and the Lonvia cycling layer. Just follow one of the official bike routes to plan your epic bike trip.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-height text-center">
+                                <div class="-well">
+                                    <i class="material-icons text-5x text-muted">gps_fixed</i>
+                                    <h2>GPX viewer</h2>
+                                    <p>You'd like to preview your route to simplify your roadbook edition? Just download a GPX file from a GPS track sharing website and select it from settings. Your road will show up on the map.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center text-muted">
+                            <p></p>
+                            <p>
+                                <a class="btn btn-primary btn-lg btn-block text-3x start-editing"><i class="glyphicon glyphicon-log-in"></i> Start now</a>
+                                <a class="btn btn-default btn-lg hidden start-tour"><i class="glyphicon glyphicon-play"></i> Quick tour</a>
+                            </p>
+                            <p><small>Bike tour, bike touring, bike trip, bikemap, cycle route planner, cycling tour, driving route planner, europe tour, european tour, free application, gpx viewer, itinerary planner, open street map, opencyclemap, plan a road trip, plan my route, road book, road trip, road trip usa, road tripping, road trips, roadbook, roadtrip, route planner, tour planner, trip planner, trip planner map, trip planning, walking route planner, world travel.</small></p>
+                            <hr/>
+                            <p><small class="text-muted">This application is powered by <a href="http://www.openstreetmap.org">Open Street Map</a> and the fair use Nominatim geocoding web service. You can send your comments, suggestions, bug reports and other messages via this <a href="https://docs.google.com/forms/d/1uaCUT8lPsKDI9lgLJUMtlywup-Lne8yrS83CNpKdX30/viewform?edit_requested=true" target="_blank">contact form</a>.
+                            <br/>A <a href="https://paypal.me/chrisbo1975" target="_blank">small contribution</a> would be very appreciate to promote a "real" hosting/domain and for my daily pittance.
+                            <br/>Made with <i class="glyphicon glyphicon-heart"></i> by a broke bike tour enthusiast 
+                            </small></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,8 +190,9 @@
                         Zoom the map then click on your way-points. The city names will be inserted in the edition zone at cursor position.
                     </div>
                     -->
-                    <form>
-                        <input id="stored_roadbook" type="hidden" />
+                    <form id="hidden_form" data-persist="garlic">
+                        <input id="stored_roadbook" class="garlic-auto-save" type="hidden" />
+                        <input class="garlic-auto-save" type="hidden" name="image_ids[0]" value="" />
                     </form>
                 </div>
             </div>
@@ -277,7 +301,7 @@
                 </div>
             </div>
         </div>
-        <nav id="ad_container" class="navbar navbar-default -navbar-inverse navbar-fixed-bottom">
+        <nav id="ad_container" class="navbar -navbar-default -navbar-inverse navbar-fixed-bottom">
             <div class="container-fluid text-center">
                 <ins class="adsbygoogle"></ins>
             </div>
