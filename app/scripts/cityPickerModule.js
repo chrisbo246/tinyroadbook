@@ -14,8 +14,6 @@
 var cityPickerModule = (function () {
     'use strict';
 
-    var editor;
-
     var settings = {
         quill: {
             //readOnly: false,
@@ -23,9 +21,16 @@ var cityPickerModule = (function () {
             styles: false,
             formats: ['bold', 'italic', 'strike', 'underline',
                     'font', 'size', 'align', 'color', 'background'] //'bullet', 'list', 'image', 'link'
+        },
+        spinner: {
+            color: '#fff',
+            scale: 0.75
         }
     };
-
+    
+    var editor;
+    var spinner = new Spinner(settings.spinner);    
+    
     
 
     /**
@@ -254,10 +259,7 @@ var cityPickerModule = (function () {
             }
         });
 
-        geocodeModule.nominatimSearch(params, query).success(function (json) {
-            console.log(JSON.stringify(json));
-            _insertCity(json[0]);
-        });
+        return geocodeModule.nominatimSearch(params, query);
 
     };
 
@@ -273,7 +275,9 @@ var cityPickerModule = (function () {
         if (!position || !zoom) {
             return false;
         }
-
+        
+        spinner.spin(document.getElementById('spinner'));
+        
         //console.log('Zoom: ' + zoom);
         zoom = Math.min(Math.max((zoom || 10), 0), 18);
         //console.log('Extraction level: ' + zoom);
@@ -294,8 +298,17 @@ var cityPickerModule = (function () {
             //console.log(JSON.stringify(json));
 
             setTimeout(function () {
-                _getCityDetails(json);
+                return _getCityDetails(json)
+                    .success(function (json) {
+                        console.log(JSON.stringify(json));
+                        _insertCity(json[0]);
+                    })
+                    .done(function () {
+                        spinner.stop();
+                    });
             }, 1000);
+            
+            
             /*
             if ($('#font_color_proportional, #font_size_proportional, #insert_local_name, #insert_icon').is(':checked')) {
                 // Wait 1s to respect the Nominatim policy
@@ -347,19 +360,20 @@ var cityPickerModule = (function () {
      * @param {Object} map - OL3 map
      */
     var setMap = function (map) {
-
+    
         map.on('click', function (evt) {
 
             var view = map.getView();
             var zoom = view.getZoom();
             var position = evt.coordinate;
             var projection = view.getProjection();
-
+            
             position = ol.proj.transform(position, projection.getCode(), 'EPSG:4326');
+            
             console.time('Reverse geocoding');
             _getCity(position, zoom);
             console.timeEnd('Reverse geocoding');
-
+            
         });
 
     };
@@ -406,7 +420,7 @@ var cityPickerModule = (function () {
             
             if (range) {
                 if (range.start === range.end) {
-                    qlMultiCursorModule.setCursor('selectionStart', range.start, 'Insertion point', '#337ab7');
+                    //qlMultiCursorModule.setCursor('selectionStart', range.start, 'Insertion point', '#337ab7');
                     $buttons.attr('disabled', true).closest('li').addClass('disabled');
                     console.log('Cursor is on', range.start);
                 } else {

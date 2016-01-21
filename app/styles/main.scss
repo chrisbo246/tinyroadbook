@@ -4,16 +4,17 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-@import "./_background";
-@import "./_scrollbar";
 @import "./_bootstrap_add-on";
+@import "./_scrollbar";
 @import "./_roadbook";
-
+//@import "./_background";
 
 body {
   overflow: auto;
   padding-top: 70px;
   padding-bottom: 100px;
+  //background-image: url("../images/backgrounds/dust_scratch.png");
+  //background-repeat: repeat;
 }
 
 body > .tab-content > .tab-pane {

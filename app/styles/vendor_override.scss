@@ -46,11 +46,23 @@
 /* Quill */
 
 .ql-editor{
-background-color: #fff; 
-background-image: 
-linear-gradient(transparent .95em, #eee 1em);
+//background-color: #fff; 
+/*
+background-image: linear-gradient(transparent .95em, #eee 1em);
 background-size: 100% 1em;
 background-position: left top;
-padding: 0 1em;
+background-image: url("../images/backgrounds/snow.png");
+background-repeat: repeat;
+padding: 2em 2em;
+*/
 min-height: 350px;
+}
+
+
+/* Addthis */
+.addthis_sharing_toolbox {
+line-height: 1em;
+}
+.at-share-tbx-element .at-share-btn {
+margin: 0 2px;
 }

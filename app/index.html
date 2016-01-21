@@ -10,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     </head>
     <body>
@@ -100,7 +99,9 @@
             </div>
             <div id="picker" class="tab-pane fade in" >
                 <div class="col-md-6 -no-padding">
-                    <div id="map" class="map"></div>
+                    <div id="map" class="map">
+                        <div id="spinner"></div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <nav id="editor_toolbar" class="navbar navbar-default navbar-no-collapse" >
@@ -306,9 +307,8 @@
                 <ins class="adsbygoogle"></ins>
             </div>
         </nav>
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- build:css(.) styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
@@ -318,9 +318,12 @@
         <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-floating.css" />
         <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
         <!-- endbuild -->
-        <!-- build:css(.tmp) styles/override.css -->
-        <link rel="stylesheet" href="styles/override.css">
+        <!-- build:css(.tmp) styles/vendor_override.css -->
+        <link rel="stylesheet" href="styles/vendor_override.css">
         <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->           
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="/bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -336,22 +339,25 @@
         <script src="/bower_components/quill/dist/quill.js"></script>
         <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/bower_components/cookieconsent2/cookieconsent.js"></script>
+        <script src="/bower_components/spin.js/spin.js"></script>
         <!-- endbower -->     
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+        <!--
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
-        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
-        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
-        <!-- endbuild -->
+        <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>        
+        -->
         <!-- build:js scripts/main.js -->
         <script src="scripts/mapModule.js"></script>
         <script src="scripts/mapLayersModule.js"></script>
