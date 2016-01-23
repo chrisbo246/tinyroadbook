@@ -195,6 +195,28 @@ var appModule = (function () {
             //learnMore: 'Learn more'
             theme: 'light-floating'
         });*/
+        
+        // Parallax
+        var $window = $(window);
+        $('section[data-type="background"]').each(function () {
+            var $scroll = $(this);
+            $window.scroll(function () {                          
+                var yPos = -($window.scrollTop() / $scroll.data('speed'));
+                var coords = '50% '+ yPos + 'px';
+                $scroll.css({ backgroundPosition: coords });   
+            });
+        });
+        
+        // Scrollto links
+        $('.scroll').click(function () {
+            $.scrollTo(this.hash, 1500, {easing:'swing'});
+            return false;
+        });
+        $('.scroll-top-bottom').click(function () {
+            $.scrollTo('#intro', 1500, {easing:'swing'});
+            $.scrollTo('#about', 1500, {easing:'swing'});
+            return false;
+        });
 
     });
 

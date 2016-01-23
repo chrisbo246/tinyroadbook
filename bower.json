@@ -10,7 +10,8 @@
     "quill": "~0.20.1",
     "sweetalert": "~1.1.3",
     "cookieconsent2": "~1.0.10",
-    "spin.js": "~2.3.2"
+    "spin.js": "~2.3.2",
+    "jquery-smooth-scroll": "~1.7.1"
   },
   "overrides": {
     "bootstrap-sass": {
