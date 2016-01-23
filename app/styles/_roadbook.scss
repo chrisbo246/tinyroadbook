@@ -1,24 +1,31 @@
 
+/* Editor */
+
 #editor_container {
     padding-top: 70px;
 }
 
 #editor_toolbar {
-//position: absolute;
-margin-top: -70px;
-//margin-bottom: -70px;
+    margin-top: -70px;
 }
 
 #editor {
-	//position: absolute;
 	height: 100%;
-	//top: 0;
-	//margin-top: -70px;
-	//padding-top: 70px;
 	overflow: auto;
+	margin-top: -3px;
+    padding: (($line-height-computed - 1) / 2);
+    margin: 0 0 ($line-height-computed / 2);
+    font-size: ($font-size-base - 1);
+    line-height: $line-height-base;
+    color: $pre-color;
+    //background-color: $pre-bg;
+    border: 1px solid $pre-border-color;
+    border-radius: $border-radius-base;
 }
 
+
 /* Settings */
+
 #separator {
     overflow: auto;
     overflow: hidden;
