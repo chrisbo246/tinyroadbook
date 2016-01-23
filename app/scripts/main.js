@@ -23,12 +23,6 @@
 var appModule = (function () {
     'use strict';
 
-    var settings = {
-        adsense: {
-            adClient: 'ca-pub-8495719252049968'
-        }
-    };
-
     var map1;
 
     // Base layers
@@ -129,8 +123,6 @@ var appModule = (function () {
 
     $(document).ready(function () {
 
-        adsenseModule.init(settings.adsense);
-
         // Initialize the map when pane become visible for the first time
         $('a[data-toggle="tab"]').one('shown.bs.tab', function (e) {
             var paneId = $(e.target).attr('href');
@@ -161,63 +153,19 @@ var appModule = (function () {
             $('#settings form').garlic('destroy');
             location.reload();
         });
-        $('#reset_all').click(function () {
-            swal({
-                title: 'Are you sure?',
-                text: 'This will reset settings, erase your roadbook and delete local data stored by this application.',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes reset all',
-                cancelButtonText: 'No stop !',
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    var cookies = document.cookie.split(';');
-                    cookies.forEach(function (cookie) {
-                        document.cookie = cookie.split('=')[0]
-                                + '=; username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-                    });
-                    localStorage.clear();
-                    location.reload();
-                    //navigator.geolocation.clearWatch();
-                } else {
-                    swal('Cancelled', 'You can continue where you left off.', 'error');
-                }
-            });
-        });
-
-        // Automatically reload the last opened tab
-        tabModule.rememberTab('#main-nav', !localStorage);
 
         /*window.update_cookieconsent_options({
             //learnMore: 'Learn more'
             theme: 'light-floating'
         });*/
+       
+        commonsModule.adsense();
+        commonsModule.parallax();
+        commonsModule.adsense();
+        commonsModule.storeActiveTab();
+        commonsModule.resetButton();
+        commonsModule.loadGoogleFonts();
         
-        // Parallax
-        var $window = $(window);
-        $('section[data-type="background"]').each(function () {
-            var $scroll = $(this);
-            $window.scroll(function () {                          
-                var yPos = -($window.scrollTop() / $scroll.data('speed'));
-                var coords = '50% '+ yPos + 'px';
-                $scroll.css({ backgroundPosition: coords });   
-            });
-        });
-        
-        // Scrollto links
-        $('.scroll').click(function () {
-            $.scrollTo(this.hash, 1500, {easing:'swing'});
-            return false;
-        });
-        $('.scroll-top-bottom').click(function () {
-            $.scrollTo('#intro', 1500, {easing:'swing'});
-            $.scrollTo('#about', 1500, {easing:'swing'});
-            return false;
-        });
-
     });
 
     return {
