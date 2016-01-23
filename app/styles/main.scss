@@ -4,11 +4,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-@import "./_vendor_override";
-@import "./_bootstrap_add-on";
-@import "./_scrollbar";
-@import "./_roadbook";
-//@import "./_background";
+
 
 html, body {
     height:100%;
@@ -72,4 +68,9 @@ body > .tab-content {
 		background-size: cover;
 	}
 
+}
+
+// Prevent fouc
+.material-icons {
+    display: none;
 }

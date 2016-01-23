@@ -11,6 +11,9 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild --> 
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -75,14 +78,14 @@
                             <div class="row-same-height">
                                 <div class="col-md-4 col-md-height text-center">
                                     <div class="-well">
-                                        <i class="material-icons text-5x text-muted hidden-xs">directions_bike</i>
+                                        <i class="material-icons text-10x text-muted hidden-xs">directions_bike</i>
                                         <h2>Cycle route planner</h2>
                                         <p>You are planning a bike tour? This application is provided with the Opencyclemap bikemap and the Lonvia cycling layer. Just follow one of the official bike routes to plan your epic bike trip.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-md-height text-center">
                                     <div class="-well">
-                                        <i class="material-icons text-5x text-muted hidden-xs">gps_fixed</i>
+                                        <i class="material-icons text-10x text-muted hidden-xs">gps_fixed</i>
                                         <h2>GPX viewer</h2>
                                         <p>You'd like to preview your route to simplify your roadbook edition? Just download a GPX file from a GPS track sharing website and select it from settings. Your road will show up on the map.</p>
                                     </div>
@@ -344,8 +347,8 @@
         <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
         <!-- endbuild -->
         
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
+        <!-- build:css(.tmp) styles/vendor_override.css -->
+        <link rel="stylesheet" href="styles/vendor_override.css">
         <!-- endbuild -->   
         
         <!-- build:js scripts/vendor/modernizr.js -->

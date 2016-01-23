@@ -2,10 +2,10 @@
 /* Editor */
 
 #editor_container {
-    padding-top: 70px;
+    padding-top: 50px;
 
 	.navbar {
-		margin-top: -70px;
+		margin-top: -50px;
 		margin-bottom: 0;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
@@ -14,14 +14,15 @@
 	#editor {
 		height: 100%;
 		overflow: auto;
-		margin-top: -3px;
+		//margin-top: -3px;
 		padding: (($line-height-computed - 1) / 2);
 		margin: 0 0 ($line-height-computed / 2);
 		font-size: ($font-size-base - 1);
 		line-height: $line-height-base;
 		color: $pre-color;
 		//background-color: $pre-bg;
-		border: 1px solid $pre-border-color;
+		border: solid $pre-border-color;
+		border-width: 0 1px 1px 1px;
 	    border-radius: 0 0 $border-radius-base $border-radius-base;		
 	}
 
