@@ -9,9 +9,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var tourModule = (function () {
+var tourModule = function () {
     'use strict';
 
     var tour;
@@ -27,7 +25,7 @@ var tourModule = (function () {
             content: 'Go to the editor tab to extract city names and edit your roadbook.',
             placement: 'bottom',
             orphan: true,
-            onShow: function onShow() {
+            onShow: function () {
                 $('a[href="#home"]').tab('show');
             }
         }, {
@@ -35,7 +33,7 @@ var tourModule = (function () {
             title: 'The map',
             content: 'The map allow you to extract city names by clicking on you waypoints. Drag it up to your starting point.',
             placement: 'right',
-            onShow: function onShow() {
+            onShow: function () {
                 $('a[href="#picker"]').tab('show');
             }
         }, {
@@ -43,7 +41,7 @@ var tourModule = (function () {
             title: 'Zoom ',
             content: 'Zoom until you can see the smallest city on your way then click on each one up to your last destination.',
             placement: 'right',
-            onShow: function onShow() {
+            onShow: function () {
                 appModule.map.getView().setZoom(11);
             }
         }, {
@@ -56,7 +54,7 @@ var tourModule = (function () {
             title: 'Switch layers',
             content: 'You can change the base map and activate optional overlays like bike roads or hiking paths.',
             placement: 'right',
-            onShow: function onShow() {
+            onShow: function () {
                 $('.layer-switcher').trigger('mouseenter');
             }
         }, {
@@ -64,7 +62,7 @@ var tourModule = (function () {
             title: 'Print your roadbook',
             content: 'When you end editing your roadbook, just click this button to print it to your prefered format. You can also just copy the text and save it in a text file.',
             placement: 'bottom',
-            onShow: function onShow() {
+            onShow: function () {
                 $('a[href="#picker"]').tab('show');
             }
         }, {
@@ -72,7 +70,7 @@ var tourModule = (function () {
             title: 'Tell the world',
             content: 'Don\'t forget to tell your friends about this cool application ;).',
             placement: 'bottom',
-            onShow: function onShow() {
+            onShow: function () {
                 $('a[href="#picker"]').tab('show');
             }
         }, {
@@ -80,7 +78,7 @@ var tourModule = (function () {
             title: 'The settings',
             content: 'The settings tab allow you to customize picker output, select a GPS track file or reset the application.',
             placement: 'bottom',
-            onShow: function onShow() {
+            onShow: function () {
                 //$('a[href="#settings"]').first().tab('show');
             }
         }, {
@@ -196,19 +194,19 @@ var tourModule = (function () {
             //duration: 10000,
             orphan: true,
             steps: steps,
-            onStart: function onStart() {
+            onStart: function () {
                 if ($start) $start.addClass('disabled');
             },
-            onEnd: function onEnd() {
+            onEnd: function () {
                 if ($start) $start.removeClass('disabled');
             },
-            onShow: function onShow() {
+            onShow: function () {
                 if ($start) $start.addClass('disabled');
             },
-            onHide: function onHide() {
+            onHide: function () {
                 if ($start) $start.removeClass('disabled');
             },
-            onPause: function onPause() {
+            onPause: function () {
                 if ($start) $start.removeClass('disabled');
             }
         });
@@ -223,5 +221,5 @@ var tourModule = (function () {
     });
 
     return {};
-})();
+}();
 //# sourceMappingURL=tourModule.js.map

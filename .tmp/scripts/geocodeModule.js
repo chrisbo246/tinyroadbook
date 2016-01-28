@@ -10,9 +10,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var geocodeModule = (function () {
+var geocodeModule = function () {
     'use strict';
 
     /**
@@ -22,14 +20,15 @@ var geocodeModule = (function () {
      * @param {string} query - Formated address
      * @returns {Object} jqHXR
      */
-    var nominatimSearch = function nominatimSearch(params, query) {
+
+    var nominatimSearch = function (params, query) {
 
         var url = 'http://nominatim.openstreetmap.org/search/' + encodeURI(query) + '?' + $.param(params);
         console.log(url);
 
         return $.ajax({
             url: url,
-            error: function error(jqxhr, status, _error) {
+            error: function (jqxhr, status, error) {
                 console.warn(status);
             }
 
@@ -42,14 +41,14 @@ var geocodeModule = (function () {
      * @param {Object} params - Request parameters
      * @returns {Object} jqXHR
      */
-    var nominatimReverse = function nominatimReverse(params) {
+    var nominatimReverse = function (params) {
 
         var url = 'http://nominatim.openstreetmap.org/reverse?' + $.param(params);
         console.log(url);
 
         return $.ajax({
             url: url,
-            error: function error(jqxhr, status, _error2) {
+            error: function (jqxhr, status, error) {
                 console.warn(status);
             }
         });
@@ -59,5 +58,5 @@ var geocodeModule = (function () {
         nominatimSearch: nominatimSearch,
         nominatimReverse: nominatimReverse
     };
-})();
+}();
 //# sourceMappingURL=geocodeModule.js.map

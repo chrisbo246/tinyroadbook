@@ -5,9 +5,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var pdfMakeModule = (function () {
+var pdfMakeModule = function () {
 	'use strict';
 
 	var docDefinition = {
@@ -36,7 +34,7 @@ var pdfMakeModule = (function () {
   * @public
   * @param {Object} [customDocDefinition] - PDF definition parameters
  */
-	var init = function init(customDocDefinition) {
+	var init = function (customDocDefinition) {
 
 		$.extent(docDefinition, customDocDefinition || {});
 	};
@@ -46,7 +44,7 @@ var pdfMakeModule = (function () {
   * @public
   * @param {Object} settings - PDF definition parameters
  */
-	var update = function update(settings) {
+	var update = function (settings) {
 
 		$.extend(docDefinition, settings);
 	};
@@ -71,5 +69,5 @@ var pdfMakeModule = (function () {
 		init: init,
 		update: update
 	};
-})();
+}();
 //# sourceMappingURL=pdfMakeModule.js.map

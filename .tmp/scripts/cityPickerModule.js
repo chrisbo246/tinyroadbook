@@ -11,9 +11,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var cityPickerModule = (function () {
+var cityPickerModule = function () {
     'use strict';
 
     var settings = {
@@ -41,7 +39,7 @@ var cityPickerModule = (function () {
      * @param {integer} index - Default value (array index starting from 0)
      * @returns {string} One of the possible values
      */
-    var numberToName = function numberToName(number, min, max, values, index) {
+    var numberToName = function (number, min, max, values, index) {
         //if (!$.isNumeric(number)) return values[index];
 
         // Define the default value with the medium value if empty
@@ -64,7 +62,7 @@ var cityPickerModule = (function () {
      * @param {number} max - The biggest value accepted
      * @returns {string} A valid font size-name from xx-small to xx-large
      */
-    var _numberToFontSizeName = function _numberToFontSizeName(number, min, max) {
+    var _numberToFontSizeName = function (number, min, max) {
         var array = ['xx-small', 'x-small', 'smaller', 'small', 'normal', 'large', 'larger', 'x-large', 'xx-large'];
         return numberToName(number, min, max, array, 4);
     };
@@ -76,7 +74,7 @@ var cityPickerModule = (function () {
      * @param {number} max - The biggest value accepted
      * @returns {string} A valid color name
      */
-    var _numberToColorName = function _numberToColorName(number, min, max) {
+    var _numberToColorName = function (number, min, max) {
         var array = ['lightgray', 'gray', 'black']; // 'whitesmock', 'silver',
         return numberToName(number, min, max, array, 1);
     };
@@ -88,7 +86,7 @@ var cityPickerModule = (function () {
      * - Set position to 0 if editor is empty (pos 1)
      * @returns {integer} Cursor position
      */
-    var _posBeforeInsert = function _posBeforeInsert() {
+    var _posBeforeInsert = function () {
 
         var pos;
         var length = editor.getLength();
@@ -117,7 +115,7 @@ var cityPickerModule = (function () {
      * Add city name to the editor
      * @param {Object} json - The JSON object returned by Nominatim
      */
-    var _insertCity = function _insertCity(json) {
+    var _insertCity = function (json) {
 
         var size,
             color,
@@ -206,7 +204,7 @@ var cityPickerModule = (function () {
      * Use reverse geocode to define the name of the city at a given position
      * @param {object} json - The JSON object returned by Nominatim reverse geocode
      */
-    var _getCityDetails = function _getCityDetails(json) {
+    var _getCityDetails = function (json) {
 
         if (!json || !json.address) {
             return;
@@ -249,7 +247,7 @@ var cityPickerModule = (function () {
      * @param {object} position - Longitude, latitude at EPSG:4326 projection
      * @param {integer} zoom - Zoom level used for extraction
      */
-    var _getCity = function _getCity(position, zoom) {
+    var _getCity = function (position, zoom) {
 
         if (!position || !zoom) {
             return false;
@@ -304,7 +302,7 @@ var cityPickerModule = (function () {
      * Print editor content
      * @param {Object} data - Formated text
      */
-    var _print = function _print(data) {
+    var _print = function (data) {
 
         console.log(data);
 
@@ -328,7 +326,7 @@ var cityPickerModule = (function () {
      * @public
      * @param {Object} map - OL3 map
      */
-    var setMap = function setMap(map) {
+    var setMap = function (map) {
 
         map.on('click', function (evt) {
 
@@ -348,7 +346,7 @@ var cityPickerModule = (function () {
     /**
      * Toggle buttons visibility when editor is empty or not
      */
-    var _toggleButtonStatusEmptyEditor = function _toggleButtonStatusEmptyEditor() {
+    var _toggleButtonStatusEmptyEditor = function () {
 
         var $buttons = $('#copy_editor, #print_editor, #erase_editor');
         if (editor.getLength() === 1) {
@@ -407,7 +405,7 @@ var cityPickerModule = (function () {
         // then move the cursor to the end
         $('#stored_roadbook').garlic({
             excluded: '',
-            onRetrieve: function onRetrieve(elem, retrievedValue) {
+            onRetrieve: function (elem, retrievedValue) {
                 editor.setHTML(retrievedValue);
                 //var pos = editor.getLength() - 1;
                 //editor.setSelection(pos, pos);
@@ -497,5 +495,5 @@ var cityPickerModule = (function () {
         //getCityDetails: getCityDetails,
         //insertCity: insertCity
     };
-})();
+}();
 //# sourceMappingURL=cityPickerModule.js.map

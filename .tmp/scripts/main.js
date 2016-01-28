@@ -20,9 +20,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var appModule = (function () {
+var appModule = function () {
     'use strict';
 
     var map1;
@@ -64,7 +62,7 @@ var appModule = (function () {
      * @param {target} target - Map div selector
      * @return {object} - The map object
      */
-    var _addMap = function _addMap(target) {
+    var _addMap = function (target) {
 
         var layers = [new ol.layer.Group({
             name: 'baseLayers',
@@ -147,5 +145,5 @@ var appModule = (function () {
     return {
         map: map1
     };
-})();
+}();
 //# sourceMappingURL=main.js.map

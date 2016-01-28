@@ -9,9 +9,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var mapModule = (function () {
+var mapModule = function () {
     'use strict';
 
     var map,
@@ -22,7 +20,7 @@ var mapModule = (function () {
      * Draw map
      * @public
      */
-    var init = function init(target) {
+    var init = function (target) {
 
         ready.resolve();
 
@@ -36,7 +34,7 @@ var mapModule = (function () {
      * @param {string} control - Predefined control variable name
      * @param {object} map - OL3 initialized map
      */
-    var _addControl = function _addControl(control, map) {
+    var _addControl = function (control, map) {
         if (!map || !controls[control]) {
             return;
         }
@@ -50,7 +48,7 @@ var mapModule = (function () {
      * @param {number} latitude - Latitude at EPSG:4326 projection
      * @param {integer} [zoom] - Zoom from 0 to 18
      */
-    var centerMap = function centerMap(longitude, latitude, zoom) {
+    var centerMap = function (longitude, latitude, zoom) {
 
         var view = map.getView();
         view.setCenter(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'));
@@ -65,7 +63,7 @@ var mapModule = (function () {
      * @public
      * @param {Object} map - OL3 map
      */
-    var centerOnPosition = function centerOnPosition(map) {
+    var centerOnPosition = function (map) {
 
         var view = map.getView();
 
@@ -86,7 +84,7 @@ var mapModule = (function () {
      * @see {@link http://openlayers.org/en/v3.4.0/examples/center.html}
      * @public
      */
-    var fitLayerGeometry = function fitLayerGeometry(id, map, layer, featureId) {
+    var fitLayerGeometry = function (id, map, layer, featureId) {
 
         var source = layer.getSource();
         var feature = source.getFeatureById(id);
@@ -107,7 +105,7 @@ var mapModule = (function () {
      * @public
      * @param {Object} map - OL3 map
      */
-    var fitAll = function fitAll(map) {
+    var fitAll = function (map) {
 
         var extent = ol.extent.createEmpty();
         map.getLayers().forEach(function (layer) {
@@ -121,7 +119,7 @@ var mapModule = (function () {
      * @public
      * @param {Object} map - OL3 map
      */
-    var zoomOut = function zoomOut(map) {
+    var zoomOut = function (map) {
         //var extent = map.  .getSource().getExtent();
         var view = map.getView();
         var extent = view.getExtent();
@@ -136,7 +134,7 @@ var mapModule = (function () {
      * @param {string} selector - File input ID
      * @param {Object} layer - OL3 vector layer
      */
-    var setFileSource = function setFileSource(selector, layer) {
+    var setFileSource = function (selector, layer) {
 
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
             console.warn('The File APIs are not fully supported in this browser.');
@@ -149,7 +147,7 @@ var mapModule = (function () {
             files.forEach(function (f) {
 
                 var reader = new FileReader();
-                reader.onload = (function (theFile) {
+                reader.onload = function (theFile) {
                     return function (e) {
                         layer.setProperties({
                             title: escape(theFile.name),
@@ -160,7 +158,7 @@ var mapModule = (function () {
                             visible: true
                         });
                     };
-                })(f);
+                }(f);
 
                 reader.readAsDataURL(f);
             });
@@ -175,5 +173,5 @@ var mapModule = (function () {
         setFileSource: setFileSource,
         fitAll: fitAll
     };
-})();
+}();
 //# sourceMappingURL=mapModule.js.map

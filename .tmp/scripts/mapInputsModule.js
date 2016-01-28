@@ -9,12 +9,11 @@
  * @module
  * @returns {Object} mapModule
  */
-'use strict';
-
-var mapInputsModule = (function () {
+var mapInputsModule = function () {
     'use strict';
 
     /** @private */
+
     var map;
 
     /** @private */
@@ -26,7 +25,7 @@ var mapInputsModule = (function () {
      * @param {string} name - Predefined input (variable name)
      * @returns {Object} OL3 layer
      */
-    var create = function create(name, selector, map) {
+    var create = function (name, selector, map) {
 
         if (!inputs[name]) {
             console.warn(name + ' input definition does not exists');
@@ -219,7 +218,7 @@ var mapInputsModule = (function () {
             files.forEach(function (f) {
 
                 var reader = new FileReader();
-                reader.onload = (function (theFile) {
+                reader.onload = function (theFile) {
                     return function (e) {
                         layer.setProperties({
                             title: escape(theFile.name),
@@ -230,7 +229,7 @@ var mapInputsModule = (function () {
                             visible: true
                         });
                     };
-                })(f);
+                }(f);
 
                 reader.readAsDataURL(f);
             });
@@ -240,5 +239,5 @@ var mapInputsModule = (function () {
     return {
         create: create
     };
-})();
+}();
 //# sourceMappingURL=mapInputsModule.js.map

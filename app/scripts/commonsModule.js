@@ -5,7 +5,6 @@
 var WebFontConfig = {};
 
 
-
 var commonsModule = (function () {
     'use strict';
 
@@ -289,14 +288,20 @@ var commonsModule = (function () {
             webfontVersion: '1.5.18'
         });
         
+        var $icons = $('.material-icons');
+        
         // WebFontConfig must be defined globally at the top of this file
         $.extend(true, WebFontConfig, {
             google: {
                 families: settings.fontFamilies
+            },
+            active: function () {
+                $icons.show();
             }
         });
-    
+        
         (function (d) { 
+            $icons.hide();
             var wf = d.createElement('script'), s = d.scripts[0];
             wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/' + settings.webfontVersion + '/webfont.js';
             s.parentNode.insertBefore(wf, s);

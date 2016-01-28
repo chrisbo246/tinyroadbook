@@ -10,9 +10,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var mapControlsModule = (function () {
+var mapControlsModule = function () {
     'use strict';
 
     var controls = {};
@@ -24,7 +22,7 @@ var mapControlsModule = (function () {
      * @public
      * @param {object} customSettings - Custom settings
      */
-    var config = function config(customSettings) {
+    var config = function (customSettings) {
 
         $.extent(settings, customSettings || {});
     };
@@ -35,7 +33,7 @@ var mapControlsModule = (function () {
      * @param {string} name - Predefined control
      * @returns {Object} - OL3 control
      */
-    var create = function create(name, properties) {
+    var create = function (name, properties) {
 
         if (!controls[name]) {
             console.warn(name + ' control definition is not defined');
@@ -93,8 +91,8 @@ var mapControlsModule = (function () {
             //layers: [
             //    mapLayersModule.baselayers
             //],
-            collapseLabel: '«',
-            label: '»',
+            collapseLabel: '\u00AB',
+            label: '\u00BB',
             collapsed: true
             //tipLabel: $.t('buttons:olOverviewmap.label')
         });
@@ -122,5 +120,5 @@ var mapControlsModule = (function () {
         create: create,
         config: config
     };
-})();
+}();
 //# sourceMappingURL=mapControlsModule.js.map

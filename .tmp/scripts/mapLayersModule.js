@@ -8,9 +8,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var mapLayersModule = (function () {
+var mapLayersModule = function () {
     'use strict';
 
     var layers = {};
@@ -28,7 +26,7 @@ var mapLayersModule = (function () {
      * @public
      * @param {Object} customSettings - Custom settings
      */
-    var config = function config(customSettings) {
+    var config = function (customSettings) {
 
         $.extent(settings, customSettings);
     };
@@ -40,7 +38,7 @@ var mapLayersModule = (function () {
      * @param {Object} [properties] - Layer custom parameters
      * @returns {Object} OL3 layer
      */
-    var create = function create(name, properties) {
+    var create = function (name, properties) {
 
         if (!layers[name]) {
             console.warn(name + ' layer definition is not defined');
@@ -612,7 +610,7 @@ var mapLayersModule = (function () {
      * See http://openlayers.org/en/v3.4.0/examples/kml-timezones.html
      */
 
-    var _timezonesStyle = function _timezonesStyle(feature) {
+    var _timezonesStyle = function (feature) {
         // feature, resolution
         var offset = 0;
         var name = feature.get('name'); // e.g. GMT -08:30
@@ -781,5 +779,5 @@ var mapLayersModule = (function () {
         create: create,
         config: config
     };
-})();
+}();
 //# sourceMappingURL=mapLayersModule.js.map

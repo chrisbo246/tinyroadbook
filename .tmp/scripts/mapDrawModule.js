@@ -7,9 +7,7 @@
  * @module
  * @returns {Object} Public functions and variables
  */
-'use strict';
-
-var mapDrawModule = (function () {
+var mapDrawModule = function () {
     'use strict';
 
     var draw;
@@ -21,7 +19,7 @@ var mapDrawModule = (function () {
      * @public
      * @param {Object} map - OL3 map
      */
-    var init = function init(map) {
+    var init = function (map) {
         featureOverlay.setMap(map);
         map.addInteraction(modify);
     };
@@ -32,7 +30,7 @@ var mapDrawModule = (function () {
      * @param {string} type - Interaction type
      * @param {Object} OL3 map
      */
-    var drawInteraction = function drawInteraction(type, map) {
+    var drawInteraction = function (type, map) {
         if (type) {
             draw = new ol.interaction.Draw({
                 features: features,
@@ -48,7 +46,7 @@ var mapDrawModule = (function () {
      * @param {string} id - Select input ID
      * @param {Object} map - OL3 map
      */
-    var addDrawTypeSwitcher = function addDrawTypeSwitcher(id, map) {
+    var addDrawTypeSwitcher = function (id, map) {
         var typeSelect = document.getElementById(id);
         typeSelect.onchange = function () {
             map.removeInteraction(draw);
@@ -89,7 +87,7 @@ var mapDrawModule = (function () {
         // the SHIFT key must be pressed to delete vertices, so
         // that new vertices can be drawn at the same position
         // of existing vertices
-        deleteCondition: function deleteCondition(event) {
+        deleteCondition: function (event) {
             return ol.events.condition.shiftKeyOnly(event) && ol.events.condition.singleClick(event);
         }
     });
@@ -99,5 +97,5 @@ var mapDrawModule = (function () {
         drawInteraction: drawInteraction,
         addDrawTypeSwitcher: addDrawTypeSwitcher
     };
-})();
+}();
 //# sourceMappingURL=mapDrawModule.js.map
