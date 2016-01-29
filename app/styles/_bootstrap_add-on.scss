@@ -133,6 +133,9 @@ width: 1%;
 .list-number-surrounded {
 counter-reset: section;
 list-style-type: none;
+@media (max-width: $screen-xs) {
+    padding-left: 0;
+}
 }
 
 .list-number-surrounded li:before {
@@ -192,9 +195,11 @@ line-height: 5em!important;
 }
 .list-number-surrounded li,
 .list-number li {
-float: left;
+//float: left;
+clear: both;
+padding-bottom: .5em;
 }
-/*
+
 .list-number-surrounded-lg li {
 line-height: 1.2em;
 }
@@ -210,7 +215,7 @@ line-height: 4em;
 .list-number-surrounded-5x li {
 line-height: 5em;
 }
-*/
+
 .list-number-surrounded-circle li:before,
 .surrounded-circle {
 border-radius: 50%;
