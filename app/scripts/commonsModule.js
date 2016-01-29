@@ -9,8 +9,6 @@ var commonsModule = (function () {
     'use strict';
 
     var modules = {};
-    
-    
 
     /**
      * Search ad containers in given block and insert ad
@@ -23,13 +21,15 @@ var commonsModule = (function () {
         if (!$block) {
             return;
         }
+        //console.log('Search ad in ' + selector + ' block');
 
+        // Search for visible ads
         $block.find(settings.containers).filter(':visible').each(function (i, container) {
 
             var $container = $(container);
 
             if (!$container.attr('data-adsbygoogle-status')) {
-
+                
                 // Inset missing attributs
                 if (!$container.attr('data-ad-client')) {
                     $container.attr('data-ad-client', settings.adClient);
@@ -43,9 +43,14 @@ var commonsModule = (function () {
 
                 // Initialize ad
                 (adsbygoogle = window.adsbygoogle || []).push({});
+
             }
 
         });
+        
+        // Initialize hidden ads when a pane is opened for the first time
+        _insertAdsInHiddenPanes(selector, settings);
+        
     };
 
 
@@ -55,16 +60,16 @@ var commonsModule = (function () {
      * @param {string} selector - Div selector from where to start ad block search 
      * @param {string} settings - Adsense settings
      */
-    var _findHiddenAds = function (selector, settings) {
+    var _insertAdsInHiddenPanes = function (selector, settings) {
 
         var $block = $(selector);
         if (!$block) return;
 
+        // Seach for hidden tabs
         $block.find(settings.tabLinksSelector).filter(':not(.active)').each(function (i, tab) {
             $(tab).one('shown.bs.tab', function (e) {
                 var paneId = $(e.target).attr('href');
                 _insertAds(paneId, settings);
-                _findHiddenAds(paneId, settings);
             });
         });
 
@@ -87,16 +92,13 @@ var commonsModule = (function () {
             tabLinksSelector: 'a[data-toggle="tab"]' // Tabs where to search ad containers
         });
     
-        $(document).ready(function () {
+        $(function () {
             $('body').append('<!-- Google Adsense -->'
                 + '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
         });
             
         $(window).on('load', function () {
-            // Initialize visible ads
             _insertAds('body', settings);
-            // Delay ad initialisation in hidden tabs
-            _findHiddenAds('body', settings);
         });
 
     };
@@ -112,7 +114,7 @@ var commonsModule = (function () {
             selector: 'section[data-type="background"]'
         });
         
-        $(document).ready(function () {
+        $(function () {
             var $window = $(window);
             $(settings.selector).each(function () {
                 var $scroll = $(this);
@@ -136,7 +138,7 @@ var commonsModule = (function () {
             
         });
     
-        $(document).ready(function () {            
+        $(function () {            
             $('.scroll').click(function () {
                 $.scrollTo(this.hash, 1500, {easing:'swing'});
                 return false;
@@ -172,7 +174,7 @@ var commonsModule = (function () {
             settings.useHash = true;
         }
                 
-        $(document).ready(function () { 
+        $(function () { 
         
             var $tabs = $(settings.linksSelector);
             if ($tabs) {
@@ -253,7 +255,7 @@ var commonsModule = (function () {
             }
         });
         
-        $(document).ready(function () {
+        $(function () {
             
             $(settings.buttonSelector).click(function () {
                 if (swall) {

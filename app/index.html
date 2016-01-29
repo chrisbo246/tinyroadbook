@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href=".">Tiny<span>RoadBook</span>
+                    <a class="navbar-brand" href=".">TinyRoadBook
                     <sup class="text-warning">beta</sup></a>
                 </div>
                 <p class="navbar-text navbar-left hidden-xs hidden">
@@ -140,106 +140,117 @@
                     </div>
                 </section>
             </div>
-            <div id="picker" class="tab-pane fade in" >
-                <div class="container-fluid">
+            <div id="picker" class="tab-pane fade in row-full-height" >
+                <div class="container-fluid row-full-height">
                     <div class="row row-full-height">
-                        <div class="col-md-6 no-padding col-full-height">
+                        <div id="map_container" class="col-md-6 no-padding col-full-height">
                             <div id="map" class="map">
                                 <div id="spinner"></div>
                             </div>
                         </div>
-                        <div id="editor_container" class="col-md-6 col-full-height">
-                            <nav id="editor_toolbar" class="navbar navbar-default navbar-no-collapse" >
-                                <div class="col-md-12">
-                                    <ul class="nav navbar-nav navbar-left">
-                                        <li><a href="" class="ql-bold"><b>B</b></a></li>
-                                        <li><a href="" class="ql-italic"><i>I</i></a></li>
-                                        <li><a href="" class="ql-underline"><ins>U</ins></a></li>
-                                        <li><a href="" class="ql-strike"><del>S</del></a></li>
-                                        <!--<li><a href="" class="ql-bold material-icons">format_bold</a></li>
-                                        <li><a href="" class="ql-italic material-icons">format_italic</a></li>
-                                        <li><a href="" class="ql-underline material-icons">format_underlined</a></li>
-                                        <li><a href="" class="ql-strike material-icons">strikethrough_s</a></li>-->
-                                    </ul>
-                                    <div class="navbar-form navbar-left text-center hidden-xs hidden-md">
-                                        <div class="form-group">
-                                            <label class="-hidden"><i class="glyphicon glyphicon-text-size"></i></label>
-                                            <select class="ql-size form-control -input-sm">
-                                                <option value="" selected>&nbsp;</option>
-                                                <option value="xx-small" style="font-size: xx-small">XXS</option>
-                                                <option value="x-small" style="font-size: x-small">XS</option>
-                                                <option value="smaller" style="font-size: smaller">Smaller</option>
-                                                <option value="small" style="font-size: small">Small</option>
-                                                <option value="normal" style="font-size: normal">Normal</option>
-                                                <option value="large" style="font-size: large">Large</option>
-                                                <option value="larger" style="font-size: larger">Larger</option>
-                                                <option value="x-large" style="font-size: x-large">XL</option>
-                                                <option value="xx-large" style="font-size: xx-large">XXL</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><i class="glyphicon glyphicon-text-color"></i></label>
-                                            <select class="ql-color form-control -input-sm">
-                                                <option value="" selected>&nbsp;</option>
-                                                <option value="black">Black</option>
-                                                <option value="gray" style="color: gray">Gray</option>
-                                                <!--<option value="silver" style="color: silver">Silver </option>-->
-                                                <option value="lightgray" style="color: lightgray">Light</option>
-                                                <!--<option value="whitesmoke" style="color: whitesmoke">Smoke</option>-->
-                                                <option value="red" style="color: red">Red</option>
-                                                <option value="orange" style="color: orange">Orange</option>
-                                                <option value="yellow" style="color: yellow">Yellow</option>
-                                                <option value="lime" style="color: lime">Lime</option>
-                                                <option value="cyan" style="color: cyan">Cyan</option>
-                                                <option value="blue" style="color: blue">Blue</option>
-                                                <option value="magenta" style="color: magenta">Magenta</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group hidden">
-                                            <label><i class="glyphicon glyphicon-text-background"></i></label>
-                                            <select class="ql-background form-control -input-sm">
-                                                <option value="" selected>&nbsp;</option>
-                                                <option value="black">Black</option>
-                                                <option value="gray" style="color: gray">Gray</option>
-                                                <option value="lightgray " style="color: lightgray">LightGray </option>
-                                                <option value="red" style="color: red">Red</option>
-                                                <option value="orange" style="color: orange">Orange</option>
-                                                <option value="yellow" style="color: yellow">Yellow</option>
-                                                <option value="lime" style="color: lime">Lime</option>
-                                                <option value="cyan" style="color: cyan">Cyan</option>
-                                                <option value="blue" style="color: blue">Blue</option>
-                                                <option value="magenta" style="color: magenta">Magenta</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group hidden">
-                                            <label><i class="glyphicon glyphicon-align-left"></i></label>
-                                            <select class="ql-align form-control -input-sm">
-                                                <option value="left" selected>Left</option>
-                                                <option value="center">Center</option>
-                                                <option value="right">Right</option>
-                                            </select>
+                        <div class="col-md-6 no-padding col-full-height">
+                            <div id="editor_container">
+                                <nav id="editor_toolbar" class="navbar navbar-default navbar-static-top navbar-no-collapse" >
+                                    <div class="col-xs-12">
+                                        <ul class="nav navbar-nav navbar-left">
+                                            <!--<li><a href="" class="ql-bold"><b>B</b></a></li>
+                                            <li><a href="" class="ql-italic"><i>I</i></a></li>
+                                            <li><a href="" class="ql-underline"><ins>U</ins></a></li>
+                                            <li><a href="" class="ql-strike"><del>S</del></a></li>-->
+                                            <li><a href="" class="ql-bold material-icons">format_bold</a></li>
+                                            <li><a href="" class="ql-italic material-icons">format_italic</a></li>
+                                            <li><a href="" class="ql-underline material-icons">format_underlined</a></li>
+                                            <li><a href="" class="ql-strike material-icons">strikethrough_s</a></li>
+                                        </ul>
+                                        <div class="navbar-form navbar-right text-center hidden-xs hidden-md">
+                                            <div class="form-group">
+                                                <label class="-hidden"><i class="glyphicon glyphicon-text-size"></i><!--<i class="material-icons">format_size</i>--></label>
+                                                <select class="ql-size form-control -input-sm">
+                                                    <option value="" selected>&nbsp;</option>
+                                                    <option value="xx-small" style="font-size: xx-small">XXS</option>
+                                                    <option value="x-small" style="font-size: x-small">XS</option>
+                                                    <option value="smaller" style="font-size: smaller">Smaller</option>
+                                                    <option value="small" style="font-size: small">Small</option>
+                                                    <option value="normal" style="font-size: normal">Normal</option>
+                                                    <option value="large" style="font-size: large">Large</option>
+                                                    <option value="larger" style="font-size: larger">Larger</option>
+                                                    <option value="x-large" style="font-size: x-large">XL</option>
+                                                    <option value="xx-large" style="font-size: xx-large">XXL</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><i class="glyphicon glyphicon-text-color"></i><!--<i class="material-icons">format_color_text</i>--></label>
+                                                <select class="ql-color form-control -input-sm">
+                                                    <option value="" selected>&nbsp;</option>
+                                                    <option value="black">Black</option>
+                                                    <option value="gray" style="color: gray">Gray</option>
+                                                    <!--<option value="silver" style="color: silver">Silver </option>-->
+                                                    <option value="lightgray" style="color: lightgray">Light</option>
+                                                    <!--<option value="whitesmoke" style="color: whitesmoke">Smoke</option>-->
+                                                    <option value="red" style="color: red">Red</option>
+                                                    <option value="orange" style="color: orange">Orange</option>
+                                                    <option value="yellow" style="color: yellow">Yellow</option>
+                                                    <option value="lime" style="color: lime">Lime</option>
+                                                    <option value="cyan" style="color: cyan">Cyan</option>
+                                                    <option value="blue" style="color: blue">Blue</option>
+                                                    <option value="magenta" style="color: magenta">Magenta</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group hidden">
+                                                <label><i class="glyphicon glyphicon-text-background"></i></label>
+                                                <select class="ql-background form-control -input-sm">
+                                                    <option value="" selected>&nbsp;</option>
+                                                    <option value="black">Black</option>
+                                                    <option value="gray" style="color: gray">Gray</option>
+                                                    <option value="lightgray " style="color: lightgray">LightGray </option>
+                                                    <option value="red" style="color: red">Red</option>
+                                                    <option value="orange" style="color: orange">Orange</option>
+                                                    <option value="yellow" style="color: yellow">Yellow</option>
+                                                    <option value="lime" style="color: lime">Lime</option>
+                                                    <option value="cyan" style="color: cyan">Cyan</option>
+                                                    <option value="blue" style="color: blue">Blue</option>
+                                                    <option value="magenta" style="color: magenta">Magenta</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group hidden">
+                                                <label><i class="glyphicon glyphicon-align-left"></i></label>
+                                                <select class="ql-align form-control -input-sm">
+                                                    <option value="left" selected>Left</option>
+                                                    <option value="center">Center</option>
+                                                    <option value="right">Right</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><a id="print_editor" href="#print">
-                                            <i class="glyphicon glyphicon-print"></i> Print</a></li>
-                                        <li><a id="erase_editor" href="#erase">
-                                            <i class="glyphicon glyphicon-erase"></i> Erase</a></li>
-                                    </ul>
+                                </nav>
+                                <div id="editor"></div>
+                                <div class="ad_container">
+                                    <ins class="adsbygoogle"></ins>
                                 </div>
-                            </nav>
-                            <div id="editor"></div>
-                            <!--
-                            <div id="get_started_alert" class="alert alert-dismissible alert-info" style="-display: none;">
-                                <button type="button" class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></button>
-                                <h4><i class="glyphicon glyphicon-info-sign"></i> Let's get started!</h4>
-                                Zoom the map then click on your way-points. The city names will be inserted in the edition zone at cursor position.
+                                <!--
+                                <div id="get_started_alert" class="alert alert-dismissible alert-info" style="-display: none;">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></button>
+                                    <h4><i class="glyphicon glyphicon-info-sign"></i> Let's get started!</h4>
+                                    Zoom the map then click on your way-points. The city names will be inserted in the edition zone at cursor position.
+                                </div>
+                                -->
+                                <nav class="navbar navbar-default navbar-static-bottom navbar-no-collapse" >
+                                    <div class="col-xs-12">
+                                        <ul class="nav navbar-nav navbar-left">
+                                            <li><a id="erase_editor" href="#erase">
+                                                <i class="glyphicon glyphicon-erase"></i> Erase</a></li>
+                                        </ul>
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a id="print_editor" href="#print">
+                                                <i class="glyphicon glyphicon-print"></i> Print</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
-                            -->
                             <form id="hidden_form" data-persist="garlic">
                                 <input id="stored_roadbook" class="garlic-auto-save" type="hidden" />
                                 <input class="garlic-auto-save" type="hidden" name="image_ids[0]" value="" />
-                            </form>
+                            </form>                            
                         </div>
                     </div>
                 </div>
@@ -326,6 +337,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="container ad_container">
+                    <ins class="adsbygoogle"></ins>
+                </div>
             </div>
             <div id="about" class="tab-pane fade in" >
                 <div class="container">
@@ -349,11 +363,6 @@
                 </div>
             </div>
         </div>
-        <nav id="ad_container" class="navbar navbar-fixed-bottom">
-            <div class="container-fluid text-center">
-                <ins class="adsbygoogle"></ins>
-            </div>
-        </nav>
 
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">

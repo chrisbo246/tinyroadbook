@@ -49,7 +49,7 @@ var pdfMakeModule = function () {
 		$.extend(docDefinition, settings);
 	};
 
-	$(document).ready(function () {
+	$(function () {
 
 		// Print button
 		$('#print_pdf_roadbook').click(function () {

@@ -402,7 +402,7 @@ var cityPickerModule = (function () {
 
 
 
-    $(document).ready(function () {
+    $(function () {
 
         var $editor = $('#editor');
 

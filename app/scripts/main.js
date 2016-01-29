@@ -6,6 +6,10 @@
  * @version: 0.1
  */
 
+console.time('$: HTML loaded (except images) and DOM is ready');
+console.time('$(document).ready: HTML loaded (except images) and DOM is ready');
+console.time('$(window).load: Page is fully loaded, including frames, objects and images');
+
 /**
  * Main module.
  * @external jQuery
@@ -121,7 +125,7 @@ var appModule = (function () {
 
 
 
-    $(document).ready(function () {
+    $(function () {
 
         // Initialize the map when pane become visible for the first time
         $('a[data-toggle="tab"]').one('shown.bs.tab', function (e) {
@@ -159,7 +163,6 @@ var appModule = (function () {
             theme: 'light-floating'
         });*/
        
-        commonsModule.adsense();
         commonsModule.parallax();
         commonsModule.adsense();
         commonsModule.storeActiveTab();
@@ -168,6 +171,18 @@ var appModule = (function () {
         
     });
 
+    /*
+    $(function () {
+        console.timeEnd('$: HTML loaded (except images) and DOM is ready');
+    });
+    $(document).ready(function () {
+        console.timeEnd('$(document).ready: HTML loaded (except images) and DOM is ready');
+    });
+    $(window).on('load', function () {
+        console.timeEnd('$(window).load: Page is fully loaded, including frames, objects and images');
+    });
+    */
+    
     return {
         map: map1
     };

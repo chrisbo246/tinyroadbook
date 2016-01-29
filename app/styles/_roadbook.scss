@@ -2,31 +2,41 @@
 /* Editor */
 
 #editor_container {
-    padding-top: 50px;
 
-	.navbar {
-		margin-top: -50px;
-		margin-bottom: 0;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+    height: 100%;
+	padding-top: $navbar-height;
+	padding-bottom: $navbar-height + 13px;
+	@media (min-width: 768px) {    
+        padding-bottom: $navbar-height + 2px;
 	}
-
-	#editor {
-		height: 100%;
+	
+	.navbar:first-of-type {
+		margin-top: -$navbar-height;
+		margin-bottom: 0;
+	}
+	.navbar:last-of-type {
+		margin-bottom: -$navbar-height;
+		margin-top: 0;
+	}
+	.ql-container {
 		overflow: auto;
-		//margin-top: -3px;
 		padding: (($line-height-computed - 1) / 2);
-		margin: 0 0 ($line-height-computed / 2);
 		font-size: ($font-size-base - 1);
 		line-height: $line-height-base;
-		color: $pre-color;
-		//background-color: $pre-bg;
-		border: solid $pre-border-color;
-		border-width: 0 1px 1px 1px;
-	    border-radius: 0 0 $border-radius-base $border-radius-base;		
+		color: $pre-color;	
+        padding-bottom: 70px;		
+	}
+    .ad_container {
+	    width: 98%;
+        height: 70px;
+	    position: absolute;
+	    bottom: $navbar-height;
+		overflow: hidden;
+		background-color: $body-bg;
 	}
 
 }
+
 
 /* Settings */
 

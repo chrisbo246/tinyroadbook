@@ -453,3 +453,30 @@ $icon-li-width:         (30em / 14);
     padding-bottom: 0;
     box-shadow: none;
 }
+
+
+/* Align */
+
+.align-vertical {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* Navbar */
+
+.navbar-collapse {
+	.navbar-static-bottom & {
+	  padding-left: 0;
+	  padding-right: 0;
+	}
+}
+.navbar-static-bottom {
+  z-index: $zindex-navbar;
+  border-width: 1px 0 0;
+
+  @media (min-width: $grid-float-breakpoint) {
+    border-radius: 0;
+  }
+}
