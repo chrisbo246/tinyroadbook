@@ -255,6 +255,9 @@ module.exports = function (grunt) {
     // The following *-min tasks produce minified files in the dist folder
     imagemin: {
       dist: {
+        options: {
+            progressive: true
+        },
         files: [{
           expand: true,
           cwd: '<%= config.app %>/images',
@@ -287,7 +290,13 @@ module.exports = function (grunt) {
           removeOptionalTags: true,
           // true would impact styles with attribute selectors
           removeRedundantAttributes: false,
-          useShortDoctype: true
+          useShortDoctype: true,
+          // custom
+          minifyCSS: true,
+          minifyJS: true,
+          removeRedundantAttributes: true,
+          removeComments: true,
+          removeCommentsFromCDATA: true
         },
         files: [{
           expand: true,
