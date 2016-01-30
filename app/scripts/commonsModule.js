@@ -251,25 +251,28 @@ var commonsModule = (function () {
             confirmation: {
                 title: 'Cancelled', 
                 text: 'You can continue where you left off.',
-                type:'error'
+                type:'error',
+                timer: 2000,
+                showConfirmButton: false
             }
         });
         
         $(function () {
             
             $(settings.buttonSelector).click(function () {
-                if (swall) {
+                if (swal) {
                     swal(settings.warning, function (isConfirm) {
                         if (isConfirm) {
                             _clearLocalStorage();
+                            location.reload();
                         } else {
                             swal(settings.confirmation);
                         }
                     });
                 } else {
                     _clearLocalStorage();
+                    location.reload();
                 }
-                location.reload();
             });
         
         });

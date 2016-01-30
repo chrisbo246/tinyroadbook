@@ -1,6 +1,11 @@
 //jslint browser: true
 //global window, console, $, ol, swal, Quill, geocodeModule
 
+var addthis_share = {
+   url: 'http://www.tinyroadbook.tk',
+   title: 'I\'m doing a tiny road book for my next tour'
+};
+
 /**
  * City picker module.
  * @external jQuery
@@ -414,6 +419,12 @@ var cityPickerModule = (function () {
             timeout: 10000
         });
 
+        /*var map = appModule.map;
+        var canvas;        
+        map.once('postcompose', function(event) {
+            canvas = event.context.canvas;
+        });*/
+        
         editor.on('selection-change', function (range) {
 
             var $buttons = $('#editor_toolbar').find('.ql-bold, .ql-italic, .ql-strike, .ql-underline, .ql-size, .ql-color, .ql-background'); // .ql-font .ql-align .ql-bullet .ql-list .ql-image .ql-link
@@ -438,10 +449,25 @@ var cityPickerModule = (function () {
             // Copy editor content to hidden textarea (for garlic autosave)
             $('#stored_roadbook').val(editor.getHTML()).trigger('change');
 
+            // Enable / disable the print / Erase buttons
             _toggleButtonStatusEmptyEditor();
 
             // Auto-scroll the textarea to keep the last city visible
             $editor.scrollTop($editor[0].scrollHeight);
+            
+            // Update Addthis widget data attributs
+            // http://support.addthis.com/customer/portal/topics/38604-customizing-addthis/articles
+            $.extend(addthis_share, {
+                    description: editor.getHTML()
+                    //image: (canvas ? canvas.toDataURL('image/png') : '')
+                });
+            //$('.addthis_sharing_toolbox')
+            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour')
+            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour');
+            //$('meta[property="og:title"]').attr('content', addthis_share.title);
+            //$('meta[property="og:url"]').attr('content', addthis_share.url);
+            //$('meta[property="og:description"]').attr('content', editor.getHTML());
+            
 
         });
 

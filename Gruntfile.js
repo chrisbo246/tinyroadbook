@@ -294,9 +294,7 @@ module.exports = function (grunt) {
           // custom
           minifyCSS: true,
           minifyJS: true,
-          removeRedundantAttributes: true,
-          removeComments: true,
-          removeCommentsFromCDATA: true
+          removeComments: true
         },
         files: [{
           expand: true,
