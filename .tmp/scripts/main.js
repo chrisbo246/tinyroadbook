@@ -41,15 +41,15 @@ var appModule = function () {
     var mapquestHybLayer = mapLayersModule.create('mapquestHyb');
     var lonviaHikingLayer = mapLayersModule.create('lonviaHiking');
     var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling');
+
     var gpxLayer = new ol.layer.Vector({
         name: 'gpsTrack',
+        title: 'GPX tracks',
         visible: false,
-        source: new ol.source.Vector({
-            format: new ol.format.GPX()
-        }),
+        source: new ol.source.Vector({}),
         style: new ol.style.Style({
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 255, 0, 0.7)',
+                color: 'rgba(51, 122, 183, 0.7)',
                 width: 3
             })
         })

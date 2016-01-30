@@ -127,6 +127,21 @@ var mapModule = function () {
     };
 
     /**
+     * Convert bytes to string size
+     * @param {integer} bytes - Size in bytes
+     * @param {integer} decimals - Round number to n decimals
+     * @returns {string} The formatted value
+     */
+    var _formatBytes = function (bytes, decimals) {
+        if (bytes == 0) return '0 Byte';
+        var k = 1000;
+        var dm = decimals + 1 || 3;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+    };
+
+    /**
      * Update layer source url from a file input
      * <input id="gpx_file_path" type="file" accept=".gpx" />
      * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
@@ -137,31 +152,57 @@ var mapModule = function () {
     var setFileSource = function (selector, layer) {
 
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-            console.warn('The File APIs are not fully supported in this browser.');
+            swal({ title: 'Oups!', text: 'The File APIs are not fully supported by your browser.', type: 'warning' });
+            return;
         }
+
+        var gpxFormat = new ol.format.GPX();
+        var gpxFeatures;
 
         var $filePath = $(selector);
         $filePath.on('change', function (e) {
 
             var files = e.target.files;
-            files.forEach(function (f) {
+            var output = [];
+            for (var i = 0, f; f = files[i]; i++) {
 
                 var reader = new FileReader();
-                reader.onload = function (theFile) {
-                    return function (e) {
-                        layer.setProperties({
-                            title: escape(theFile.name),
-                            source: new ol.source.Vector({
-                                url: e.target.result,
-                                format: new ol.format.GPX()
-                            }),
-                            visible: true
-                        });
-                    };
-                }(f);
+                reader.readAsText(f); //, 'UTF-8'
+                //reader.readAsDataURL(f);
 
-                reader.readAsDataURL(f);
-            });
+                reader.onload = function (e) {
+
+                    gpxFeatures = gpxFormat.readFeatures(e.target.result, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    });
+                    layer.getSource().addFeatures(gpxFeatures);
+
+                    layer.setProperties({
+                        visible: true
+                    });
+                };
+
+                reader.onloadstart = function (e) {
+                    //console.log('GPX tracks loading...');
+                };
+                reader.onloadend = function (e) {
+                    console.log('GPX tracks loaded');
+                };
+                reader.onerror = function (e) {
+                    swal({ title: 'Oups!', text: 'An error occured while trying to read your file.', type: 'warning' });
+                };
+
+                // Build the list of loaded files
+                output.push('<li class="list-group-item">' + escape(f.name) + ' <span class="badge">' + _formatBytes(f.size) + (' ' + f.type || '')
+                //+ (f.lastModifiedDate ? ' last modified: ' + f.lastModifiedDate.toLocaleDateString() : '')
+                 + '<span></li>');
+            };
+
+            var $list = $(selector + '_list');
+            if ($list) {
+                $list.html('<ul class="list-group">' + output.join('') + '</ul>');
+            }
         });
     };
 

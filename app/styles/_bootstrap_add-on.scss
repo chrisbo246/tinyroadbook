@@ -143,7 +143,8 @@ counter-increment: section;
 content: counter(section) " ";
 margin-right: 1em;
 float:left;
-vertical-align: -15%;
+display: inline-block;
+//vertical-align: -50%;
 }
 
 
@@ -199,7 +200,7 @@ line-height: 5em!important;
 clear: both;
 padding-bottom: .5em;
 }
-
+/*
 .list-number-surrounded-lg li {
 line-height: 1.2em;
 }
@@ -215,7 +216,7 @@ line-height: 4em;
 .list-number-surrounded-5x li {
 line-height: 5em;
 }
-
+*/
 .list-number-surrounded-circle li:before,
 .surrounded-circle {
 border-radius: 50%;

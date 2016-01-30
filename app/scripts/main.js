@@ -41,15 +41,16 @@ var appModule = (function () {
     var mapquestHybLayer = mapLayersModule.create('mapquestHyb');
     var lonviaHikingLayer = mapLayersModule.create('lonviaHiking');
     var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling');
+
     var gpxLayer = new ol.layer.Vector({
         name: 'gpsTrack',
+        title: 'GPX tracks',
         visible: false,
         source: new ol.source.Vector({
-            format: new ol.format.GPX()
         }),
         style: new ol.style.Style({
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 255, 0, 0.7)',
+                color: 'rgba(51, 122, 183, 0.7)',
                 width: 3
             })
         })
@@ -162,13 +163,13 @@ var appModule = (function () {
             //learnMore: 'Learn more'
             theme: 'light-floating'
         });*/
-       
+
         commonsModule.parallax();
         commonsModule.adsense();
         commonsModule.storeActiveTab();
         commonsModule.resetButton();
         commonsModule.loadGoogleFonts();
-        
+
     });
 
     /*
@@ -182,7 +183,7 @@ var appModule = (function () {
         console.timeEnd('$(window).load: Page is fully loaded, including frames, objects and images');
     });
     */
-    
+
     return {
         map: map1
     };

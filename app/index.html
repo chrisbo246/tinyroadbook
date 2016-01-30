@@ -1022,8 +1022,8 @@ body {
                             <div class="col-md-12">
                                 <div class="jumbotron -text-center">
                                     <h1>Minimalist <span class="text-primary">road book</span> editor</h1>
-                                    <p class="lead hidden">Extract city names with just few click on a map, freely edit your minimalist road book and live your adventure!</p>
-                                    <ol class="list-number-surrounded list-number-surrounded-circle list-number-surrounded-2x text-2x">
+                                    <p class="lead">Extract city names with just few click on a map, freely edit your minimalist road book and live your adventure!</p>
+                                    <ol class="list-number-surrounded list-number-surrounded-circle list-number-surrounded-2x text-2x hidden">
                                         <li>Extract city names with just few click on a map.</li>
                                         <li>Freely edit your minimalist road book.</li>
                                         <li>Print it and live your adventure!</li>
@@ -1097,10 +1097,10 @@ body {
                                     <a class="btn btn-primary btn-lg btn-block text-3x start-editing"><i class="glyphicon glyphicon-log-in hidden"></i> Start</a>
                                     <a class="btn btn-default btn-lg hidden start-tour"><i class="glyphicon glyphicon-play"></i> Quick tour</a>
                                 </p>
-                                <p class="text-muted"><small class="-text-muted">This application is powered by <a href="http://openlayers.org/" target="_blank">Openlayers</a>, <a href="http://www.openstreetmap.org" target="_blank">Open Street Map</a> and the fair use Nominatim geocoding web service. You can send your comments, suggestions, bug reports and other messages via this <a href="https://docs.google.com/forms/d/1Y6nrUwEdbVt_poAdTu_PyJoH_Ym3PppkfUyivA_fdGI/prefill" target="_blank">contact form</a>.
-                                A <a href="https://paypal.me/chrisbo1975" target="_blank">small contribution</a> would be very appreciate to promote a "real" hosting/domain and for my daily pittance.
-                                <br/>Made with <i class="glyphicon glyphicon-heart"></i> by a broke bike tour enthusiast
-                                </small></p>
+                                <p class="text-muted"><small class="-text-muted">This application is powered by <a href="http://openlayers.org/" target="_blank">Openlayers</a>, <a href="http://www.openstreetmap.org" target="_blank">Open Street Map</a> and the fair use Nominatim geocoding web service.<br/>You can send your comments, suggestions, bug reports and other messages via this <a href="https://docs.google.com/forms/d/1Y6nrUwEdbVt_poAdTu_PyJoH_Ym3PppkfUyivA_fdGI/prefill" target="_blank">contact form</a>.
+                                <!--A <a href="https://paypal.me/chrisbo1975" target="_blank">small contribution</a> would be very appreciate to promote a "real" hosting/domain and for my daily pittance.-->
+                                <br/>Made with <i class="glyphicon glyphicon-heart"></i> by a broke bike tour enthusiast</small></p>
+                                <a class="text-4x text-muted" href="https://paypal.me/chrisbo1975" target="_blank"><i class="glyphicon glyphicon-piggy-bank"></i></a>
                             </div>
                         </div>
                     </div>
@@ -1225,7 +1225,7 @@ body {
                 <div class="container">
                     <form id="settings_form" data-persist="garlic">
                         <div class="row">
-                            <fieldset class="col-md-6">
+                            <fieldset class="col-md-4">
                                 <legend><i class="glyphicon glyphicon-pushpin"></i> Picker</legend>
                                 <!--
                                 <div class="form-group">
@@ -1270,13 +1270,14 @@ body {
                                 <span class="help-block hidden"><i class="glyphicon glyphicon-alert text-warning"></i> This may reduce name
                                 extraction speed.</span>
                             </fieldset>
-                            <fieldset class="col-md-6">
+                            <fieldset class="col-md-4">
                                 <legend><i class="glyphicon glyphicon-globe"></i> Map</legend>
                                 <div class="form-group">
                                     <label for="gpx_file_path">GPS track</label>
-                                    <input id="gpx_file_path" class="form-control" type="file" accept=".gpx" />
+                                    <input id="gpx_file_path" class="form-control" type="file" accept=".gpx" name="files[]" multiple />
                                     <span class="help-block">Visualize your route by uploading a GPS track file (.gpx).</span>
                                 </div>
+                                <output id="gpx_file_path_list"></output>
                             </fieldset>
                             <!--
                             <fieldset class="col-md-6">
@@ -1295,7 +1296,7 @@ body {
                                 </div>
                             </fieldset>
                             -->
-                            <fieldset class="col-md-6">
+                            <fieldset class="col-md-4">
                                 <legend><i class="glyphicon glyphicon-refresh"></i> Reset</legend>
                                 <button id="reset_settings" type="button" class="btn btn-default btn-block">Restore settings</button>
                                 <button id="reset_all" type="button" class="btn btn-default btn-block btn-warning">Delete all data</button>
@@ -1336,7 +1337,7 @@ body {
 
         <!-- build:css(.) styles/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
+        <link rel="stylesheet" href="/bower_components/ol3/ol.css" />
         <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
         <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
         <!-- endbower -->
@@ -1358,7 +1359,7 @@ body {
         </script>
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/bower_components/bower-ol3/build/ol.js"></script>
+        <script src="/bower_components/ol3/ol.js"></script>
         <script src="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
         <script src="/bower_components/garlicjs/dist/garlic.min.js"></script>
         <script src="/bower_components/quill/dist/quill.js"></script>
