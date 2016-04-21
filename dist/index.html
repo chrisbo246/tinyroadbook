@@ -1,4 +1,788 @@
-<!doctype html><html class="no-js" lang="en"><head><meta name="msvalidate.01" content="93EAF08B55AC3C1EAD6FC56407B2D32A"><meta name="google-site-verification" content="zqEqsiPlmpNz2yZJ3A8ythPCkPXaR-v4P8sX5KW3Hd0"><meta name="yandex-verification" content="417bd8d59fedca40"><title>TinyRoadbook - Minimalist route planner online</title><meta charset="utf-8"><meta name="description" content="Retrieve city names with few clicks on a map, freely edit your minimalist roadbook, print it... You are ready for the great escape!"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><!-- Above the fold --><style></style><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="styles/vendor.css"><!-- Roadbook live style --><style id="roadbook_style" rel="stylesheet" type="text/css">@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,greek,vietnamese,cyrillic);
+<!doctype html><html class="no-js" lang="en"><head><meta name="msvalidate.01" content="93EAF08B55AC3C1EAD6FC56407B2D32A"><meta name="google-site-verification" content="zqEqsiPlmpNz2yZJ3A8ythPCkPXaR-v4P8sX5KW3Hd0"><meta name="yandex-verification" content="417bd8d59fedca40"><title>TinyRoadbook - Minimalist route planner online</title><meta charset="utf-8"><meta name="description" content="Retrieve city names with few clicks on a map, freely edit your minimalist roadbook, print it... You are ready for the great escape!"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><!-- Above the fold --><style>@charset "UTF-8";
+sup {
+  vertical-align: baseline;
+}
+body {
+  margin: 0;
+}
+.col-xs-12 {
+  float: left;
+}
+label {
+  max-width: 100%;
+}
+.navbar-fixed-top .navbar-collapse {
+  max-height: 340px;
+}
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+nav,
+section {
+  display: block;
+}
+a {
+  background-color: transparent;
+}
+h1 {
+  margin: .67em 0;
+}
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+}
+sup {
+  top: -.5em;
+}
+textarea {
+  overflow: auto;
+}
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.glyphicon {
+  font-style: normal;
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button {
+  -webkit-appearance: button;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+input[type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.btn,
+.form-control,
+.navbar-toggle {
+  background-image: none;
+}
+body {
+  background-color: #fff;
+}
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot);
+  src: url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix) format("embedded-opentype"),url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2) format("woff2"),url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff) format("woff"),url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf) format("truetype"),url(../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format("svg");
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-cog:before {
+  content: "\e019";
+}
+.glyphicon-home:before {
+  content: "\e021";
+}
+.glyphicon-refresh:before {
+  content: "\e031";
+}
+.glyphicon-print:before {
+  content: "\e045";
+}
+.glyphicon-align-left:before {
+  content: "\e052";
+}
+.glyphicon-edit:before {
+  content: "\e065";
+}
+.glyphicon-play:before {
+  content: "\e072";
+}
+.glyphicon-globe:before {
+  content: "\e135";
+}
+.glyphicon-pushpin:before {
+  content: "\e146";
+}
+.glyphicon-log-in:before {
+  content: "\e161";
+}
+.glyphicon-alert:before {
+  content: "\e209";
+}
+.glyphicon-erase:before {
+  content: "\e221";
+}
+.glyphicon-text-size:before {
+  content: "\e241";
+}
+.glyphicon-text-color:before {
+  content: "\e242";
+}
+.glyphicon-text-background:before {
+  content: "\e243";
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+h1 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 36px;
+}
+p {
+  margin: 0 0 10px;
+}
+.lead {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+label {
+  font-weight: 700;
+}
+@media (min-width:768px) {
+  .lead {
+    font-size: 21px;
+  }
+}
+.text-center {
+  text-align: center;
+}
+.text-muted {
+  color: #777;
+}
+.text-primary {
+  color: #337ab7;
+}
+.text-warning {
+  color: #8a6d3b;
+}
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee;
+}
+ul {
+  margin-top: 0;
+}
+ul {
+  margin-bottom: 10px;
+}
+@media (min-width:768px) {
+  .container {
+    width: 750px;
+  }
+}
+.container-fluid:after,
+.container:after,
+.navbar-collapse:after,
+.navbar-header:after,
+.navbar:after,
+.row:after {
+  clear: both;
+}
+legend {
+  color: #333;
+}
+.container-fluid:after,
+.container-fluid:before,
+.container:after,
+.container:before,
+.row:after,
+.row:before {
+  display: table;
+  content: " ";
+}
+.container,
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+}
+.container,
+.container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width:992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width:1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.col-md-12,
+.col-md-6,
+.col-xs-12 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.col-xs-12 {
+  width: 100%;
+}
+@media (min-width:992px) {
+  .col-md-12,
+  .col-md-6 {
+    float: left;
+  }
+  .col-md-6 {
+    width: 50%;
+  }
+  .col-md-12 {
+    width: 100%;
+  }
+}
+fieldset,
+legend {
+  padding: 0;
+  border: 0;
+}
+fieldset {
+  margin: 0;
+  min-width: 0;
+}
+legend {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  border-bottom: 1px solid #e5e5e5;
+}
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+input[type=checkbox] {
+  margin: 4px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+}
+.form-control {
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  display: block;
+}
+input[type=file] {
+  display: block;
+}
+.form-control {
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: #999;
+}
+.form-control::-webkit-input-placeholder {
+  color: #999;
+}
+.form-control::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+textarea.form-control {
+  height: auto;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.checkbox label {
+  min-height: 20px;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+.checkbox input[type=checkbox] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px\9;
+}
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+.btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-block+.btn-block {
+  margin-top: 5px;
+}
+.fade {
+  opacity: 0;
+}
+.fade.in {
+  opacity: 1;
+}
+.collapse {
+  display: none;
+}
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.nav:after,
+.nav:before {
+  content: " ";
+  display: table;
+}
+.nav>li,
+.nav>li>a {
+  display: block;
+  position: relative;
+}
+.nav:after {
+  clear: both;
+}
+.nav>li>a {
+  padding: 10px 15px;
+}
+.tab-content>.tab-pane {
+  display: none;
+}
+.tab-content>.active {
+  display: block;
+}
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+.navbar:after,
+.navbar:before {
+  content: " ";
+  display: table;
+}
+.navbar-header:after,
+.navbar-header:before {
+  content: " ";
+  display: table;
+}
+.navbar-collapse {
+  overflow-x: visible;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+  -webkit-overflow-scrolling: touch;
+}
+.navbar-collapse:after,
+.navbar-collapse:before {
+  content: " ";
+  display: table;
+}
+@media (min-width:768px) {
+  .navbar {
+    border-radius: 4px;
+  }
+  .navbar-header {
+    float: left;
+  }
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+  }
+  .navbar-fixed-top .navbar-collapse {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-device-width:480px) and (orientation:landscape) {
+  .navbar-fixed-top .navbar-collapse {
+    max-height: 200px;
+  }
+}
+.container-fluid>.navbar-collapse,
+.container-fluid>.navbar-header {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.navbar-static-top {
+  z-index: 1000;
+  border-width: 0 0 1px;
+}
+.navbar-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+}
+.navbar-brand {
+  float: left;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+}
+@media (min-width:768px) {
+  .container-fluid>.navbar-collapse,
+  .container-fluid>.navbar-header {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .navbar-fixed-top,
+  .navbar-static-top {
+    border-radius: 0;
+  }
+  .navbar>.container-fluid .navbar-brand {
+    margin-left: -15px;
+  }
+}
+.navbar-toggle {
+  position: relative;
+  float: right;
+  margin-right: 15px;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+.navbar-toggle .icon-bar+.icon-bar {
+  margin-top: 4px;
+}
+.navbar-nav {
+  margin: 7.5px -15px;
+}
+.navbar-nav>li>a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+@media (min-width:768px) {
+  .navbar-toggle {
+    display: none;
+  }
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav>li {
+    float: left;
+  }
+  .navbar-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.navbar-form {
+  padding: 10px 15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);
+  margin: 8px -15px;
+}
+@media (min-width:768px) {
+  .navbar-form .form-group {
+    display: inline-block;
+  }
+  .navbar-form .form-group {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .navbar-form .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  .navbar-form {
+    width: auto;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+  }
+}
+@media (max-width:767px) {
+  .navbar-form .form-group {
+    margin-bottom: 5px;
+  }
+  .navbar-form .form-group:last-child {
+    margin-bottom: 0;
+  }
+}
+.navbar-text {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (min-width:768px) {
+  .navbar-text {
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .navbar-left {
+    float: left!important;
+  }
+  .navbar-right {
+    float: right!important;
+    margin-right: -15px;
+  }
+}
+.navbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #777;
+}
+.navbar-default .navbar-form {
+  border-color: #e7e7e7;
+}
+.navbar-inverse {
+  background-color: #222;
+  border-color: #090909;
+}
+.navbar-inverse .navbar-brand {
+  color: #9d9d9d;
+}
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-text {
+  color: #9d9d9d;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #333;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #101010;
+}
+.jumbotron,
+.jumbotron h1 {
+  color: inherit;
+}
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  background-color: #eee;
+}
+.jumbotron p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+.container .jumbotron {
+  border-radius: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media screen and (min-width:768px) {
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .jumbotron h1 {
+    font-size: 63px;
+  }
+}
+.hidden {
+  display: none!important;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@media (max-width:767px) {
+  .hidden-xs {
+    display: none!important;
+  }
+}
+@media (min-width:992px) and (max-width:1199px) {
+  .hidden-md {
+    display: none!important;
+  }
+}
+body,
+body>.tab-content,
+body>.tab-content>.tab-pane,
+html {
+  height: 100%;
+}
+body {
+  padding-top: 50px;
+}
+#home_pane section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+#home_pane section:first-of-type {
+  background: url(../images/backgrounds/route_planner.d0901265.jpg) 50% 0 fixed;
+  background-size: cover;
+  min-height: 100%;
+}
+#home_pane section:first-of-type .jumbotron {
+  background-color: transparent;
+}
+#editor_pane .container-fluid,
+#editor_pane .row-full-height {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media (max-width:992px) {
+  #editor_pane .col-full-height:nth-of-type(1) {
+    height: 40%;
+  }
+  #editor_pane .col-full-height:nth-of-type(2) {
+    height: 60%;
+  }
+}
+section:first-of-type{
+    padding-top: 20px;
+}
+#settings_pane section:last-of-type {
+    padding-bottom: 20px;
+}
+#settings_pane .adsbygoogle {
+  min-height: 60px;
+}
+.material-icons {
+  display: none;
+}</style><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="styles/vendor.css"><!-- Roadbook live style --><!--@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,greek,vietnamese,cyrillic);--><style id="roadbook_style" rel="stylesheet" type="text/css">@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
 @media screen,
 print {
 
@@ -194,7 +978,7 @@ print {
 
     .roadbook [data-capital="yes"] {
         color: #08f;
-        font-weight: 900;
+        font-weight: 800;
     }
     .roadbook [data-capital="0"] {
         color: #00d;
@@ -202,7 +986,7 @@ print {
     }
     .roadbook [data-capital="1"] {
         color: #00c;
-        font-weight: 800;
+        font-weight: 700;
     }
     .roadbook [data-capital="2"] {
         color: #00b;
@@ -210,7 +994,7 @@ print {
     }
     .roadbook [data-capital="3"] {
         color: #00a;
-        font-weight: 700;
+        font-weight: 600;
     }
     .roadbook [data-capital="4"] {
         color: #009;
@@ -218,27 +1002,27 @@ print {
     }
     .roadbook [data-capital="5"] {
         color: #008;
-        font-weight: 600;
+        font-weight: 400;
     }
     .roadbook [data-capital="6"] {
         color: #007;
-        font-weight: 500;
+        font-weight: 400;
     }
     .roadbook [data-capital="7"] {
         color: #006;
-        font-weight: 500;
+        font-weight: 400;
     }
     .roadbook [data-capital="8"] {
         color: #005;
-        font-weight: 400;
+        font-weight: 300;
     }
     .roadbook [data-capital="9"] {
         color: #004;
-        font-weight: 400;
+        font-weight: 300;
     }
     .roadbook [data-capital="10"] {
         color: #003;
-        font-weight: 400;
+        font-weight: 300;
     }
 
 
@@ -382,7 +1166,7 @@ print {
         color: violet;
     }
 
-}</style><script src="scripts/vendor/modernizr.js"></script></head><body><!--[if lt IE 10]>
+}</style></head><body><!--[if lt IE 10]>
         <div class="alert alert-dismissible alert-warning">
             <button type="button" class="close" data-dismiss="alert">&close;</button>
             <h4>Warning!</h4>
@@ -393,7 +1177,7 @@ print {
                                         </span>--> <input id="road" type="text" class="form-control" title="Next road" rel="tooltip" data-placement="top" placeholder=""> <span class="input-group-addon"><input id="auto_insert_road" type="checkbox" title="Auto insertion" rel="tooltip" data-placement="top"> </span><span class="input-group-btn"><button id="insert_road" type="button" class="btn btn-default" data-type="road" title="Manual insertion" rel="tooltip" data-placement="top"><span class="glyphicon glyphicon-plus"></span></button></span></div></form><form class="navbar-form navbar-left debug-only"><div class="btn-toolbar" role="toolbar" aria-label=""><div class="btn-group" role="group" aria-label=""><button type="button" class="btn btn-default" data-toggle="modal" data-target="#style_edition_modal" title="Attributs" rel="tooltip" data-placement="left"><span class="glyphicon glyphicon-tags"></span></button></div></div></form></nav><form id="editor_form" class="tab-content"><div id="visual_editor_pane" class="tab-pane fade active in"><div id="editor"></div></div></form><div class="ad_container hidden-print"><ins class="adsbygoogle"></ins></div></div></div></div></div></div><div id="editor_html_pane" class="tab-pane fade in row-full-height"><div class="container-fluid row-full-height"><div class="row row-full-height"><div class="col-md-12 col-full-height no-padding"><pre class="col-full-height no-margin no-corner"><code id="roadbook_editor_html" class="language-markup"></code></pre></div></div></div></div><div id="editor_contents_pane" class="tab-pane fade in row-full-height"><div class="container-fluid row-full-height"><div class="row row-full-height"><div class="col-md-12 no-padding col-full-height"><pre class="col-full-height no-margin no-corner"><code id="roadbook_editor_contents" class="language-json"></code></pre></div></div></div></div><div id="style_pane" class="tab-pane fade in row-full-height"><div class="container-fluid row-full-height"><div class="row row-full-height no-padding"><div class="col-md-6"><div class="form-group"><label class="hidden">Preview <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Here is like your roadbook will look like."></span></label><div class="input-control roadbook"><div><span data-place="city">city</span>&nbsp; <span data-type="translation">translation</span>&nbsp; <span data-place="road">road</span>&nbsp; <span data-place="path">path</span>&nbsp; <span data-place="track">track</span></div><div><span data-place="city" data-population="0">population 1</span>&nbsp; <span data-place="city" data-population="1">3</span>&nbsp; <span data-place="city" data-population="2">7</span>&nbsp; <span data-place="city" data-population="3">20</span>&nbsp; <span data-place="city" data-population="4">50</span>&nbsp; <span data-place="city" data-population="5">150</span>&nbsp; <span data-place="city" data-population="6">400</span>&nbsp; <span data-place="city" data-population="7">1,000</span>&nbsp; <span data-place="city" data-population="8">3,000</span>&nbsp; <span data-place="city" data-population="9">8,100</span>&nbsp; <span data-place="city" data-population="10">22,000</span>&nbsp; <span data-place="city" data-population="11">60,000</span>&nbsp; <span data-place="city" data-population="12">163,000</span>&nbsp; <span data-place="city" data-population="13">442,000</span>&nbsp; <span data-place="city" data-population="14">1M</span>&nbsp; <span data-place="city" data-population="15">3M</span>&nbsp; <span data-place="city" data-population="16">10M</span>&nbsp; <span data-place="city" data-population="17">24M</span>&nbsp; <span data-place="city" data-population="18">65M</span>&nbsp; <span data-place="city" data-population="19">180M</span>&nbsp; <span data-place="city" data-population="20">485M</span>&nbsp; <span data-place="city" data-population="21">1,300M</span></div><div><span data-place="city" data-capital="yes">capital</span>&nbsp; <span data-place="city" data-capital="0">0</span>&nbsp; <span data-place="city" data-capital="1">1</span>&nbsp; <span data-place="city" data-capital="2">2</span>&nbsp; <span data-place="city" data-capital="3">3</span>&nbsp; <span data-place="city" data-capital="4">4</span>&nbsp; <span data-place="city" data-capital="5">5</span>&nbsp; <span data-place="city" data-capital="6">6</span>&nbsp; <span data-place="city" data-capital="7">7</span>&nbsp; <span data-place="city" data-capital="8">8</span>&nbsp; <span data-place="city" data-capital="9">9</span>&nbsp; <span data-place="city" data-capital="10">10</span></div><div><span data-place="country">country</span>&nbsp; <span data-place="state">state</span>&nbsp; <span data-place="state_district">state district</span>&nbsp; <span data-place="county">county</span>&nbsp; <span data-place="city">city</span>&nbsp; <span data-place="city_district">city district</span>&nbsp; <span data-place="suburb">suburb</span>&nbsp; <span data-place="town">town</span>&nbsp; <span data-place="village">village</span>&nbsp; <span data-place="hamlet">hamlet</span>&nbsp; <span data-place="locality">locality</span>&nbsp; <span data-place="municipality">municipality</span>&nbsp; <span data-place="island">island</span>&nbsp; <span data-place="islet">islet</span>&nbsp; <span data-place="neighbourhood">neighbourhood</span></div><div><span data-place="arts_centre">arts_centre</span>&nbsp; <span data-place="artwork">artwork</span>&nbsp; <span data-place="atm">atm</span>&nbsp; <span data-place="bakery">bakery</span>&nbsp; <span data-place="bank">bank</span>&nbsp; <span data-place="beach">beach</span>&nbsp; <span data-place="bicycle">bicycle</span>&nbsp; <span data-place="books">books</span>&nbsp; <span data-place="building">building</span>&nbsp; <span data-place="bus_station">bus_station</span>&nbsp; <span data-place="bus_stop">bus_stop</span>&nbsp; <span data-place="butcher">butcher</span>&nbsp; <span data-place="cafe">cafe</span>&nbsp; <span data-place="car_repair">car_repair</span>&nbsp; <span data-place="castle">castle</span>&nbsp; <span data-place="cinema">cinema</span>&nbsp; <span data-place="clothes">clothes</span>&nbsp; <span data-place="community_centre">community_centre</span>&nbsp; <span data-place="computer">computer</span>&nbsp; <span data-place="convenience">convenience</span>&nbsp; <span data-place="courthouse">courthouse</span>&nbsp; <span data-place="optician">optician</span>&nbsp; <span data-place="dentist">dentist</span>&nbsp; <span data-place="department_store">department_store</span>&nbsp; <span data-place="doityourself">doityourself</span>&nbsp; <span data-place="dry_cleaning">dry_cleaning</span>&nbsp; <span data-place="farm">farm</span>&nbsp; <span data-place="fast_food">fast_food</span>&nbsp; <span data-place="fire_station">fire_station</span>&nbsp; <span data-place="florist">florist</span>&nbsp; <span data-place="fuel">fuel</span>&nbsp; <span data-place="hairdresser">hairdresser</span>&nbsp; <span data-place="hardware">hardware</span>&nbsp; <span data-place="hospital">hospital</span>&nbsp; <span data-place="hostel">hostel</span>&nbsp; <span data-place="hotel">hotel</span>&nbsp; <span data-place="house_number">house_number</span>&nbsp; <span data-place="isolated_dwelling">isolated_dwelling</span>&nbsp; <span data-place="jewelry">jewelry</span>&nbsp; <span data-place="library">library</span>&nbsp; <span data-place="memorial">memorial</span>&nbsp; <span data-place="mobile_phone">mobile_phone</span>&nbsp; <span data-place="monument">monument</span>&nbsp; <span data-place="museum">museum</span>&nbsp; <span data-place="nature_reserve">nature_reserve</span>&nbsp; <span data-place="outdoor">outdoor</span>&nbsp; <span data-place="park">park</span>&nbsp; <span data-place="parking">parking</span>&nbsp; <span data-place="pharmacy">pharmacy</span>&nbsp; <span data-place="picnic_site">picnic_site</span>&nbsp; <span data-place="place_of_worship">place_of_worship</span>&nbsp; <span data-place="playground">playground</span>&nbsp; <span data-place="police">police</span>&nbsp; <span data-place="post_box">post_box</span>&nbsp; <span data-place="pub">pub</span>&nbsp; <span data-place="public_building">public_building</span>&nbsp; <span data-place="restaurant">restaurant</span>&nbsp; <span data-place="school">school</span>&nbsp; <span data-place="shoes">shoes</span>&nbsp; <span data-place="sports_centre">sports_centre</span>&nbsp; <span data-place="stadium">stadium</span>&nbsp; <span data-place="supermarket">supermarket</span>&nbsp; <span data-place="telephone">telephone</span>&nbsp; <span data-place="theatre">theatre</span>&nbsp; <span data-place="townhall">townhall</span>&nbsp; <span data-place="toys">toys</span>&nbsp; <span data-place="travel_agency">travel_agency</span>&nbsp; <span data-place="university">university</span>&nbsp; <span data-place="viewpoint">viewpoint</span></div></div><div class="ad_container hidden-print"><ins class="adsbygoogle"></ins></div></div></div><div class="col-md-6 col-full-height no-padding"><pre class="col-full-height no-margin no-corner"><code id="roadbook_style_editor" class="language-css"></code></pre></div></div></div></div><div id="settings_pane" class="tab-pane fade in"><div class="container"><form id="settings_form" data-persist="garlic" data-parsley-validate="" data-parsley-trigger="change"><div class="row"><fieldset class="col-md-4"><legend><span class="glyphicon glyphicon-plus"></span> Insertion</legend><div class="form-group"><label>Translation <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Append the translated name to the local name."></span></label><select id="user_language" class="form-control"><option value="" selected="selected">&nbsp;</option><option value="ab">Abkhazian</option><option value="aa">Afar</option><option value="af">Afrikaans</option><option value="ak">Akan</option><option value="sq">Albanian</option><option value="am">Amharic</option><option value="ar">Arabic</option><option value="an">Aragonese</option><option value="hy">Armenian</option><option value="as">Assamese</option><option value="av">Avaric</option><option value="ae">Avestan</option><option value="ay">Aymara</option><option value="az">Azerbaijani</option><option value="bm">Bambara</option><option value="ba">Bashkir</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bi">Bislama</option><option value="bs">Bosnian</option><option value="br">Breton</option><option value="bg">Bulgarian</option><option value="my">Burmese</option><option value="ca">Catalan</option><option value="ch">Chamorro</option><option value="ce">Chechen</option><option value="zh">Chinese</option><option value="cu">Church Slavic</option><option value="cv">Chuvash</option><option value="kw">Cornish</option><option value="co">Corsican</option><option value="cr">Cree</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="dv">Divehi</option><option value="nl">Dutch</option><option value="dz">Dzongkha</option><option value="en">English</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="ee">Ewe</option><option value="fo">Faroese</option><option value="fj">Fijian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="ff">Fulah</option><option value="gl">Galician</option><option value="lg">Ganda</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gn">Guarani</option><option value="gu">Gujarati</option><option value="ht">Haitian</option><option value="ha">Hausa</option><option value="he">Hebrew</option><option value="hz">Herero</option><option value="hi">Hindi</option><option value="ho">Hiri Motu</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="io">Ido</option><option value="ig">Igbo</option><option value="id">Indonesian</option><option value="ia">Interlingua</option><option value="ie">Interlingue</option><option value="iu">Inuktitut</option><option value="ik">Inupiaq</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jv">Javanese</option><option value="kl">Kalaallisut</option><option value="kn">Kannada</option><option value="kr">Kanuri</option><option value="ks">Kashmiri</option><option value="kk">Kazakh</option><option value="km">Khmer</option><option value="ki">Kikuyu</option><option value="rw">Kinyarwanda</option><option value="kv">Komi</option><option value="kg">Kongo</option><option value="ko">Korean</option><option value="kj">Kuanyama</option><option value="ku">Kurdish</option><option value="ky">Kyrgyz</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="li">Limburgish</option><option value="ln">Lingala</option><option value="lt">Lithuanian</option><option value="lu">Luba-Katanga</option><option value="lb">Luxembourgish</option><option value="mk">Macedonian</option><option value="mg">Malagasy</option><option value="ms">Malay</option><option value="ml">Malayalam</option><option value="mt">Maltese</option><option value="gv">Manx</option><option value="mi">Maori</option><option value="mr">Marathi</option><option value="mh">Marshallese</option><option value="mn">Mongolian</option><option value="na">Nauru</option><option value="nv">Navajo</option><option value="ng">Ndonga</option><option value="ne">Nepali</option><option value="nd">North Ndebele</option><option value="se">Northern Sami</option><option value="nb">Norwegian Bokm?l</option><option value="nn">Norwegian Nynorsk</option><option value="no">Norwegian</option><option value="ny">Nyanja</option><option value="oc">Occitan</option><option value="oj">Ojibwa</option><option value="or">Oriya</option><option value="om">Oromo</option><option value="os">Ossetic</option><option value="pi">Pali</option><option value="ps">Pashto</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="qu">Quechua</option><option value="ro">Romanian</option><option value="rm">Romansh</option><option value="rn">Rundi</option><option value="ru">Russian</option><option value="sm">Samoan</option><option value="sg">Sango</option><option value="sa">Sanskrit</option><option value="sc">Sardinian</option><option value="gd">Scottish Gaelic</option><option value="sr">Serbian</option><option value="sh">Serbo-Croatian</option><option value="sn">Shona</option><option value="ii">Sichuan Yi</option><option value="sd">Sindhi</option><option value="si">Sinhala</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="so">Somali</option><option value="nr">South Ndebele</option><option value="st">Southern Sotho</option><option value="es">Spanish</option><option value="su">Sundanese</option><option value="sw">Swahili</option><option value="ss">Swati</option><option value="sv">Swedish</option><option value="tl">Tagalog</option><option value="ty">Tahitian</option><option value="tg">Tajik</option><option value="ta">Tamil</option><option value="tt">Tatar</option><option value="te">Telugu</option><option value="th">Thai</option><option value="bo">Tibetan</option><option value="ti">Tigrinya</option><option value="to">Tongan</option><option value="ts">Tsonga</option><option value="tn">Tswana</option><option value="tr">Turkish</option><option value="tk">Turkmen</option><option value="tw">Twi</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="ug">Uyghur</option><option value="uz">Uzbek</option><option value="ve">Venda</option><option value="vi">Vietnamese</option><option value="vo">Volap?k</option><option value="wa">Walloon</option><option value="cy">Welsh</option><option value="fy">Western Frisian</option><option value="wo">Wolof</option><option value="xh">Xhosa</option><option value="yi">Yiddish</option><option value="yo">Yoruba</option><option value="za">Zhuang</option><option value="zu">Zulu</option></select><span class="help-block"></span></div><div class="form-group"><label>Default picker <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="The picker will be retested to this value after each insertion."></span></label><select id="default_type" class="form-control"><option value="">&nbsp;</option><option value="place" selected="selected">Place</option><option value="road">Road</option><option value="poi">POI</option></select></div></fieldset><fieldset class="col-md-4"><legend><span class="glyphicon glyphicon-zoom-in"></span> Extraction</legend><div class="form-group"><label for="zoom_min">Zoom min <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="The minimum zoom level used to extract place names."></span></label><select id="zoom_min" class="form-control" required=""><option value="">&nbsp;</option><option value="0">0 Continent / Sea</option><option value="1">1</option><option value="2">2</option><option value="3">3 Country</option><option value="4">4</option><option value="5">5 State</option><option value="6">6 Region</option><option value="7">7</option><option value="8" selected="selected">8 County</option><option value="9">9</option><option value="10">10 City</option><option value="11">11</option><option value="12">12 Town / Village</option><option value="13">13</option><option value="14">14 Suburb</option><option value="15">15</option><option value="16">16 Street</option><option value="17">17</option><option value="18">18 Building</option><option value="19">19</option><option value="20">20</option><option value="21">21</option></select><span class="help-block"></span></div><div class="form-group"><label for="zoom_max">Zoom max <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="The maximum zoom level used to extract place names."></span></label><select id="zoom_max" class="form-control" required=""><option value="">&nbsp;</option><option value="0">0 Continent / Sea</option><option value="1">1</option><option value="2">2</option><option value="3">3 Country</option><option value="4">4</option><option value="5">5 State</option><option value="6">6 Region</option><option value="7">7</option><option value="8">8 County</option><option value="9">9</option><option value="10">10 City</option><option value="11">11</option><option value="12" selected="selected">12 Town / Village</option><option value="13">13</option><option value="14">14 Suburb</option><option value="15">15</option><option value="16">16 Street</option><option value="17">17</option><option value="18">18 Building</option><option value="19">19</option><option value="20">20</option><option value="21">21</option></select><span class="help-block"></span></div><div class="form-group"><label for="zoom_delta">Zoom delta <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You may want to adjust this value when extracted names are not visible on the map."></span></label><input id="zoom_delta" class="form-control" data-toggle="tooltip" type="range" min="-4" max="4" step="1" value="-2"> <span class="help-block"></span></div></fieldset><fieldset class="col-md-4"><legend><span class="glyphicon glyphicon-refresh"></span> Reset</legend><button id="reset_settings" type="button" class="btn btn-default btn-block">Settings</button> <button id="reset_style" type="button" class="btn btn-default btn-block">Styles</button> <button id="erase_roadbook" type="button" class="btn btn-default btn-block btn-warning">Roadbook</button> <button id="reset_all" type="button" class="btn btn-default btn-block btn-warning">All</button></fieldset></div></form></div></div></div><div id="style_edition_modal" class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Attributs</h4></div><div class="modal-body"><form id="style_edition_form"><div class="form-group"><label><span class="glyphicon glyphicon-tint" data-toggle="tooltip" title="Type"></span><i class="material-icons hidden">format_size</i> Type</label><select id="ql_type" class="ql-type form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="translation">Translation</option><!--<option value="place">Place</option>
                                 <option value="road">Road</option>
                                 <option value="poi">POI</option>
-                                <option value="separator">Separator</option>--></select></div><div class="form-group"><label><span class="glyphicon glyphicon-map-marker" data-toggle="tooltip" title="Place"></span><i class="material-icons hidden">format_size</i> Place type</label><select id="ql_place" class="ql-place form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="country" data-place="country">Country</option><option value="state" data-place="state">State</option><option value="state_district" data-place="state_district">State district</option><option value="county" data-place="county">County</option><option value="city" data-place="city">City</option><option value="city_district" data-place="city_district">City district</option><option value="suburb" data-place="suburb">Suburb</option><option value="town" data-place="town">Town</option><option value="village" data-place="village">Village</option><option value="hamlet" data-place="hamlet">Hamlet</option><option value="locality" data-place="locality">Locality</option><option value="municipality" data-place="municipality">Municipality</option><option value="island" data-place="island">Island</option><option value="islet" data-place="islet">Islet</option><option value="neighbourhood" data-place="neighbourhood">Neighbourhood</option><option value="road" data-place="road">road</option><option value="path" data-place="path">path</option><option value="track" data-place="track">track</option><option value="arts_centre" data-place="arts_centre">arts_centre</option><option value="artwork" data-place="artwork">artwork</option><option value="atm" data-place="atm">atm</option><option value="bakery" data-place="bakery">bakery</option><option value="bank" data-place="bank">bank</option><option value="beach" data-place="beach">beach</option><option value="bicycle" data-place="bicycle">bicycle</option><option value="books" data-place="books">books</option><option value="building" data-place="building">building</option><option value="bus_station" data-place="bus_station">bus_station</option><option value="bus_stop" data-place="bus_stop">bus_stop</option><option value="butcher" data-place="butcher">butcher</option><option value="cafe" data-place="cafe">cafe</option><option value="car_repair" data-place="car_repair">car_repair</option><option value="castle" data-place="castle">castle</option><option value="cinema" data-place="cinema">cinema</option><option value="clothes" data-place="clothes">clothes</option><option value="community_centre" data-place="community_centre">community_centre</option><option value="computer" data-place="computer">computer</option><option value="convenience" data-place="convenience">convenience</option><option value="courthouse" data-place="courthouse">courthouse</option><option value="optician" data-place="optician">optician</option><option value="dentist" data-place="dentist">dentist</option><option value="department_store" data-place="department_store">department_store</option><option value="doityourself" data-place="doityourself">doityourself</option><option value="dry_cleaning" data-place="dry_cleaning">dry_cleaning</option><option value="farm" data-place="farm">farm</option><option value="fast_food" data-place="fast_food">fast_food</option><option value="fire_station" data-place="fire_station">fire_station</option><option value="florist" data-place="florist">florist</option><option value="fuel" data-place="fuel">fuel</option><option value="hairdresser" data-place="hairdresser">hairdresser</option><option value="hardware" data-place="hardware">hardware</option><option value="hospital" data-place="hospital">hospital</option><option value="hostel" data-place="hostel">hostel</option><option value="hotel" data-place="hotel">hotel</option><option value="house_number" data-place="house_number">house_number</option><option value="isolated_dwelling" data-place="isolated_dwelling">isolated_dwelling</option><option value="jewelry" data-place="jewelry">jewelry</option><option value="library" data-place="library">library</option><option value="memorial" data-place="memorial">memorial</option><option value="mobile_phone" data-place="mobile_phone">mobile_phone</option><option value="monument" data-place="monument">monument</option><option value="museum" data-place="museum">museum</option><option value="nature_reserve" data-place="nature_reserve">nature_reserve</option><option value="outdoor" data-place="outdoor">outdoor</option><option value="park" data-place="park">park</option><option value="parking" data-place="parking">parking</option><option value="pharmacy" data-place="pharmacy">pharmacy</option><option value="picnic_site" data-place="picnic_site">picnic_site</option><option value="place_of_worship" data-place="place_of_worship">place_of_worship</option><option value="playground" data-place="playground">playground</option><option value="police" data-place="police">police</option><option value="post_box" data-place="post_box">post_box</option><option value="pub" data-place="pub">pub</option><option value="public_building" data-place="public_building">public_building</option><option value="restaurant" data-place="restaurant">restaurant</option><option value="school" data-place="school">school</option><option value="shoes" data-place="shoes">shoes</option><option value="sports_centre" data-place="sports_centre">sports_centre</option><option value="stadium" data-place="stadium">stadium</option><option value="supermarket" data-place="supermarket">supermarket</option><option value="telephone" data-place="telephone">telephone</option><option value="theatre" data-place="theatre">theatre</option><option value="townhall" data-place="townhall">townhall</option><option value="toys" data-place="toys">toys</option><option value="travel_agency" data-place="travel_agency">travel_agency</option><option value="university" data-place="university">university</option><option value="viewpoint" data-place="viewpoint">viewpoint</option></select></div><div class="form-group"><label><span class="glyphicon glyphicon-user" data-toggle="tooltip" title="Population"></span><i class="material-icons hidden">format_size</i> Population</label><select id="ql_population" class="ql-population form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="0" data-place="city" data-population="0" data-population2="1">1</option><option value="1" data-place="city" data-population="1" data-population2="3">3</option><option value="2" data-place="city" data-population="2" data-population2="7">7</option><option value="3" data-place="city" data-population="3" data-population2="20">20</option><option value="4" data-place="city" data-population="4" data-population2="55">50</option><option value="5" data-place="city" data-population="5" data-population2="148">150</option><option value="6" data-place="city" data-population="6" data-population2="403">400</option><option value="7" data-place="city" data-population="7" data-population2="1097">1 000</option><option value="8" data-place="city" data-population="8" data-population2="2981">3 000</option><option value="9" data-place="city" data-population="9" data-population2="8103">8 100</option><option value="10" data-place="city" data-population="10" data-population2="22026">22 000</option><option value="11" data-place="city" data-population="11" data-population2="59874">60 000</option><option value="12" data-place="city" data-population="12" data-population2="162755">163 000</option><option value="13" data-place="city" data-population="13" data-population2="442413">442 000</option><option value="14" data-place="city" data-population="14" data-population2="1202604">1M</option><option value="15" data-place="city" data-population="15" data-population2="3269017">3M</option><option value="16" data-place="city" data-population="16" data-population2="8886111">10M</option><option value="17" data-place="city" data-population="17" data-population2="24154953">24M</option><option value="18" data-place="city" data-population="18" data-population2="65659969">65M</option><option value="19" data-place="city" data-population="19" data-population2="178482301">180M</option><option value="20" data-place="city" data-population="20" data-population2="485165195">485M</option><option value="21" data-place="city" data-population="21" data-population2="1318815734">1 300M</option></select></div><div class="form-group"><label><span class="glyphicon glyphicon-flag" data-toggle="tooltip" title="Capital"></span><i class="material-icons hidden">format_size</i> Capital level</label><select id="ql_capital" class="ql-capital form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="yes" data-place="city" data-capital="yes">Capital</option><option value="0" data-place="city" data-capital="0">Sub-level 0</option><option value="1" data-place="city" data-capital="1">Sub-level 1</option><option value="2" data-place="city" data-capital="2">Sub-level 2</option><option value="3" data-place="city" data-capital="3">Sub-level 3</option><option value="4" data-place="city" data-capital="4">Sub-level 4</option><option value="5" data-place="city" data-capital="5">Sub-level 5</option><option value="6" data-place="city" data-capital="6">Sub-level 6</option><option value="7" data-place="city" data-capital="7">Sub-level 7</option><option value="8" data-place="city" data-capital="8">Sub-level 8</option></select></div></form></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="button" class="btn btn-primary">OK</button></div></div></div></div><div id="import_modal" class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><form id="import_form" data-persist="garlic" data-parsley-validate=""><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Import</h4></div><div class="modal-body"><div class="form-group"><label for="html_file">Roadbook file<span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Select a previously saved .html roadbook from your device."></span></label><input id="html_file" class="form-control" type="file" accept=".html" multiple="" required=""> <span class="help-block"></span></div><div class="form-group"><div class="checkbox"><label><input id="import_html" value="html" type="checkbox" checked="checked" data-parsley-multiple="import_option" required="" data-parsley-mincheck="1"> Import roadbook</label></div><div class="checkbox"><label><input id="import_style" value="style" type="checkbox" data-parsley-multiple="import_option"> Import styles</label></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Import</button></div></div></form></div></div><div id="gpx_reader_modal" class="modal fade" tabindex="-1" role="dialog"><form id="gpx_reader_form" data-parsley-validate=""><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">GPS tracks overlay</h4></div><div class="modal-body"><div class="form-group"><label for="gpx_file">GPX files <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Visualize your route by loading one or more GPX files."></span></label><input id="gpx_file" class="form-control" type="file" accept=".gpx" name="files[]" multiple="" required=""> <span class="help-block"></span></div><output id="gpx_file_list"></output></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Load</button></div></div></div></form></div><div id="layer_settings_modal" class="modal fade" tabindex="-1" role="dialog"><form id="layer_settings_form" data-persist="garlic" data-parsley-validate=""><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Layer settings</h4></div><div class="modal-body"><div class="form-group" data-section="1"><label for="base_layer_tile_server">Custom base layer <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="URL of the alternative tile server."></span></label><input id="base_layer_tile_server" class="form-control" type="text" placeholder="http:// ... /{z}/{x}/{y}.png" required="" pattern="^https?://.+"> <span class="help-block"></span></div><div class="form-group" data-section="2"><label for="overlay_tile_server">Custom overlay <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="URL of the alternative tile server."></span></label><input id="overlay_tile_server" class="form-control" type="text" placeholder="http:// ... /{z}/{x}/{y}.png" required="" pattern="^https?://.+"> <span class="help-block"></span></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">OK</button></div></div></div></form></div><link rel="stylesheet" href="styles/vendor_override.css"><!-- AddThis --><!--<script defer src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927"></script>--><!-- Google Analytics: change UA-XXXXX-X to be your site's ID. --><script>(function (b, o, i, l, e, r) {
+                                <option value="separator">Separator</option>--></select></div><div class="form-group"><label><span class="glyphicon glyphicon-map-marker" data-toggle="tooltip" title="Place"></span><i class="material-icons hidden">format_size</i> Place type</label><select id="ql_place" class="ql-place form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="country" data-place="country">Country</option><option value="state" data-place="state">State</option><option value="state_district" data-place="state_district">State district</option><option value="county" data-place="county">County</option><option value="city" data-place="city">City</option><option value="city_district" data-place="city_district">City district</option><option value="suburb" data-place="suburb">Suburb</option><option value="town" data-place="town">Town</option><option value="village" data-place="village">Village</option><option value="hamlet" data-place="hamlet">Hamlet</option><option value="locality" data-place="locality">Locality</option><option value="municipality" data-place="municipality">Municipality</option><option value="island" data-place="island">Island</option><option value="islet" data-place="islet">Islet</option><option value="neighbourhood" data-place="neighbourhood">Neighbourhood</option><option value="road" data-place="road">road</option><option value="path" data-place="path">path</option><option value="track" data-place="track">track</option><option value="arts_centre" data-place="arts_centre">arts_centre</option><option value="artwork" data-place="artwork">artwork</option><option value="atm" data-place="atm">atm</option><option value="bakery" data-place="bakery">bakery</option><option value="bank" data-place="bank">bank</option><option value="beach" data-place="beach">beach</option><option value="bicycle" data-place="bicycle">bicycle</option><option value="books" data-place="books">books</option><option value="building" data-place="building">building</option><option value="bus_station" data-place="bus_station">bus_station</option><option value="bus_stop" data-place="bus_stop">bus_stop</option><option value="butcher" data-place="butcher">butcher</option><option value="cafe" data-place="cafe">cafe</option><option value="car_repair" data-place="car_repair">car_repair</option><option value="castle" data-place="castle">castle</option><option value="cinema" data-place="cinema">cinema</option><option value="clothes" data-place="clothes">clothes</option><option value="community_centre" data-place="community_centre">community_centre</option><option value="computer" data-place="computer">computer</option><option value="convenience" data-place="convenience">convenience</option><option value="courthouse" data-place="courthouse">courthouse</option><option value="optician" data-place="optician">optician</option><option value="dentist" data-place="dentist">dentist</option><option value="department_store" data-place="department_store">department_store</option><option value="doityourself" data-place="doityourself">doityourself</option><option value="dry_cleaning" data-place="dry_cleaning">dry_cleaning</option><option value="farm" data-place="farm">farm</option><option value="fast_food" data-place="fast_food">fast_food</option><option value="fire_station" data-place="fire_station">fire_station</option><option value="florist" data-place="florist">florist</option><option value="fuel" data-place="fuel">fuel</option><option value="hairdresser" data-place="hairdresser">hairdresser</option><option value="hardware" data-place="hardware">hardware</option><option value="hospital" data-place="hospital">hospital</option><option value="hostel" data-place="hostel">hostel</option><option value="hotel" data-place="hotel">hotel</option><option value="house_number" data-place="house_number">house_number</option><option value="isolated_dwelling" data-place="isolated_dwelling">isolated_dwelling</option><option value="jewelry" data-place="jewelry">jewelry</option><option value="library" data-place="library">library</option><option value="memorial" data-place="memorial">memorial</option><option value="mobile_phone" data-place="mobile_phone">mobile_phone</option><option value="monument" data-place="monument">monument</option><option value="museum" data-place="museum">museum</option><option value="nature_reserve" data-place="nature_reserve">nature_reserve</option><option value="outdoor" data-place="outdoor">outdoor</option><option value="park" data-place="park">park</option><option value="parking" data-place="parking">parking</option><option value="pharmacy" data-place="pharmacy">pharmacy</option><option value="picnic_site" data-place="picnic_site">picnic_site</option><option value="place_of_worship" data-place="place_of_worship">place_of_worship</option><option value="playground" data-place="playground">playground</option><option value="police" data-place="police">police</option><option value="post_box" data-place="post_box">post_box</option><option value="pub" data-place="pub">pub</option><option value="public_building" data-place="public_building">public_building</option><option value="restaurant" data-place="restaurant">restaurant</option><option value="school" data-place="school">school</option><option value="shoes" data-place="shoes">shoes</option><option value="sports_centre" data-place="sports_centre">sports_centre</option><option value="stadium" data-place="stadium">stadium</option><option value="supermarket" data-place="supermarket">supermarket</option><option value="telephone" data-place="telephone">telephone</option><option value="theatre" data-place="theatre">theatre</option><option value="townhall" data-place="townhall">townhall</option><option value="toys" data-place="toys">toys</option><option value="travel_agency" data-place="travel_agency">travel_agency</option><option value="university" data-place="university">university</option><option value="viewpoint" data-place="viewpoint">viewpoint</option></select></div><div class="form-group"><label><span class="glyphicon glyphicon-user" data-toggle="tooltip" title="Population"></span><i class="material-icons hidden">format_size</i> Population</label><select id="ql_population" class="ql-population form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="0" data-place="city" data-population="0" data-population2="1">1</option><option value="1" data-place="city" data-population="1" data-population2="3">3</option><option value="2" data-place="city" data-population="2" data-population2="7">7</option><option value="3" data-place="city" data-population="3" data-population2="20">20</option><option value="4" data-place="city" data-population="4" data-population2="55">50</option><option value="5" data-place="city" data-population="5" data-population2="148">150</option><option value="6" data-place="city" data-population="6" data-population2="403">400</option><option value="7" data-place="city" data-population="7" data-population2="1097">1 000</option><option value="8" data-place="city" data-population="8" data-population2="2981">3 000</option><option value="9" data-place="city" data-population="9" data-population2="8103">8 100</option><option value="10" data-place="city" data-population="10" data-population2="22026">22 000</option><option value="11" data-place="city" data-population="11" data-population2="59874">60 000</option><option value="12" data-place="city" data-population="12" data-population2="162755">163 000</option><option value="13" data-place="city" data-population="13" data-population2="442413">442 000</option><option value="14" data-place="city" data-population="14" data-population2="1202604">1M</option><option value="15" data-place="city" data-population="15" data-population2="3269017">3M</option><option value="16" data-place="city" data-population="16" data-population2="8886111">10M</option><option value="17" data-place="city" data-population="17" data-population2="24154953">24M</option><option value="18" data-place="city" data-population="18" data-population2="65659969">65M</option><option value="19" data-place="city" data-population="19" data-population2="178482301">180M</option><option value="20" data-place="city" data-population="20" data-population2="485165195">485M</option><option value="21" data-place="city" data-population="21" data-population2="1318815734">1 300M</option></select></div><div class="form-group"><label><span class="glyphicon glyphicon-flag" data-toggle="tooltip" title="Capital"></span><i class="material-icons hidden">format_size</i> Capital level</label><select id="ql_capital" class="ql-capital form-control roadbook"><option value="" selected="selected">&nbsp;</option><option value="yes" data-place="city" data-capital="yes">Capital</option><option value="0" data-place="city" data-capital="0">Sub-level 0</option><option value="1" data-place="city" data-capital="1">Sub-level 1</option><option value="2" data-place="city" data-capital="2">Sub-level 2</option><option value="3" data-place="city" data-capital="3">Sub-level 3</option><option value="4" data-place="city" data-capital="4">Sub-level 4</option><option value="5" data-place="city" data-capital="5">Sub-level 5</option><option value="6" data-place="city" data-capital="6">Sub-level 6</option><option value="7" data-place="city" data-capital="7">Sub-level 7</option><option value="8" data-place="city" data-capital="8">Sub-level 8</option></select></div></form></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="button" class="btn btn-primary">OK</button></div></div></div></div><div id="import_modal" class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><form id="import_form" data-persist="garlic" data-parsley-validate=""><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Import</h4></div><div class="modal-body"><div class="form-group"><label for="html_file">Roadbook file<span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Select a previously saved .html roadbook from your device."></span></label><input id="html_file" class="form-control" type="file" accept=".html" multiple="" required=""> <span class="help-block"></span></div><div class="form-group"><div class="checkbox"><label><input id="import_html" value="html" type="checkbox" checked="checked" data-parsley-multiple="import_option" required="" data-parsley-mincheck="1"> Import roadbook</label></div><div class="checkbox"><label><input id="import_style" value="style" type="checkbox" data-parsley-multiple="import_option"> Import styles</label></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Import</button></div></div></form></div></div><div id="gpx_reader_modal" class="modal fade" tabindex="-1" role="dialog"><form id="gpx_reader_form" data-parsley-validate=""><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">GPS tracks overlay</h4></div><div class="modal-body"><div class="form-group"><label for="gpx_file">GPX files <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Visualize your route by loading one or more GPX files."></span></label><input id="gpx_file" class="form-control" type="file" accept=".gpx" name="files[]" multiple="" required=""> <span class="help-block"></span></div><output id="gpx_file_list"></output></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">Load</button></div></div></div></form></div><div id="layer_settings_modal" class="modal fade" tabindex="-1" role="dialog"><form id="layer_settings_form" data-persist="garlic" data-parsley-validate=""><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Layer settings</h4></div><div class="modal-body"><div class="form-group" data-section="1"><label for="base_layer_tile_server">Custom base layer <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="URL of the alternative tile server."></span></label><input id="base_layer_tile_server" class="form-control" type="text" placeholder="http:// ... /{z}/{x}/{y}.png" required="" pattern="^https?://.+"> <span class="help-block"></span></div><div class="form-group" data-section="2"><label for="overlay_tile_server">Custom overlay <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="URL of the alternative tile server."></span></label><input id="overlay_tile_server" class="form-control" type="text" placeholder="http:// ... /{z}/{x}/{y}.png" required="" pattern="^https?://.+"> <span class="help-block"></span></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="submit" class="btn btn-primary">OK</button></div></div></div></form></div><link rel="stylesheet" href="styles/vendor_override.css"><!-- AddThis --><script defer="defer" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927"></script><!-- Google Analytics: change UA-XXXXX-X to be your site's ID. --><script>(function (b, o, i, l, e, r) {
             b.GoogleAnalyticsObject = l;
             b[l] || (b[l] =
                 function () {
@@ -406,7 +1190,7 @@ print {
             r.parentNode.insertBefore(e, r)
         }(window, document, 'script', 'ga'));
         ga('create', 'UA-72237495-1');
-        ga('send', 'pageview');</script><script src="scripts/vendor.js"></script><script src="scripts/plugins.js"></script><!--
+        ga('send', 'pageview');</script><script src="scripts/vendor/modernizr.js"></script><script src="scripts/vendor.js"></script><script src="scripts/plugins.js"></script><!--
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
         <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>

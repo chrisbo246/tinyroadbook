@@ -76,7 +76,7 @@ var appModule = function () {
 
         // Default config
         /*eslint-disable camelcase*/
-        window.addthis_share = {
+        var addthis_share = {
             url: document.URL,
             title: 'I\'m doing a tiny roadbook for my next tour'
         };
