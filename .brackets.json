@@ -1,0 +1,13 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/async/nexttick_test.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/async/conditionaldelay.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/async/throttle.js",
+        "D:/wamp/www/tinyroadbook/app/scripts/pickerModule.js",
+        "D:/wamp/www/tinyroadbook/app/scripts/main.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/color/color_test.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/color/names.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/crypt/aes.js",
+        "D:/wamp/www/tinyroadbook/bower_components/bower-ol3/closure-library/closure/goog/crypt/aes_test.js"
+    ]
+}

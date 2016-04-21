@@ -1,0 +1,35 @@
+
+#settings_pane {
+
+
+    .row:first-of-type{
+        padding-top: 20px;
+    }
+
+    .row:last-of-type {
+        padding-bottom: 20px;
+    }
+
+    .adsbygoogle {
+        min-height: 60px;
+    }
+}
+
+#settings_form {
+
+    pre {
+        max-height: 600px;
+        overflow: auto;
+    }
+
+    .ad_container {
+        padding-top: 20px;
+    }
+
+}
+
+#separator {
+    overflow: auto;
+    overflow: hidden;
+    resize: none;
+}

@@ -1,115 +1,192 @@
-//jslint browser: true
-//global window, $, ol, swal, mapModule, mapLayersModule, mapControlsModule, tabModule, adsenseModule, cityPickerModule
+/*eslint-env browser, jquery */
+/*global Base64, bootstrapModule, ol, commonsModule, htmlEditorModule, importModule, mapControlsModule, mapLayersModule, MapModule, pickerModule, roadbookModule, styleModule, swal */
 /**
  * @fileOverview TinyRoadbook application
  * @author Christophe Boisier
- * @version: 0.1
+ * @version: 0.1.9
  */
-
-console.time('$: HTML loaded (except images) and DOM is ready');
-console.time('$(document).ready: HTML loaded (except images) and DOM is ready');
-console.time('$(window).load: Page is fully loaded, including frames, objects and images');
 
 /**
  * Main module.
- * @external jQuery
- * @external OL3
- * @external swal
- * @external mapModule
- * @external mapLayersModule
- * @external mapControlsModule
- * @external tabModule
- * @external adsenseModule
- * @external cityPickerModule
  * @module
- * @returns {Object} Public functions and variables
+ * @external $
+ * @external Base64
+ * @external bootstrapModule
+ * @external commonsModule
+ * @external htmlEditorModule
+ * @external importModule
+ * @external mapControlsModule
+ * @external mapLayersModule
+ * @external MapModule
+ * @external ol
+ * @external pickerModule
+ * @external roadbookModule
+ * @external styleModule
+ * @external swal
+ * @return {Object} Public functions / variables
  */
+/*eslint-disable no-unused-vars*/
 var appModule = (function () {
+    /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var map1;
+    var mapMod1;
 
-    // Base layers
-    var mapquestSatLayer = mapLayersModule.create('mapquestSat');
-    var openCycleMapLayer = mapLayersModule.create('openCycleMap');
-    var openStreetMapLayer = mapLayersModule.create('openStreetMap', {visible: true});
-    var openStreetMapHumanitarianLayer = mapLayersModule.create('openStreetMapHumanitarian');
-    var thunderforestTransportLayer = mapLayersModule.create('thunderforestTransport');
-    var thunderforestOutdoorLayer = mapLayersModule.create('thunderforestOutdoor');
+    // Start debugging
+    commonsModule.debug();
 
-    // Overlays
-    var mapquestHybLayer = mapLayersModule.create('mapquestHyb');
-    var lonviaHikingLayer = mapLayersModule.create('lonviaHiking');
-    var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling');
-
-    var gpxLayer = new ol.layer.Vector({
-        name: 'gpsTrack',
-        title: 'GPX tracks',
-        visible: false,
-        source: new ol.source.Vector({
-        }),
-        style: new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                color: 'rgba(51, 122, 183, 0.7)',
-                width: 3
-            })
-        })
+    swal.setDefaults({
+        //customClass: '',
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-primary',
+        cancelButtonClass: 'btn btn-default'
     });
 
-    // Controls
+    // Define map base layers
+    var openCycleMapLayer = mapLayersModule.create('openCycleMap');
+    var openStreetMapLayer = mapLayersModule.create('openStreetMap', {visible: true});
+    var googleTerrainLayer = mapLayersModule.create('googleTerrain');
+    var customBaseLayerLayer = mapLayersModule.create('customBaseLayer', {title: 'Custom tile server <small><a href="#layer_settings_modal" data-toggle="modal" data-target-section="1"><span class="glyphicon glyphicon-cog"></span></a></small>'});
+
+    // Define map overlays
+    var lonviaHikingLayer = mapLayersModule.create('lonviaHiking');
+    var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling');
+    var googleBikeLayer = mapLayersModule.create('googleBike');
+    var gpxLayer = mapLayersModule.create('gpxFile', {title: 'GPS tracks <small><a href="#gpx_reader_modal" data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a></small>'});
+    var customOverlayLayer = mapLayersModule.create('customOverlay', {title: 'Custom tile server <small><a href="#layer_settings_modal" data-toggle="modal" data-target-section="2"><span class="glyphicon glyphicon-cog"></span></a></small>'});
+
+    // Define map controls
     var attributionControl = mapControlsModule.create('attribution');
     var scaleLineControl = mapControlsModule.create('scaleLine');
     var fullScreenControl = mapControlsModule.create('fullScreen');
     var layerSwitcherControl = mapControlsModule.create('layerSwitcher');
+    var zoomSliderControl = mapControlsModule.create('zoomSlider');
+
+    // Check if the godfather mode must be enabled via URL parameters
+    var godfatherMode = (parseInt($.urlParam('godfather'))) ? true : false; // || (document.domain === 'localhost')
+    console.log('Godfather mode', godfatherMode);
+
+
+
+    /**
+     * Build a valid HTML file with the editor content
+     * @public
+     * @return {String} HTML file content
+     */
+    var buildExport = function () {
+
+        var htmlDoc = '';
+        var roadbookEditor = roadbookModule.getEditor();
+        var styleEditor = styleModule.getEditor();
+
+        if (roadbookEditor && styleEditor) {
+            htmlDoc = '<html>\n'
+                + '<head>\n'
+                + '<title>' + window.location.hostname + '</title>\n'
+                + '<meta charset="UTF-8">\n'
+                + '<style>\n'
+                + styleEditor.getText() + '\n'
+                + '</style>\n'
+                + '</head>\n'
+                + '<body>\n'
+                + '<div class="roadbook">\n'
+                + roadbookEditor.getHTML() + '\n'
+                + '</div>\n'
+                + '</body>\n'
+                + '</html>';
+        }
+
+         return htmlDoc;
+
+    };
+
+
+
+    /**
+     * Rebuild the save link URL
+     * @public
+     * @return {String} HTML file content
+     */
+    var updateSaveLink = function () {
+
+        var htmlDoc = buildExport();
+        if (htmlDoc) {
+            $('#save_roadbook').attr('href', 'data:text/html;base64, ' + Base64.encode(htmlDoc));
+        }
+
+    };
 
 
 
     /**
      * Initialize an OL3 map
+     * @private
      * @param {target} target - Map div selector
      * @return {object} - The map object
      */
-    var _addMap = function (target) {
+    var initMap = function (target) {
 
-        var layers = [
-            new ol.layer.Group({
-                name: 'baseLayers',
-                title: 'Base map',
-                layers: [
-                    mapquestSatLayer,
-                    openStreetMapHumanitarianLayer,
-                    thunderforestTransportLayer,
-                    thunderforestOutdoorLayer,
-                    openCycleMapLayer,
-                    openStreetMapLayer
-                ]
-            }),
-            new ol.layer.Group({
-                name: 'overlays',
-                title: 'Overlays',
-                layers: [
-                    gpxLayer,
-                    mapquestHybLayer,
-                    lonviaHikingLayer,
-                    lonviaCyclingLayer
-                ]
-            })
-        ];
+        var layers;
 
+        if (!godfatherMode) {
+            layers = [
+                new ol.layer.Group({
+                    name: 'baseLayers',
+                    title: 'Base map',
+                    layers: [
+                        openCycleMapLayer,
+                        openStreetMapLayer
+                    ]
+                }),
+                new ol.layer.Group({
+                    name: 'overlays',
+                    title: 'Overlays',
+                    layers: [
+                        lonviaHikingLayer,
+                        lonviaCyclingLayer,
+                        gpxLayer
+                    ]
+                })
+            ];
+        } else {
+            layers = [
+                new ol.layer.Group({
+                    name: 'baseLayers',
+                    title: 'Base map',
+                    layers: [
+                        customBaseLayerLayer,
+                        googleTerrainLayer,
+                        openCycleMapLayer,
+                        openStreetMapLayer
+                    ]
+                }),
+                new ol.layer.Group({
+                    name: 'overlays',
+                    title: 'Overlays',
+                    layers: [
+                        customOverlayLayer,
+                        lonviaHikingLayer,
+                        googleBikeLayer,
+                        lonviaCyclingLayer,
+                        gpxLayer
+                    ]
+                })
+            ];
+        }
         var controls = ol.control.defaults({
             attribution: false,
             attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
                 collapsible: false
             }),
             zoomOptions: {
-                // zoomInTipLabel: $.t('buttons:olZoomIn.label'),
-                // zoomOutTipLabel: $.t('buttons:olZoomOut.label')
+
             }
         }).extend([
             attributionControl,
             scaleLineControl,
             fullScreenControl,
-            layerSwitcherControl
+            layerSwitcherControl,
+            zoomSliderControl
         ]);
 
         return new ol.Map({
@@ -117,7 +194,9 @@ var appModule = (function () {
             target: target,
             view: new ol.View({
                 center: [0, 0],
-                zoom: 4
+                zoom: 4,
+                minZoom: 2,
+                maxZoom: 19
             }),
             controls: controls
         });
@@ -126,66 +205,161 @@ var appModule = (function () {
 
 
 
+    /**
+     * Document ready
+     */
     $(function () {
 
-        // Initialize the map when pane become visible for the first time
-        $('a[data-toggle="tab"]').one('shown.bs.tab', function (e) {
-            var paneId = $(e.target).attr('href');
-            if (paneId === '#picker') {
-                map1 = _addMap('map');
-                mapModule.centerOnPosition(map1);
-                cityPickerModule.setMap(map1);
-                $('#gpx_file_path').on('change', function () {
-                    layerSwitcherControl.renderPanel();
-                });
-            }
-        });
+        // Initialize mandatory modules
+        console.time('Bootstrap module initialized');
+        bootstrapModule.debug();
+        bootstrapModule.restoreActiveTab();
+        bootstrapModule.tab();
+        bootstrapModule.modalTogglerAttributs();
+        bootstrapModule.tooltip();
+        //bootstrapModule.restoreActiveModal();
+        console.timeEnd('Bootstrap module initialized');
 
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            mapModule.setFileSource('#gpx_file_path', gpxLayer);
-        } else {
-            $('#gpx_file_path').closest('.form-group').hide();
-        }
-
-        $('.start-editing').click(function () {
-            $('a[href="#picker"]').tab('show');
-        });
-
-        // excluded: 'input[type="file"], input[type="hidden"], input[type="submit"], [data-persist="false"]'
-        $('input[type="hidden"]').trigger('change');
-        // Garlic reset buttons
-        $('#reset_settings').click(function () {
-            $('#settings form').garlic('destroy');
-            location.reload();
-        });
-
-        /*window.update_cookieconsent_options({
-            //learnMore: 'Learn more'
-            theme: 'light-floating'
-        });*/
-
-        commonsModule.parallax();
+        commonsModule.disableUnsupported();
         commonsModule.adsense();
-        commonsModule.storeActiveTab();
-        commonsModule.resetButton();
         commonsModule.loadGoogleFonts();
 
+        roadbookModule.init();
+        htmlEditorModule.init();
+        styleModule.init();
+        importModule.init();
+
+        // Try to define user language at the first connection
+        var $input = $('#user_language');
+        if ($input) {
+            $input.val(navigator.language || navigator.userLanguage);
+            console.log('User language defined', $input.val());
+        }
+        // Then store / restore input values
+        commonsModule.fixInputValues();
+        commonsModule.storeForms();
+
+        var $tabs = $('a[data-toggle="tab"]');
+
+        // Initialize the home pane functionalities only when visible for the first time
+        $tabs.filter('[href="#home_pane"]').one('shown.bs.tab', function () {
+
+            commonsModule.parallax();
+
+        });
+
+        // Initialize the editor pane functionalities only when visible for the first time
+        $tabs.filter('[href="#editor_pane"]').one('shown.bs.tab', function () {
+
+            // Several links may open the pane, so this prevent initializing several maps
+            if (mapMod1) {
+                return false;
+            }
+
+            mapMod1 = new MapModule(initMap('map'));
+            console.log('Map initialized');
+            mapMod1.debug();
+
+            // Try to restore map center and zoom from the local storage
+            if (!mapMod1.restoreMapState()) {
+                // Or center map on user position and set a default zoom
+                mapMod1.setCenterOnPosition();
+                mapMod1.map.getView().setZoom(12);
+            }
+
+            // Check map events and store changes to local storage
+            mapMod1.storeMapState();
+
+            // Initialize the picker module
+            pickerModule.watchMapClick(mapMod1.map);
+
+            // Watch GPX file input changes
+            $('#gpx_file').on('change', function (inputEvent) {
+                var files = inputEvent.target.files;
+                bootstrapModule.inputFileList(files, '#gpx_file_list');
+            });
+
+            // Update map overlay when user click ok
+            $('#gpx_reader_form').on('submit', function (e) {
+
+                e.preventDefault();
+                $('#gpx_reader_modal').modal('hide');
+                var files = document.getElementById('gpx_file').files;
+
+                var $spinner = $('#map').find('.spinner');
+                $spinner.fadeIn();
+
+                gpxLayer.getSource().clear();
+
+                var dfd = commonsModule.reader(files, function (result) {
+                    var gpxFormat = new ol.format.GPX();
+                    var gpxFeatures = gpxFormat.readFeatures(result, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    });
+                    gpxLayer.getSource().addFeatures(gpxFeatures);
+                    gpxLayer.setProperties({
+                        visible: true
+                    });
+                });
+
+                dfd.done(function () {
+                    $spinner.fadeOut();
+                });
+
+                // Refresh the layerswitcher control
+                layerSwitcherControl.renderPanel();
+
+                // Adjust the view to fit tracks
+                //mapMod1.fitVectorLayer(gpxLayer);
+
+            });
+
+            // Customize modal with data attributs
+            //bootstrapModule.modalTogglerAttributs(); //'#layer_settings_modal'
+
+            // Force the Bootstrap modal API to initialize the layerswitcher links
+            $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function () {
+                $(this).trigger('click.bs.modal.data-api');
+            });
+
+        });
+
+        // Initialize the settings pane functionalities only when visible for the first time
+        $tabs.filter('[href="#settings_pane"]').one('shown.bs.tab', function () {
+
+            commonsModule.resetButton();
+            bootstrapModule.rangeValueTooltip();
+
+        });
+
+        // Hide debug mode only elements
+        //if (!godfatherMode) {
+        //    $('.debug-only').hide();
+        //} else {
+        //    $('.debug-only').show();
+        //}
+
+        // Reset buttons
+        $('#reset_settings').click(function () {
+            commonsModule.resetInputValues();
+        });
+
+        $('#layer_settings_form').on('submit', function (e) {
+            e.preventDefault();
+            $('#layer_settings_modal').modal('hide');
+        });
+
+        // Update local tile url
+        mapLayersModule.inputLayerSource(customBaseLayerLayer, '#base_layer_tile_server');
+        mapLayersModule.inputLayerSource(customOverlayLayer, '#overlay_tile_server');
+
     });
 
-    /*
-    $(function () {
-        console.timeEnd('$: HTML loaded (except images) and DOM is ready');
-    });
-    $(document).ready(function () {
-        console.timeEnd('$(document).ready: HTML loaded (except images) and DOM is ready');
-    });
-    $(window).on('load', function () {
-        console.timeEnd('$(window).load: Page is fully loaded, including frames, objects and images');
-    });
-    */
 
     return {
-        map: map1
+        buildExport: buildExport,
+        updateSaveLink: updateSaveLink
     };
 
 })();

@@ -1,49 +1,45 @@
+'use strict';
+
 //jslint browser: true
 //global console, $, Tour
-
 /**
  * Bootstrap-tour module.
- * @external jQuery
  * @external bootstrap-tour
- * @see {@link https://github.com/sorich87/bootstrap-tour}
+ * @external jquery
  * @module
- * @returns {Object} Public functions and variables
+ * @return {Object} Public functions and variables
+ * @see {@link https://github.com/sorich87/bootstrap-tour}
  */
 var tourModule = function () {
     'use strict';
 
     var tour;
-
     $(function () {
-
         var $start = $('.start-tour');
         $start.removeClass('hidden');
-
         var steps = [{
-            element: '#main-nav a[href="#picker"]',
+            element: '#main-nav a[href="#editor_pane"]',
             title: 'Ready to start?',
             content: 'Go to the editor tab to extract city names and edit your roadbook.',
             placement: 'bottom',
             orphan: true,
-            onShow: function () {
-                $('a[href="#home"]').tab('show');
+            onShow: function onShow() {
+                $('a[href="#home_pane"]').tab('show');
             }
         }, {
             element: '#map',
             title: 'The map',
             content: 'The map allow you to extract city names by clicking on you waypoints. Drag it up to your starting point.',
             placement: 'right',
-            onShow: function () {
-                $('a[href="#picker"]').tab('show');
+            onShow: function onShow() {
+                $('a[href="#editor_pane"]').tab('show');
             }
         }, {
             element: '.ol-zoom',
             title: 'Zoom ',
             content: 'Zoom until you can see the smallest city on your way then click on each one up to your last destination.',
             placement: 'right',
-            onShow: function () {
-                appModule.map.getView().setZoom(11);
-            }
+            onShow: function onShow() {}
         }, {
             element: '#editor',
             title: 'Freely edit your roadbook',
@@ -54,32 +50,32 @@ var tourModule = function () {
             title: 'Switch layers',
             content: 'You can change the base map and activate optional overlays like bike roads or hiking paths.',
             placement: 'right',
-            onShow: function () {
+            onShow: function onShow() {
                 $('.layer-switcher').trigger('mouseenter');
             }
         }, {
-            element: '#print_editor',
+            element: '#print_roadbook',
             title: 'Print your roadbook',
             content: 'When you end editing your roadbook, just click this button to print it to your prefered format. You can also just copy the text and save it in a text file.',
             placement: 'bottom',
-            onShow: function () {
-                $('a[href="#picker"]').tab('show');
+            onShow: function onShow() {
+                $('a[href="#editor_pane"]').tab('show');
             }
         }, {
             element: '.addthis_sharing_toolbox',
             title: 'Tell the world',
             content: 'Don\'t forget to tell your friends about this cool application ;).',
             placement: 'bottom',
-            onShow: function () {
-                $('a[href="#picker"]').tab('show');
+            onShow: function onShow() {
+                $('a[href="#editor_pane"]').tab('show');
             }
         }, {
-            element: '#main-nav a[href="#settings"]',
+            element: '#main-nav a[href="#settings_pane"]',
             title: 'The settings',
             content: 'The settings tab allow you to customize picker output, select a GPS track file or reset the application.',
             placement: 'bottom',
-            onShow: function () {
-                //$('a[href="#settings"]').first().tab('show');
+            onShow: function onShow() {
+                //$('a[href="#settings_pane"]').first().tab('show');
             }
         }, {
             element: '#gpx_file_path',
@@ -189,31 +185,28 @@ var tourModule = function () {
              }
           }*/
         ];
-
         tour = new Tour({
             //duration: 10000,
             orphan: true,
             steps: steps,
-            onStart: function () {
+            onStart: function onStart() {
                 if ($start) $start.addClass('disabled');
             },
-            onEnd: function () {
+            onEnd: function onEnd() {
                 if ($start) $start.removeClass('disabled');
             },
-            onShow: function () {
+            onShow: function onShow() {
                 if ($start) $start.addClass('disabled');
             },
-            onHide: function () {
+            onHide: function onHide() {
                 if ($start) $start.removeClass('disabled');
             },
-            onPause: function () {
+            onPause: function onPause() {
                 if ($start) $start.removeClass('disabled');
             }
         });
-
         tour.init();
         console.log('Tour initialized');
-
         $start.on('click', function (e) {
             console.log('Start tour');
             tour.start(true);

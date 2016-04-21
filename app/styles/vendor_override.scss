@@ -1,32 +1,37 @@
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables";
 
-//@import "./_vendor_override";
 @import "./_bootstrap_add-on";
-@import "./_scrollbar";
-@import "./_roadbook";
-//@import "./_background";
+
+
+/* Bootstrap (fix) */
+
+$zindex-tooltip: 1070;
+.tooltip {
+    z-index: $zindex-tooltip !important;
+}
 
 
 /* ol3 */
+
 .map {
-	width: 100%;
-	height: 100%;
-	//min-height: 420px;
-	margin: 0;
-	padding: 0;
+    width: 100%;
+    height: 100%;
+    //min-height: 420px;
+    margin: 0;
+    padding: 0;
 }
 .map:-moz-full-screen {
-	height: 100%;
+    height: 100%;
 }
 .map:-webkit-full-screen {
-	height: 100%;
+    height: 100%;
 }
 .map:-ms-fullscreen {
-	height: 100%;
+    height: 100%;
 }
 .map:fullscreen {
-	height: 100%;
+    height: 100%;
 }
 .ol-attribution ul {
     font-size: 1rem;
@@ -34,28 +39,38 @@
 
 
 /* ol3-layerswitcher */
+
 .layer-switcher {
-	top: 2.5em;
+    top: 2.5em;
 }
-.layer-switcher button{
+.layer-switcher button {
     height: 1.375em;
     width: 1.375em;
-	background-size: 100%;
-	background-position: 0;
+    background-size: 100%;
+    background-position: 0;
 }
 
+.layer-switcher small {
+    font-size: .6em;
+}
+
+.layer-switcher small,
+.layer-switcher small a {
+	color: #888;
+}
 
 /* Google Adsense */
+
 .adsbygoogle {
-	display: block;
-	overflow: hidden;
+    display: block;
+    overflow: hidden;
 }
 
 
 /* Quill */
 
 /*.ql-editor{
-//background-color: #fff; 
+//background-color: #fff;
 background-image: linear-gradient(transparent .95em, #eee 1em);
 background-size: 100% 1em;
 background-position: left top;
@@ -72,4 +87,32 @@ line-height: 1em;
 }
 .at-share-tbx-element .at-share-btn {
 margin: 0 2px;
+}
+
+
+/* Cookieconsent */
+
+.cc_container {
+    height: $navbar-height;
+    background: rgba($navbar-inverse-bg, 0.9);
+    color: $navbar-inverse-color;
+    border-color: $navbar-inverse-border;
+    .cc_btn,
+    .cc_btn:visited {
+        color: $btn-primary-color;
+        background-color: $btn-primary-bg;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+.cc_container {
+    padding: 8px 30px 9px;
+}
+}
+
+/* Zeroclipboard */
+
+.zeroclipboard-is-hover {
+
 }

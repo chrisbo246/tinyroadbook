@@ -1,77 +1,112 @@
 
-/* Editor */
+$editor-ad-height: 70px;
+$editor-bottom-navbar-height: 0;
+
+#editor_pane {
+    .row-full-height, .container-fluid {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    @media (max-width: $screen-md) {
+        .col-full-height:nth-of-type(1) {
+            height: 40%;
+        }
+        .col-full-height:nth-of-type(2) {
+            height: 60%;
+        }
+    }
+}
+
+/* Prevent hazardous height changes*/
+#editor_toolbar {
+    //height: $navbar-height;
+    //overflow: hidden;
+}
 
 #editor_container {
 
     height: 100%;
-	padding-top: $navbar-height;
-	padding-bottom: $navbar-height + 13px;
-	@media (min-width: 768px) {    
-        padding-bottom: $navbar-height + 2px;
-	}
-	
-	.navbar:first-of-type {
-		margin-top: -$navbar-height;
-		margin-bottom: 0;
-	}
-	.navbar:last-of-type {
-		margin-bottom: -$navbar-height;
-		margin-top: 0;
-	}
-	.ql-container {
-		overflow: auto;
-		padding: (($line-height-computed - 1) / 2);
-		font-size: ($font-size-base - 1);
-		line-height: $line-height-base;
-		color: $pre-color;	
-        padding-bottom: 70px;		
-	}
+
+    padding-top: $navbar-height;
+    padding-bottom: $editor-bottom-navbar-height + 13px;
+    @media (min-width: 768px) {
+        padding-bottom: $editor-bottom-navbar-height + 2px;
+    }
+
+    .navbar:first-of-type {
+        margin-top: -$navbar-height;
+        margin-bottom: 0;
+    }
+    //.navbar:last-of-type {
+    //    margin-bottom: -$editor-bottom-navbar-height;
+    //    margin-top: 0;
+    //}
+    .ql-container {
+        overflow: auto;
+        padding: (($line-height-computed - 1) / 2);
+        font-size: initial;
+        //font-size: ($font-size-base - 1);
+        //line-height: $line-height-base;
+        //color: $pre-color;
+        //padding-bottom: $editor-ad-height;
+    }
+    .ql-container, pre, textarea {
+        height: 100%;
+        overflow: auto;
+        border-radius: 0;
+        border: none;
+    }
+    .tab-content {
+        height: 100%;
+        padding-bottom: $editor-ad-height;
+
+        .tab-pane, textarea {
+            height: 100%;
+        }
+    }
     .ad_container {
-	    width: 98%;
-        height: 70px;
-	    position: absolute;
-	    bottom: $navbar-height;
-		overflow: hidden;
-		background-color: $body-bg;
-	}
+        width: 98%;
+        min-height: 50px;
+        max-height: $editor-ad-height;
+        position: absolute;
+        bottom: $editor-bottom-navbar-height;
+        overflow: hidden;
+        background-color: $body-bg;
+    }
 
 }
 
+#map {
+    .spinner {
+        opacity: .2;
+        z-index: 1;
+        width: 1em;
+        height: 1em;
+    }
 
-/* Settings */
+    .ol-zoom .ol-zoom-out {
+        margin-top: 204px;
+    }
+    .ol-zoomslider {
+        background-color: transparent;
+        top: 2.3em;
+    }
 
-#separator {
-    overflow: auto;
-    overflow: hidden;
-    resize: none;
-}
+    .ol-touch .ol-zoom .ol-zoom-out {
+        margin-top: 212px;
+    }
+    .ol-touch .ol-zoomslider {
+        top: 2.75em;
+    }
 
+    .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+    .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+        top: 3px;
+    }
 
-/* City names style */
+    .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+    .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+        top: 232px;
+    }
 
-.country {
-	font-size: 2.5em;
-}
-.state {
-	font-size: 2em;
-}
-.county {
-	font-size: 1.4em;
-	font-weight: bolder;
-}
-.city {
-	font-size: 1.2em;
-	font-weight: bold;
-}
-.town {
-	font-size: 1em;
-}
-.village {
-	font-size: .9em;
-}
-.neighbourhood {
-	font-size: .8em;
-}
-.suburb {
-	font-size: .7em;
 }

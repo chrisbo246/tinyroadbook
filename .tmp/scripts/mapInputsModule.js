@@ -1,15 +1,18 @@
-//jslint browser: true
-//global $, mapModule
+'use strict';
 
+/*eslint-env browser, jquery */
+/*global escape, ol */
 /**
  * OL3 inputs module.
- * @external jQuery
- * @external OL3
- * @external mapModule
  * @module
- * @returns {Object} mapModule
+ * @external $
+ * @external escape
+ * @external ol
+ * @return {Object} Public functions / variables
  */
+/*eslint-disable no-unused-vars*/
 var mapInputsModule = function () {
+    /*eslint-enable no-unused-vars*/
     'use strict';
 
     /** @private */
@@ -23,17 +26,14 @@ var mapInputsModule = function () {
      * Create a new input using predefined settings
      * @public
      * @param {string} name - Predefined input (variable name)
-     * @returns {Object} OL3 layer
+     * @return {Object} OL3 layer
      */
-    var create = function (name, selector, map) {
-
+    var create = function create(name, selector) {
         if (!inputs[name]) {
             console.warn(name + ' input definition does not exists');
-            return;
+            return false;
         }
-
         var input = inputs[name](selector);
-
         return input;
     };
 
@@ -125,7 +125,7 @@ var mapInputsModule = function () {
      * @param {Object} map - OL3 map
      */
     inputs.centerX = function (selector) {
-        var $input = $(Xselector);
+        var $input = $(selector);
         $input.on('change', function () {
             var val = $input.val();
             if (val || val === 0) {
@@ -181,10 +181,8 @@ var mapInputsModule = function () {
 
     /**
      * Export map as PNG
-     * @param {string} selector - Link ID or class
-     * @param {Object} map - OL3 map
      */
-    inputs.exportPNG = function (selector) {
+    inputs.exportPNG = function () {
         var $input = document.getElementById('export-png');
         if ($input) {
             $input.on('click', function () {
@@ -199,38 +197,33 @@ var mapInputsModule = function () {
 
     /**
      * Update layer source url from a file input
-     * <input id="gpx_file_path" type="file" accept=".gpx" />
+     * <input id="gpx_file" type="file" accept=".gpx" />
      * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
      * @public
      * @param {string} selector - File input ID
      * @param {Object} layer - OL3 vector layer
      */
     inputs.GPXSource = function (selector, layer) {
-
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
             console.warn('The File APIs are not fully supported in this browser.');
         }
-
         var $filePath = $(selector);
-        $filePath.on('change', function (e) {
-
-            var files = e.target.files;
+        $filePath.on('change', function (inputEvent) {
+            var files = inputEvent.target.files;
             files.forEach(function (f) {
-
                 var reader = new FileReader();
-                reader.onload = function (theFile) {
-                    return function (e) {
+                reader.onload = function (loadEvent) {
+                    return function (returned) {
                         layer.setProperties({
-                            title: escape(theFile.name),
+                            title: escape(loadEvent.name),
                             source: new ol.source.Vector({
-                                url: e.target.result,
+                                url: returned.target.result,
                                 format: new ol.format.GPX()
                             }),
                             visible: true
                         });
                     };
                 }(f);
-
                 reader.readAsDataURL(f);
             });
         });

@@ -1,18 +1,60 @@
-//jslint browser: true
-//global document, ol
-
+/*eslint-env browser, jquery */
+/*global ol */
 /**
  * OL3 draw module.
- * @external OL3
  * @module
- * @returns {Object} Public functions and variables
+ * @external ol
+ * @return {Object} Public functions / variables
  */
+/*eslint-disable no-unused-vars*/
 var mapDrawModule = (function () {
+    /*eslint-enable no-unused-vars*/
     'use strict';
 
     var draw;
-
     var features = new ol.Collection();
+
+
+
+    /**
+     * Modify interaction
+     */
+    var modify = new ol.interaction.Modify({
+        features: features,
+        // the SHIFT key must be pressed to delete vertices, so
+        // that new vertices can be drawn at the same position
+        // of existing vertices
+        deleteCondition: function (event) {
+            return ol.events.condition.shiftKeyOnly(event) &&
+                    ol.events.condition.singleClick(event);
+        }
+    });
+
+
+
+    /**
+     * Features vector layer
+     */
+    var featureOverlay = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: features
+        }),
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#ffcc33',
+                width: 2
+            }),
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: '#ffcc33'
+                })
+            })
+        })
+    });
 
 
 
@@ -26,8 +68,8 @@ var mapDrawModule = (function () {
         map.addInteraction(modify);
     };
 
-    
-    
+
+
     /**
      * Add a draw interaction to the map
      * @public
@@ -63,48 +105,6 @@ var mapDrawModule = (function () {
 
 
 
-    /**
-     * Features vector layer
-     */
-    var featureOverlay = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: features
-        }),
-        style: new ol.style.Style({
-            fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.2)'
-            }),
-            stroke: new ol.style.Stroke({
-                color: '#ffcc33',
-                width: 2
-            }),
-            image: new ol.style.Circle({
-                radius: 7,
-                fill: new ol.style.Fill({
-                    color: '#ffcc33'
-                })
-            })
-        })
-    });
-
-
-
-    /**
-     * Modify interaction
-     */
-    var modify = new ol.interaction.Modify({
-        features: features,
-        // the SHIFT key must be pressed to delete vertices, so
-        // that new vertices can be drawn at the same position
-        // of existing vertices
-        deleteCondition: function (event) {
-            return ol.events.condition.shiftKeyOnly(event) &&
-                    ol.events.condition.singleClick(event);
-        }
-    });
-
-
-    
     return {
         init: init,
         drawInteraction: drawInteraction,

@@ -1,30 +1,155 @@
-//jslint browser: true
-//global console, window, escape, FileReader, $, ol, controls, mapControlsModule
+'use strict';
 
+/*eslint-env browser, jquery */
+/*global ol */
 /**
  * OL3 module.
- * @external jQuery
- * @external ol3
  * @see {@link http://openlayers.org/en/v3.12.1/apidoc/}
  * @module
- * @returns {Object} Public functions and variables
+ * @external $
+ * @external Basil
+ * @external ol
+ * @param {Object} map - ol initialized map
+ * @param {Object} settings - Module settings override
+ * @return {Object} Public functions / variables
  */
-var mapModule = function () {
+/*eslint-disable no-unused-vars*/
+var MapModule = function MapModule(map, settings) {
+    /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var map,
-        draw,
-        ready = $.Deferred();
+    var defaults = {
+        ol: {},
+        basil: {}
+    };
+
+    settings = $.extend(true, {}, defaults, settings);
+
+    // Global variables
+    var basil;
+
+    // Init Basil
+    if (!basil && typeof window.Basil !== 'undefined') {
+        // Define an unique namespace to store map data
+        if (!settings.basil.namespace) {
+            settings.basil.namespace = map.get('target');
+        }
+        basil = new window.Basil(settings.basil);
+    }
 
     /**
-     * Draw map
+     * Save map state using cookies or local storage
      * @public
      */
-    var init = function (target) {
+    var storeMapState = function storeMapState() {
 
-        ready.resolve();
+        if (!basil) {
+            return false;
+        }
 
-        return map;
+        var view = map.getView();
+
+        // Store view center changes
+        view.on('change:center', function () {
+            basil.set('center', this.getCenter()); //, {'namespace': settings.basil.namespace}
+        });
+
+        // Store view resolution changes
+        view.on('change:resolution', function () {
+            basil.set('zoom', this.getZoom());
+        });
+
+        // Store map move changes
+        map.on('moveend', function () {
+            basil.set('center', view.getCenter());
+        });
+
+        // Store map render changes
+        map.on('postrender', function () {
+            basil.set('zoom', view.getZoom());
+        });
+
+        // Save / restore visible layers
+        /*var layers = map.getLayers();
+        mapLayersModule.treatLayers(map1, function (l) {
+            if (l.getVisible()) {
+                console.log('Selected layer', l.get('name'));
+            } else {
+                console.log('Unselected layer', l.get('name'));
+            }
+        });*/
+    };
+
+    /**
+     * Save map state using cookies or local storage
+     * @public
+     * @return {Boolean} Restore success
+     */
+    var restoreMapState = function restoreMapState() {
+
+        if (!basil) {
+            return false;
+        }
+
+        var ok = false;
+        var view = map.getView();
+
+        // Restore map center
+        if (basil.get('center')) {
+            view.setCenter(basil.get('center'));
+            ok = true;
+        }
+
+        // Restore map zoom
+        if (basil.get('zoom')) {
+            view.setZoom(basil.get('zoom'));
+            ok = true;
+        }
+
+        // Save / restore visible layers
+        /*var layers = map.getLayers();
+        mapLayersModule.treatLayers(map1, function (l) {
+            if (l.getVisible()) {
+                console.log('Selected layer', l.get('name'));
+            } else {
+                console.log('Unselected layer', l.get('name'));
+            }
+        });*/
+
+        return ok;
+    };
+
+    /**
+     * Display event logs
+     * @public
+     */
+    var debug = function debug() {
+
+        var target = map.get('target');
+        var view = map.getView();
+
+        map.on('change change:layerGroup change:size change:target change:view click dblclick moveend pointerdrag pointermove postcompose postrender precompose propertychange singleclick', function (e) {
+            console.log(target + ' map ', e);
+            console.log(target + ' map ' + e.name + ' event firered', e.value);
+        });
+
+        view.on('change change:center change:resolution change:rotation propertychange', function (e) {
+            console.log(target + ' map view ', e);
+            console.log(target + ' map view ' + e.name + ' event firered', e.value);
+        });
+
+        /*map.on('moveend', function () {
+            console.log(target + ' map moved', view.getCenter());
+        });
+        map.on('postrender', function () {
+            console.log(target + ' map zoom changed after postrender', view.getZoom());
+        });
+        view.on('change:center', function () {
+            console.log(target + ' view center changes', this.getCenter());
+        });
+        view.on('change:resolution', function () {
+            console.log(target + ' view zoom changed', this.getZoom());
+        });*/
     };
 
     /**
@@ -32,13 +157,36 @@ var mapModule = function () {
      * (Remove control with map.removeControl(control);)
      * @private
      * @param {string} control - Predefined control variable name
-     * @param {object} map - OL3 initialized map
      */
-    var _addControl = function (control, map) {
-        if (!map || !controls[control]) {
-            return;
+    /*var addControl = function (control) {
+        if (!controls[control]) {
+            return false;
         }
         map.addControl(mapControlsModule.controls[control]);
+    };*/
+
+    /**
+     * Return the selected base layer name
+     * @public
+     */
+    var getSelectedBaseLayer = function getSelectedBaseLayer() {
+
+        var layers = map.getLayers();
+
+        $.each(layers, function (i, l) {
+            //var BL = l.get('baselayer');
+            if (l.getVisible()) {
+                console.log('Selected layer', l.get('name'));
+            } else {
+                console.log('Unselected layer', l.get('name'));
+            }
+            l.on('change:visible', function () {
+                // this.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
+                if (this.getVisible()) {
+                    console.log('Selected layer', this.get('name'));
+                }
+            });
+        });
     };
 
     /**
@@ -46,27 +194,20 @@ var mapModule = function () {
      * @public
      * @param {number} longitude - Longitude at EPSG:4326 projection
      * @param {number} latitude - Latitude at EPSG:4326 projection
-     * @param {integer} [zoom] - Zoom from 0 to 18
      */
-    var centerMap = function (longitude, latitude, zoom) {
-
+    var setCenter = function setCenter(longitude, latitude) {
         var view = map.getView();
         view.setCenter(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'));
-        if (zoom) {
-            view.setZoom(zoom);
-        }
-        console.log('Map centered at longitude: ' + longitude + ' latitude: ' + latitude + ' zoom: ' + zoom);
+        console.log('Map centered at longitude: ' + longitude + ' latitude: ' + latitude);
     };
 
     /**
-     * Center map on user position
+     * Try to geolocate user and center map on the position
      * @public
-     * @param {Object} map - OL3 map
      */
-    var centerOnPosition = function (map) {
+    var setCenterOnPosition = function setCenterOnPosition() {
 
         var view = map.getView();
-
         var geolocation = new ol.Geolocation({
             projection: view.getProjection(),
             tracking: true
@@ -74,145 +215,92 @@ var mapModule = function () {
 
         geolocation.once('change:position', function () {
             view.setCenter(geolocation.getPosition());
-            //view.setResolution(2.388657133911758);
-            view.setZoom(10);
         });
     };
 
     /**
-     * Center the map on a vector source and adjust zoom
-     * @see {@link http://openlayers.org/en/v3.4.0/examples/center.html}
+     * Change zoom level
      * @public
+     * @param {Integer} zoom - Zoom level from 0 to 21
      */
-    var fitLayerGeometry = function (id, map, layer, featureId) {
-
-        var source = layer.getSource();
-        var feature = source.getFeatureById(id);
-        var polygon = /** @type {ol.geom.SimpleGeometry} */feature.getGeometry();
-        var size = /** @type {ol.Size} */map.getSize();
-
-        var view = map.getView();
-        view.fit(polygon, size, {
-            padding: [0, 0, 0, 0],
-            constrainResolution: false
-            // nearest: true,
-            // minResolution: 50
-        });
+    var setZoom = function setZoom(zoom) {
+        zoom = parseInt(zoom);
+        if (zoom) {
+            map.getView().setZoom(zoom);
+        }
     };
 
     /**
-     * Fit all layers in the map viewport
+     * Zoom out and adjust center to fit the view extent
      * @public
-     * @param {Object} map - OL3 map
      */
-    var fitAll = function (map) {
-
-        var extent = ol.extent.createEmpty();
-        map.getLayers().forEach(function (layer) {
-            ol.extent.extend(extent, layer.getSource().getExtent());
-        });
-        map.getView().fit(extent, map.getSize());
-    };
-
-    /**
-     * Zoom out to view extent
-     * @public
-     * @param {Object} map - OL3 map
-     */
-    var zoomOut = function (map) {
-        //var extent = map.  .getSource().getExtent();
+    var fitView = function fitView() {
         var view = map.getView();
         var extent = view.getExtent();
         view.fit(extent, map.getSize());
     };
 
     /**
-     * Convert bytes to string size
-     * @param {integer} bytes - Size in bytes
-     * @param {integer} decimals - Round number to n decimals
-     * @returns {string} The formatted value
+     * Zoom out and adjust center to fit all layers in the map viewport
+     * @public
      */
-    var _formatBytes = function (bytes, decimals) {
-        if (bytes == 0) return '0 Byte';
-        var k = 1000;
-        var dm = decimals + 1 || 3;
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+    var fitLayers = function fitLayers() {
+        var view = map.getView();
+        var extent = ol.extent.createEmpty();
+        map.getLayers().forEach(function (layer) {
+            ol.extent.extend(extent, layer.getSource().getExtent());
+        });
+        view.fit(extent, map.getSize());
     };
 
     /**
-     * Update layer source url from a file input
-     * <input id="gpx_file_path" type="file" accept=".gpx" />
-     * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
+     * Zoom out and adjust center to fit the layer features
      * @public
-     * @param {string} selector - File input ID
-     * @param {Object} layer - OL3 vector layer
+     * @param {Object} ol3 vector layer
      */
-    var setFileSource = function (selector, layer) {
+    var fitVectorLayer = function fitVectorLayer(layer) {
+        var view = map.getView();
+        var extent = layer.getSource().getExtent();
+        view.fit(extent, map.getSize());
+    };
 
-        if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-            swal({ title: 'Oups!', text: 'The File APIs are not fully supported by your browser.', type: 'warning' });
-            return;
-        }
-
-        var gpxFormat = new ol.format.GPX();
-        var gpxFeatures;
-
-        var $filePath = $(selector);
-        $filePath.on('change', function (e) {
-
-            var files = e.target.files;
-            var output = [];
-            for (var i = 0, f; f = files[i]; i++) {
-
-                var reader = new FileReader();
-                reader.readAsText(f); //, 'UTF-8'
-                //reader.readAsDataURL(f);
-
-                reader.onload = function (e) {
-
-                    gpxFeatures = gpxFormat.readFeatures(e.target.result, {
-                        dataProjection: 'EPSG:4326',
-                        featureProjection: 'EPSG:3857'
-                    });
-                    layer.getSource().addFeatures(gpxFeatures);
-
-                    layer.setProperties({
-                        visible: true
-                    });
-                };
-
-                reader.onloadstart = function (e) {
-                    //console.log('GPX tracks loading...');
-                };
-                reader.onloadend = function (e) {
-                    console.log('GPX tracks loaded');
-                };
-                reader.onerror = function (e) {
-                    swal({ title: 'Oups!', text: 'An error occured while trying to read your file.', type: 'warning' });
-                };
-
-                // Build the list of loaded files
-                output.push('<li class="list-group-item">' + escape(f.name) + ' <span class="badge">' + _formatBytes(f.size) + (' ' + f.type || '')
-                //+ (f.lastModifiedDate ? ' last modified: ' + f.lastModifiedDate.toLocaleDateString() : '')
-                 + '<span></li>');
-            };
-
-            var $list = $(selector + '_list');
-            if ($list) {
-                $list.html('<ul class="list-group">' + output.join('') + '</ul>');
-            }
-        });
+    /**
+     * Zoom out and adjust center to fil a vectore layer feature
+     * @see {@link http://openlayers.org/en/v3.4.0/examples/center.html}
+     * @public
+     * @param {String} id - Feature id
+     * @param {Object} layer - Vector layer
+     * @param {Object} options - ol3 fit function parameters
+     */
+    var fitLayerGeometry = function fitLayerGeometry(id, layer, options) {
+        var source = layer.getSource();
+        var feature = source.getFeatureById(id);
+        var polygon = /** @type {ol.geom.SimpleGeometry} */feature.getGeometry();
+        var size = /** @type {ol.Size} */map.getSize();
+        var view = map.getView();
+        view.fit(polygon, size, $.extend({
+            padding: [0, 0, 0, 0],
+            constrainResolution: false
+            // nearest: true,
+            // minResolution: 50
+        }, options));
     };
 
     return {
+        settings: settings,
         map: map,
-        ready: ready,
-        init: init,
-        centerOnPosition: centerOnPosition,
-        setFileSource: setFileSource,
-        fitAll: fitAll
+        basil: basil,
+        debug: debug,
+        setZoom: setZoom,
+        setCenter: setCenter,
+        setCenterOnPosition: setCenterOnPosition,
+        getSelectedBaseLayer: getSelectedBaseLayer,
+        storeMapState: storeMapState,
+        restoreMapState: restoreMapState,
+        fitView: fitView,
+        fitLayers: fitLayers,
+        fitVectorLayer: fitVectorLayer,
+        fitLayerGeometry: fitLayerGeometry
     };
-}();
+};
 //# sourceMappingURL=mapModule.js.map
