@@ -174,14 +174,18 @@ var commonsModule = (function () {
 
         $.extend(true, settings.adsense, options);
 
-        $(function () {
-            $('body').append('<!-- Google Adsense -->'
-                + '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
+        //$(function () {
+        //    $('body').append('<!-- Google Adsense -->'
+        //        + '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
+        //});
+
+        $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+            console.log('Google Adsense library loaded');
+            $(window).on('load', function () {
+                insertAdsenseAds('body', settings);
+            });
         });
 
-        $(window).on('load', function () {
-            insertAdsenseAds('body', settings);
-        });
     };
 
 

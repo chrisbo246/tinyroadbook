@@ -69,6 +69,51 @@ var appModule = (function () {
 
 
     /**
+     * Load the Addthis widget library and update parameters when the roadbook change
+     * @private
+     */
+    var initAddthisWidget = function () {
+
+        // Default config
+        /*eslint-disable camelcase*/
+        var addthis_share = {
+            url: document.URL
+            , title: 'I\'m doing a tiny roadbook for my next tour'
+        };
+        /*eslint-enable camelcase*/
+
+        // Load the Addthis widget library
+        $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
+            console.log('Addthis widget library loaded');
+
+            // Watch roadbook editor changes
+            var editor = roadbookModule.getEditor();
+            editor.on('text-change', function () {
+
+                // Update Addthis widget data attributs
+                // http://support.addthis.com/customer/portal/topics/38604-customizing-addthis/articles
+                var description = editor.getText();
+                $.extend(addthis_share, {
+                        description: description.substring(0, 100) + ((description.length > 100) ? '...' : '')
+                        //image: (canvas ? canvas.toDataURL('image/png') : '')
+                    });
+
+                //$('.addthis_sharing_toolbox')
+                //    .attr('data-title', 'I\'m doing a tiny road book for my next tour')
+                //    .attr('data-title', 'I\'m doing a tiny road book for my next tour');
+                //$('meta[property="og:title"]').attr('content', addthis_share.title);
+                //$('meta[property="og:url"]').attr('content', addthis_share.url);
+                //$('meta[property="og:description"]').attr('content', editor.getHTML());
+
+            });
+
+        });
+
+    };
+
+
+
+    /**
      * Build a valid HTML file with the editor content
      * @public
      * @return {String} HTML file content
@@ -228,6 +273,8 @@ var appModule = (function () {
         htmlEditorModule.init();
         styleModule.init();
         importModule.init();
+
+        initAddthisWidget();
 
         // Try to define user language at the first connection
         var $input = $('#user_language');

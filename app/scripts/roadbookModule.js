@@ -227,7 +227,7 @@ var roadbookModule = (function () {
         var formats = {span: true, place: 'road'}, //, type: 'road'
             $road = $('#road'),
             name,
-			translation;
+            translation;
 
         //if (json) {
         //    return false;
@@ -306,7 +306,7 @@ var roadbookModule = (function () {
         var formats = {span: true}, //, type: 'poi'
             name,
             translation,
-			placeType;
+            placeType;
 
         if (!json) {
             return false;
@@ -503,21 +503,6 @@ var roadbookModule = (function () {
 
             // Auto-scroll the textarea to keep the last city visible
             $editor.scrollTop($editor[0].scrollHeight);
-
-            // Update Addthis widget data attributs
-            // http://support.addthis.com/customer/portal/topics/38604-customizing-addthis/articles
-            var description = editor.getText();
-            $.extend(addthis_share, {
-                    description: description.substring(0, 100) + ((description.length > 100) ? '...' : '')
-                    //image: (canvas ? canvas.toDataURL('image/png') : '')
-                });
-
-            //$('.addthis_sharing_toolbox')
-            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour')
-            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour');
-            //$('meta[property="og:title"]').attr('content', addthis_share.title);
-            //$('meta[property="og:url"]').attr('content', addthis_share.url);
-            //$('meta[property="og:description"]').attr('content', editor.getHTML());
 
             // Update the code preview
             $('#roadbook_editor_contents').html(JSON.stringify(editor.getContents()));
