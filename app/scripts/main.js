@@ -76,15 +76,15 @@ var appModule = (function () {
 
         // Default config
         /*eslint-disable camelcase*/
-        var addthis_share = {
+        window.addthis_share = {
             url: document.URL
             , title: 'I\'m doing a tiny roadbook for my next tour'
         };
         /*eslint-enable camelcase*/
 
         // Load the Addthis widget library
-        $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
-            console.log('Addthis widget library loaded');
+        //$.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
+        //    console.log('Addthis widget library loaded');
 
             // Watch roadbook editor changes
             var editor = roadbookModule.getEditor();
@@ -107,7 +107,7 @@ var appModule = (function () {
 
             });
 
-        });
+        //});
 
     };
 
