@@ -801,410 +801,6 @@ section:first-of-type{
 }
     </style>
 
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
-    <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
-    <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
-    <!-- endbower -->
-    <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-bottom.css" />
-    <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
-    <!-- endbuild -->
-
-    <!-- Roadbook live style -->
-    <!--@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,greek,vietnamese,cyrillic);-->
-    <style id="roadbook_style" rel="stylesheet" type="text/css">
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);
-@media screen,
-print {
-
-    /* Global ---------------------------------------------- */
-
-    .roadbook {
-        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        line-height: 1.428571429;
-        color: #333;
-        background-color: #fff;
-    }
-
-    /* Paragraphs */
-    .roadbook div {
-        margin-bottom: 1em;
-    }
-
-    /* Separators */
-    .roadbook span:not(:first-of-type):not([data-type="translation"]) {
-        margin-left: 0.6em;
-    }
-
-    /* Places */
-    .roadbook [data-place="country"],
-    .roadbook [data-place="state"],
-    .roadbook [data-place="state_district"],
-    .roadbook [data-place="county"],
-    .roadbook [data-place="city"],
-    .roadbook [data-place="city_district"],
-    .roadbook [data-place="suburb"],
-    .roadbook [data-place="town"],
-    .roadbook [data-place="village"],
-    .roadbook [data-place="hamlet"],
-    .roadbook [data-place="locality"],
-    .roadbook [data-place="municipality"],
-    .roadbook [data-place="island"],
-    .roadbook [data-place="islet"],
-    .roadbook [data-place="neighbourhood"] {
-
-    }
-
-    /* Roads */
-    .roadbook [data-place="road"],
-    .roadbook [data-place="path"],
-    .roadbook [data-place="track"]    {
-        padding: 0em .3em;
-        font-size: .625em;
-        border: solid 1px;
-    }
-
-    /* POIs (all but roads and places) */
-    .roadbook span:not([data-place="road"]):not([data-place="path"]):not([data-place="track"]):not([data-place="country"]):not([data-place="state"]):not([data-place="state_district"]):not([data-place="county"]):not([data-place="city"]):not([data-place="city_district"]):not([data-place="suburb"]):not([data-place="town"]):not([data-place="village"]):not([data-place="hamlet"]):not([data-place="locality"]):not([data-place="municipality"]):not([data-place="island"]):not([data-place="islet"]):not([data-place="neighbourhood"]) {
-        font-size: 0.8em;
-    }
-
-
-    /* Translations ---------------------------------------- */
-
-    .roadbook [data-type="translation"] {
-        font-size: .7em;
-        opacity: .5;
-        color: #000;
-    }
-    .roadbook [data-type="translation"]:before {
-        content: "(";
-    }
-    .roadbook [data-type="translation"]:after {
-        content: ")";
-    }
-
-
-    /* Place type ------------------------------------------ */
-
-    .roadbook [data-place="country"] {
-        color: #00f;
-    }
-    .roadbook [data-place="state"] {
-        color: #22f;
-    }
-    .roadbook [data-place="state_district"] {
-        color: #44f;
-    }
-    .roadbook [data-place="county"] {
-        color: #66f;
-    }
-    .roadbook [data-place="city"] {
-
-    }
-    .roadbook [data-place="city_district"] {
-        color: #88f;
-    }
-    .roadbook [data-place="suburb"] {
-        color: #aaf;
-    }
-    .roadbook [data-place="town"] {
-
-    }
-    .roadbook [data-place="village"] {
-
-    }
-    .roadbook [data-place="hamlet"] {
-        color: #ccf;
-    }
-    .roadbook [data-place="locality"] {
-        color: #ccf;
-    }
-    .roadbook [data-place="municipality"] {
-        color: #ccf;
-    }
-    .roadbook [data-place="island"] {
-        color: #ccf;
-    }
-    .roadbook [data-place="islet"] {
-        color: #ccf;
-    }
-    .roadbook [data-place="neighbourhood"] {
-        color: #ccf;
-    }
-
-
-    /* Population level ------------------------------------ */
-
-    .roadbook [data-population="0"] {
-        font-size: .8em;
-    }
-    .roadbook [data-population="1"] {
-        font-size: .825em;
-    }
-    .roadbook [data-population="2"] {
-        font-size: .85em;
-    }
-    .roadbook [data-population="3"] {
-        font-size: .875em;
-    }
-    .roadbook [data-population="4"] {
-        font-size: .9em;
-    }
-    .roadbook [data-population="5"] {
-        font-size: .925em;
-    }
-    .roadbook [data-population="6"] {
-        font-size: .95em;
-    }
-    .roadbook [data-population="7"] {
-        font-size: .975em;
-    }
-    .roadbook [data-population="8"] {
-        font-size: 1em;
-    }
-    .roadbook [data-population="9"] {
-        font-size: 1.05em;
-    }
-    .roadbook [data-population="10"] {
-        font-size: 1.15em;
-    }
-    .roadbook [data-population="11"] {
-        font-size: 1.2em;
-    }
-    .roadbook [data-population="12"] {
-        font-size: 1.25em;
-    }
-    .roadbook [data-population="13"] {
-        font-size: 1.3em;
-    }
-    .roadbook [data-population="14"] {
-        font-size: 1.35em;
-    }
-    .roadbook [data-population="15"] {
-        font-size: 1.4em;
-    }
-    .roadbook [data-population="16"] {
-        font-size: 1.45em;
-    }
-    .roadbook [data-population="17"] {
-        font-size: 1.5em;
-    }
-    .roadbook [data-population="18"] {
-        font-size: 1.55em;
-    }
-    .roadbook [data-population="19"] {
-        font-size: 1.6em;
-    }
-    .roadbook [data-population="20"] {
-        font-size: 1.65em;
-    }
-    .roadbook [data-population="21"] {
-        font-size: 1.7em;
-    }
-
-
-    /* Capital & sub-level --------------------------------- */
-
-    .roadbook [data-capital="yes"] {
-        color: #08f;
-        font-weight: 800;
-    }
-    .roadbook [data-capital="0"] {
-        color: #00d;
-        font-weight: 800;
-    }
-    .roadbook [data-capital="1"] {
-        color: #00c;
-        font-weight: 700;
-    }
-    .roadbook [data-capital="2"] {
-        color: #00b;
-        font-weight: 700;
-    }
-    .roadbook [data-capital="3"] {
-        color: #00a;
-        font-weight: 600;
-    }
-    .roadbook [data-capital="4"] {
-        color: #009;
-        font-weight: 600;
-    }
-    .roadbook [data-capital="5"] {
-        color: #008;
-        font-weight: 400;
-    }
-    .roadbook [data-capital="6"] {
-        color: #007;
-        font-weight: 400;
-    }
-    .roadbook [data-capital="7"] {
-        color: #006;
-        font-weight: 400;
-    }
-    .roadbook [data-capital="8"] {
-        color: #005;
-        font-weight: 300;
-    }
-    .roadbook [data-capital="9"] {
-        color: #004;
-        font-weight: 300;
-    }
-    .roadbook [data-capital="10"] {
-        color: #003;
-        font-weight: 300;
-    }
-
-
-    /* Road types ------------------------------------------ */
-
-    /* Concrete */
-    .roadbook [data-place="road"] {
-        color: #55f;
-        border-color: #55f;
-    }
-
-    /* Muddy */
-    .roadbook [data-place="path"],
-    .roadbook [data-place="footway"],
-    .roadbook [data-place="track"] {
-        color: #a50;
-        border-color: #a50;
-    }
-
-
-    /* POI types ------------------------------------------- */
-
-    /* POI */
-    .roadbook [data-place="building"],
-    .roadbook [data-place="castle"],
-    .roadbook [data-place="courthouse"],
-    .roadbook [data-place="farm"],
-    .roadbook [data-place="fire_station"],
-    .roadbook [data-place="house_number"],
-    .roadbook [data-place="isolated_dwelling"],
-    .roadbook [data-place="public_building"],
-    .roadbook [data-place="school"],
-    .roadbook [data-place="university"],
-    .roadbook [data-place="townhall"] {
-        color: navy;
-    }
-    .roadbook [data-place="beach"],
-    .roadbook [data-place="nature_reserve"],
-    .roadbook [data-place="park"],
-    .roadbook [data-place="picnic_site"],
-    .roadbook [data-place="playground"] {
-        color: green;
-    }
-    .roadbook [data-place="artwork"],
-    .roadbook [data-place="memorial"],
-    .roadbook [data-place="monument"],
-    .roadbook [data-place="viewpoint"] {
-        color: turquoise;
-    }
-
-    /* Leisure */
-    .roadbook [data-place="arts_centre"],
-    .roadbook [data-place="cinema"],
-    .roadbook [data-place="community_centre"],
-    .roadbook [data-place="library"],
-    .roadbook [data-place="museum"],
-    .roadbook [data-place="place_of_worship"],
-    .roadbook [data-place="sports_centre"],
-    .roadbook [data-place="stadium"],
-    .roadbook [data-place="theatre"] {
-        color: navy;
-    }
-
-    /* Shop */
-    .roadbook [data-place="supermarket"],
-    .roadbook [data-place="department_store"],
-    .roadbook [data-place="convenience"],
-    .roadbook [data-place="hardware"] {
-        color: magenta;
-    }
-    /* Shops:Detail */
-    .roadbook [data-place="bicycle"],
-    .roadbook [data-place="books"],
-    .roadbook [data-place="clothes"],
-    .roadbook [data-place="computer"],
-    .roadbook [data-place="florist"],
-    .roadbook [data-place="jewelry"],
-    .roadbook [data-place="mobile_phone"],
-    .roadbook [data-place="optician"]
-    .roadbook [data-place="outdoor"],
-    .roadbook [data-place="pharmacy"],
-    .roadbook [data-place="shoes"],
-    .roadbook [data-place="telephone"],
-    .roadbook [data-place="toys"] {
-        color: purple;
-    }
-    /* Shop:Food */
-    .roadbook [data-place="restaurant"],
-    .roadbook [data-place="cafe"],
-    .roadbook [data-place="pub"],
-    .roadbook [data-place="fast_food"],
-    .roadbook [data-place="bakery"],
-    .roadbook [data-place="butcher"] {
-        color: orange;
-    }
-
-    /* Transport */
-    .roadbook [data-place="bus_stop"],
-    .roadbook [data-place="bus_station"] {
-        color: blue;
-    }
-    /* Transport:Parking */
-    .roadbook [data-place="parking"] {
-        color: blue;
-    }
-    /* Service:Repair */
-    .roadbook [data-place="fuel"],
-    .roadbook [data-place="car_repair"],
-    .roadbook [data-place="doityourself"] {
-        color: blue;
-    }
-
-    /* Services */
-    .roadbook [data-place="bank"],
-    .roadbook [data-place="dry_cleaning"],
-    .roadbook [data-place="hairdresser"] {
-        color: violet;
-    }
-    /* Service:Health */
-    .roadbook [data-place="hospital"],
-    .roadbook [data-place="dentist"] {
-        color: red;
-    }
-    /* Urgency */
-    .roadbook [data-place="police"] {
-        color: red;
-    }
-
-    /* Service:Hosting */
-    .roadbook [data-place="hostel"],
-    .roadbook [data-place="hotel"] {
-        color: violet;
-    }
-    /* Service:Travel */
-    .roadbook [data-place="travel_agency"] {
-        color: violet;
-    }
-    /* Services:Box */
-    .roadbook [data-place="atm"],
-    .roadbook [data-place="post_box"] {
-        color: violet;
-    }
-
-}
-    </style>
-
 </head>
 
 <body>
@@ -1914,6 +1510,9 @@ print {
                             <button id="reset_all" type="button" class="btn btn-default btn-block btn-warning">All</button>
                         </fieldset>
                     </div>
+                    <div class="row ad_container hidden-print">
+                        <ins class="adsbygoogle"></ins>
+                    </div>
                 </form>
             </div>
         </div>
@@ -2174,12 +1773,410 @@ print {
         </form>
     </div>
 
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bower-ol3/css/ol.css" />
+    <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
+    <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-bottom.css" />
+    <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
+    <!-- endbuild -->
+
     <!-- build:css styles/vendor_override.css -->
     <link rel="stylesheet" property="stylesheet" href="styles/vendor_override.css">
     <!-- endbuild -->
 
-    <!-- AddThis -->
-    <script defer src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927"></script>
+    <!-- Roadbook live style -->
+    <!--
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=latin,greek,vietnamese,cyrillic);
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -->
+    <style id="roadbook_style" rel="stylesheet" type="text/css">
+@media screen, print {
+
+    /* Global ---------------------------------------------- */
+
+    .roadbook {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #333;
+        background-color: #fff;
+    }
+
+    /* Separators */
+    .roadbook span:not(:first-of-type):not([data-type="translation"]) {
+        margin-left: 0.6em;
+    }
+
+    /* Places */
+    .roadbook [data-place="country"],
+    .roadbook [data-place="state"],
+    .roadbook [data-place="state_district"],
+    .roadbook [data-place="county"],
+    .roadbook [data-place="city"],
+    .roadbook [data-place="city_district"],
+    .roadbook [data-place="suburb"],
+    .roadbook [data-place="town"],
+    .roadbook [data-place="village"],
+    .roadbook [data-place="hamlet"],
+    .roadbook [data-place="locality"],
+    .roadbook [data-place="municipality"],
+    .roadbook [data-place="island"],
+    .roadbook [data-place="islet"],
+    .roadbook [data-place="neighbourhood"] {
+
+    }
+
+    /* Roads */
+    .roadbook [data-place="road"],
+    .roadbook [data-place="path"],
+    .roadbook [data-place="track"]    {
+        padding: 0em .3em;
+        font-size: .625em;
+        border: solid 1px;
+    }
+
+    /* POIs (all but roads and places) */
+    .roadbook span:not([data-place="road"]):not([data-place="path"]):not([data-place="track"]):not([data-place="country"]):not([data-place="state"]):not([data-place="state_district"]):not([data-place="county"]):not([data-place="city"]):not([data-place="city_district"]):not([data-place="suburb"]):not([data-place="town"]):not([data-place="village"]):not([data-place="hamlet"]):not([data-place="locality"]):not([data-place="municipality"]):not([data-place="island"]):not([data-place="islet"]):not([data-place="neighbourhood"]) {
+        font-size: 0.8em;
+    }
+
+
+    /* Translations ---------------------------------------- */
+
+    .roadbook [data-type="translation"] {
+        font-size: .7em;
+        opacity: .5;
+        color: #000;
+    }
+    .roadbook [data-type="translation"]:before {
+        content: "(";
+    }
+    .roadbook [data-type="translation"]:after {
+        content: ")";
+    }
+
+
+    /* Place type ------------------------------------------ */
+
+    .roadbook [data-place="country"] {
+        color: #00f;
+    }
+    .roadbook [data-place="state"] {
+        color: #22f;
+    }
+    .roadbook [data-place="state_district"] {
+        color: #44f;
+    }
+    .roadbook [data-place="county"] {
+        color: #66f;
+    }
+    .roadbook [data-place="city"] {
+
+    }
+    .roadbook [data-place="city_district"] {
+        color: #88f;
+    }
+    .roadbook [data-place="suburb"] {
+        color: #aaf;
+    }
+    .roadbook [data-place="town"] {
+
+    }
+    .roadbook [data-place="village"] {
+
+    }
+    .roadbook [data-place="hamlet"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="locality"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="municipality"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="island"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="islet"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="neighbourhood"] {
+        color: #ccf;
+    }
+
+
+    /* Population level ------------------------------------ */
+
+    .roadbook [data-population="0"] {
+        font-size: .8em;
+    }
+    .roadbook [data-population="1"] {
+        font-size: .825em;
+    }
+    .roadbook [data-population="2"] {
+        font-size: .85em;
+    }
+    .roadbook [data-population="3"] {
+        font-size: .875em;
+    }
+    .roadbook [data-population="4"] {
+        font-size: .9em;
+    }
+    .roadbook [data-population="5"] {
+        font-size: .925em;
+    }
+    .roadbook [data-population="6"] {
+        font-size: .95em;
+    }
+    .roadbook [data-population="7"] {
+        font-size: .975em;
+    }
+    .roadbook [data-population="8"] {
+        font-size: 1em;
+    }
+    .roadbook [data-population="9"] {
+        font-size: 1.05em;
+    }
+    .roadbook [data-population="10"] {
+        font-size: 1.15em;
+    }
+    .roadbook [data-population="11"] {
+        font-size: 1.2em;
+    }
+    .roadbook [data-population="12"] {
+        font-size: 1.25em;
+    }
+    .roadbook [data-population="13"] {
+        font-size: 1.3em;
+    }
+    .roadbook [data-population="14"] {
+        font-size: 1.35em;
+    }
+    .roadbook [data-population="15"] {
+        font-size: 1.4em;
+    }
+    .roadbook [data-population="16"] {
+        font-size: 1.45em;
+    }
+    .roadbook [data-population="17"] {
+        font-size: 1.5em;
+    }
+    .roadbook [data-population="18"] {
+        font-size: 1.55em;
+    }
+    .roadbook [data-population="19"] {
+        font-size: 1.6em;
+    }
+    .roadbook [data-population="20"] {
+        font-size: 1.65em;
+    }
+    .roadbook [data-population="21"] {
+        font-size: 1.7em;
+    }
+
+
+    /* Capital & sub-level --------------------------------- */
+
+    .roadbook [data-capital="yes"] {
+        color: #08f;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="0"] {
+        color: #00d;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="1"] {
+        color: #00c;
+        font-weight: 700;
+    }
+    .roadbook [data-capital="2"] {
+        color: #00b;
+        font-weight: 700;
+    }
+    .roadbook [data-capital="3"] {
+        color: #00a;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="4"] {
+        color: #009;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="5"] {
+        color: #008;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="6"] {
+        color: #007;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="7"] {
+        color: #006;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="8"] {
+        color: #005;
+        font-weight: 300;
+    }
+    .roadbook [data-capital="9"] {
+        color: #004;
+        font-weight: 300;
+    }
+    .roadbook [data-capital="10"] {
+        color: #003;
+        font-weight: 300;
+    }
+
+
+    /* Road types ------------------------------------------ */
+
+    /* Concrete */
+    .roadbook [data-place="road"] {
+        color: #55f;
+        border-color: #55f;
+    }
+
+    /* Muddy */
+    .roadbook [data-place="path"],
+    .roadbook [data-place="footway"],
+    .roadbook [data-place="track"] {
+        color: #a50;
+        border-color: #a50;
+    }
+
+
+    /* POI types ------------------------------------------- */
+
+    /* POI */
+    .roadbook [data-place="building"],
+    .roadbook [data-place="castle"],
+    .roadbook [data-place="courthouse"],
+    .roadbook [data-place="farm"],
+    .roadbook [data-place="fire_station"],
+    .roadbook [data-place="house_number"],
+    .roadbook [data-place="isolated_dwelling"],
+    .roadbook [data-place="public_building"],
+    .roadbook [data-place="school"],
+    .roadbook [data-place="university"],
+    .roadbook [data-place="townhall"] {
+        color: navy;
+    }
+    .roadbook [data-place="beach"],
+    .roadbook [data-place="nature_reserve"],
+    .roadbook [data-place="park"],
+    .roadbook [data-place="picnic_site"],
+    .roadbook [data-place="playground"] {
+        color: green;
+    }
+    .roadbook [data-place="artwork"],
+    .roadbook [data-place="memorial"],
+    .roadbook [data-place="monument"],
+    .roadbook [data-place="viewpoint"] {
+        color: turquoise;
+    }
+
+    /* Leisure */
+    .roadbook [data-place="arts_centre"],
+    .roadbook [data-place="cinema"],
+    .roadbook [data-place="community_centre"],
+    .roadbook [data-place="library"],
+    .roadbook [data-place="museum"],
+    .roadbook [data-place="place_of_worship"],
+    .roadbook [data-place="sports_centre"],
+    .roadbook [data-place="stadium"],
+    .roadbook [data-place="theatre"] {
+        color: navy;
+    }
+
+    /* Shop */
+    .roadbook [data-place="supermarket"],
+    .roadbook [data-place="department_store"],
+    .roadbook [data-place="convenience"],
+    .roadbook [data-place="hardware"] {
+        color: magenta;
+    }
+    /* Shops:Detail */
+    .roadbook [data-place="bicycle"],
+    .roadbook [data-place="books"],
+    .roadbook [data-place="clothes"],
+    .roadbook [data-place="computer"],
+    .roadbook [data-place="florist"],
+    .roadbook [data-place="jewelry"],
+    .roadbook [data-place="mobile_phone"],
+    .roadbook [data-place="optician"]
+    .roadbook [data-place="outdoor"],
+    .roadbook [data-place="pharmacy"],
+    .roadbook [data-place="shoes"],
+    .roadbook [data-place="telephone"],
+    .roadbook [data-place="toys"] {
+        color: purple;
+    }
+    /* Shop:Food */
+    .roadbook [data-place="restaurant"],
+    .roadbook [data-place="cafe"],
+    .roadbook [data-place="pub"],
+    .roadbook [data-place="fast_food"],
+    .roadbook [data-place="bakery"],
+    .roadbook [data-place="butcher"] {
+        color: orange;
+    }
+
+    /* Transport */
+    .roadbook [data-place="bus_stop"],
+    .roadbook [data-place="bus_station"] {
+        color: blue;
+    }
+    /* Transport:Parking */
+    .roadbook [data-place="parking"] {
+        color: blue;
+    }
+    /* Service:Repair */
+    .roadbook [data-place="fuel"],
+    .roadbook [data-place="car_repair"],
+    .roadbook [data-place="doityourself"] {
+        color: blue;
+    }
+
+    /* Services */
+    .roadbook [data-place="bank"],
+    .roadbook [data-place="dry_cleaning"],
+    .roadbook [data-place="hairdresser"] {
+        color: violet;
+    }
+    /* Service:Health */
+    .roadbook [data-place="hospital"],
+    .roadbook [data-place="dentist"] {
+        color: red;
+    }
+    /* Urgency */
+    .roadbook [data-place="police"] {
+        color: red;
+    }
+
+    /* Service:Hosting */
+    .roadbook [data-place="hostel"],
+    .roadbook [data-place="hotel"] {
+        color: violet;
+    }
+    /* Service:Travel */
+    .roadbook [data-place="travel_agency"] {
+        color: violet;
+    }
+    /* Services:Box */
+    .roadbook [data-place="atm"],
+    .roadbook [data-place="post_box"] {
+        color: violet;
+    }
+
+}
+    </style>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
         (function (b, o, i, l, e, r) {
@@ -2201,7 +2198,10 @@ print {
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-    
+
+    <!-- AddThis -->
+    <script defer src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927"></script>
+
     <!-- build:js scripts/vendor.js -->
     <script type="text/javascript">
         window.cookieconsent_options = {
