@@ -113,13 +113,13 @@ var commonsModule = (function () {
             $block = $('body');
         }
 
-        //console.log('Search ad in ' + selector + ' block');
+        console.log('Search for visible ads in ' + selector + ' block');
         // Search for visible ads
         $block.find(settings.adsense.containers).filter(':visible').each(function (i, container) {
             var $container = $(container);
-            if (!$container.attr('data-adsbygoogle-status')) {
 
-                // Inset missing attributs
+            // Inset missing attributs
+            if (!$container.attr('data-adsbygoogle-status')) {
                 if (!$container.attr('data-ad-client')) {
                     $container.attr('data-ad-client', settings.adsense.adClient);
                 }
@@ -129,14 +129,17 @@ var commonsModule = (function () {
                 if (!$container.attr('data-ad-format')) {
                     $container.attr('data-ad-format', settings.adsense.adFormat);
                 }
-                // Initialize ad
-                (adsbygoogle = window.adsbygoogle || []).push({});
             }
+
+            // Initialize ad
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            console.log('#' + $container.attr('id') + ' ad initialised in ' + selector, $container.data());
+
         });
 
         // Initialize hidden ads when a pane is opened for the first time
         bootstrapModule.oneShownHiddenTab(selector, function (paneId) {
-            insertAdsenseAds(paneId, settings.adsense);
+            insertAdsenseAds(paneId);
         });
         //insertAdsInHiddenPanes(selector, settings.adsense);
 
@@ -495,6 +498,7 @@ var commonsModule = (function () {
 
         // WebFontConfig must be defined globally at the top of this file
         window.WebFontConfig = {};
+        // Define the webfont loader config
         $.extend(true, window.WebFontConfig, {
             google: {
                 families: settings.googleFonts.fontFamilies
@@ -505,7 +509,9 @@ var commonsModule = (function () {
         });
 
         (function (d) {
+            // Hide material design icons until font was loaded
             toogleMaterialDesignIconVisibility('hide');
+            // Append the font loader script to the body
             var wf = d.createElement('script'), s = d.scripts[0];
             wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/' + settings.googleFonts.webfontVersion + '/webfont.js';
             s.parentNode.insertBefore(wf, s);
@@ -765,19 +771,19 @@ var commonsModule = (function () {
     var init = function () {
         // Show a lot of information in console
         debug();
-        // Save input default values to a data attribute (for live reset)
+        // Load Google fonts asynchronously (+ Material design icons)
+        loadGoogleFonts();
+        // Initialize Adsense ads in hidden tabs
+        adsense();
+        // Save input values to a data attribute (used for live reset)
         fixInputValues();
         // Make form fields persistent
         storeForms();
         // Add a disabled class to unsuported field types
         disableUnsupported();
-        // Initialize Adsense ads in hidden tabs
-        adsense();
-        // Load Google fonts asynchronously (+ Material design icons)
-        loadGoogleFonts();
         // A simple parallax function
         parallax();
-        // Clear cookies and local storage when user click the reset button
+        // Watch the reset button clicks and clear cookies / local storage
         resetButton();
     };
 

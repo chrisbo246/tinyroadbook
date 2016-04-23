@@ -34,6 +34,7 @@ var appModule = (function () {
 
     // Start debugging
     commonsModule.debug();
+    commonsModule.loadGoogleFonts();
 
     swal.setDefaults({
         //customClass: '',
@@ -267,7 +268,7 @@ var appModule = (function () {
 
         commonsModule.disableUnsupported();
         commonsModule.adsense();
-        commonsModule.loadGoogleFonts();
+
 
         roadbookModule.init();
         htmlEditorModule.init();

@@ -289,11 +289,12 @@ var bootstrapModule = (function () {
             return false;
         }
 
-        $block.find(settings.tab.toggleSelector).filter(':not(.active)').each(function (i, toggler) {
-            $(toggler).one('shown.bs.tab', function (e) {
+        //$block.find(settings.tab.toggleSelector).filter(':not(.active)').each(function (i, toggler) {
+        $block.find(settings.tab.toggleSelector).one('shown.bs.tab', function (e) {
+            //$(toggler).one('shown.bs.tab', function (e) {
                 var paneId = $(e.target).attr('href');
                 callback(paneId);
-            });
+            //});
         });
 
     };
