@@ -36,10 +36,9 @@ var appModule = function () {
 
     // Start debugging
     commonsModule.debug();
-    commonsModule.loadGoogleFonts();
+    commonsModule.loadWebFonts();
 
     swal.setDefaults({
-        //customClass: '',
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-primary',
         cancelButtonClass: 'btn btn-default'
@@ -48,15 +47,19 @@ var appModule = function () {
     // Define map base layers
     var openCycleMapLayer = mapLayersModule.create('openCycleMap');
     var openStreetMapLayer = mapLayersModule.create('openStreetMap', { visible: true });
+    var mapsForFreeReliefLayer = mapLayersModule.create('mapsForFreeRelief');
+    var customBaseLayerLayer = mapLayersModule.create('customBaseLayer', { title: 'Custom tile server <a href="#layer_settings_modal" data-toggle="modal" data-target-section="1"><span class="glyphicon glyphicon-cog"></span></a>' });
+    var googleMapLayer = mapLayersModule.create('googleMap');
     var googleTerrainLayer = mapLayersModule.create('googleTerrain');
-    var customBaseLayerLayer = mapLayersModule.create('customBaseLayer', { title: 'Custom tile server <small><a href="#layer_settings_modal" data-toggle="modal" data-target-section="1"><span class="glyphicon glyphicon-cog"></span></a></small>' });
+    var googleSatelliteLayer = mapLayersModule.create('googleSatellite');
 
     // Define map overlays
     var lonviaHikingLayer = mapLayersModule.create('lonviaHiking');
     var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling');
+    var gpxLayer = mapLayersModule.create('gpxFile', { title: 'GPS tracks <a href="#gpx_reader_modal" data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>' });
+    var customOverlayLayer = mapLayersModule.create('customOverlay', { title: 'Custom tile server <a href="#layer_settings_modal" data-toggle="modal" data-target-section="2"><span class="glyphicon glyphicon-cog"></span></a>' });
     var googleBikeLayer = mapLayersModule.create('googleBike');
-    var gpxLayer = mapLayersModule.create('gpxFile', { title: 'GPS tracks <small><a href="#gpx_reader_modal" data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a></small>' });
-    var customOverlayLayer = mapLayersModule.create('customOverlay', { title: 'Custom tile server <small><a href="#layer_settings_modal" data-toggle="modal" data-target-section="2"><span class="glyphicon glyphicon-cog"></span></a></small>' });
+    var googleHybridLayer = mapLayersModule.create('googleHybrid');
 
     // Define map controls
     var attributionControl = mapControlsModule.create('attribution');
@@ -155,21 +158,21 @@ var appModule = function () {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [openCycleMapLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer, mapsForFreeReliefLayer, openCycleMapLayer, openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [lonviaHikingLayer, lonviaCyclingLayer, gpxLayer]
+                layers: [customOverlayLayer, lonviaHikingLayer, lonviaCyclingLayer, gpxLayer]
             })];
         } else {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [customBaseLayerLayer, googleTerrainLayer, openCycleMapLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer, googleSatelliteLayer, googleTerrainLayer, mapsForFreeReliefLayer, openCycleMapLayer, googleMapLayer, openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, lonviaHikingLayer, googleBikeLayer, lonviaCyclingLayer, gpxLayer]
+                layers: [customOverlayLayer, lonviaHikingLayer, googleBikeLayer, lonviaCyclingLayer, googleHybridLayer, gpxLayer]
             })];
         }
         var controls = ol.control.defaults({
@@ -205,11 +208,11 @@ var appModule = function () {
         bootstrapModule.tab();
         bootstrapModule.modalTogglerAttributs();
         bootstrapModule.tooltip();
-        //bootstrapModule.restoreActiveModal();
         console.timeEnd('Bootstrap module initialized');
 
         commonsModule.disableUnsupported();
         commonsModule.adsense();
+        commonsModule.hideHashOnClick();
 
         roadbookModule.init();
         htmlEditorModule.init();
@@ -302,9 +305,6 @@ var appModule = function () {
                 //mapMod1.fitVectorLayer(gpxLayer);
             });
 
-            // Customize modal with data attributs
-            //bootstrapModule.modalTogglerAttributs(); //'#layer_settings_modal'
-
             // Force the Bootstrap modal API to initialize the layerswitcher links
             $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function () {
                 $(this).trigger('click.bs.modal.data-api');
@@ -318,12 +318,8 @@ var appModule = function () {
             bootstrapModule.rangeValueTooltip();
         });
 
-        // Hide debug mode only elements
-        //if (!godfatherMode) {
-        //    $('.debug-only').hide();
-        //} else {
-        //    $('.debug-only').show();
-        //}
+        // Initialize the style pane functionalities only when visible for the first time
+        $tabs.filter('[href="#style_pane"]').one('shown.bs.tab', function () {});
 
         // Reset buttons
         $('#reset_settings').click(function () {
@@ -334,6 +330,16 @@ var appModule = function () {
             e.preventDefault();
             $('#layer_settings_modal').modal('hide');
         });
+
+        // Hide the modal when the form is submited
+        /*var $modal;
+        $('.modal').each(function () {
+            $modal = $(this);
+            $modal.find('form').on('submit', function (e) {
+                e.preventDefault();
+                $modal.modal('hide');
+            });
+        });*/
 
         // Update local tile url
         mapLayersModule.inputLayerSource(customBaseLayerLayer, '#base_layer_tile_server');

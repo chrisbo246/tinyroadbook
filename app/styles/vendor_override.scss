@@ -41,7 +41,7 @@ $zindex-tooltip: 1070;
 /* ol3-layerswitcher */
 
 .layer-switcher {
-    top: 2.5em;
+    top: 2.75em;
 }
 .layer-switcher button {
     height: 1.375em;
@@ -93,10 +93,15 @@ margin: 0 2px;
 /* Cookieconsent */
 
 .cc_container {
-    height: $navbar-height;
-    background: rgba($navbar-inverse-bg, 0.9);
-    color: $navbar-inverse-color;
-    border-color: $navbar-inverse-border;
+    //height: $navbar-height;
+    //font-size: 90%;
+    //padding: 5px 30px;
+    //background: rgba($navbar-inverse-bg, 1);
+    //color: $navbar-inverse-color;
+    //border-color: $navbar-inverse-border;
+    background: $state-info-bg;
+    color: $state-info-text;
+    border-color: $state-info-border;
     .cc_btn,
     .cc_btn:visited {
         color: $btn-primary-color;
@@ -104,15 +109,26 @@ margin: 0 2px;
     }
 }
 
+.cc_container .cc_btn {
+    //padding: 4px 5px;
+}
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $screen-sm) {
 .cc_container {
-    padding: 8px 30px 9px;
+
 }
 }
+
 
 /* Zeroclipboard */
 
 .zeroclipboard-is-hover {
 
+}
+
+
+/* Webfont loader */
+
+html:not(.wf-materialicons-n4-active) .material-icons {
+    display: none;
 }

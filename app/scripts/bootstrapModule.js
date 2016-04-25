@@ -370,6 +370,30 @@ var bootstrapModule = (function () {
 
 
     /**
+     * Prevent URL hash display with internal links
+     * @public
+     */
+    var hideHashOnShown = function () {
+
+        if ($().tab) {
+            var $tabs = $(settings.tab.toggleSelector);
+            $tabs.on('shown.bs.tab', function () {
+                commonsModule.hideHash();
+            });
+        }
+
+        if ($().modal) {
+            var $modals = $(settings.modal.modalSelector);
+            $modals.on('shown.bs.modal', function () {
+                commonsModule.hideHash();
+            });
+        }
+
+    };
+
+
+
+    /**
      * Document ready
      */
     $(function () {
@@ -389,7 +413,8 @@ var bootstrapModule = (function () {
         settings: settings,
         restoreActiveTab: restoreActiveTab,
         restoreActiveModal: restoreActiveModal,
-        tooltip: tooltip
+        tooltip: tooltip,
+        hideHashOnShown: hideHashOnShown
     };
 
 })();

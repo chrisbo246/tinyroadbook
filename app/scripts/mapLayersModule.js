@@ -77,8 +77,18 @@ var mapLayersModule = (function () {
     var inputLayerSource = function (layer, selector) {
         var $el = $(selector);
         if ($el && layer) {
+
+            var url = $.trim($el.val());
+            if (url) {
+                layer.setProperties({
+                    source: new ol.source.OSM({
+                        url: url
+                    })
+                });
+            }
+
             $el.on('change', function () {
-                var url = $.trim($el.val());
+                url = $.trim($el.val());
                 if (url) {
                     layer.setProperties({
                         visible: true,
@@ -92,6 +102,7 @@ var mapLayersModule = (function () {
                     });
                 }
             });
+
         }
     };
 
@@ -324,6 +335,17 @@ var mapLayersModule = (function () {
             })
         });
     };
+    layers.googleMap = function () {
+        return new ol.layer.Tile({
+            name: 'googleMap',
+            title: 'Road map<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            type: 'base',
+            source: new ol.source.XYZ({
+                crossOrigin: 'anonymous', // Important
+                url: 'http://mt1.google.com/vt/lyrs=m@285235804&hl=en&x={x}&y={y}&z={z}&s=1'
+            })
+        });
+    };
     layers.googleTerrain = function () {
         return new ol.layer.Tile({
             name: 'googleTerrain',
@@ -331,7 +353,8 @@ var mapLayersModule = (function () {
             type: 'base',
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
-                url: 'http://mts0.google.com/maps//vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                url: 'http://mts1.google.com/vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                //url: 'http://mts0.google.com/maps//vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
@@ -343,7 +366,8 @@ var mapLayersModule = (function () {
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
                 //resolutions: [9784, 2446, 1223, 76.44, 9.55, 2.39],
-                url: 'http://khms0.google.com/maps//kh/v=165&src=app&x={x}&y={y}&z={z}&s=1'
+                url: 'https://www.google.se/maps/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m2!1e1!3i198!4e0'
+                //url: 'http://khms0.google.com/maps//kh/v=165&src=app&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
@@ -481,6 +505,19 @@ var mapLayersModule = (function () {
             })*/
         });
     };
+    layers.mapsForFreeRelief = function () {
+        return new ol.layer.Tile({
+            name: 'mapsForFreeRelief',
+            title: 'Relief<small> (by <a href="http://www.maps-for-free.com">maps-for-free.com</a>)</small>',
+            type: 'base',
+            maxZoom: 11,
+            source: new ol.source.XYZ({
+                urls: [
+                    'http://www.maps-for-free.com/layer/relief/z{z}/row{y}/{z}_{x}-{y}.jpg'
+                ]
+            })
+        });
+    };
     /*
     // Err
     layers.stamenBurningMap = function () {
@@ -531,7 +568,20 @@ var mapLayersModule = (function () {
                 //  ol.source.OSM.ATTRIBUTION
                 //],
                 crossOrigin: 'anonymous',
-                url: 'http://mts0.google.com/maps//vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                url: 'http://mts0.google.com/vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                //url: 'http://mts0.google.com/maps//vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+            })
+        });
+    };
+    layers.googleHybrid = function () {
+        return new ol.layer.Tile({
+            name: 'googleHybrid',
+            title: 'Roads + labels<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            visible: true,
+            opacity: 1,
+            source: new ol.source.XYZ({
+                crossOrigin: 'anonymous',
+                url: 'http://mt1.google.com/vt/lyrs=h@239000000&hl=en&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
@@ -548,7 +598,7 @@ var mapLayersModule = (function () {
         return new ol.layer.Tile({
             name: 'lonviaCycling',
             title: 'Cycling roads<small> (by <a href="http://www.waymarkedtrails.org">Lonvia</a>)</small>',
-            opacity: 0.7,
+            opacity: 0.6,
             source: new ol.source.OSM({
                 attributions: [
                     new ol.Attribution({
@@ -570,7 +620,7 @@ var mapLayersModule = (function () {
         return new ol.layer.Tile({
             name: 'lonviaHiking',
             title: 'Hiking paths<small> (by <a href="http://www.waymarkedtrails.org">Lonvia</a>)</small>',
-            opacity: 0.7,
+            opacity: 0.6,
             source: new ol.source.OSM({
                 attributions: [
                     new ol.Attribution({
@@ -610,8 +660,26 @@ var mapLayersModule = (function () {
             })
         });
     };
-
-
+    layers.mapsForFreeWater = function () {
+        return new ol.layer.Tile({
+            name: 'mapsForFreeWater',
+            title: 'Water<small> (by <a href="http://www.maps-for-free.com">maps-for-free.com</a>)</small>',
+            opacity: 0.7,
+            source: new ol.source.XYZ({
+                url: 'http://www.maps-for-free.com/layer/water/z{z}/row{y}/{z}_{x}-{y}.gif'
+            })
+        });
+    };
+    layers.mapsForFreeAdmin = function () {
+        return new ol.layer.Tile({
+            name: 'mapsForFreeAdmin',
+            title: 'Admin<small> (by <a href="http://www.maps-for-free.com">maps-for-free.com</a>)</small>',
+            opacity: 0.3,
+            source: new ol.source.XYZ({
+                url: 'http://www.maps-for-free.com/layer/admin/z{z}/row{y}/{z}_{x}-{y}.gif'
+            })
+        });
+    };
 
     /**
      *
@@ -753,8 +821,8 @@ var mapLayersModule = (function () {
             }),
             style: new ol.style.Style({
                 stroke: new ol.style.Stroke({
-                    color: 'rgba(51, 122, 183, 0.7)',
-                    width: 3
+                    color: 'rgba(50, 255, 0, 0.6)',
+                    width: 5
                 })
             })
         });

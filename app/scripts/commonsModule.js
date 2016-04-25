@@ -35,9 +35,21 @@ var commonsModule = (function () {
             fieldsSelector: '[data-parsley-id]',
             formsSelector: '[data-parsley-validate]'
         },
-        googleFonts: {
-            fontFamilies: ['Material+Icons'],
-            webfontVersion: '1.5.18'
+        webFontLoader: {
+            version: '1.6.16',
+            config: {
+                google: {
+                    families: ['Material+Icons']
+                }
+                //loading: function() {},
+                //active: function() {
+                //    //toogleMaterialDesignIconVisibility('show');
+                //},
+                //inactive: function() {},
+                //fontloading: function(familyName, fvd) {},
+                //fontactive: function(familyName, fvd) {},
+                //fontinactive: function(familyName, fvd) {}
+            }
         },
         materialDesign: {
             iconsSelector: '.material-icons'
@@ -73,8 +85,8 @@ var commonsModule = (function () {
         },
         swal: {
             resetWarning: {
-                title: 'Reset all?',
-                text: 'This will erase your roadbook, reset settings and delete all local data stored by this application.\nDo you really want to continue?',
+                title: 'Reset everything?',
+                text: 'This will erase your roadbook, reset settings and delete all local data stored by this application.',
                 type: 'warning',
                 confirmButtonText: 'Yes reset',
                 cancelButtonText: 'No stop !',
@@ -103,44 +115,49 @@ var commonsModule = (function () {
     /**
      * Search ad containers in given block and insert ad
      * @private
-     * @param {string} selector - Div selector from where to start ad block search
-     * @param {string} settings - Adsense settings
+     * @param {string} [selector="body"] - Div selector from where to start ad block search
      */
     var insertAdsenseAds = function (selector) {
 
-        var $block = $(selector);
-        if (!$block) {
-            $block = $('body');
-        }
+        selector = selector || 'body';
 
-        console.log('Search for visible ads in ' + selector + ' block');
-        // Search for visible ads
-        $block.find(settings.adsense.containers).filter(':visible').each(function (i, container) {
-            var $container = $(container);
+        var $ads = $(selector).find(settings.adsense.containers).filter(':not([data-adsbygoogle-status])');
+        var $ad;
+        console.log($ads.length + ' uninitialized ad(s) found in ' + selector);
 
-            // Inset missing attributs
-            if (!$container.attr('data-adsbygoogle-status')) {
-                if (!$container.attr('data-ad-client')) {
-                    $container.attr('data-ad-client', settings.adsense.adClient);
+        $ads.each(function (i, ad) {
+            $ad = $(ad);
+            if ($ad.parents(':not(:visible)').length === 0) {
+                if (!$ad.attr('data-ad-client')) {
+                    $ad.attr('data-ad-client', settings.adsense.adClient);
                 }
-                if (!$container.attr('data-ad-slot')) {
-                    $container.attr('data-ad-slot', settings.adsense.adSlot);
+                if (!$ad.attr('data-ad-slot')) {
+                    $ad.attr('data-ad-slot', settings.adsense.adSlot);
                 }
-                if (!$container.attr('data-ad-format')) {
-                    $container.attr('data-ad-format', settings.adsense.adFormat);
+                if (!$ad.attr('data-ad-format')) {
+                    $ad.attr('data-ad-format', settings.adsense.adFormat);
                 }
+                console.log('Adsense attributs added to', '#' + $ad.attr('id'));
+                //setTimeout(function () {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    console.log('#' + $ad.attr('id') + ' ad initialised with attributs ', $ad.data());
+                //}, 4000);
+            } else {
+                console.log('#' + $ad.attr('id') + ' ad is in a hidden container and cannot be initialized now');
             }
-
-            // Initialize ad
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            console.log('#' + $container.attr('id') + ' ad initialised in ' + selector, $container.data());
-
         });
+
+        // Initialize ads
+        /*$ads.each(function (i, ad) {
+            var $ad = $(ad);
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            console.log('#' + $ad.attr('id') + ' ad initialised with attributs ', $ad.data());
+        });*/
 
         // Initialize hidden ads when a pane is opened for the first time
-        bootstrapModule.oneShownHiddenTab(selector, function (paneId) {
-            insertAdsenseAds(paneId);
-        });
+        //bootstrapModule.oneShownHiddenTab(selector, function (paneId) {
+        //    insertAdsenseAds(paneId);
+        //});
         //insertAdsInHiddenPanes(selector, settings.adsense);
 
     };
@@ -169,24 +186,29 @@ var commonsModule = (function () {
 
 
     /**
-     * Find ad blocks, add missing attributs and initialise ads
+     * Load the Google Adsense library and add a adsbygoogle-status-done class to the html tag
      * @public
-     * @param {object} [options] - Adsense config
      */
-    var adsense = function (options) {
-
-        $.extend(true, settings.adsense, options);
-
-        //$(function () {
-        //    $('body').append('<!-- Google Adsense -->'
-        //        + '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
-        //});
+    var adsense = function () {
 
         $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
             console.log('Google Adsense library loaded');
-            $(window).on('load', function () {
-                insertAdsenseAds('body', settings);
-            });
+            $('html').addClass('adsbygoogle-status-done');
+
+            /*$(window).on('load', function () {
+                if (callback) {
+                    callback(selector, insertAdsenseAds(selector));
+                } else {
+                    insertAdsenseAds(selector)
+                }
+                var $ads = $('.adsbygoogle').filter('[data-adsbygoogle-status="done"]');
+                if ($ads.length) {
+                    $('html').addClass('adsbygoogle-status-done');
+                } else {
+                    console.warn('Ad is not initialized');
+                }
+            });*/
+
         });
 
     };
@@ -464,10 +486,10 @@ var commonsModule = (function () {
      * @private
      * @param {Object} settings - See defaults
      */
-    var toogleMaterialDesignIconVisibility = function (state) {
+    /*var toogleMaterialDesignIconVisibility = function (state) {
 
-        if (settings.googleFonts.fontFamilies && settings.googleFonts.fontFamilies.length) {
-            $.each(settings.googleFonts.fontFamilies, function (i, fontName) {
+        if (settings.webFontLoader.config.google && settings.webFontLoader.config.google.length) {
+            $.each(settings.webFontLoader.config.google, function (i, fontName) {
                 if (fontName.match(/Material[+ ]Icons/gi)) {
                     var $icons = $(settings.materialDesign.iconsSelector);
                     if (state) {
@@ -482,7 +504,7 @@ var commonsModule = (function () {
             });
         }
 
-    };
+    };*/
 
 
 
@@ -492,28 +514,21 @@ var commonsModule = (function () {
      * @public
      * @param {Object} settings - See defaults
      */
-    var loadGoogleFonts = function (options) {
+    var loadWebFonts = function (options) {
 
         $.extend(true, settings.googleFonts, options);
 
         // WebFontConfig must be defined globally at the top of this file
         window.WebFontConfig = {};
         // Define the webfont loader config
-        $.extend(true, window.WebFontConfig, {
-            google: {
-                families: settings.googleFonts.fontFamilies
-            },
-            active: function () {
-                toogleMaterialDesignIconVisibility('show');
-            }
-        });
+        $.extend(true, window.WebFontConfig, settings.webFontLoader.config);
 
         (function (d) {
             // Hide material design icons until font was loaded
-            toogleMaterialDesignIconVisibility('hide');
+            //toogleMaterialDesignIconVisibility('hide');
             // Append the font loader script to the body
             var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/' + settings.googleFonts.webfontVersion + '/webfont.js';
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/' + settings.webFontLoader.version + '/webfont.js';
             s.parentNode.insertBefore(wf, s);
         })(document);
 
@@ -765,6 +780,46 @@ var commonsModule = (function () {
 
 
     /**
+     * Prevent URL hash display with internal links
+     * @public
+     */
+    var hideHash = function () {
+
+        var hash = location.hash.replace('#', '');
+        if(hash !== '') {
+            location.hash = '';
+        }
+
+    };
+
+
+
+    /**
+     * Prevent URL hash display with internal links
+     * @public
+     * @param {String} [selector='body'] - Container selector
+     */
+    var hideHashOnClick = function (selector) {
+
+        var $container = $(selector || 'body');
+        var $link;
+
+        if ($container) {
+            $container.find('a[href^="#"]').each(function (i, el) {
+                $link = $(this);
+                console.log('Watching internal links clicks', $(el).attr('href'));
+                $link.on('click', function (e) {
+                    hideHash();
+                    console.log('URL hash hidden', e.currentTarget.hash);
+                });
+            });
+        }
+
+    };
+
+
+
+    /**
      * Apply all
      * @public
      */
@@ -772,7 +827,7 @@ var commonsModule = (function () {
         // Show a lot of information in console
         debug();
         // Load Google fonts asynchronously (+ Material design icons)
-        loadGoogleFonts();
+        loadWebFonts();
         // Initialize Adsense ads in hidden tabs
         adsense();
         // Save input values to a data attribute (used for live reset)
@@ -793,16 +848,19 @@ var commonsModule = (function () {
     return {
         init: init,
         adsense: adsense,
+        insertAdsenseAds: insertAdsenseAds,
         basil: basil,
         debug: debug,
         disableUnsupported: disableUnsupported,
-        loadGoogleFonts: loadGoogleFonts,
+        loadWebFonts: loadWebFonts,
         parallax: parallax,
         storeForms: storeForms,
         reader: reader,
         resetButton: resetButton,
         scrollTo: scrollTo,
         storeHash: storeHash,
+        hideHash: hideHash,
+        hideHashOnClick: hideHashOnClick,
         restoreHash: restoreHash,
         fixInputValues: fixInputValues,
         resetInputValues: resetInputValues
