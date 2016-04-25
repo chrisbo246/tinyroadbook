@@ -537,7 +537,8 @@ $gutter: $grid-gutter-width;
 
 .ad_container {
     //z-index: $zindex-navbar - 1;
-    z-index: $zindex-navbar-fixed;
+    //z-index: $zindex-navbar-fixed;
+    z-index: 1030;
     overflow: hidden;
 }
 .adsbygoogle-status-done .ad_container {
