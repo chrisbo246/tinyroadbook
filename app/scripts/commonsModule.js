@@ -104,7 +104,7 @@ var commonsModule = (function () {
         }
     };
 
-
+    var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
 
     if (typeof Basil === 'function') {
         var basil = new window.Basil(settings.basil);
@@ -191,7 +191,7 @@ var commonsModule = (function () {
      */
     var adsense = function () {
 
-        $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+        $.getScript(protocol + '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
             console.log('Google Adsense library loaded');
             $('html').addClass('adsbygoogle-status-done');
 

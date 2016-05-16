@@ -531,13 +531,12 @@ $screen-lg:                  1200px
 
 /* Advert ------------------------------------------------------------------ */
 
-
-
 $gutter: $grid-gutter-width;
 $ad-gutter: $grid-gutter-width;
 
 .ad_container {
     z-index: $zindex-navbar-fixed;
+    z-index: 1030;
     overflow: hidden;
     background: $body-bg;
 }

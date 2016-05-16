@@ -88,7 +88,7 @@ var appModule = function () {
         /*eslint-enable camelcase*/
 
         // Load the Addthis widget library
-        //$.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
+        //$.getScript('https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
         //    console.log('Addthis widget library loaded');
 
         // Watch roadbook editor changes

@@ -6,10 +6,10 @@
 
 /* Bootstrap (fix) */
 
-$zindex-tooltip: 1070;
-.tooltip {
-    z-index: $zindex-tooltip !important;
-}
+//$zindex-tooltip: 1070;
+//.tooltip {
+//    z-index: $zindex-tooltip !important;
+//}
 
 
 /* ol3 */
@@ -102,13 +102,16 @@ margin: 0 2px;
     //background: rgba($navbar-inverse-bg, 1);
     //color: $navbar-inverse-color;
     //border-color: $navbar-inverse-border;
+    width: 100%;
     background: $state-info-bg;
     color: $state-info-text;
     border-color: $state-info-border;
+    border-radius: 0;
     .cc_btn,
     .cc_btn:visited {
         color: $btn-primary-color;
         background-color: $btn-primary-bg;
+        float: right;
     }
 }
 
@@ -117,9 +120,9 @@ margin: 0 2px;
 }
 
 @media screen and (min-width: $screen-sm) {
-.cc_container {
+    .cc_container {
 
-}
+    }
 }
 
 
