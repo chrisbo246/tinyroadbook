@@ -15,7 +15,7 @@ var geocodeModule = (function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var protocol = window.location.protocol || 'http:';
+    var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
 
 
 

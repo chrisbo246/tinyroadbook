@@ -22,6 +22,8 @@ var mapLayersModule = function () {
         }
     };
 
+    var protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+
     var layers = {};
 
     /**
@@ -137,12 +139,12 @@ var mapLayersModule = function () {
     layers.openStreetMap = function () {
         return new ol.layer.Tile({
             name: 'openStreetMap',
-            title: 'Road Map<small> (by <a href="http://www.openstreetmap.org">OpenStreetMap</a>)</small>', // (offline)
+            title: 'Road Map<small> (by <a href="https://www.openstreetmap.org">OpenStreetMap</a>)</small>', // (offline)
             visible: true,
             type: 'base',
             source: new ol.source.OSM({
                 // crossOrigin: null,
-                urls: ['http://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                urls: [protocol + '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 //'../../Datas/Tiles/osm_mapnik/{z}/{x}/{y}.png'
                 ]
             })
@@ -165,13 +167,13 @@ var mapLayersModule = function () {
     layers.openStreetMapHumanitarian = function () {
         return new ol.layer.Tile({
             name: 'openStreetMapHumanitarian',
-            title: 'Humanitarian <small>(by <a href="http://www.openstreetmap.org">OpenStreetMap</a>)</small>',
+            title: 'Humanitarian <small>(by <a href="https://www.openstreetmap.org">OpenStreetMap</a>)</small>',
             type: 'base',
             source: new ol.source.OSM({
                 attributions: [new ol.Attribution({
                     html: 'All maps &copy; ' + '<a href="http://www.openstreetmap.fr/">OpenStreetMap</a>'
                 }), ol.source.OSM.ATTRIBUTION],
-                url: 'http://tile-{a-c}.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                url: protocol + '//tile-{a-c}.openstreetmap.fr/hot/{z}/{x}/{y}.png'
             })
         });
     };
@@ -268,68 +270,68 @@ var mapLayersModule = function () {
     layers.arcgis = function () {
         return new ol.layer.Tile({
             name: 'arcgis',
-            title: 'Terrain<small> (by <a href="http://services.arcgisonline.com">ArcGIS</a>)</small>',
+            title: 'Terrain<small> (by <a href="https://services.arcgisonline.com">ArcGIS</a>)</small>',
             type: 'base',
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
                 attributions: [new ol.Attribution({
-                    html: 'Tiles &copy; <a href="http://services.arcgisonline.com/ArcGIS/' + 'rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
+                    html: 'Tiles &copy; <a href="https://services.arcgisonline.com/ArcGIS/' + 'rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
                 })],
-                url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' + 'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                url: protocol + '//server.arcgisonline.com/ArcGIS/rest/services/' + 'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
             })
         });
     };
     layers.arcgisRestHighwayUSA = function () {
         return new ol.layer.Tile({
             name: 'arcgisRestHighwayUSA',
-            title: 'Highway USA<small> (by <a href="http://services.arcgisonline.com">ArcGIS</a>)</small>',
+            title: 'Highway USA<small> (by <a href="https://services.arcgisonline.com">ArcGIS</a>)</small>',
             type: 'base',
             extent: [-13884991, 2870341, -7455066, 6338219],
             source: new ol.source.TileArcGISRest({
-                url: 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/' + 'ESRI_StateCityHighway_USA/MapServer'
+                url: protocol + '//sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/' + 'ESRI_StateCityHighway_USA/MapServer'
             })
         });
     };
     layers.googleMap = function () {
         return new ol.layer.Tile({
             name: 'googleMap',
-            title: 'Road map<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            title: 'Road map<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             type: 'base',
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
-                url: 'http://mt1.google.com/vt/lyrs=m@285235804&hl=en&x={x}&y={y}&z={z}&s=1'
+                url: protocol + '//mt1.google.com/vt/lyrs=m@285235804&hl=en&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
     layers.googleTerrain = function () {
         return new ol.layer.Tile({
             name: 'googleTerrain',
-            title: 'Terrain + labels<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            title: 'Terrain + labels<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             type: 'base',
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
-                url: 'http://mts1.google.com/vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
-                //url: 'http://mts0.google.com/maps//vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                url: protocol + '//mts1.google.com/vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                //url: protocol + '//mts0.google.com/maps//vt/lyrs=t@132,r@285000000&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
     layers.googleSatellite = function () {
         return new ol.layer.Tile({
             name: 'googleSatellite',
-            title: 'Aerial view<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            title: 'Aerial view<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             type: 'base',
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous', // Important
                 //resolutions: [9784, 2446, 1223, 76.44, 9.55, 2.39],
-                url: 'https://www.google.se/maps/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m2!1e1!3i198!4e0'
-                //url: 'http://khms0.google.com/maps//kh/v=165&src=app&x={x}&y={y}&z={z}&s=1'
+                url: protocol + '//www.google.se/maps/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m2!1e1!3i198!4e0'
+                //url: protocol + '//khms0.google.com/maps//kh/v=165&src=app&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
     layers.bingRoad = function () {
         return new ol.layer.Tile({
             name: 'bingRoad',
-            title: 'Road map<small> (by <a href="http://www.bing.com/maps/">Bing</a>)</small>',
+            title: 'Road map<small> (by <a href="https://www.bing.com/maps/">Bing</a>)</small>',
             type: 'base',
             maxZoom: 19,
             source: new ol.source.BingMaps({
@@ -341,7 +343,7 @@ var mapLayersModule = function () {
     layers.bingAerial = function () {
         return new ol.layer.Tile({
             name: 'bingAerial',
-            title: 'Aerial view<small> (by <a href="http://www.bing.com/maps/">Bing</a>)</small>',
+            title: 'Aerial view<small> (by <a href="https://www.bing.com/maps/">Bing</a>)</small>',
             type: 'base',
             maxZoom: 19,
             source: new ol.source.BingMaps({
@@ -353,7 +355,7 @@ var mapLayersModule = function () {
     layers.bingAerialWithLabels = function () {
         return new ol.layer.Tile({
             name: 'bingAerialWithLabels',
-            title: 'Aerial view with labels<small> (by <a href="http://www.bing.com/maps/">Bing</a>)</small>',
+            title: 'Aerial view with labels<small> (by <a href="https://www.bing.com/maps/">Bing</a>)</small>',
             type: 'base',
             maxZoom: 19,
             source: new ol.source.BingMaps({
@@ -365,7 +367,7 @@ var mapLayersModule = function () {
     layers.bingCollinsBart = function () {
         return new ol.layer.Tile({
             name: 'bingCollinsBart',
-            title: 'CollinsBart<small> (by <a href="http://www.bing.com/maps/">Bing</a>)</small>',
+            title: 'CollinsBart<small> (by <a href="https://www.bing.com/maps/">Bing</a>)</small>',
             type: 'base',
             maxZoom: 19,
             source: new ol.source.BingMaps({
@@ -377,7 +379,7 @@ var mapLayersModule = function () {
     layers.bingOrdnanceSurvey = function () {
         return new ol.layer.Tile({
             name: 'bingOrdnanceSurvey',
-            title: 'OrdnanceSurvey<small> (by <a href="http://www.bing.com/maps/">Bing</a>)</small>',
+            title: 'OrdnanceSurvey<small> (by <a href="https://www.bing.com/maps/">Bing</a>)</small>',
             type: 'base',
             maxZoom: 19,
             source: new ol.source.BingMaps({
@@ -510,31 +512,25 @@ var mapLayersModule = function () {
     layers.googleBike = function () {
         return new ol.layer.Tile({
             name: 'googleBike',
-            title: 'Cycling roads<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            title: 'Cycling roads<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             visible: true,
             opacity: 1,
             source: new ol.source.XYZ({
-                //attributions: [
-                //  new ol.Attribution({
-                //    html: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-                //  }),
-                //  ol.source.OSM.ATTRIBUTION
-                //],
                 crossOrigin: 'anonymous',
-                url: 'http://mts0.google.com/vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
-                //url: 'http://mts0.google.com/maps//vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                url: protocol + '//mts0.google.com/vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
+                //url: protocol + '//mts0.google.com/maps//vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
     layers.googleHybrid = function () {
         return new ol.layer.Tile({
             name: 'googleHybrid',
-            title: 'Roads + labels<small> (by <a href="http://www.google.com/maps/">Google</a>)</small>',
+            title: 'Roads + labels<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             visible: true,
             opacity: 1,
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous',
-                url: 'http://mt1.google.com/vt/lyrs=h@239000000&hl=en&x={x}&y={y}&z={z}&s=1'
+                url: protocol + '//mt1.google.com/vt/lyrs=h@239000000&hl=en&x={x}&y={y}&z={z}&s=1'
             })
         });
     };
@@ -554,7 +550,7 @@ var mapLayersModule = function () {
             opacity: 0.6,
             source: new ol.source.OSM({
                 attributions: [new ol.Attribution({
-                    html: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+                    html: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
                 }), ol.source.OSM.ATTRIBUTION],
                 crossOrigin: null,
                 url: 'http://tile.lonvia.de/cycling/{z}/{x}/{y}.png'
@@ -573,7 +569,7 @@ var mapLayersModule = function () {
             opacity: 0.6,
             source: new ol.source.OSM({
                 attributions: [new ol.Attribution({
-                    html: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+                    html: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
                 }), ol.source.OSM.ATTRIBUTION],
                 crossOrigin: null,
                 url: 'http://tile.lonvia.de/hiking/{z}/{x}/{y}.png'

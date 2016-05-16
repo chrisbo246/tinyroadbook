@@ -536,11 +536,8 @@ $screen-lg:                  1200px
 $gutter: $grid-gutter-width;
 $ad-gutter: $grid-gutter-width;
 
-//.adsbygoogle-status-done
 .ad_container {
-    //z-index: $zindex-navbar - 1;
-    //z-index: $zindex-navbar-fixed;
-    z-index: 1030;
+    z-index: $zindex-navbar-fixed;
     overflow: hidden;
     background: $body-bg;
 }
