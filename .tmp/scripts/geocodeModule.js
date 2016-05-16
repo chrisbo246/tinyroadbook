@@ -17,6 +17,8 @@ var geocodeModule = function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
+    var protocol = window.location.protocol || 'http:';
+
     /**
      * Geocode search using Openstreetmap Nominatim
      * @public
@@ -24,15 +26,21 @@ var geocodeModule = function () {
      * @param {string} query - Formated address
      * @return {Object} jqHXR
      */
-
     var nominatimSearch = function nominatimSearch(params, query) {
-        var url = 'http://nominatim.openstreetmap.org/search/' + encodeURI(query) + '?' + $.param(params);
-        console.log(url);
+
+        console.time('Nominatim geocoding complete');
+
+        var url = protocol + '//nominatim.openstreetmap.org/search/' + encodeURI(query) + '?' + $.param(params);
+        console.log('Nominatim geocoding request', url);
+
         return $.ajax({
-            url: url,
-            error: function error(jqxhr, status, _error) {
-                console.warn(status, _error);
-            }
+            url: url
+        }).done(function (json) {
+            console.log('Nominatim geocoding result', JSON.stringify(json));
+        }).fail(function () {
+            console.warn('Nominatim geocoding failed');
+        }).always(function () {
+            console.timeEnd('Nominatim geocoding complete');
         });
     };
 
@@ -46,7 +54,7 @@ var geocodeModule = function () {
 
         console.time('Nominatim reverse geocoding complete');
 
-        var url = 'http://nominatim.openstreetmap.org/reverse?' + $.param(params);
+        var url = protocol + '//nominatim.openstreetmap.org/reverse?' + $.param(params);
         console.log('Nominatim reverse geocoding request', url);
 
         return $.ajax({

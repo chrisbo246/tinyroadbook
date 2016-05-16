@@ -186,7 +186,19 @@ var styleModule = (function () {
      * @public
      */
     var init = function () {
+
+        // Import the roadbook css in style tag
+        /*$.get('styles/roadbook.css', function(data) {
+
+          $('#roadbook_style').html(data);
+          console.log('Roadbook style imported');
+
+          initEditor();
+
+        });*/
+
         initEditor();
+
     };
 
 

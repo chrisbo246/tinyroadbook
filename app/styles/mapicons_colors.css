@@ -1,0 +1,260 @@
+
+@media screen, print {
+
+    .roadbook [data-icon="accommodation_alpinehut"],
+    .roadbook [data-icon="accommodation_bed_and_breakfast"],
+    .roadbook [data-icon="accommodation_camping"],
+    .roadbook [data-icon="accommodation_caravan_park"],
+    .roadbook [data-icon="accommodation_hotel"],
+    .roadbook [data-icon="accommodation_hotel2"],
+    .roadbook [data-icon="accommodation_shelter"],
+    .roadbook [data-icon="accommodation_shelter2"],
+    .roadbook [data-icon="accommodation_youth_hostel"] {
+        color: #0092da;
+    }
+
+    .roadbook [data-icon="amenity_bench"],
+    .roadbook [data-icon="amenity_court"],
+    .roadbook [data-icon="amenity_firestation"],
+    .roadbook [data-icon="amenity_firestation2"],
+    .roadbook [data-icon="amenity_firestation3"],
+    .roadbook [data-icon="amenity_fountain"],
+    .roadbook [data-icon="amenity_information"],
+    .roadbook [data-icon="amenity_library"],
+    .roadbook [data-icon="amenity_police"],
+    .roadbook [data-icon="amenity_police2"],
+    .roadbook [data-icon="amenity_post_box"],
+    .roadbook [data-icon="amenity_post_office"],
+    .roadbook [data-icon="amenity_prison"],
+    .roadbook [data-icon="amenity_recycling"],
+    .roadbook [data-icon="amenity_survey_point"],
+    .roadbook [data-icon="amenity_telephone"],
+    .roadbook [data-icon="amenity_toilets"],
+    .roadbook [data-icon="amenity_toilets_disabled"],
+    .roadbook [data-icon="amenity_toilets_men"],
+    .roadbook [data-icon="amenity_toilets_women"],
+    .roadbook [data-icon="amenity_waste_bin"] {
+        color: #734a08;
+    }
+
+    .roadbook [data-icon="barrier_bollard"],
+    .roadbook [data-icon="barrier_enterance"],
+    .roadbook [data-icon="barrier_gate"],
+    .roadbook [data-icon="barrier_lift_gate"],
+    .roadbook [data-icon="barrier_stile"],
+    .roadbook [data-icon="barrier_toll_booth"] {
+        color: #666666;
+    }
+
+    .roadbook [data-icon="education_nursery"],
+    .roadbook [data-icon="education_school"],
+    .roadbook [data-icon="education_university"] {
+        color: #39ac39;
+    }
+
+    .roadbook [data-icon="food_bar"],
+    .roadbook [data-icon="food_cafe"],
+    .roadbook [data-icon="food_drinkingtap"],
+    .roadbook [data-icon="food_fastfood"],
+    .roadbook [data-icon="food_fastfood2"],
+    .roadbook [data-icon="food_pub"],
+    .roadbook [data-icon="food_restaurant"] {
+        color: #734a08;
+    }
+
+    .roadbook [data-icon="health_dentist"],
+    .roadbook [data-icon="health_doctors"],
+    .roadbook [data-icon="health_hospital"],
+    .roadbook [data-icon="health_hospital_emergency"],
+    .roadbook [data-icon="health_hospital_emergency2"],
+    .roadbook [data-icon="health_opticians"],
+    .roadbook [data-icon="health_pharmacy"],
+    .roadbook [data-icon="health_pharmacy_dispensing"],
+    .roadbook [data-icon="health_veterinary"] {
+        color: #da0092;
+    }
+
+    .roadbook [data-icon="landuse_coniferous"],
+    .roadbook [data-icon="landuse_coniferous_and_deciduous"],
+    .roadbook [data-icon="landuse_deciduous"],
+    .roadbook [data-icon="landuse_grass"],
+    .roadbook [data-icon="landuse_grasssvg"],
+    .roadbook [data-icon="landuse_hills"],
+    .roadbook [data-icon="landuse_quary"],
+    .roadbook [data-icon="landuse_scrub"],
+    .roadbook [data-icon="landuse_swamp"] {
+        color: #999999;
+    }
+
+    .roadbook [data-icon="money_atm"],
+    .roadbook [data-icon="money_atm2"],
+    .roadbook [data-icon="money_bank"],
+    .roadbook [data-icon="money_bank2"],
+    .roadbook [data-icon="money_currency_exchange"] {
+        color: #000000;
+    }
+
+    .roadbook [data-icon="place_of_worship"],
+    .roadbook [data-icon="place_of_worship_bahai"],
+    .roadbook [data-icon="place_of_worship_bahai3"],
+    .roadbook [data-icon="place_of_worship_buddhist"],
+    .roadbook [data-icon="place_of_worship_buddhist3"],
+    .roadbook [data-icon="place_of_worship_christian"],
+    .roadbook [data-icon="place_of_worship_christian3"],
+    .roadbook [data-icon="place_of_worship_hindu"],
+    .roadbook [data-icon="place_of_worship_hindu3"],
+    .roadbook [data-icon="place_of_worship_islamic"],
+    .roadbook [data-icon="place_of_worship_islamic3"],
+    .roadbook [data-icon="place_of_worship_jain"],
+    .roadbook [data-icon="place_of_worship_jain3"],
+    .roadbook [data-icon="place_of_worship_jewish"],
+    .roadbook [data-icon="place_of_worship_jewish3"],
+    .roadbook [data-icon="place_of_worship_shinto"],
+    .roadbook [data-icon="place_of_worship_shinto3"],
+    .roadbook [data-icon="place_of_worship_sikh"],
+    .roadbook [data-icon="place_of_worship_sikh3"],
+    .roadbook [data-icon="place_of_worship_unknown3"] {
+        color: #000000;
+    }
+
+    .roadbook [data-icon="poi_boundary_administrative"],
+    .roadbook [data-icon="poi_bunker"],
+    .roadbook [data-icon="poi_cave"],
+    .roadbook [data-icon="poi_embassy"],
+    .roadbook [data-icon="poi_embassy2"],
+    .roadbook [data-icon="poi_military_bunker"],
+    .roadbook [data-icon="poi_mine"],
+    .roadbook [data-icon="poi_mine_abandoned"],
+    .roadbook [data-icon="poi_peak"],
+    .roadbook [data-icon="poi_place_city"],
+    .roadbook [data-icon="poi_place_town"],
+    .roadbook [data-icon="poi_place_village"],
+    .roadbook [data-icon="poi_point_of_interest"],
+    .roadbook [data-icon="poi_tower_communications"],
+    .roadbook [data-icon="poi_tower_power"],
+    .roadbook [data-icon="poi_tower_water"] {
+        color: #000000;
+    }
+
+    .roadbook [data-icon="shopping_alcohol"],
+    .roadbook [data-icon="shopping_bakery"],
+    .roadbook [data-icon="shopping_bicycle"],
+    .roadbook [data-icon="shopping_book"],
+    .roadbook [data-icon="shopping_butcher"],
+    .roadbook [data-icon="shopping_car"],
+    .roadbook [data-icon="shopping_car_repair"],
+    .roadbook [data-icon="shopping_clothes"],
+    .roadbook [data-icon="shopping_confectionery"],
+    .roadbook [data-icon="shopping_convenience"],
+    .roadbook [data-icon="shopping_diy"],
+    .roadbook [data-icon="shopping_estateagent"],
+    .roadbook [data-icon="shopping_estateagent2"],
+    .roadbook [data-icon="shopping_estateagent3"],
+    .roadbook [data-icon="shopping_fish"],
+    .roadbook [data-icon="shopping_garden_centre"],
+    .roadbook [data-icon="shopping_gift"],
+    .roadbook [data-icon="shopping_greengrocer"],
+    .roadbook [data-icon="shopping_hairdresser"],
+    .roadbook [data-icon="shopping_hifi"],
+    .roadbook [data-icon="shopping_jewelry"],
+    .roadbook [data-icon="shopping_laundrette"],
+    .roadbook [data-icon="shopping_mobile_phone"],
+    .roadbook [data-icon="shopping_motorcycle"],
+    .roadbook [data-icon="shopping_music"],
+    .roadbook [data-icon="shopping_pet"],
+    .roadbook [data-icon="shopping_pet2"],
+    .roadbook [data-icon="shopping_photo"],
+    .roadbook [data-icon="shopping_supermarket"],
+    .roadbook [data-icon="shopping_tackle"],
+    .roadbook [data-icon="shopping_video_rental"] {
+        color: #ac39ac;
+    }
+
+    .roadbook [data-icon="sport_archery"],
+    .roadbook [data-icon="sport_baseball"],
+    .roadbook [data-icon="sport_cricket"],
+    .roadbook [data-icon="sport_diving"],
+    .roadbook [data-icon="sport_golf"],
+    .roadbook [data-icon="sport_gym"],
+    .roadbook [data-icon="sport_gymnasium"],
+    .roadbook [data-icon="sport_gymnasium2"],
+    .roadbook [data-icon="sport_hillclimbing"],
+    .roadbook [data-icon="sport_horse_racing"],
+    .roadbook [data-icon="sport_iceskating"],
+    .roadbook [data-icon="sport_jetski"],
+    .roadbook [data-icon="sport_leisure_centre"],
+    .roadbook [data-icon="sport_motorracing"],
+    .roadbook [data-icon="sport_playground"],
+    .roadbook [data-icon="sport_sailing"],
+    .roadbook [data-icon="sport_skiing_crosscountry"],
+    .roadbook [data-icon="sport_skiing_downhill"],
+    .roadbook [data-icon="sport_snooker"],
+    .roadbook [data-icon="sport_soccer"],
+    .roadbook [data-icon="sport_swimming_indoor"],
+    .roadbook [data-icon="sport_swimming_outdoor"],
+    .roadbook [data-icon="sport_tennis"],
+    .roadbook [data-icon="sport_windsurfing"] {
+        color: #39ac39;
+    }
+
+    .roadbook [data-icon="tourist_archaeological"],
+    .roadbook [data-icon="tourist_archaeological2"],
+    .roadbook [data-icon="tourist_art_gallery"],
+    .roadbook [data-icon="tourist_art_gallery2"],
+    .roadbook [data-icon="tourist_battlefield"],
+    .roadbook [data-icon="tourist_beach"],
+    .roadbook [data-icon="tourist_casino"],
+    .roadbook [data-icon="tourist_castle"],
+    .roadbook [data-icon="tourist_cinema"],
+    .roadbook [data-icon="tourist_cinema2"],
+    .roadbook [data-icon="tourist_fountain"],
+    .roadbook [data-icon="tourist_memorial"],
+    .roadbook [data-icon="tourist_monument"],
+    .roadbook [data-icon="tourist_museum"],
+    .roadbook [data-icon="tourist_picnic"],
+    .roadbook [data-icon="tourist_ruin"],
+    .roadbook [data-icon="tourist_steam_train"],
+    .roadbook [data-icon="tourist_theatre"],
+    .roadbook [data-icon="tourist_view_point"],
+    .roadbook [data-icon="tourist_waterwheel"],
+    .roadbook [data-icon="tourist_windmill"],
+    .roadbook [data-icon="tourist_wreck"],
+    .roadbook [data-icon="tourist_zoo"] {
+        color: #734a08;
+    }
+
+    .roadbook [data-icon="transport_aerodrome"],
+    .roadbook [data-icon="transport_aerodrome2"],
+    .roadbook [data-icon="transport_airport"],
+    .roadbook [data-icon="transport_airport2"],
+    .roadbook [data-icon="transport_bus_station"],
+    .roadbook [data-icon="transport_bus_stop"],
+    .roadbook [data-icon="transport_bus_stop2"],
+    .roadbook [data-icon="transport_car_share"],
+    .roadbook [data-icon="transport_ford"],
+    .roadbook [data-icon="transport_fuel"],
+    .roadbook [data-icon="transport_fuel_lpg"],
+    .roadbook [data-icon="transport_lighthouse"],
+    .roadbook [data-icon="transport_marina"],
+    .roadbook [data-icon="transport_parking"],
+    .roadbook [data-icon="transport_parking_bicycle"],
+    .roadbook [data-icon="transport_parking_car"],
+    .roadbook [data-icon="transport_parking_car_paid"],
+    .roadbook [data-icon="transport_parking_disabled"],
+    .roadbook [data-icon="transport_parking_private"],
+    .roadbook [data-icon="transport_parking_private2"],
+    .roadbook [data-icon="transport_parking_private3"],
+    .roadbook [data-icon="transport_port"],
+    .roadbook [data-icon="transport_rental_bicycle"],
+    .roadbook [data-icon="transport_rental_car"],
+    .roadbook [data-icon="transport_roundabout_anticlockwise"],
+    .roadbook [data-icon="transport_roundabout_clockwise"],
+    .roadbook [data-icon="transport_taxi_rank"],
+    .roadbook [data-icon="transport_traffic_lights"],
+    .roadbook [data-icon="transport_train_station"],
+    .roadbook [data-icon="transport_train_station2"],
+    .roadbook [data-icon="transport_tram_stop"] {
+        color: #0093db;
+    }
+
+}

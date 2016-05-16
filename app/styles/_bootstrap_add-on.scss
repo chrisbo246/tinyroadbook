@@ -534,14 +534,14 @@ $screen-lg:                  1200px
 
 
 $gutter: $grid-gutter-width;
+$ad-gutter: $grid-gutter-width;
 
+//.adsbygoogle-status-done
 .ad_container {
     //z-index: $zindex-navbar - 1;
     //z-index: $zindex-navbar-fixed;
     z-index: 1030;
     overflow: hidden;
-}
-.adsbygoogle-status-done .ad_container {
     background: $body-bg;
 }
 
@@ -552,44 +552,44 @@ $gutter: $grid-gutter-width;
         left: 0;
         top: 0;
         height: 100%;
-        width: 120px;
+        width: 120px + $ad-gutter;
         //padding-top: $navbar-height;
     }
-    .adsbygoogle-status-done .container,
-    .adsbygoogle-status-done .container-fluid {
-        padding-left: 120px + floor(($gutter / 2));
+    .container,
+    .container-fluid {
+        padding-left: 120px + $ad-gutter + floor(($gutter / 2));
     }
 }
 /* Horizontal screen > 768px */
 @media (orientation: landscape) and (min-width: $screen-sm-min) {
     .ad_container {
-        width: 120px;
+        width: 120px + $ad-gutter;
     }
-    .adsbygoogle-status-done .container,
-    .adsbygoogle-status-done .container-fluid {
-        padding-left: 120px + floor(($gutter / 2));
+    .container,
+    .container-fluid {
+        padding-left: 120px + $ad-gutter + floor(($gutter / 2));
     }
 }
 /* Horizontal screen > 992px */
 @media (orientation: landscape) and (min-width: $screen-md-min) {
     .ad_container {
-        width: 160px;
+        width: 160px + $ad-gutter;
     }
-    .adsbygoogle-status-done .container,
-    .adsbygoogle-status-done .container-fluid {
-        padding-left: 160px + floor(($gutter / 2));
+    .container,
+    .container-fluid {
+        padding-left: 160px + $ad-gutter + floor(($gutter / 2));
     }
 }
 /* Horizontal screen > 1200px */
 @media (orientation: landscape) and (min-width: $screen-lg-min) {
     .ad_container {
-        //width: 300px;
-        width: 160px;
+        //width: 300px + $ad-gutter;
+        width: 160px + $ad-gutter;
     }
-    .adsbygoogle-status-done .container,
-    .adsbygoogle-status-done .container-fluid {
-        //padding-left: 300px + floor(($gutter / 2));
-        padding-left: 160px + floor(($gutter / 2));
+    .container,
+    .container-fluid {
+        //padding-left: 300px + $ad-gutter + floor(($gutter / 2));
+        padding-left: 160px + $ad-gutter + floor(($gutter / 2));
     }
 }
 
@@ -602,7 +602,7 @@ $gutter: $grid-gutter-width;
         width: 100%;
         height: 100px;
     }
-    .adsbygoogle-status-done body > .tab-content > .tab-pane > div:last-of-type {
+    body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 100px !important;
     }
 }
@@ -611,7 +611,7 @@ $gutter: $grid-gutter-width;
     .ad_container {
         height: 60px;
     }
-    .adsbygoogle-status-done body > .tab-content > .tab-pane > div:last-of-type {
+    body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 60px !important;
     }
 }
@@ -620,7 +620,7 @@ $gutter: $grid-gutter-width;
     .ad_container {
         height: 90px;
     }
-    .adsbygoogle-status-done body > .tab-content > .tab-pane > div:last-of-type {
+    body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 90px !important;
     }
 }
@@ -629,7 +629,7 @@ $gutter: $grid-gutter-width;
     .ad_container {
         height: 250px;
     }
-    .adsbygoogle-status-done body > .tab-content > .tab-pane > div:last-of-type {
+    body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 250px !important;
     }
 }

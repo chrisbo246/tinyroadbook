@@ -29,45 +29,285 @@ var roadbookModule = (function () {
         }
     };
 
+    /* Nominatim extratags that will be stored in a data attribute */
+    var allowedTags = [
+        'cuisine',
+        'place',
+        'population',
+        'religion',
+        'shop'
+    ];
+
+    var disallowedTags = [
+        'description',
+        'denomination',
+        'wikidata',
+        'wikipedia', // wikipedia:
+        'contact', // contact:
+        'website',
+        'opening_hours',
+        'drive_through',
+        'data-wheelchair'
+        //'phone',
+    ];
+
+    /*var poiCategories = {
+        'alpinehut': 'accommodation',
+        'bed_and_breakfast': 'accommodation',
+        'camping': 'accommodation',
+        'caravan_park': 'accommodation',
+        'chalet': 'accommodation',
+        'hostel': 'accommodation',
+        'hotel': 'accommodation',
+        'motel': 'accommodation',
+        'shelter': 'accommodation',
+        'youth_hostel': 'accommodation',
+        'bench': 'amenity',
+        'court': 'amenity',
+        'firestation': 'amenity',
+        'fountain': 'amenity',
+        'library': 'amenity',
+        'playground': 'amenity',
+        'police': 'amenity',
+        'post_box': 'amenity',
+        'post_office': 'amenity',
+        'prison': 'amenity',
+        'public_building': 'amenity',
+        'recycling': 'amenity',
+        'survey_point': 'amenity',
+        'telephone': 'amenity',
+        'toilets': 'amenity',
+        'toilets_disabled': 'amenity',
+        'toilets_men': 'amenity',
+        'toilets_women': 'amenity',
+        'town_hall': 'amenity',
+        'waste_bin': 'amenity',
+        'blocks': 'barrier',
+        'bollard': 'barrier',
+        'cattle_grid': 'barrier',
+        'cycle_barrier': 'barrier',
+        'entrance': 'barrier',
+        'exit': 'barrier',
+        'gate': 'barrier',
+        'kissing_gate': 'barrier',
+        'lift_gate': 'barrier',
+        'steps': 'barrier',
+        'stile': 'barrier',
+        'toll_booth': 'barrier',
+        'college': 'education',
+        'college_vocational': 'education',
+        'nursery': 'education',
+        'school': 'education',
+        'school_primary': 'education',
+        'school_secondary': 'education',
+        'university': 'education',
+        'bar': 'food',
+        'biergarten': 'food',
+        'cafe': 'food',
+        'drinkingtap': 'food',
+        'fastfood': 'food',
+        'fastfood_pizza': 'food',
+        'ice_cream': 'food',
+        'pizza': 'food',
+        'pub': 'food',
+        'restaurant': 'food',
+        'dentist': 'health',
+        'doctors': 'health',
+        'hospital': 'health',
+        'hospital_emergency': 'health',
+        'opticians': 'health',
+        'pharmacy': 'health',
+        'pharmacy_dispencing': 'health',
+        'veterinary': 'health',
+        'coniferous': 'landuse',
+        'coniferous_and_deciduous': 'landuse',
+        'deciduous': 'landuse',
+        'grass': 'landuse',
+        'hills': 'landuse',
+        'quary': 'landuse',
+        'scrub': 'landuse',
+        'swamp': 'landuse',
+        'atm': 'money',
+        'bank': 'money',
+        'currency_exchange': 'money',
+        'of_worship_bahai': 'place',
+        'of_worship_buddhist': 'place',
+        'of_worship_christian': 'place',
+        'of_worship_hindu': 'place',
+        'of_worship_islamic': 'place',
+        'of_worship_jain': 'place',
+        'of_worship_jewish': 'place',
+        'of_worship_shinto': 'place',
+        'of_worship_sikh': 'place',
+        'of_worship_unknown': 'place',
+        'boundary_administrative': 'poi',
+        'cave': 'poi',
+        'crane': 'poi',
+        'embassy': 'poi',
+        'military_bunker': 'poi',
+        'mine': 'poi',
+        'mine_abandoned': 'poi',
+        'mountain_pass': 'poi',
+        'peak': 'poi',
+        'place_city': 'poi',
+        'place_hamlet': 'poi',
+        'place_suburb': 'poi',
+        'place_town': 'poi',
+        'place_village': 'poi',
+        'point_of_interest': 'poi',
+        'tower_communications': 'poi',
+        'tower_lookout': 'poi',
+        'tower_power': 'poi',
+        'tower_water': 'poi',
+        'station_coal': 'power',
+        'station_gas': 'power',
+        'station_solar': 'power',
+        'station_water': 'power',
+        'station_wind': 'power',
+        'substation': 'power',
+        'tower_high': 'power',
+        'tower_low': 'power',
+        'transformer': 'power',
+        'alcohol': 'shopping',
+        'bakery': 'shopping',
+        'bicycle': 'shopping',
+        'book': 'shopping',
+        'butcher': 'shopping',
+        'car': 'shopping',
+        'car_repair': 'shopping',
+        'clothes': 'shopping',
+        'computer': 'shopping',
+        'confectionery': 'shopping',
+        'convenience': 'shopping',
+        'copyshop': 'shopping',
+        'department_store': 'shopping',
+        'diy': 'shopping',
+        'estateagent': 'shopping',
+        'fish': 'shopping',
+        'florist': 'shopping',
+        'garden_centre': 'shopping',
+        'gift': 'shopping',
+        'greengrocer': 'shopping',
+        'hairdresser': 'shopping',
+        'hearing_aids': 'shopping',
+        'hifi': 'shopping',
+        'jewelry': 'shopping',
+        'kiosk': 'shopping',
+        'laundrette': 'shopping',
+        'marketplace': 'shopping',
+        'mobile_phone': 'shopping',
+        'motorcycle': 'shopping',
+        'music': 'shopping',
+        'newspaper': 'shopping',
+        'pet': 'shopping',
+        'photo': 'shopping',
+        'supermarket': 'shopping',
+        'tackle': 'shopping',
+        'tobacco': 'shopping',
+        'toys': 'shopping',
+        'vending_machine': 'shopping',
+        'video_rental': 'shopping',
+        'archery': 'sport',
+        'baseball': 'sport',
+        'canoe': 'sport',
+        'cricket': 'sport',
+        'diving': 'sport',
+        'golf': 'sport',
+        'gym': 'sport',
+        'gymnasium': 'sport',
+        'hillclimbing': 'sport',
+        'horse_racing': 'sport',
+        'iceskating': 'sport',
+        'jetski': 'sport',
+        'leisure_centre': 'sport',
+        'minature_golf': 'sport',
+        'motorracing': 'sport',
+        //'playground': 'sport',
+        'sailing': 'sport',
+        'shooting': 'sport',
+        'skiing_crosscountry': 'sport',
+        'skiing_downhill': 'sport',
+        'snooker': 'sport',
+        'soccer': 'sport',
+        'stadium': 'sport',
+        'swimming_indoor': 'sport',
+        'swimming_outdoor': 'sport',
+        'tennis': 'sport',
+        'windsurfing': 'sport',
+        'archaeological': 'tourist',
+        'art_gallery': 'tourist',
+        'attraction': 'tourist',
+        'battlefield': 'tourist',
+        'beach': 'tourist',
+        'casino': 'tourist',
+        'castle': 'tourist',
+        'cinema': 'tourist',
+        'clock': 'tourist',
+        //'fountain': 'tourist',
+        'guidepost': 'tourist',
+        'information': 'tourist',
+        'map': 'tourist',
+        'memorial': 'tourist',
+        'monument': 'tourist',
+        'museum': 'tourist',
+        'picnic': 'tourist',
+        'ruin': 'tourist',
+        'steam_train': 'tourist',
+        'theatre': 'tourist',
+        'theme_park': 'tourist',
+        'view_point': 'tourist',
+        'waterwheel': 'tourist',
+        'wayside_cross': 'tourist',
+        'wayside_shrine': 'tourist',
+        'windmill': 'tourist',
+        'wreck': 'tourist',
+        'zoo': 'tourist',
+        'aerodrome': 'transport',
+        'airport': 'transport',
+        'airport_gate': 'transport',
+        'airport_terminal': 'transport',
+        'bus_station': 'transport',
+        'bus_stop': 'transport',
+        'car_share': 'transport',
+        'emergency_phone': 'transport',
+        'ford': 'transport',
+        'fuel': 'transport',
+        'fuel_lpg': 'transport',
+        'helicopter': 'transport',
+        'helicopter_pad': 'transport',
+        'lighthouse': 'transport',
+        'marina': 'transport',
+        'miniroundabout_anticlockwise': 'transport',
+        'miniroundabout_clockwise': 'transport',
+        'parking': 'transport',
+        'parking_bicycle': 'transport',
+        'parking_car': 'transport',
+        'parking_car_paid': 'transport',
+        'parking_disabled': 'transport',
+        'parking_private': 'transport',
+        'port': 'transport',
+        'rental_bicycle': 'transport',
+        'rental_car': 'transport',
+        'roundabout_anticlockwise': 'transport',
+        'roundabout_clockwise': 'transport',
+        'slipway': 'transport',
+        'speedbump': 'transport',
+        'subway': 'transport',
+        'taxi_rank': 'transport',
+        'traffic_lights': 'transport',
+        'train_station': 'transport',
+        'tram_stop': 'transport',
+        'turning_circle': 'transport',
+        'walking': 'transport',
+        'zebra_crossing': 'transport',
+        'dam': 'water',
+        'tower': 'water',
+        'weir': 'water'
+    };*/
+
     if (typeof Basil === 'function') {
         var basil = new window.Basil(settings.basil);
     }
-
-
-
-    /**
-     * Extract and filter the smallest place from the Nominatim result
-     * @private
-     * @param {Object} json - The Nominatim result
-     * @return {Object} Place data
-     */
-    /*var getNominatimPlace = function (json) {
-
-        var place = {
-            type: null,
-            name: {
-                local: null,
-                translated: null
-            }
-        };
-
-        if (json.address) {
-            $.each(json.address, function (k, v) {
-                place.type = k;
-                place.name.translated = v;
-                return false;
-            });
-        }
-
-        if (json.extratags) {
-            if (json.extratags.place) {
-                place.name.local = json.extratags.place;
-            }
-        }
-
-        return place;
-
-    };*/
 
 
 
@@ -113,176 +353,142 @@ var roadbookModule = (function () {
 
     /**
      * Add city name to the editor
-     * @private
+     * @public
      * @param {Object} json - The JSON object returned by Nominatim
+     * @param {String} [options] - Nominatim result override
      */
-    var insertCity = function (json) {
+    var insertNominatimResult = function (json, options) {
 
-        var formats = {span: true}, //, type: 'place'
+        var formats = {span: true},
             names = [],
             translation,
-            details = [];
+            text = '';
 
-        if (!json) {
-            return false;
+        json = $.extend(true, json || {}, options);
+        console.log('json', json);
+
+        // Add the longitude and latitude data attributes
+        if (json && json.lat && json.lon) {
+            formats.latitude = json.lat;
+            formats.longitude = json.lon;
         }
 
-
-        // Insert json as data attribut
-        //formats.nominatimReverse = JSON.stringify(json);
-
-        formats.latitude = json.lat;
-        formats.longitude = json.lon;
-
         // Retrieve the first and smallest place
-        if (json.address) {
+        if (json && json.address) {
             $.each(json.address, function (k, v) {
-                formats.place = k;
+                formats.addrType = k; //k.toLowerCase()
                 translation = v;
-                console.log('Smallest place', formats.place);
+                console.log('Detected type', formats.type);
                 return false;
             });
         }
 
-        if (json.extratags) {
+        if (json && json.extratags) {
             // Exponential population level
             if (json.extratags.population) {
-                formats.population = (Math.log(json.extratags.population)).toFixed(0);
+                formats.populationLevel = (Math.log(json.extratags.population)).toFixed(0);
             }
             // Administrative place level
             if (json.extratags.capital) {
                 formats.capital = json.extratags.capital;
             }
             // Place type
-            if (json.extratags.place) {
-                formats.place = json.extratags.place;
+            //if (json.extratags.place) {
+            //    formats.class = 'place';
+            //    formats.type = json.extratags.place.toLowerCase();
+            //}
+            // Add tag values to a data attribute
+            $.each(json.extratags, function (k, v) {
+                // If key look like "key:value", keep only the key
+                k = k.replace(/[:].*$/, ''); //k.split(':')[0];
+                // Exclude some tags
+                if ($.inArray(k, disallowedTags) === -1) {
+                    // If editor format is not defined, create it
+                    if ($.inArray(k, allowedTags) === -1) {
+                        allowedTags.push(k);
+                        editor.addFormat(k, {attribute: 'data-' + k});
+                    }
+                    formats[k] = v;
+                }
+            });
+        }
+
+        if (json && json.class) {
+            formats.class = json.class;
+        }
+
+        if (json && json.type) {
+            formats.type = json.type;
+        }
+
+        if (json && json.icon) {
+            var icon = json.icon.replace(/^.*\//g, '').replace(/\.[a-z]+\.[0-9]+\.png/i, '');
+            formats.icon = icon;
+        }
+
+        if (json && json.namedetails) {
+            // Add the local language name
+            if (json.namedetails.name) {
+                var array = $.map(json.namedetails.name.split(/(?:[\/,;:]| - )+/), $.trim);
+                $.merge(names, array);
             }
         }
 
-        if (json.namedetails) {
-
-            // Add the local language name
-            if (json.namedetails.name) {
-                var array = $.map(json.namedetails.name.split('/'), $.trim);
-                $.merge(names, array);
+        if (options) {
+            // If a custom name was provided, don't use the translation
+            if (options.namedetails && json.namedetails.name) {
+                //names.push(json.namedetails.name);
+                translation = null;
             }
+        }
 
+        // If no name was found, use the translation as alternative
+        if (!names.length && translation) {
+            names.push(translation);
+            translation = null;
         }
 
         // Insert text
         if (names.length > 0) {
 
+            // Delete user selected text
             deleteSelection();
 
-            var pos = getCaretPos(),
-                text = '';
+            // Get cursor position
+            var pos = getCaretPos();
 
-            // Insert city name
+            // Insert icon if exists
+            /*url = 'http://www.sjjb.co.uk/mapicons/png/' + poiCategories[formats.type] + '_' + formats.type + '.p.12.png';
+            editor.insertEmbed(pos, 'image', url, 'user');
+            pos = pos + 1;
+            editor.insertText(pos, separator, false, 'user');
+            pos = pos + separator.length;*/
+            /*$.ajax({
+                url: url,
+                dataType: 'text',
+                type: 'GET'
+            }).done(function () {
+                editor.insertEmbed(pos, 'image', url, 'user');
+                pos = pos + 1;
+                editor.insertText(pos, separator, false, 'user');
+                pos = pos + separator.length;
+            });*/
+
+            // Insert the name
+            console.log('Names', names);
             text = $.unique(names).shift();
             editor.insertText(pos, text, formats, 'user');
             pos = pos + text.length;
 
-            // Insert translations
-            if (translation && translation !== text) {
+            // Insert the translation
+            if (translation && translation !== text) { //&& !customName
                 text = separator;
                 editor.insertText(pos, text, false, 'user');
                 pos = pos + separator.length;
                 text = translation;
-                editor.insertText(pos, text, {span: true, type: 'translation'}, 'user');
+                editor.insertText(pos, text, {span: true, class: 'translation'}, 'user');
                 pos = pos + text.length;
             }
-
-            // Insert city details
-            if (details.length > 0) {
-                text = separator;
-                editor.insertText(pos, text, false, 'user');
-                pos = pos + separator.length;
-                text = ' ' + ($.unique(details).join(', '));
-                editor.insertText(pos, text, {
-                    'class': 'details'
-                }, 'user');
-                pos = pos + text.length;
-            }
-
-            editor.insertText(pos, separator, false, 'user');
-            pos = pos + separator.length;
-
-            // Move cursor after insertions
-            editor.setSelection(pos, pos, 'user');
-        } else {
-            console.log('Extracted data does not contain a city name.');
-        }
-
-    };
-
-
-
-    /**
-     * Add roqd name to the editor
-     * @public
-     * @param {Object} json - The JSON object returned by Nominatim
-     */
-    var insertRoad = function (json) {
-
-        var formats = {span: true, place: 'road'}, //, type: 'road'
-            $road = $('#road'),
-            name,
-            translation;
-
-        //if (json) {
-        //    return false;
-        //} else if ($road) {
-        if (!json && $road) {
-            // Use input value as default
-            name = $road.val();
-            // And also try to retrieve the json data stored in the data-nominatim-reverse attribut
-            json = $road.data('nominatim-reverse');
-            console.log('Restored road data', json);
-            //if (str) {
-            //    json = $.parseJSON(str);
-            //}
-        } //else {
-        //    return false;
-        //}
-
-        if (json) {
-
-            // Insert json as data attribut
-            //formats.nominatimReverse = JSON.stringify(json);
-
-            formats.latitude = json.lat;
-            formats.longitude = json.lon;
-
-            if (json.address) {
-                // Retrieve the first and smallest place
-                $.each(json.address, function (k, v) {
-                    formats.place = k;
-                    translation = v;
-                    console.log('Smallest place', formats.place);
-                    return false;
-                });
-            }
-
-            if (json.namedetails) {
-                name = name || json.namedetails.ref || json.namedetails.int_ref || json.namedetails.name || translation;
-            }
-
-        }
-
-
-        if (name) {
-
-            // Delete user selected text
-            deleteSelection();
-
-            // Get caret position
-            var pos = getCaretPos(),
-                text = '';
-
-            // Insert the road name
-            text = name;
-            editor.insertText(pos, text, formats, 'user');
-            pos = pos + text.length;
 
             // Insert a white space
             editor.insertText(pos, separator, false, 'user');
@@ -291,101 +497,13 @@ var roadbookModule = (function () {
             // Move cursor after insertions
             editor.setSelection(pos, pos, 'user');
 
-        }
-
-    };
-
-
-    /**
-     * Add a poi to the editor
-     * @private
-     * @param {Object} json - The JSON object returned by Nominatim
-     */
-    var insertPOI = function (json) {
-
-        var formats = {span: true}, //, type: 'poi'
-            name,
-            translation,
-            placeType;
-
-        if (!json) {
-            return false;
-        }
-
-        // Insert json as data attribut
-        //formats.nominatimReverse = JSON.stringify(json);
-
-        formats.latitude = json.lat;
-        formats.longitude = json.lon;
-
-        if (json.address) {
-            // Retrieve the first and smallest place
-            $.each(json.address, function (k, v) {
-                formats.place = k;
-                translation = v;
-                placeType = k;
-                if (k === 'road') {
-                    console.log('Place type refused', k);
-                    return false;
-                }
-                console.log('Smallest place', formats.place);
-                return false;
-            });
-        }
-
-        if (json.address) {
-            // Retrieve the first and smallest place
-            $.each(json.address, function (k, v) {
-                formats.place = k;
-                translation = v;
-                console.log('Smallest place', formats.place);
-                return false;
-            });
-        }
-
-        if (json.namedetails) {
-
-            // Add the local language name
-            if (json.namedetails.name) {
-                name = json.namedetails.name;
-            }
-
-        }
-
-        // Insert text
-        if (name && placeType) {
-
-            deleteSelection();
-
-            var pos = getCaretPos(),
-                text = '';
-
-            // Insert POI name
-            text = name;
-            editor.insertText(pos, text, formats, 'user');
-            pos = pos + text.length;
-
-            // Insert translations
-            if (translation && translation !== text) {
-                text = separator;
-                editor.insertText(pos, text, false, 'user');
-                pos = pos + separator.length;
-                text = translation;
-                editor.insertText(pos, text, {span: true, type: 'translation'}, 'user');
-                pos = pos + text.length;
-            }
-
-            // Add a space
-            editor.insertText(pos, separator, false, 'user');
-            pos = pos + separator.length;
-
-            // Move cursor after insertions
-            editor.setSelection(pos, pos, 'user');
+            console.log('Nominatim result inserted.');
         } else {
-            console.log('Extracted data does not contain a name.');
+            console.log('Nominatim result does not contain any valid place name.');
         }
 
     };
+
 
 
     /**
@@ -442,13 +560,12 @@ var roadbookModule = (function () {
      */
     var print = function () {
 
-        var htmlDoc = appModule.buildExport();
-        if (htmlDoc) {
+        appModule.buildExport().done(function(htmlDoc) {
             var printWin = window.open('', window.location.hostname, '');
             printWin.document.write(htmlDoc);
             printWin.print();
             printWin.close();
-        }
+        });
 
     };
 
@@ -481,15 +598,24 @@ var roadbookModule = (function () {
         //    timeout: 10000
         //});
 
-        editor.addFormat('span', {tag: 'span'});
-        editor.addFormat('type', {attribute: 'data-type'});
-        editor.addFormat('place', {attribute: 'data-place'});
-        editor.addFormat('population', {attribute: 'data-population'});
+        //editor.addFormat('place', {attribute: '[data-type'});
         editor.addFormat('capital', {attribute: 'data-capital'});
-        editor.addFormat('placeType', {attribute: 'data-place-type'});
+        editor.addFormat('class', {attribute: 'data-class'});
+        editor.addFormat('icon', {attribute: 'data-icon'});
         editor.addFormat('latitude', {attribute: 'data-latitude'});
         editor.addFormat('longitude', {attribute: 'data-longitude'});
         editor.addFormat('nominatimReverse', {attribute: 'data-nominatim-reverse'});
+        editor.addFormat('placeType', {attribute: '[data-type-type'});
+        editor.addFormat('populationLevel', {attribute: 'data-population-level'});
+        editor.addFormat('span', {tag: 'span'});
+        editor.addFormat('tagType', {attribute: 'data-tag-type'});
+        editor.addFormat('tagValue', {attribute: 'data-tag-value'});
+        editor.addFormat('type', {attribute: 'data-type'});
+        editor.addFormat('addrType', {attribute: 'data-addr-type'});
+
+        $.each(allowedTags, function(i, v) {
+            editor.addFormat(v, {attribute: 'data-' + v}); //.replace(/[_ ]/, '-')
+        });
 
         // Watch text changes
         // @param delta, source
@@ -561,13 +687,16 @@ var roadbookModule = (function () {
         // Watch the print button
         $('#print_roadbook').click(function (e) {
             e.preventDefault();
-            print(editor.getHTML());
+            print();
         });
 
         // Watch insert road button
         $('#insert_road').click(function (e) {
             e.preventDefault();
-            insertRoad();
+            var $input = $('#road');
+            var json = $input.data('nominatim-reverse');
+            var name = $input.val();
+            roadbookModule.insertNominatimResult(json, name);
         });
 
         // Watch the erase button
@@ -592,15 +721,7 @@ var roadbookModule = (function () {
                         timer: 3000,
                         showConfirmButton: false
                     });
-                }/* else {
-                    swal({
-                        title: 'Cancelled',
-                        text: 'Whew... you narrow escape!',
-                        type: 'error',
-                        timer: 3000,
-                        showConfirmButton: false
-                    });
-                }*/
+                }
             });
         });
 
@@ -645,9 +766,7 @@ var roadbookModule = (function () {
     return {
         getEditor: getEditor,
         init: init,
-        insertCity: insertCity,
-        insertRoad: insertRoad,
-        insertPOI: insertPOI,
+        insertNominatimResult: insertNominatimResult,
         replaceHtmlAlert: replaceHtmlAlert
     };
 

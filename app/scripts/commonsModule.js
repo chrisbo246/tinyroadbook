@@ -344,9 +344,9 @@ var commonsModule = (function () {
                 value = basil.get(id);
                 if (value !== null) {
                     if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') {
-                        $input.prop('checked', value);
+                        $input.prop('checked', value).trigger('change');
                     } else {
-                        $input.val(value);
+                        $input.val(value).trigger('change');
                     }
                     console.log('#' + id + ' value restored', value);
                 }
@@ -368,6 +368,7 @@ var commonsModule = (function () {
         });
 
     };
+
 
 
     /**
@@ -598,6 +599,7 @@ var commonsModule = (function () {
         console.log('location.hostname', location.hostname);
         console.log('document.location.hostname', document.location.hostname);
         console.log('window.location.hostname', window.location.hostname);
+        console.log('window.location.protocol', window.location.protocol);
         console.log('document.domain', document.domain);
         console.log('document.URL', document.URL);
         console.log('document.location.href', document.location.href);

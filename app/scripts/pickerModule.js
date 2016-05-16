@@ -1,5 +1,5 @@
 /*eslint-env browser, jquery */
-/*global geocodeModule, ol, roadbookModule */
+/*global geocodeModule, ol, roadbookModule, swal */
 /**
  * City picker module.
  * @module
@@ -7,6 +7,7 @@
  * @external geocodeModule
  * @external ol
  * @external roadbookModule
+ * @external swal
  * @return {Object} Public functions / variables
  */
 /*eslint-disable no-unused-vars*/
@@ -14,211 +15,161 @@ var pickerModule = (function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var zoomMin = 0;
-    var zoomMax = 20;
-    var zoomDelta = -2;
-    var pick = 'place';
-    var language = 'en';
-    var reverseGeolocationXhr;
+    var settings = {
+        allowedTypes: {
+            admin: ['country', 'state', 'state_district', 'county', 'island', 'islet'],
+            city: ['city', 'town', 'village'],
+            suburb: ['city_district', 'suburb', 'hamlet', 'locality', 'municipality', 'isolated_dwelling'],
+            road: [
+                'bike_route', 'bus-route-segment', 'fitness_trail', 'footway', 'historic_route', 'loc_route', 'master_route',
+                'nature trail', 'old_route', 'path', 'pedestrian', 'road', 'route', 'route', 'route-disabled', 'route-part',
+                'route-template', 'routeindex', 'routemaster', 'routerating', 'routetmp', 'route_fragments', 'route_link',
+                'route_master', 'route_rating', 'route_ref', 'route_section', 'runway', 'superroute', 'through_route',
+                'track', 'trail'
+            ],
+            poi: null,
+            various: ['country_code', 'postcode', 'house_number', 'neighbourhood']
 
-
-
-    /**
-     * Start listening clicks on the map
-     * @public
-     * @param {Object} map - OL3 map
-     */
-    var watchMapClick = function (map) {
-
-        // Watch map clicks
-        map.on('click', function (evt) {
-
-            var view = map.getView();
-            var position = evt.coordinate;
-            var projection = view.getProjection();
-
-            // Adjust extraction level
-            var zoom = view.getZoom();
-            console.log('Zoom', zoom);
-            console.log('zoomMin', zoomMin);
-            console.log('zoomMax', zoomMax);
-            console.log('zoomDelta', zoomDelta);
-            zoom = Math.min(Math.max((zoom + zoomDelta), zoomMin), zoomMax);
-            console.log('Extraction level', zoom);
-
-            // Define clicked coordinates
-            position = ol.proj.transform(position, projection.getCode(), 'EPSG:4326');
-
-            console.log('Picked', pick);
-
-            // Auto-insert the previous road before each insertion
-            var $el = $('#auto_insert_road');
-            if (pick !== 'road' && $el && $el.is(':checked')) {
-                roadbookModule.insertRoad();
-            }
-
-            // Stop an eventual previous request
-            if (reverseGeolocationXhr) {
-                reverseGeolocationXhr.abort();
-            }
-
-            // Reverse geocode clicked location
-            console.time('Reverse geocoding');
-            if (pick === 'place') {
-
-                reverseGeolocationXhr = getPlace(position, zoom);
-                reverseGeolocationXhr.done(function (json) {
-                        if (json.osm_type !== 'way') {
-                            roadbookModule.insertCity(json);
-                        } else {
-                            console.log('osm_type is not the required type', json.osm_type);
-                        }
-                    });
-
-            } else if (pick === 'road') {
-
-                reverseGeolocationXhr = getRoad(position);
-                reverseGeolocationXhr.done(function (json) {
-                        if (json.osm_type === 'way') {
-
-                            // Copy road name in the input field for a further use
-                            storeRoad(json);
-
-                            // Insert the road in the editor (if not in auto-insert mode)
-                            var $checkbox = $('#auto_insert_road');
-                            if ($checkbox && $checkbox.not(':checked')) {
-                                roadbookModule.insertRoad(json);
-                            }
-
-                        } else {
-                            console.log('osm_type is not the required type', json.osm_type);
-                        }
-                    });
-
-            } else {
-
-                reverseGeolocationXhr = getPOI(position);
-                reverseGeolocationXhr.done(function (json) {
-                        if (json.osm_type !== 'relation') {
-                            roadbookModule.insertPOI(json);
-                        } else {
-                            console.log('osm_type is not the required type', json.osm_type);
-                        }
-                    });
-
-            }
-            console.timeEnd('Reverse geocoding');
-
-            // Reset active button
-            var $input = $('#default_type');
-            if ($input) {
-                var $button = $('#pick_' + $input.val());
-                if ($button) {
-                    $button.trigger('click');
-                }
-            }
-
-        });
-
-        // On layer change, adjust zoom delta depending on selected base layer
-        // zoomDelta = -2;
+        },
+        disallowedTypes: {
+            various: ['address26', 'address29']
+        }
     };
+
+    //settings.allowedTypes.poi = settings.disallowedTypes.various;
+    settings.disallowedTypes.poi = [].concat.apply([], [
+        settings.allowedTypes.admin,
+        settings.allowedTypes.city,
+        settings.allowedTypes.suburb,
+        settings.allowedTypes.road,
+        settings.allowedTypes.various
+    ]);
+
+    var zoomMin = 0,
+        zoomMax = 21,
+        zoomDelta = -2,
+        pick = 'city',
+        language = 'en',
+        geolocationXhr,
+        clickCounter;
 
 
 
     /**
      * Use reverse geocode to define the name of the city at a given position
      * @private
-     * @param {object} position - Longitude, latitude at EPSG:4326 projection
-     * @param {integer} zoom - Zoom level used for extraction
-     * @return {Object} jqxhr
+     * @param {Object} json - The JSON object returned by Nominatim reverse geocode
+     * @param {Array} [allowedPlaceTypes] - Allowed place types
+     * @param {Array} [disallowedPlaceTypes] - Disallowed place types
      */
-    var getPlace = function (position, zoom) {
+    var getPlaceDetails = function (json, allowedPlaceTypes, disallowedPlaceTypes, options) {
+
+        if (!json.address) {
+            return json;
+        }
 
         var params = {
             format: 'json',
-            lon: position[0],
-            lat: position[1],
-            zoom: zoom,
-            'osm_type': 'relation',
+            limit: 1,
+            'polygon_svg': 0,
             addressdetails: 1,
             extratags: 1,
             namedetails: 1,
             'accept-language': language
         };
 
-        var $spinner = $('#map').find('.spinner');
-        $spinner.fadeIn();
+        if (options) {
+            $.extend(params, options);
+        }
 
-        return geocodeModule.nominatimReverse(params)
-            .always(function () {
-                $spinner.fadeOut();
+        // Build query
+        var query = [];
+
+        // Get the smallest valid place name
+        if (json.address) {
+
+            // Search the first allowed place types and use the name as query string
+            console.log('Search for an allowed place type in ', allowedPlaceTypes);
+            $.each(json.address, function (k, v) {
+                if ((!allowedPlaceTypes || $.inArray(k, allowedPlaceTypes) !== -1)
+                    && (!disallowedPlaceTypes || $.inArray(k, disallowedPlaceTypes) === -1)) {
+                    query.push(v);
+                    return false;
+                } else {
+                    // Remove the (first) disallowed values from params
+                    delete params[k];
+                }
             });
 
-    };
+            var street = [];
+            /*eslint-disable dot-notation*/
+            if (json.address['house_number']) {
+                street.push(json.address['house_number']);
+            }
+            /*eslint-enable dot-notation*/
+            if (json.address.road) {
+                street.push(json.address.road);
+            }
+            if (street.length > 0) {
+                params.street = street.join(' ');
+            }
+            if (json.address.city) {
+                params.city = json.address.city;
+            }
+            if (json.address.county) {
+                params.county = json.address.county;
+            }
+            if (json.address.state) {
+                params.state = json.address.state;
+            }
+            if (json.address.country) {
+                params.country = json.address.country;
+            }
+            if (json.address.postcode) {
+                params.postalcode = json.address.postcode;
+            }
 
+        }
 
-
-   /**
-     * Use reverse geocode to define the name of the road at a given position
-     * @private
-     * @param {object} position - Longitude, latitude at EPSG:4326 projection
-     * @return {Object} jqxhr
-     */
-    var getRoad = function (position) {
-
-        var params = {
-            format: 'json',
-            lon: position[0],
-            lat: position[1],
-            zoom: 21,
-            'osm_type': 'way',
-            addressdetails: 1,
-            extratags: 0,
-            namedetails: 1,
-            'accept-language': language
-        };
-
-        var $spinner = $('#map').find('.spinner');
-        $spinner.fadeIn();
-
-        return geocodeModule.nominatimReverse(params)
-            .always(function () {
-                $spinner.fadeOut();
-            });
+        return geocodeModule.nominatimSearch(params, query);
 
     };
 
 
 
     /**
-     * Use reverse geocode to define the name of the relation at a given position
+     * Check if the Nominatim result is of the good type
+     * else make a new request to get a more accurate result
      * @private
-     * @param {object} position - Longitude, latitude at EPSG:4326 projection
-     * @param {integer} zoom - Zoom level used for extraction
-     * @return {Object} jqxhr
+     * @param {Object} json - Nominatim result
+     * @param {Array} allowedPlaceTypes - Allowed place types
+     * @param {Array} disallowedPlaceTypes - Disallowed place types
+     * @return {Object} Deferred with new Nominatim result
      */
-    var getPOI = function (position) {
+    var filterNominatimResult = function (json, allowedPlaceTypes, disallowedPlaceTypes, options) {
 
-        var params = {
-            format: 'json',
-            lon: position[0],
-            lat: position[1],
-            zoom: 21,
-            'osm_type': 'node',
-            addressdetails: 1,
-            extratags: 1,
-            namedetails: 1,
-            'accept-language': language
-        };
+        var dfd = new $.Deferred();
 
-        var $spinner = $('#map').find('.spinner');
-        $spinner.fadeIn();
+        if (json && json.address) {
 
-        return geocodeModule.nominatimReverse(params)
-            .always(function () {
-                $spinner.fadeOut();
-            });
+            // Try a geolocation request with the reverse geolocation result
+            geolocationXhr = getPlaceDetails(json, allowedPlaceTypes, disallowedPlaceTypes, options);
+            geolocationXhr.done(function (json2) {
+                    if (json2.length > 0) {
+                        dfd.resolve(json2[0]);
+                    } else {
+                        dfd.resolve(json);
+                    }
+                });
+            geolocationXhr.fail(function () {
+                    dfd.resolve(json);
+                });
+
+        } else {
+            dfd.resolve(json);
+        }
+
+        return dfd;
 
     };
 
@@ -231,24 +182,32 @@ var pickerModule = (function () {
      */
     var storeRoad = function (json) {
 
-        var name, place;
+        var name;
+        var $input = $('#road');
+
+        if (!json || !$input) {
+            return false;
+        }
 
         // Check if this is really a road
-        if (json.address) {
+        if (json && json.address) {
+
+            var translation;
+
+            /*eslint-disable no-unused-vars*/
             $.each(json.address, function (k, v) {
-                place = k;
-                name = v;
+                translation = v;
                 return false;
             });
+            /*eslint-enable no-unused-vars*/
         }
 
         // Get the road number, else the road name
-        if (json.namedetails) {
-            name = json.namedetails.ref || json.namedetails.int_ref || json.namedetails.name;
+        if ((json && json.namedetails) || translation) {
+            name = json.namedetails.ref || json.namedetails.int_ref || json.namedetails.name || translation;
         }
 
-        var $input = $('#road');
-        if (name && place && $input) { //&& place === 'road'
+        if (name) {
 
             // If input is focused, insert the picked road at caret position
             if ($input.is(':focus')) {
@@ -257,11 +216,229 @@ var pickerModule = (function () {
                 name = content.substring(0, pos) + name + content.substring(pos);
             }
 
-            $input.val(name);
+            // Populate input field
             $input.attr('data-nominatim-reverse', JSON.stringify(json));
+            $input.val(name).trigger('change');
         }
 
     };
+
+
+
+    /**
+     * Start listening clicks on the map
+     * @public
+     * @param {Object} map - OL3 map
+     */
+    var watchMapClick = function (map) {
+
+        var $input;
+        var $spinner = $('#map').find('.spinner');
+
+        // Watch map clicks
+        map.on('singleclick', function (evt) {
+
+            console.log('Picked', pick);
+
+            // Adjust extraction level
+            var view = map.getView();
+            var zoom = view.getZoom();
+            console.log('Zoom', zoom);
+            //console.log('zoomMin', zoomMin);
+            //console.log('zoomMax', zoomMax);
+            //console.log('zoomDelta', zoomDelta);
+
+            // Define clicked coordinates
+            var position = evt.coordinate;
+            var projection = view.getProjection();
+            position = ol.proj.transform(position, projection.getCode(), 'EPSG:4326');
+            var lon = position[0];
+            var lat = position[1];
+
+            // Stop the previous geolocation task if user click too quickly
+            if (geolocationXhr) { //&& geolocationXhr.state() === 'pending'
+                console.log('Geolocation state', geolocationXhr.state());
+                geolocationXhr.abort();
+                $spinner.fadeOut();
+                /*if (clickCounter > 0) {
+                    swal({
+                        title: 'Slow down!',
+                        text: 'You made a second click before the previous application have been completed.',
+                        type: 'warning',
+                        timer: 2000
+                    });
+                }*/
+                clickCounter = 0;
+            }
+
+            // Reverse geocode clicked location
+            if (pick === 'admin') {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), 0), 9);
+
+                getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+                    .done(function (json) {
+                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                            .done(function (json2) {
+                                roadbookModule.insertNominatimResult(json2);
+                            });
+                    });
+
+            } else if (pick === 'city') {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), 10), 13);
+
+                getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+                    .done(function (json) {
+                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                            .done(function (json2) {
+                                roadbookModule.insertNominatimResult(json2);
+                            });
+                    });
+
+            } else if (pick === 'suburb') {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), 14), 15);
+
+                getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+                    .done(function (json) {
+                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                            .done(function (json2) {
+                                roadbookModule.insertNominatimResult(json2);
+                            });
+                    });
+
+            } else if (pick === 'road') {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), 16), 17);
+
+                getPlace(lon, lat, {'osm_type': 'way', zoom: zoom})
+                    .done(function (json) {
+
+                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                            .done(function (json2) {
+
+                                // Copy road name in the input field for a further use
+                                storeRoad(json2);
+
+                                // Insert the road in the editor (if not in auto-insert mode)
+                                var $checkbox = $('#auto_insert_road');
+                                if ($checkbox && !$checkbox.is(':checked')) {
+                                    $input = $('#road');
+                                    //var json = $input.data('nominatim-reverse');
+                                    var name = $input.val();
+                                    roadbookModule.insertNominatimResult(json2, {
+                                            address: {road: name},
+                                            namedetails: {name: name}
+                                        });
+                                }
+
+                            });
+
+                    });
+
+            } else if (pick === 'poi') {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), 18), 21);
+
+                getPlace(lon, lat, {'osm_type': 'node', zoom: zoom})
+                    .done(function (json) {
+                        filterNominatimResult(json, settings.allowedTypes[pick], settings.disallowedTypes[pick], {zoom: zoom})
+                            .done(function (json2) {
+                                roadbookModule.insertNominatimResult(json2);
+                            });
+                    });
+
+            } else {
+
+                $spinner.fadeIn();
+                clickCounter = clickCounter + 1;
+                zoom = Math.min(Math.max((zoom + zoomDelta), zoomMin), zoomMax);
+
+                getPlace(lon, lat, {zoom: zoom})
+                    .done(function (json) {
+                        roadbookModule.insertNominatimResult(json);
+                    });
+
+            }
+
+            // Stop the spinner and reduce the click counter once the geolocation task completed
+            if (geolocationXhr) {
+                geolocationXhr.always(function () {
+                        $spinner.fadeOut();
+                        clickCounter = clickCounter - 1;
+                    });
+            }
+
+            // Auto-insert the stored road before each insertion (excepted roads obviously)
+            var $el = $('#auto_insert_road');
+            if (pick !== 'road' && $el && $el.is(':checked')) {
+                $input = $('#road');
+                var storedjson = $input.data('nominatim-reverse');
+                var storedName = $input.val();
+                roadbookModule.insertNominatimResult(storedjson, {
+                        address: {road: storedName},
+                        namedetails: {name: storedName}
+                    });
+            }
+
+            // Reset active button
+            $input = $('#default_type');
+            if ($input) {
+                var $button = $('#pick_' + $input.val());
+                if ($button) {
+                    $button.trigger('click');
+                }
+            }
+
+        });
+
+    };
+
+
+
+    /**
+     * Use reverse geocode to define the name of the city at a given position
+     * @private
+     * @param {number} lon - Longitude
+     * @param {number} lat - Latitude
+     * @param {object} [options] - Longitude, latitude at EPSG:4326 projection
+     * @return {Object} jqxhr
+     */
+    var getPlace = function (lon, lat, options) {
+
+        var params = {
+            format: 'json',
+            lon: lon,
+            lat: lat,
+            //zoom: zoom,
+            //'osm_type': 'relation',
+            addressdetails: 1,
+            extratags: 1,
+            namedetails: 1,
+            'accept-language': language
+        };
+
+        console.log('getPlace options', options);
+        $.extend(params, options);
+
+        geolocationXhr = geocodeModule.nominatimReverse(params);
+
+        return geolocationXhr;
+
+    };
+
+
 
     /**
      * Document ready
@@ -290,7 +467,7 @@ var pickerModule = (function () {
         $spinner.hide();
 
         // Activate the default pick button
-        var $buttons = $('#pick_place, #pick_road, #pick_poi');
+        var $buttons = $('#pick_buttons').find('button');
         $buttons.filter('[data-type="' + pick + '"]').addClass('active');
 
         // Watch pick buttons clicks

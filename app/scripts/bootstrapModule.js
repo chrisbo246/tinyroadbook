@@ -394,6 +394,60 @@ var bootstrapModule = (function () {
 
 
     /**
+     * Data persistence inputs
+     * @public
+     */
+    var storeButtonState = function () {
+
+        if (typeof Basil === 'undefined') {
+            return false;
+        }
+
+        var basil = new window.Basil(settings.basil);
+
+        var $button, $buttons, value, id;
+
+        $('.btn').filter('[id]').each(function () {
+            $button = $(this);
+
+            // Restore button state if a stored value exists
+            id = $button.attr('id');
+            value = basil.get(id);
+            if (value !== null) {
+                if (value && !$button.hasClass('active')) {
+                    $button.trigger('click');
+                } else {
+                    $button.removeClass('active');
+                }
+                console.log('#' + id + ' button click fired', value);
+            }
+
+            // Store changes
+            $button.on('click', function () {
+
+                // If the button is in a button group, reset all stored values
+                $buttons = $button.parent('.btn-group').find('.btn').filter('[id]');
+                if (!$buttons.length) {
+                    $buttons = $(this);
+                }
+
+                $buttons.each(function () {
+                    $button = $(this);
+                    value = $button.hasClass('active');
+                    id = $button.attr('id');
+                    basil.set(id, value);
+                    console.log('#' + id + ' button state stored', value);
+                });
+
+            });
+
+        });
+
+    };
+
+
+
+    /**
      * Document ready
      */
     $(function () {
@@ -413,6 +467,7 @@ var bootstrapModule = (function () {
         settings: settings,
         restoreActiveTab: restoreActiveTab,
         restoreActiveModal: restoreActiveModal,
+        storeButtonState: storeButtonState,
         tooltip: tooltip,
         hideHashOnShown: hideHashOnShown
     };

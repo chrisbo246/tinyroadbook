@@ -33,6 +33,7 @@ var appModule = function () {
     'use strict';
 
     var mapMod1;
+    var mapIconsStyle;
 
     // Start debugging
     commonsModule.debug();
@@ -121,14 +122,18 @@ var appModule = function () {
     var buildExport = function buildExport() {
 
         var htmlDoc = '';
+        var dfd = new $.Deferred();
+
         var roadbookEditor = roadbookModule.getEditor();
         var styleEditor = styleModule.getEditor();
 
-        if (roadbookEditor && styleEditor) {
-            htmlDoc = '<html>\n' + '<head>\n' + '<title>' + window.location.hostname + '</title>\n' + '<meta charset="UTF-8">\n' + '<style>\n' + styleEditor.getText() + '\n' + '</style>\n' + '</head>\n' + '<body>\n' + '<div class="roadbook">\n' + roadbookEditor.getHTML() + '\n' + '</div>\n' + '</body>\n' + '</html>';
+        if (roadbookEditor && styleEditor && mapIconsStyle) {
+            htmlDoc = '<html>\n' + '<head>\n' + '<title>' + window.location.hostname + '</title>\n' + '<meta charset="UTF-8">\n' + '<style>\n' + styleEditor.getText() + '\n' + mapIconsStyle + '\n' + '</style>\n' + '</head>\n' + '<body>\n' + '<div class="roadbook">\n' + roadbookEditor.getHTML() + '\n' + '</div>\n' + '</body>\n' + '</html>';
+
+            dfd.resolve(htmlDoc);
         }
 
-        return htmlDoc;
+        return dfd;
     };
 
     /**
@@ -138,10 +143,11 @@ var appModule = function () {
      */
     var updateSaveLink = function updateSaveLink() {
 
-        var htmlDoc = buildExport();
-        if (htmlDoc) {
-            $('#save_roadbook').attr('href', 'data:text/html;base64, ' + Base64.encode(htmlDoc));
-        }
+        buildExport().done(function (htmlDoc) {
+            if (htmlDoc) {
+                $('#save_roadbook').attr('href', 'data:text/html;base64, ' + Base64.encode(htmlDoc));
+            }
+        });
     };
 
     /**
@@ -208,6 +214,7 @@ var appModule = function () {
         bootstrapModule.tab();
         bootstrapModule.modalTogglerAttributs();
         bootstrapModule.tooltip();
+        bootstrapModule.storeButtonState();
         console.timeEnd('Bootstrap module initialized');
 
         commonsModule.disableUnsupported();
@@ -224,7 +231,7 @@ var appModule = function () {
         // Try to define user language at the first connection
         var $input = $('#user_language');
         if ($input) {
-            $input.val(navigator.language || navigator.userLanguage);
+            $input.val(navigator.language || navigator.userLanguage).trigger('change');
             console.log('User language defined', $input.val());
         }
         // Then store / restore input values
@@ -263,6 +270,9 @@ var appModule = function () {
 
             // Initialize the picker module
             pickerModule.watchMapClick(mapMod1.map);
+
+            // On layer change, adjust zoom delta depending on selected base layer
+            // zoomDelta = -2;
 
             // Watch GPX file input changes
             $('#gpx_file').on('change', function (inputEvent) {
@@ -340,6 +350,12 @@ var appModule = function () {
                 $modal.modal('hide');
             });
         });*/
+
+        // Load icon styles if not already
+        $.get('styles/mapicons_spritesheet.css', function (data) {
+            mapIconsStyle = data;
+            updateSaveLink();
+        });
 
         // Update local tile url
         mapLayersModule.inputLayerSource(customBaseLayerLayer, '#base_layer_tile_server');

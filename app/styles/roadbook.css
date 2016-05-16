@@ -1,0 +1,962 @@
+@media screen, print {
+
+    /* Global -------------------------------------------------------------- */
+
+    .roadbook {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 28px;
+        color: #333;
+        background-color: #fff;
+    }
+
+    /* Paragraphs */
+    .roadbook div {
+        padding-bottom: 1em;
+    }
+
+    /* Separators */
+    .roadbook span:not(:first-of-type):not([data-type="translation"]) {
+        margin-left: 7px;
+    }
+
+    /* Translation */
+
+    .roadbook [data-type="translation"] {
+        font-size: .7em;
+        opacity: .5;
+        color: #000;
+    }
+    .roadbook [data-type="translation"]:before {
+        content: "(";
+    }
+    .roadbook [data-type="translation"]:after {
+        content: ")";
+    }
+
+
+    /* Place --------------------------------------------------------------- */
+
+    .roadbook [data-place="country"],
+    .roadbook [data-place="state"],
+    .roadbook [data-place="state_district"],
+    .roadbook [data-place="county"],
+    .roadbook [data-place="city"],
+    .roadbook [data-place="city_district"],
+    .roadbook [data-place="suburb"],
+    .roadbook [data-place="town"],
+    .roadbook [data-place="village"],
+    .roadbook [data-place="hamlet"],
+    .roadbook [data-place="locality"],
+    .roadbook [data-place="municipality"],
+    .roadbook [data-place="island"],
+    .roadbook [data-place="islet"],
+    .roadbook [data-place="neighbourhood"] {
+
+    }
+
+    /* Place type */
+
+    .roadbook [data-place="country"] {
+        color: #00f;
+    }
+    .roadbook [data-place="state"] {
+        color: #22f;
+    }
+    .roadbook [data-place="state_district"] {
+        color: #44f;
+    }
+    .roadbook [data-place="county"] {
+
+    }
+    .roadbook [data-place="city"] {
+
+    }
+    .roadbook [data-place="city_district"] {
+        color: #88f;
+    }
+    .roadbook [data-place="suburb"] {
+        color: #aaf;
+    }
+    .roadbook [data-place="town"] {
+
+    }
+    .roadbook [data-place="village"] {
+
+    }
+    .roadbook [data-place="hamlet"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="locality"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="municipality"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="island"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="islet"] {
+        color: #ccf;
+    }
+    .roadbook [data-place="neighbourhood"] {
+        color: #ccf;
+    }
+
+
+    /* Population level */
+
+    .roadbook [data-population="0"] {
+        font-size: .6em;
+    }
+    .roadbook [data-population="1"] {
+        font-size: .65em;
+    }
+    .roadbook [data-population="2"] {
+        font-size: .7em;
+    }
+    .roadbook [data-population="3"] {
+        font-size: .75em;
+    }
+    .roadbook [data-population="4"] {
+        font-size: .8em;
+    }
+    .roadbook [data-population="5"] {
+        font-size: .85em;
+    }
+    .roadbook [data-population="6"] {
+        font-size: .9em;
+    }
+    .roadbook [data-population="7"] {
+        font-size: 1em;
+    }
+    .roadbook [data-population="8"] {
+        font-size: 1.1em;
+    }
+    .roadbook [data-population="9"] {
+        font-size: 1.2em;
+    }
+    .roadbook [data-population="10"] {
+        font-size: 1.3em;
+    }
+    .roadbook [data-population="11"] {
+        font-size: 1.4em;
+    }
+    .roadbook [data-population="12"] {
+        font-size: 1.5em;
+    }
+    .roadbook [data-population="13"] {
+        font-size: 1.55em;
+    }
+    .roadbook [data-population="14"] {
+        font-size: 1.6em;
+    }
+    .roadbook [data-population="15"] {
+        font-size: 1.65em;
+    }
+    .roadbook [data-population="16"] {
+        font-size: 1.7em;
+    }
+    .roadbook [data-population="17"] {
+        font-size: 1.75em;
+    }
+    .roadbook [data-population="18"] {
+        font-size: 1.8em;
+    }
+    .roadbook [data-population="19"] {
+        font-size: 1.85em;
+    }
+    .roadbook [data-population="20"] {
+        font-size: 1.9em;
+    }
+    .roadbook [data-population="21"] {
+        font-size: 1.95em;
+    }
+
+    /* Capital & sub-level */
+
+    .roadbook [data-capital="yes"] {
+        color: #66f;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="0"] {
+        color: #44f;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="1"] {
+        color: #22f;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="2"] {
+        color: #00f;
+        font-weight: 800;
+    }
+    .roadbook [data-capital="3"] {
+        color: #00d;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="4"] {
+        color: #00b;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="5"] {
+        color: #009;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="6"] {
+        color: #007;
+        font-weight: 600;
+    }
+    .roadbook [data-capital="7"] {
+        color: #005;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="8"] {
+        color: #003;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="9"] {
+        color: #000;
+        font-weight: 400;
+    }
+    .roadbook [data-capital="10"] {
+        color: #000;
+        font-weight: 400;
+    }
+
+
+    /* Road style ---------------------------------------------------------- */
+
+    /* Global */
+    .roadbook [data-place="bike_route"],
+    .roadbook [data-place="bus-route-segment"],
+    .roadbook [data-place="footway"],
+    .roadbook [data-place="historic_route"],
+    .roadbook [data-place="loc_route"],
+    .roadbook [data-place="master_route"],
+    .roadbook [data-place="old_route"],
+    .roadbook [data-place="path"],
+    .roadbook [data-place="pedestrian"],
+    .roadbook [data-place="road"],
+    .roadbook [data-place="route"],
+    .roadbook [data-place="route"],
+    .roadbook [data-place="route-disabled"],
+    .roadbook [data-place="route-part"],
+    .roadbook [data-place="route-template"],
+    .roadbook [data-place="routeindex"],
+    .roadbook [data-place="routemaster"],
+    .roadbook [data-place="routerating"],
+    .roadbook [data-place="routetmp"],
+    .roadbook [data-place="route_fragments"],
+    .roadbook [data-place="route_link"],
+    .roadbook [data-place="route_master"],
+    .roadbook [data-place="route_rating"],
+    .roadbook [data-place="route_ref"],
+    .roadbook [data-place="route_section"],
+    .roadbook [data-place="runway"],
+    .roadbook [data-place="superroute"],
+    .roadbook [data-place="through_route"],
+    .roadbook [data-place="track"],
+    .roadbook [data-place="nature trail"],
+    .roadbook [data-place="fitness_trail"],
+    .roadbook [data-place="trail"] {
+        padding: 0.1em 0.4em;
+        font-size: .625em;
+        border: solid 1px;
+        opacity: 0.8;
+        font-weight: bold;
+        background-color: #55f;
+        color: #fff;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* Foot only */
+    .roadbook [data-place="runway"],
+    .roadbook [data-place="pedestrian"],
+    .roadbook [data-place="footway"],
+    .roadbook [data-place="old_route"],
+    .roadbook [data-place="path"],
+    .roadbook [data-place="track"],
+    .roadbook [data-place="nature trail"],
+    .roadbook [data-place="fitness_trail"],
+    .roadbook [data-place="trail"] {
+        background-color: #888;
+        color: #fff;
+    }
+
+    /* Transport only */
+    .roadbook [data-place="bus-route-segment"] {
+        color: #0092da;
+    }
+
+
+    /* POI colors (without icons) ------------------------------------------ */
+
+    /* Nature */
+    .roadbook [data-place="nature_reserve"],
+    .roadbook [data-place="garden"],
+    .roadbook [data-place="trailer_park"],
+    .roadbook [data-place="park"] {
+        font-size: 0.8em;
+        color: green;
+    }
+
+    /* Tourism */
+    .roadbook [data-place="viewpoint"],
+    .roadbook [data-place="arts_centre"],
+    .roadbook [data-place="artwork"] {
+        font-size: 0.8em;
+        color: #0092da;
+    }
+
+    /* Shopping */
+    .roadbook [data-place="market"],
+    .roadbook [data-place="shop"],
+    .roadbook [data-place="shopping"] {
+        font-size: 0.8em;
+        color: #ac39ac;
+    }
+
+    /* Food */
+    .roadbook [data-place="food_source"],
+    .roadbook [data-place="fast_food"] {
+        font-size: 0.8em;
+        color: #734a08;
+    }
+
+    /* Transport */
+    .roadbook [data-place="bicycle_parking"],
+    .roadbook [data-place="bus"],
+    .roadbook [data-place="bus_loop"],
+    .roadbook [data-place="controlled_parking_zone"],
+    .roadbook [data-place="motorcycle_parking"],
+    .roadbook [data-place="parking;fuel"],
+    .roadbook [data-place="parking_entrance"],
+    .roadbook [data-place="parking_fee"],
+    .roadbook [data-place="parking_space"],
+    .roadbook [data-place="parking_zone"],
+    .roadbook [data-place="public_transport"],
+    .roadbook [data-place="public_transport:stop_area"],
+    .roadbook [data-place="residents parking zone"],
+    .roadbook [data-place="residents parking"],
+    .roadbook [data-place="taxi"],
+    .roadbook [data-place="transport_network"],
+    .roadbook [data-place="tricycle_station"] {
+        font-size: 0.8em;
+        color: #0092da;
+    }
+
+    /* Medical */
+    .roadbook [data-place="medical_centre"] {
+        font-size: 0.8em;
+        color: #da0092;
+    }
+
+    /* Unclassified */
+    .roadbook [data-place="access"],
+    .roadbook [data-place="ackerland"],
+    .roadbook [data-place="addr:postcode"],
+    .roadbook [data-place="address"],
+    .roadbook [data-place="adjoint"],
+    .roadbook [data-place="administration"],
+    .roadbook [data-place="administrative"],
+    .roadbook [data-place="admin_centre"],
+    .roadbook [data-place="advertising"],
+    .roadbook [data-place="alm"],
+    .roadbook [data-place="ambulance_station"],
+    .roadbook [data-place="amenity"],
+    .roadbook [data-place="amu"],
+    .roadbook [data-place="anglehelper"],
+    .roadbook [data-place="animal_boarding"],
+    .roadbook [data-place="animal_breeding"],
+    .roadbook [data-place="animal_shelter"],
+    .roadbook [data-place="animal_training"],
+    .roadbook [data-place="anlage 334"],
+    .roadbook [data-place="ap_wifi"],
+    .roadbook [data-place="aqueduct"],
+    .roadbook [data-place="arbusto ornamental"],
+    .roadbook [data-place="archipelago"],
+    .roadbook [data-place="area"],
+    .roadbook [data-place="associated7eg"],
+    .roadbook [data-place="associatedaddres"],
+    .roadbook [data-place="associatedaddress"],
+    .roadbook [data-place="associatedblock"],
+    .roadbook [data-place="associatedparking"],
+    .roadbook [data-place="associatedstation"],
+    .roadbook [data-place="associatedstreet"],
+    .roadbook [data-place="associatedtrack"],
+    .roadbook [data-place="associated_address"],
+    .roadbook [data-place="associated_entrance"],
+    .roadbook [data-place="association"],
+    .roadbook [data-place="atm_network"],
+    .roadbook [data-place="audio"],
+    .roadbook [data-place="auditorium"],
+    .roadbook [data-place="baby_hatch"],
+    .roadbook [data-place="bbq"],
+    .roadbook [data-place="belvedere"],
+    .roadbook [data-place="beton"],
+    .roadbook [data-place="betriebsstelle"],
+    .roadbook [data-place="bicycle_rental"],
+    .roadbook [data-place="bicycle_repair_station"],
+    .roadbook [data-place="bike_sharing_stations"],
+    .roadbook [data-place="board"],
+    .roadbook [data-place="boat cruise"],
+    .roadbook [data-place="boathouse"],
+    .roadbook [data-place="boat_rental"],
+    .roadbook [data-place="boat_sharing"],
+    .roadbook [data-place="boat_storage"],
+    .roadbook [data-place="bogus:restriction"],
+    .roadbook [data-place="border"],
+    .roadbook [data-place="boudary"],
+    .roadbook [data-place="boundary"],
+    .roadbook [data-place="boundry"],
+    .roadbook [data-place="bridge"],
+    .roadbook [data-place="broadleaved"],
+    .roadbook [data-place="broad_leaved"],
+    .roadbook [data-place="brothel"],
+    .roadbook [data-place="bts"],
+    .roadbook [data-place="bui"],
+    .roadbook [data-place="buiding"],
+    .roadbook [data-place="buidling"],
+    .roadbook [data-place="building"],
+    .roadbook [data-place="buildingpart"],
+    .roadbook [data-place="buildings"],
+    .roadbook [data-place="builing"],
+    .roadbook [data-place="bundled_ways"],
+    .roadbook [data-place="bunker"],
+    .roadbook [data-place="bureau_de_change"],
+    .roadbook [data-place="business"],
+    .roadbook [data-place="canceled_restriction"],
+    .roadbook [data-place="canceled_route"],
+    .roadbook [data-place="canceled_route_master"],
+    .roadbook [data-place="canteen"],
+    .roadbook [data-place="care_home"],
+    .roadbook [data-place="carriageway"],
+    .roadbook [data-place="car_rental"],
+    .roadbook [data-place="car_sharing"],
+    .roadbook [data-place="car_wash"],
+    .roadbook [data-place="casa"],
+    .roadbook [data-place="cattle"],
+    .roadbook [data-place="cemetery"],
+    .roadbook [data-place="chain_store"],
+    .roadbook [data-place="chapel"],
+    .roadbook [data-place="charging_place"],
+    .roadbook [data-place="charging_station"],
+    .roadbook [data-place="childcare"],
+    .roadbook [data-place="church"],
+    .roadbook [data-place="church_hall"],
+    .roadbook [data-place="circuit"],
+    .roadbook [data-place="citymap_post"],
+    .roadbook [data-place="classement"],
+    .roadbook [data-place="classification"],
+    .roadbook [data-place="clinic"],
+    .roadbook [data-place="clone:height"],
+    .roadbook [data-place="closure"],
+    .roadbook [data-place="club"],
+    .roadbook [data-place="club_house"],
+    .roadbook [data-place="cluster"],
+    .roadbook [data-place="coast"],
+    .roadbook [data-place="collected_boundary"],
+    .roadbook [data-place="collection"],
+    .roadbook [data-place="commune"],
+    .roadbook [data-place="communications_transponder"],
+    .roadbook [data-place="communication_tower_group"],
+    .roadbook [data-place="community_center"],
+    .roadbook [data-place="community_centre"],
+    .roadbook [data-place="community_hall"],
+    .roadbook [data-place="complex_object"],
+    .roadbook [data-place="composite_attribute"],
+    .roadbook [data-place="compound"],
+    .roadbook [data-place="compressed_air"],
+    .roadbook [data-place="concert_hall"],
+    .roadbook [data-place="conference_centre"],
+    .roadbook [data-place="conifer"],
+    .roadbook [data-place="connectivity:lanes"],
+    .roadbook [data-place="construction"],
+    .roadbook [data-place="control"],
+    .roadbook [data-place="controlled_area"],
+    .roadbook [data-place="courthouse"],
+    .roadbook [data-place="coworking_space"],
+    .roadbook [data-place="craft"],
+    .roadbook [data-place="crematorium"],
+    .roadbook [data-place="curvature"],
+    .roadbook [data-place="customs"],
+    .roadbook [data-place="dancing_school"],
+    .roadbook [data-place="danger"],
+    .roadbook [data-place="date"],
+    .roadbook [data-place="deep_water_route"],
+    .roadbook [data-place="defaults"],
+    .roadbook [data-place="delimitation parcellaire"],
+    .roadbook [data-place="demolished:level_map"],
+    .roadbook [data-place="depth"],
+    .roadbook [data-place="designated_cluster"],
+    .roadbook [data-place="destination"],
+    .roadbook [data-place="destination:sign"],
+    .roadbook [data-place="destinationsign"],
+    .roadbook [data-place="destination_sign"],
+    .roadbook [data-place="destination_sing"],
+    .roadbook [data-place="development"],
+    .roadbook [data-place="direction"],
+    .roadbook [data-place="disabled:restriction"],
+    .roadbook [data-place="disc_golf"],
+    .roadbook [data-place="disc_golf_course"],
+    .roadbook [data-place="disputed:boundary"],
+    .roadbook [data-place="district"],
+    .roadbook [data-place="disused"],
+    .roadbook [data-place="disused:route"],
+    .roadbook [data-place="disused:route_master"],
+    .roadbook [data-place="disused_route"],
+    .roadbook [data-place="dive_centre"],
+    .roadbook [data-place="dog_bin"],
+    .roadbook [data-place="dog_waste_bin"],
+    .roadbook [data-place="dojo"],
+    .roadbook [data-place="domain awareness center"],
+    .roadbook [data-place="door"],
+    .roadbook [data-place="dormitory"],
+    .roadbook [data-place="draft"],
+    .roadbook [data-place="drinking_water"],
+    .roadbook [data-place="driving_school"],
+    .roadbook [data-place="dual_carriageway"],
+    .roadbook [data-place="duplicate-object"],
+    .roadbook [data-place="duplicated-object"],
+    .roadbook [data-place="education"],
+    .roadbook [data-place="election"],
+    .roadbook [data-place="election_set"],
+    .roadbook [data-place="emergency"],
+    .roadbook [data-place="emergency_service"],
+    .roadbook [data-place="enclosing"],
+    .roadbook [data-place="enforcement"],
+    .roadbook [data-place="ensemble"],
+    .roadbook [data-place="events_venue"],
+    .roadbook [data-place="exercise_point"],
+    .roadbook [data-place="exhibition_centre"],
+    .roadbook [data-place="exhibition_hall"],
+    .roadbook [data-place="facility"],
+    .roadbook [data-place="feeding_place"],
+    .roadbook [data-place="fence"],
+    .roadbook [data-place="ferry_terminal"],
+    .roadbook [data-place="fire district"],
+    .roadbook [data-place="fire_station"],
+    .roadbook [data-place="first_aid"],
+    .roadbook [data-place="fixme"],
+    .roadbook [data-place="food_court"],
+    .roadbook [data-place="foot"],
+    .roadbook [data-place="forest"],
+    .roadbook [data-place="funeral_home"],
+    .roadbook [data-place="future_multipolygon"],
+    .roadbook [data-place="gambling"],
+    .roadbook [data-place="game_feeding"],
+    .roadbook [data-place="garage"],
+    .roadbook [data-place="garages"],
+    .roadbook [data-place="gas"],
+    .roadbook [data-place="give_way"],
+    .roadbook [data-place="golf_club"],
+    .roadbook [data-place="golf_course"],
+    .roadbook [data-place="grave_yard"],
+    .roadbook [data-place="gravitational"],
+    .roadbook [data-place="greenhouse"],
+    .roadbook [data-place="grit_bin"],
+    .roadbook [data-place="group"],
+    .roadbook [data-place="gtfs_seg"],
+    .roadbook [data-place="guidepost_destination"],
+    .roadbook [data-place="hall"],
+    .roadbook [data-place="hazard"],
+    .roadbook [data-place="health"],
+    .roadbook [data-place="healthcare"],
+    .roadbook [data-place="health_centre"],
+    .roadbook [data-place="health_post"],
+    .roadbook [data-place="heath"],
+    .roadbook [data-place="heritage site"],
+    .roadbook [data-place="heritage"],
+    .roadbook [data-place="hierarchy"],
+    .roadbook [data-place="highway"],
+    .roadbook [data-place="highway_section"],
+    .roadbook [data-place="hiking"],
+    .roadbook [data-place="historic"],
+    .roadbook [data-place="historic:route"],
+    .roadbook [data-place="historic:superroute"],
+    .roadbook [data-place="historic:waterway"],
+    .roadbook [data-place="hospice"],
+    .roadbook [data-place="house"],
+    .roadbook [data-place="housing_collective"],
+    .roadbook [data-place="hunting_stand"],
+    .roadbook [data-place="inactive-summer-only-route"],
+    .roadbook [data-place="inner"],
+    .roadbook [data-place="institut"],
+    .roadbook [data-place="interchange"],
+    .roadbook [data-place="international_ngo"],
+    .roadbook [data-place="internet_cafe"],
+    .roadbook [data-place="itinerario"],
+    .roadbook [data-place="jggj"],
+    .roadbook [data-place="junction"],
+    .roadbook [data-place="karaoke_box"],
+    .roadbook [data-place="kindergarten"],
+    .roadbook [data-place="kitchen"],
+    .roadbook [data-place="kneipp_water_cure"],
+    .roadbook [data-place="label"],
+    .roadbook [data-place="lake"],
+    .roadbook [data-place="lan"],
+    .roadbook [data-place="land use"],
+    .roadbook [data-place="landmark"],
+    .roadbook [data-place="land_area"],
+    .roadbook [data-place="land_parcel"],
+    .roadbook [data-place="lane"],
+    .roadbook [data-place="lanelet"],
+    .roadbook [data-place="lane_assist"],
+    .roadbook [data-place="lane_group"],
+    .roadbook [data-place="lane_restriction"],
+    .roadbook [data-place="language_school"],
+    .roadbook [data-place="launch_complex"],
+    .roadbook [data-place="lavoir"],
+    .roadbook [data-place="leading_light"],
+    .roadbook [data-place="leisure"],
+    .roadbook [data-place="level"],
+    .roadbook [data-place="level_crossing"],
+    .roadbook [data-place="level_map"],
+    .roadbook [data-place="lez"],
+    .roadbook [data-place="licensed_club"],
+    .roadbook [data-place="lifeboat_station"],
+    .roadbook [data-place="lifecycle"],
+    .roadbook [data-place="life_cycle"],
+    .roadbook [data-place="life_ring"],
+    .roadbook [data-place="line"],
+    .roadbook [data-place="linestring"],
+    .roadbook [data-place="line_variant"],
+    .roadbook [data-place="link"],
+    .roadbook [data-place="list"],
+    .roadbook [data-place="loading_dock"],
+    .roadbook [data-place="localities"],
+    .roadbook [data-place="lockers"],
+    .roadbook [data-place="love_hotel"],
+    .roadbook [data-place="main_road"],
+    .roadbook [data-place="major_road"],
+    .roadbook [data-place="management"],
+    .roadbook [data-place="man_made"],
+    .roadbook [data-place="map_for_the_renderers"],
+    .roadbook [data-place="maxspeed"],
+    .roadbook [data-place="message"],
+    .roadbook [data-place="microwave"],
+    .roadbook [data-place="milestone"],
+    .roadbook [data-place="milestones"],
+    .roadbook [data-place="mobile_money"],
+    .roadbook [data-place="mobile_money_agent"],
+    .roadbook [data-place="monastery"],
+    .roadbook [data-place="money_transfer"],
+    .roadbook [data-place="mooban"],
+    .roadbook [data-place="mortuary"],
+    .roadbook [data-place="mountain"],
+    .roadbook [data-place="mountain_rescue"],
+    .roadbook [data-place="moving_building"],
+    .roadbook [data-place="mtb"],
+    .roadbook [data-place="mu"],
+    .roadbook [data-place="muas"],
+    .roadbook [data-place="multiline"],
+    .roadbook [data-place="multilinestring"],
+    .roadbook [data-place="multipoligon"],
+    .roadbook [data-place="multipolygon"],
+    .roadbook [data-place="multipolygon;"],
+    .roadbook [data-place="multipolygon;boundary"],
+    .roadbook [data-place="multipolygon_railway:uk:nesa:lor"],
+    .roadbook [data-place="music_school"],
+    .roadbook [data-place="music_venue"],
+    .roadbook [data-place="name"],
+    .roadbook [data-place="name=sotalia_guianensis"],
+    .roadbook [data-place="nameplate"],
+    .roadbook [data-place="nation"],
+    .roadbook [data-place="natural"],
+    .roadbook [data-place="naturdenkmale"],
+    .roadbook [data-place="nesa:rail_track/road"],
+    .roadbook [data-place="nesa:routecode"],
+    .roadbook [data-place="network"],
+    .roadbook [data-place="network=rcn"],
+    .roadbook [data-place="network_of_routes"],
+    .roadbook [data-place="netzwolf-route"],
+    .roadbook [data-place="netzwolf:route_master"],
+    .roadbook [data-place="nightclub"],
+    .roadbook [data-place="node"],
+    .roadbook [data-place="nodes"],
+    .roadbook [data-place="note"],
+    .roadbook [data-place="notice_board"],
+    .roadbook [data-place="null"],
+    .roadbook [data-place="nursing_home"],
+    .roadbook [data-place="office"],
+    .roadbook [data-place="oil"],
+    .roadbook [data-place="old"],
+    .roadbook [data-place="operator"],
+    .roadbook [data-place="organization"],
+    .roadbook [data-place="orienteering"],
+    .roadbook [data-place="osm"],
+    .roadbook [data-place="other"],
+    .roadbook [data-place="outer"],
+    .roadbook [data-place="outline"],
+    .roadbook [data-place="overpass"],
+    .roadbook [data-place="pair"],
+    .roadbook [data-place="pannenflicken 2012"],
+    .roadbook [data-place="parcenary"],
+    .roadbook [data-place="parish_hall"],
+    .roadbook [data-place="payment_terminal"],
+    .roadbook [data-place="permission"],
+    .roadbook [data-place="person"],
+    .roadbook [data-place="personal_service"],
+    .roadbook [data-place="photo_booth"],
+    .roadbook [data-place="picnic_table"],
+    .roadbook [data-place="pipeline"],
+    .roadbook [data-place="piste"],
+    .roadbook [data-place="place"],
+    .roadbook [data-place="place_numbers"],
+    .roadbook [data-place="planetarium"],
+    .roadbook [data-place="planned bike route"],
+    .roadbook [data-place="plase"],
+    .roadbook [data-place="plaza"],
+    .roadbook [data-place="point"],
+    .roadbook [data-place="poly"],
+    .roadbook [data-place="polygon"],
+    .roadbook [data-place="postal_code"],
+    .roadbook [data-place="post_depot"],
+    .roadbook [data-place="power"],
+    .roadbook [data-place="powergrid"],
+    .roadbook [data-place="power_circuit"],
+    .roadbook [data-place="power_structure"],
+    .roadbook [data-place="prep_school"],
+    .roadbook [data-place="preschool"],
+    .roadbook [data-place="priority"],
+    .roadbook [data-place="priority_road"],
+    .roadbook [data-place="private_toilets"],
+    .roadbook [data-place="proposed"],
+    .roadbook [data-place="protection"],
+    .roadbook [data-place="provides_feature"],
+    .roadbook [data-place="pt_interchange"],
+    .roadbook [data-place="public"],
+    .roadbook [data-place="public_bath"],
+    .roadbook [data-place="public_bookcase"],
+    .roadbook [data-place="public_facility"],
+    .roadbook [data-place="public_hall"],
+    .roadbook [data-place="quality"],
+    .roadbook [data-place="quarter"],
+    .roadbook [data-place="racetrack"],
+    .roadbook [data-place="rail"],
+    .roadbook [data-place="railway route"],
+    .roadbook [data-place="railway"],
+    .roadbook [data-place="railway:controlled_area"],
+    .roadbook [data-place="railway_crossing"],
+    .roadbook [data-place="railway_level_crossing"],
+    .roadbook [data-place="railway_power"],
+    .roadbook [data-place="railway_signal"],
+    .roadbook [data-place="railway_station"],
+    .roadbook [data-place="ranger_station"],
+    .roadbook [data-place="reception_area"],
+    .roadbook [data-place="ref:uai"],
+    .roadbook [data-place="refugee_housing"],
+    .roadbook [data-place="region"],
+    .roadbook [data-place="register_office"],
+    .roadbook [data-place="regulatory_element"],
+    .roadbook [data-place="relatedbuilding"],
+    .roadbook [data-place="relatedstreet"],
+    .roadbook [data-place="relation"],
+    .roadbook [data-place="relay_box"],
+    .roadbook [data-place="removed:route"],
+    .roadbook [data-place="removed:route_master"],
+    .roadbook [data-place="render"],
+    .roadbook [data-place="rescue_station"],
+    .roadbook [data-place="research_institute"],
+    .roadbook [data-place="residential"],
+    .roadbook [data-place="resort"],
+    .roadbook [data-place="restriction no_entry"],
+    .roadbook [data-place="restriction"],
+    .roadbook [data-place="restriction:bicycle"],
+    .roadbook [data-place="restriction:bus"],
+    .roadbook [data-place="restriction:caravan"],
+    .roadbook [data-place="restriction:hazmat"],
+    .roadbook [data-place="restriction:hgv"],
+    .roadbook [data-place="restriction:motorcar"],
+    .roadbook [data-place="restriction:motorcycle"],
+    .roadbook [data-place="restriction:motor_vehicle"],
+    .roadbook [data-place="restriction:tourist_bus"],
+    .roadbook [data-place="restriction:trolleybus"],
+    .roadbook [data-place="retirement_home"],
+    .roadbook [data-place="ridge"],
+    .roadbook [data-place="right_of_way"],
+    .roadbook [data-place="riverbank"],
+    .roadbook [data-place="roadaccess"],
+    .roadbook [data-place="road_project"],
+    .roadbook [data-place="road_sign"],
+    .roadbook [data-place="roof"],
+    .roadbook [data-place="room"],
+    .roadbook [data-place="rtype"],
+    .roadbook [data-place="s"],
+    .roadbook [data-place="sacco"],
+    .roadbook [data-place="salão_de_festas"],
+    .roadbook [data-place="sanatorium"],
+    .roadbook [data-place="sanitary_dump_station"],
+    .roadbook [data-place="sauna"],
+    .roadbook [data-place="scoot_node"],
+    .roadbook [data-place="scope"],
+    .roadbook [data-place="scout_hut"],
+    .roadbook [data-place="sector"],
+    .roadbook [data-place="security_camera"],
+    .roadbook [data-place="segmented_tag"],
+    .roadbook [data-place="seismic"],
+    .roadbook [data-place="separation scheme"],
+    .roadbook [data-place="separation_scheme"],
+    .roadbook [data-place="series"],
+    .roadbook [data-place="service"],
+    .roadbook [data-place="serviceprovider"],
+    .roadbook [data-place="set"],
+    .roadbook [data-place="sewage"],
+    .roadbook [data-place="share"],
+    .roadbook [data-place="shell"],
+    .roadbook [data-place="shower"],
+    .roadbook [data-place="side"],
+    .roadbook [data-place="sign"],
+    .roadbook [data-place="signal"],
+    .roadbook [data-place="single_rock"],
+    .roadbook [data-place="site"],
+    .roadbook [data-place="ski resort"],
+    .roadbook [data-place="skitour"],
+    .roadbook [data-place="ski_rental"],
+    .roadbook [data-place="ski_school"],
+    .roadbook [data-place="sled"],
+    .roadbook [data-place="smoking_area"],
+    .roadbook [data-place="social_centre"],
+    .roadbook [data-place="social_club"],
+    .roadbook [data-place="social_facility"],
+    .roadbook [data-place="spa"],
+    .roadbook [data-place="sport"],
+    .roadbook [data-place="sport=shooting"],
+    .roadbook [data-place="spring"],
+    .roadbook [data-place="st.perekachki"],
+    .roadbook [data-place="stables"],
+    .roadbook [data-place="stairs"],
+    .roadbook [data-place="station"],
+    .roadbook [data-place="statistical_area"],
+    .roadbook [data-place="stellbereich"],
+    .roadbook [data-place="stop"],
+    .roadbook [data-place="stopping_area"],
+    .roadbook [data-place="stop_area"],
+    .roadbook [data-place="storage"],
+    .roadbook [data-place="street"],
+    .roadbook [data-place="street_lamp"],
+    .roadbook [data-place="street_lanes"],
+    .roadbook [data-place="street_number"],
+    .roadbook [data-place="street_off"],
+    .roadbook [data-place="stripclub"],
+    .roadbook [data-place="stub"],
+    .roadbook [data-place="studio"],
+    .roadbook [data-place="superrail"],
+    .roadbook [data-place="superrelation"],
+    .roadbook [data-place="surveillance"],
+    .roadbook [data-place="swimming_pool"],
+    .roadbook [data-place="swingerclub"],
+    .roadbook [data-place="system"],
+    .roadbook [data-place="table"],
+    .roadbook [data-place="tap"],
+    .roadbook [data-place="tattoo_artist"],
+    .roadbook [data-place="temp"],
+    .roadbook [data-place="temple area"],
+    .roadbook [data-place="temple elements"],
+    .roadbook [data-place="tenants"],
+    .roadbook [data-place="test"],
+    .roadbook [data-place="test_seg"],
+    .roadbook [data-place="thw:gfb"],
+    .roadbook [data-place="thw:lv"],
+    .roadbook [data-place="ticket_validator"],
+    .roadbook [data-place="timespan"],
+    .roadbook [data-place="tlc"],
+    .roadbook [data-place="tmc"],
+    .roadbook [data-place="tmc:area"],
+    .roadbook [data-place="tmc:link"],
+    .roadbook [data-place="tmc:point"],
+    .roadbook [data-place="tmc:ramp"],
+    .roadbook [data-place="tmc:ramps"],
+    .roadbook [data-place="tmc:segment"],
+    .roadbook [data-place="toll area"],
+    .roadbook [data-place="toll"],
+    .roadbook [data-place="tomb"],
+    .roadbook [data-place="toponym"],
+    .roadbook [data-place="tour"],
+    .roadbook [data-place="tourism"],
+    .roadbook [data-place="townhall"],
+    .roadbook [data-place="towpath"],
+    .roadbook [data-place="tracks"],
+    .roadbook [data-place="trading_group"],
+    .roadbook [data-place="traffic separation scheme"],
+    .roadbook [data-place="traffic_calming"],
+    .roadbook [data-place="traffic_control"],
+    .roadbook [data-place="traffic_counter"],
+    .roadbook [data-place="traffic_light"],
+    .roadbook [data-place="traffic_mirror"],
+    .roadbook [data-place="traffic_separation_scheme"],
+    .roadbook [data-place="traffic_sign"],
+    .roadbook [data-place="traffic_signal"],
+    .roadbook [data-place="traffic_signals"],
+    .roadbook [data-place="traffic_signals_group"],
+    .roadbook [data-place="traffic_signals_set"],
+    .roadbook [data-place="traffic_signs"],
+    .roadbook [data-place="traffic_speed"],
+    .roadbook [data-place="train"],
+    .roadbook [data-place="training"],
+    .roadbook [data-place="transit"],
+    .roadbook [data-place="transit_system"],
+    .roadbook [data-place="transport_development"],
+    .roadbook [data-place="trasa"],
+    .roadbook [data-place="tree"],
+    .roadbook [data-place="trolley_bay"],
+    .roadbook [data-place="tunnel"],
+    .roadbook [data-place="turnlane:length"],
+    .roadbook [data-place="turnlanes:lenghts"],
+    .roadbook [data-place="turnlanes:length"],
+    .roadbook [data-place="turnlanes:lengths"],
+    .roadbook [data-place="turnlanes:members"],
+    .roadbook [data-place="turnlanes:turn"],
+    .roadbook [data-place="turnlanes:turns"],
+    .roadbook [data-place="turn_hint"],
+    .roadbook [data-place="turn_restriction"],
+    .roadbook [data-place="undefined"],
+    .roadbook [data-place="unsigned bike route"],
+    .roadbook [data-place="vacuum_cleaner"],
+    .roadbook [data-place="vehicle_inspection"],
+    .roadbook [data-place="vehicle_ramp"],
+    .roadbook [data-place="verwaltung eggesin"],
+    .roadbook [data-place="video"],
+    .roadbook [data-place="village_hall"],
+    .roadbook [data-place="vivarium"],
+    .roadbook [data-place="wall"],
+    .roadbook [data-place="ward_7"],
+    .roadbook [data-place="was:restriction"],
+    .roadbook [data-place="was:route"],
+    .roadbook [data-place="was:route_master"],
+    .roadbook [data-place="washing_place"],
+    .roadbook [data-place="waste_basket"],
+    .roadbook [data-place="waste_basket;recycling"],
+    .roadbook [data-place="waste_disposal"],
+    .roadbook [data-place="waste_transfer_station"],
+    .roadbook [data-place="water"],
+    .roadbook [data-place="watering_place"],
+    .roadbook [data-place="watershed"],
+    .roadbook [data-place="waterway"],
+    .roadbook [data-place="waterway_section"],
+    .roadbook [data-place="water_point"],
+    .roadbook [data-place="way"],
+    .roadbook [data-place="waypart"],
+    .roadbook [data-place="wayparts"],
+    .roadbook [data-place="way_of_the_cross"],
+    .roadbook [data-place="weighbridge"],
+    .roadbook [data-place="wellness_center"],
+    .roadbook [data-place="whirlpool"],
+    .roadbook [data-place="whitewater:section"],
+    .roadbook [data-place="wifi"],
+    .roadbook [data-place="winery"],
+    .roadbook [data-place="winter_closure"],
+    .roadbook [data-place="wire"],
+    .roadbook [data-place="wood"],
+    .roadbook [data-place="working_set"],
+    .roadbook [data-place="workplace"],
+    .roadbook [data-place="worship"],
+    .roadbook [data-place="yes"],
+    .roadbook [data-place="youth_centre"],
+    .roadbook [data-place="zone_1"] {
+        font-size: 0.8em;
+        color: #666666;
+    }
+
+}
