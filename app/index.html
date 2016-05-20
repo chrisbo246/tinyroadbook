@@ -1387,7 +1387,7 @@ label .glyphicon-question-sign {
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="addthis_sharing_toolbox"></div>
+                        <div class="addthis_sharing_toolbox hidden-sm"></div>
                     </div>
                 </div>
             </div>
@@ -1536,12 +1536,12 @@ label .glyphicon-question-sign {
                                 <form class="navbar-form navbar-left">
                                     <div class="btn-toolbar" role="toolbar" aria-label="">
                                         <div id="pick_buttons" class="btn-group" role="group" aria-label="">
-                                            <button id="pick_admin" type="button" class="btn btn-default" data-type="admin" title="Pick a administrative area" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-globe"></span></button>
-                                            <button id="pick_city" type="button" class="btn btn-default" data-type="city" title="Pick a city" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-flag"></span></button>
-                                            <button id="pick_suburb" type="button" class="btn btn-default" data-type="suburb" title="Pick a suburban area" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-screenshot"></span></button>
+                                            <button id="pick_admin" type="button" class="btn btn-default" data-type="admin" title="Pick an administrative or suburban area" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-flag"></span></button>
+                                            <button id="pick_city" type="button" class="btn btn-default" data-type="city" title="Pick a city" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-record"></span></button>
+                                            <!--<button id="pick_suburb" type="button" class="btn btn-default" data-type="suburb" title="Pick a suburban area" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-screenshot"></span></button>-->
                                             <button id="pick_road" type="button" class="btn btn-default" data-type="road" title="Pick a road" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-road"></span></button>
                                             <button id="pick_poi" type="button" class="btn btn-default -debug-only" data-type="poi" title="Pick a point of interest" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-map-marker"></span></button>
-                                            <button id="pick_auto" type="button" class="btn btn-default -debug-only" data-type="auto" title="Pick according to zoom level" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-asterisk"></span></button>
+                                            <!--<button id="pick_auto" type="button" class="btn btn-default -debug-only" data-type="auto" title="Pick according to zoom level" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-asterisk"></span></button>-->
                                         </div>
                                     </div>
                                 </form>
@@ -1556,6 +1556,7 @@ label .glyphicon-question-sign {
                                         </span>
                                     </div>
                                 </form>
+                                <!--
                                 <form class="navbar-form navbar-left debug-only">
                                     <div class="btn-toolbar" role="toolbar" aria-label="">
                                         <div class="btn-group" role="group" aria-label="">
@@ -1565,6 +1566,7 @@ label .glyphicon-question-sign {
                                         </div>
                                     </div>
                                 </form>
+                                -->
                             </nav>
                             <form id="editor_form" class="tab-content">
                                 <div id="visual_editor_pane" class="tab-pane fade active in">
@@ -2786,11 +2788,13 @@ label .glyphicon-question-sign {
                             <div class="form-group">
                                 <label>Default picker <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="The picker will be retested to this value after each insertion."></span></label>
                                 <select id="default_type" class="form-control">
-                                    <option value="">&nbsp;</option>
-                                    <option value="city" selected>City</option>
+                                    <option value="" selected>&nbsp;</option>
+                                    <option value="admin">Administrative & suburb area</option>
+                                    <option value="city">City</option>
+                                    <!--<option value="suburb">Suburban area</option>-->
                                     <option value="road">Road</option>
                                     <option value="poi" class="debug-only">POI</option>
-                                    <option value="auto" class="debug-only">Auto</option>
+                                    <!--<option value="auto" class="debug-only">Auto</option>-->
                                 </select>
                             </div>
                         </fieldset>
@@ -3212,12 +3216,14 @@ label .glyphicon-question-sign {
     /* Road style ---------------------------------------------------------- */
 
     /* All road types */
+    .roadbook [data-addr-type="road"],
     .roadbook [data-type="bike_route"],
     .roadbook [data-type="bus-route-segment"],
     .roadbook [data-type="footway"],
     .roadbook [data-type="historic_route"],
     .roadbook [data-type="loc_route"],
     .roadbook [data-type="master_route"],
+    .roadbook [data-type="motorway"],
     .roadbook [data-type="old_route"],
     .roadbook [data-type="path"],
     .roadbook [data-type="pedestrian"],
@@ -3264,12 +3270,23 @@ label .glyphicon-question-sign {
     .roadbook [data-type="nature trail"],
     .roadbook [data-type="fitness_trail"],
     .roadbook [data-type="trail"] {
-        background-color: #888;
-        color: #fff;
+        /*background-color: #888;
+        color: #fff;*/
     }
 
     /* Transport only */
     .roadbook [data-type="bus-route-segment"] { color: #0092da; }
+
+    .roadbook [data-class="highway"] {}
+    .roadbook [data-type="primary"] {}
+    .roadbook [data-type="secondary"] {}
+    .roadbook [data-type="unclassified"] {}
+
+    .roadbook [data-tracktype="grade1"],
+    .roadbook [data-tracktype="grade2"],
+    .roadbook [data-tracktype="grade3"] {
+
+    }
 
 
     /* Class colors -------------------------------------------------------- */
@@ -3304,31 +3321,53 @@ label .glyphicon-question-sign {
 
     /* Type colors --------------------------------------------------------- */
 
+    /* Administrative areas */
     .roadbook [data-type="administrative"] { color: #000000; }
-    .roadbook [data-class="place"]:not([data-type="administrative"]) { color: #888; }
 
-    /* Places */
-    .roadbook [data-type="country"] { color: #00f; }
-    .roadbook [data-type="state"] { color: #22f; }
-    .roadbook [data-type="state_district"] { color: #44f; }
-    .roadbook [data-type="county"] { color: #66f; }
-    .roadbook [data-type="city"] {}
-    .roadbook [data-type="city_district"] { color: #88f; }
-    .roadbook [data-type="suburb"] { color: #aaf; }
-    .roadbook [data-type="town"] { }
-    .roadbook [data-type="village"] { }
-    .roadbook [data-type="hamlet"] { }
-    .roadbook [data-type="locality"] { }
-    .roadbook [data-type="municipality"] { }
-    .roadbook [data-type="island"] { }
-    .roadbook [data-type="islet"] { }
-    .roadbook [data-type="neighbourhood"] { }
+    /* House number */
+    .roadbook [data-addr-type="house_number"] { color: #888; }
+
+    /* Administrative and suburban areas */
+    .roadbook [data-addr-type="country"],
+    .roadbook [data-addr-type="state"],
+    .roadbook [data-addr-type="state_district"],
+    .roadbook [data-addr-type="county"],
+    .roadbook [data-addr-type="island"],
+    .roadbook [data-addr-type="islet"],
+    .roadbook [data-addr-type="city_district"],
+    .roadbook [data-addr-type="suburb"],
+    .roadbook [data-addr-type="hamlet"],
+    .roadbook [data-addr-type="locality"],
+    .roadbook [data-addr-type="municipality"],
+    .roadbook [data-addr-type="isolated_dwelling"],
+    .roadbook [data-addr-type="neighbourhood"],
+    .roadbook [data-class="boundary"][data-type="administrative"] {
+        color: #888;
+    }
+
+    /* Place */
+    .roadbook [data-addr-type="country"] { color: #00f; }
+    .roadbook [data-addr-type="state"] { color: #22f; }
+    .roadbook [data-addr-type="state_district"] { color: #44f; }
+    .roadbook [data-addr-type="county"] { color: #66f; }
+    .roadbook [data-addr-type="city"] {}
+    .roadbook [data-addr-type="city_district"] { color: #88f; }
+    .roadbook [data-addr-type="suburb"] { color: #aaf; }
+    .roadbook [data-addr-type="town"] { }
+    .roadbook [data-addr-type="village"] { }
+    .roadbook [data-addr-type="hamlet"] { }
+    .roadbook [data-addr-type="locality"] { }
+    .roadbook [data-addr-type="municipality"] { }
+    .roadbook [data-addr-type="island"] { }
+    .roadbook [data-addr-type="islet"] { }
+    .roadbook [data-addr-type="neighbourhood"] { }
 
     .roadbook [data-class="highway"][data-type="path"] { }
 
 
-    /* Hide some icons */
-
+    /* Hide some icons ----------------------------------------------------- */
+    .roadbook [data-addr-type=boundary_administrative]:before,
+    .roadbook [data-icon=poi_boundary_administrative]:before,
     .roadbook [data-addr-type="city"]:before,
     .roadbook [data-icon="poi_place_city"]:before,
     .roadbook [data-addr-type="town"]:before,
@@ -3344,7 +3383,7 @@ label .glyphicon-question-sign {
     <!-- build:css styles/mapicons_spritesheet.css -->
     <link rel="stylesheet" href="styles/mapicons_spritesheet.css">
     <!-- endbuild -->
-    
+
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->

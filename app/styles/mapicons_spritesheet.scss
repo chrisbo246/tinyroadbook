@@ -1,6 +1,6 @@
 @media screen, print {
 
-    .roadbook [data-type]:before,
+    .roadbook [data-addr-type]:before,
     .roadbook [data-icon]:before {
         display: inline-block;
         vertical-align: middle;
@@ -2202,5 +2202,7 @@
     .roadbook [data-icon="transport_tram_stop"] {
         color: #0093db;
     }
+
+    @import "_mapicons_spritesheet_extend";
 
 }

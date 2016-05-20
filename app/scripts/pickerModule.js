@@ -17,7 +17,8 @@ var pickerModule = (function () {
 
     var settings = {
         allowedTypes: {
-            admin: ['country', 'state', 'state_district', 'county', 'island', 'islet'],
+            admin: ['country', 'state', 'state_district', 'county', 'island', 'islet',
+                'city_district', 'suburb', 'hamlet', 'locality', 'municipality', 'isolated_dwelling'],
             city: ['city', 'town', 'village'],
             suburb: ['city_district', 'suburb', 'hamlet', 'locality', 'municipality', 'isolated_dwelling'],
             road: [
@@ -27,22 +28,19 @@ var pickerModule = (function () {
                 'route_master', 'route_rating', 'route_ref', 'route_section', 'runway', 'superroute', 'through_route',
                 'track', 'trail'
             ],
-            poi: null,
-            various: ['country_code', 'postcode', 'house_number', 'neighbourhood']
-
+            poi: ['address26', 'address29', 'house_number']
         },
         disallowedTypes: {
-            various: ['address26', 'address29']
+            various: ['country_code', 'postcode', 'neighbourhood']
         }
     };
 
-    //settings.allowedTypes.poi = settings.disallowedTypes.various;
     settings.disallowedTypes.poi = [].concat.apply([], [
         settings.allowedTypes.admin,
         settings.allowedTypes.city,
         settings.allowedTypes.suburb,
         settings.allowedTypes.road,
-        settings.allowedTypes.various
+        settings.disallowedTypes.various
     ]);
 
     var zoomMin = 0,
@@ -64,8 +62,11 @@ var pickerModule = (function () {
      */
     var getPlaceDetails = function (json, allowedPlaceTypes, disallowedPlaceTypes, options) {
 
-        if (!json.address) {
-            return json;
+        var dfd = new $.Deferred();
+
+        if (!json || !json.address) {
+            dfd.resolve(json);
+            return false;
         }
 
         var params = {
@@ -82,56 +83,81 @@ var pickerModule = (function () {
             $.extend(params, options);
         }
 
-        // Build query
         var query = [];
+        var address = $.extend({}, json.address);
 
-        // Get the smallest valid place name
-        if (json.address) {
-
-            // Search the first allowed place types and use the name as query string
-            console.log('Search for an allowed place type in ', allowedPlaceTypes);
-            $.each(json.address, function (k, v) {
-                if ((!allowedPlaceTypes || $.inArray(k, allowedPlaceTypes) !== -1)
-                    && (!disallowedPlaceTypes || $.inArray(k, disallowedPlaceTypes) === -1)) {
-                    query.push(v);
-                    return false;
-                } else {
-                    // Remove the (first) disallowed values from params
-                    delete params[k];
+        // Search the first allowed place types and use the name as query string
+        console.log('Search for an allowed place type in ', allowedPlaceTypes);
+        $.each(json.address, function (k, v) {
+            if ((!allowedPlaceTypes || $.inArray(k, allowedPlaceTypes) !== -1)
+                && (!disallowedPlaceTypes || $.inArray(k, disallowedPlaceTypes) === -1)) {
+                query.push(v);
+                delete address[k];
+                // If this is a house number, append the road
+                if (k === 'house_number' && json.address.road) {
+                    query[0] = query[0] + ' ' + json.address.road;
+                    delete address.road;
                 }
-            });
+                return false;
+            } else {
+                // Remove the (first) disallowed values
+                delete params[k];
+                delete address[k];
+            }
+        });
+
+        // If data contain at least an allowed place type
+        if (query.length > 0) {
 
             var street = [];
             /*eslint-disable dot-notation*/
-            if (json.address['house_number']) {
+            if (address['house_number']) {
                 street.push(json.address['house_number']);
             }
             /*eslint-enable dot-notation*/
-            if (json.address.road) {
+            if (address.road) {
                 street.push(json.address.road);
             }
             if (street.length > 0) {
                 params.street = street.join(' ');
-            }
-            if (json.address.city) {
-                params.city = json.address.city;
-            }
-            if (json.address.county) {
-                params.county = json.address.county;
-            }
-            if (json.address.state) {
-                params.state = json.address.state;
-            }
-            if (json.address.country) {
-                params.country = json.address.country;
-            }
-            if (json.address.postcode) {
-                params.postalcode = json.address.postcode;
+                //query[0] = street.join(' ');
             }
 
+            if (address.city && address.city !== query[0]) {
+                params.city = json.address.city;
+                query.push(json.address.city);
+            }
+            if (address.county && address.county !== query[0]) {
+                params.county = json.address.county;
+                query.push(json.address.county);
+            }
+            if (address.state && address.state !== query[0]) {
+                params.state = json.address.state;
+                query.push(json.address.state);
+            }
+            if (address.country && address.country !== query[0]) {
+                params.country = json.address.country;
+                query.push(json.address.country);
+            }
+            //if (address.postcode && address.postcode !== query[0]) {
+            //    params.postalcode = json.address.postcode;
+            //    query.push(json.address.postcode);
+            //}
+
+            geolocationXhr = geocodeModule.nominatimSearch(params, $.unique(query))
+                .done(function (json2) {
+                    dfd.resolve(json2);
+                })
+                .fail(function () {
+                    dfd.resolve(json);
+                });
+
+        } else {
+            dfd.resolve(json);
         }
 
-        return geocodeModule.nominatimSearch(params, query);
+        return dfd;
+
 
     };
 
@@ -149,21 +175,35 @@ var pickerModule = (function () {
     var filterNominatimResult = function (json, allowedPlaceTypes, disallowedPlaceTypes, options) {
 
         var dfd = new $.Deferred();
-
         if (json && json.address) {
 
-            // Try a geolocation request with the reverse geolocation result
-            geolocationXhr = getPlaceDetails(json, allowedPlaceTypes, disallowedPlaceTypes, options);
-            geolocationXhr.done(function (json2) {
-                    if (json2.length > 0) {
-                        dfd.resolve(json2[0]);
-                    } else {
-                        dfd.resolve(json);
-                    }
-                });
-            geolocationXhr.fail(function () {
+            // If the first place type is allowed, not disallowed, and is not address29 or address26 (miscellaneous)
+            // just return the current data without making an second request
+            /*eslint-disable no-unused-vars*/
+            $.each(json.address, function (k, v) {
+                if ((!allowedPlaceTypes || $.inArray(k, allowedPlaceTypes) !== -1)
+                    && (!disallowedPlaceTypes || $.inArray(k, disallowedPlaceTypes) === -1)
+                    && $.inArray(k, settings.allowedTypes.poi) === -1) {
                     dfd.resolve(json);
-                });
+                }
+                return false;
+            });
+            /*eslint-enable no-unused-vars*/
+
+            // Else make a geolocation request with the first allowed place type
+            if (dfd.state() === 'pending') {
+                getPlaceDetails(json, allowedPlaceTypes, disallowedPlaceTypes, options)
+                    .done(function (json2) {
+                        if (json2.length > 0) {
+                            dfd.resolve(json2[0]);
+                        } else {
+                            dfd.resolve(json);
+                        }
+                    })
+                    .fail(function () {
+                        dfd.resolve(json);
+                    });
+            }
 
         } else {
             dfd.resolve(json);
@@ -192,10 +232,12 @@ var pickerModule = (function () {
         // Check if this is really a road
         if (json && json.address) {
 
-            var translation;
+            var type, translation;
 
             /*eslint-disable no-unused-vars*/
+            // Get the translated name (only if this is a road)
             $.each(json.address, function (k, v) {
+                type = k;
                 translation = v;
                 return false;
             });
@@ -207,7 +249,7 @@ var pickerModule = (function () {
             name = json.namedetails.ref || json.namedetails.int_ref || json.namedetails.name || translation;
         }
 
-        if (name) {
+        if (name && type && $.inArray(type, settings.allowedTypes.road) !== -1) {
 
             // If input is focused, insert the picked road at caret position
             if ($input.is(':focus')) {
@@ -256,8 +298,7 @@ var pickerModule = (function () {
             var lat = position[1];
 
             // Stop the previous geolocation task if user click too quickly
-            if (geolocationXhr) { //&& geolocationXhr.state() === 'pending'
-                console.log('Geolocation state', geolocationXhr.state());
+            if (geolocationXhr && geolocationXhr.state() === 'pending') { //&& geolocationXhr.state() === 'pending'
                 geolocationXhr.abort();
                 $spinner.fadeOut();
                 /*if (clickCounter > 0) {
@@ -276,7 +317,8 @@ var pickerModule = (function () {
 
                 $spinner.fadeIn();
                 clickCounter = clickCounter + 1;
-                zoom = Math.min(Math.max((zoom + zoomDelta), 0), 9);
+                //zoom = Math.min(Math.max((zoom + zoomDelta), 0), 9);
+                zoom = Math.min(Math.max((zoom + zoomDelta), 0), 15);
 
                 getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
                     .done(function (json) {
@@ -299,7 +341,7 @@ var pickerModule = (function () {
                                 roadbookModule.insertNominatimResult(json2);
                             });
                     });
-
+            /*
             } else if (pick === 'suburb') {
 
                 $spinner.fadeIn();
@@ -313,7 +355,7 @@ var pickerModule = (function () {
                                 roadbookModule.insertNominatimResult(json2);
                             });
                     });
-
+            */
             } else if (pick === 'road') {
 
                 $spinner.fadeIn();
@@ -355,6 +397,7 @@ var pickerModule = (function () {
                     .done(function (json) {
                         filterNominatimResult(json, settings.allowedTypes[pick], settings.disallowedTypes[pick], {zoom: zoom})
                             .done(function (json2) {
+                                //storeRoad(json2);
                                 roadbookModule.insertNominatimResult(json2);
                             });
                     });
@@ -366,8 +409,9 @@ var pickerModule = (function () {
                 zoom = Math.min(Math.max((zoom + zoomDelta), zoomMin), zoomMax);
 
                 getPlace(lon, lat, {zoom: zoom})
-                    .done(function (json) {
-                        roadbookModule.insertNominatimResult(json);
+                    .done(function (json2) {
+                        storeRoad(json2);
+                        roadbookModule.insertNominatimResult(json2);
                     });
 
             }

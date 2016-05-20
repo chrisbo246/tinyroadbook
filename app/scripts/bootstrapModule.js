@@ -410,23 +410,12 @@ var bootstrapModule = (function () {
         $('.btn').filter('[id]').each(function () {
             $button = $(this);
 
-            // Restore button state if a stored value exists
-            id = $button.attr('id');
-            value = basil.get(id);
-            if (value !== null) {
-                if (value && !$button.hasClass('active')) {
-                    $button.trigger('click');
-                } else {
-                    $button.removeClass('active');
-                }
-                console.log('#' + id + ' button click fired', value);
-            }
-
             // Store changes
             $button.on('click', function () {
 
                 // If the button is in a button group, reset all stored values
-                $buttons = $button.parent('.btn-group').find('.btn').filter('[id]');
+                $buttons = $(this).parent('.btn-group').find('.btn').filter('[id]');
+                console.log('Button group length', $buttons.length);
                 if (!$buttons.length) {
                     $buttons = $(this);
                 }
@@ -440,6 +429,18 @@ var bootstrapModule = (function () {
                 });
 
             });
+
+            // Restore button state if a stored value exists
+            id = $button.attr('id');
+            value = basil.get(id);
+            if (value !== null) {
+                if (value) { // && !$button.hasClass('active')
+                    $button.trigger('click');
+                } else {
+                    $button.removeClass('active');
+                }
+                console.log('#' + id + ' button click fired', value);
+            }
 
         });
 
