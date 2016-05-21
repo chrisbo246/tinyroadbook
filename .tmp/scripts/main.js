@@ -352,7 +352,7 @@ var appModule = function () {
         });*/
 
         // Load icon styles if not already
-        $.get('styles/mapicons_spritesheet.css', function (data) {
+        $.get('styles/poi.css', function (data) {
             mapIconsStyle = data;
             updateSaveLink();
         });
