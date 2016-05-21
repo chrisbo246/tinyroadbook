@@ -603,6 +603,7 @@ var mapLayersModule = function () {
             })
         });
     };
+    // https://www.google.com/intl/fr-FR_US/help/terms_maps.html
     layers.mapsForFreeWater = function () {
         return new ol.layer.Tile({
             name: 'mapsForFreeWater',
@@ -620,6 +621,37 @@ var mapLayersModule = function () {
             opacity: 0.3,
             source: new ol.source.XYZ({
                 url: 'http://www.maps-for-free.com/layer/admin/z{z}/row{y}/{z}_{x}-{y}.gif'
+            })
+        });
+    };
+    // http://korona.geog.uni-heidelberg.de/contact.html
+    layers.uniHeidelbergAsterh = function () {
+        return new ol.layer.Tile({
+            name: 'uniHeidelbergAsterh',
+            title: 'Hillshade<small> (by <a href="http://korona.geog.uni-heidelberg.de">uni-heidelberg.de</a>)</small>',
+            opacity: 0.8,
+            source: new ol.source.XYZ({
+                url: 'http://korona.geog.uni-heidelberg.de/tiles/asterh/x={x}&y={y}&z={z}'
+            })
+        });
+    };
+    layers.uniHeidelbergAdminb = function () {
+        return new ol.layer.Tile({
+            name: 'uniHeidelbergAdminb',
+            title: 'Admin boundaries<small> (by <a href="http://korona.geog.uni-heidelberg.de">uni-heidelberg.de</a>)</small>',
+            opacity: 0.8,
+            source: new ol.source.XYZ({
+                url: 'http://korona.geog.uni-heidelberg.de/tiles/adminb/x={x}&y={y}&z={z}'
+            })
+        });
+    };
+    layers.uniHeidelbergHybrid = function () {
+        return new ol.layer.Tile({
+            name: 'uniHeidelbergHybrid',
+            title: 'Hibrid<small> (by <a href="http://korona.geog.uni-heidelberg.de">uni-heidelberg.de</a>)</small>',
+            opacity: 0.8,
+            source: new ol.source.XYZ({
+                url: 'http://korona.geog.uni-heidelberg.de/tiles/hybrid/x={x}&y={y}&z={z}'
             })
         });
     };

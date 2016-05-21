@@ -61,6 +61,7 @@ var appModule = function () {
     var customOverlayLayer = mapLayersModule.create('customOverlay', { title: 'Custom tile server <a href="#layer_settings_modal" data-toggle="modal" data-target-section="2"><span class="glyphicon glyphicon-cog"></span></a>' });
     var googleBikeLayer = mapLayersModule.create('googleBike');
     var googleHybridLayer = mapLayersModule.create('googleHybrid');
+    var uniHeidelbergAsterhLayer = mapLayersModule.create('uniHeidelbergAsterh');
 
     // Define map controls
     var attributionControl = mapControlsModule.create('attribution');
@@ -178,7 +179,7 @@ var appModule = function () {
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, lonviaHikingLayer, googleBikeLayer, lonviaCyclingLayer, googleHybridLayer, gpxLayer]
+                layers: [customOverlayLayer, uniHeidelbergAsterhLayer, lonviaHikingLayer, googleBikeLayer, lonviaCyclingLayer, googleHybridLayer, gpxLayer]
             })];
         }
         var controls = ol.control.defaults({

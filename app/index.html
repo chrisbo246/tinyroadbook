@@ -1845,16 +1845,16 @@ label .glyphicon-question-sign {
         <div id="editor_pane" class="tab-pane fade in row-full-height">
             <div class="container-fluid row-full-height">
                 <div class="row row-full-height">
-                    <div id="map_container" class="col-md-5 no-padding col-full-height">
+                    <div id="map_container" class="col-md-6 no-padding col-full-height">
                         <div id="map" class="map hidden-print">
                             <span class="glyphicon glyphicon-cog spinner glyphicon-spin-slow absolute-center text-4x"></span>
                         </div>
                     </div>
-                    <div class="col-md-7 no-padding col-full-height">
+                    <div class="col-md-6 no-padding col-full-height">
                         <div id="editor_container">
                             <nav id="editor_toolbar" class="navbar navbar-default navbar-static-top">
                                 <form class="navbar-form navbar-left no-side-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <div class="btn-toolbar col-xs-6 col-sm-6 col-md-6 col-lg-6" role="toolbar" aria-label="">
+                                    <div class="btn-toolbar col-xs-6 col-sm-6 col-md-7 col-lg-6" role="toolbar" aria-label="">
                                         <div id="pick_buttons" class="btn-group -btn-group-justified" role="group" aria-label="">
                                             <button id="pick_admin" type="button" class="btn btn-default" data-type="admin" title="Pick an administrative or suburban area" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-flag"></span></button>
                                             <button id="pick_city" type="button" class="btn btn-default" data-type="city" title="Pick a city" rel="tooltip" [data-typement="top"><span class="glyphicon glyphicon-record"></span></button>
@@ -1866,7 +1866,7 @@ label .glyphicon-question-sign {
                                     </div>
                                 <!--</form>
                                 <form id="editor_navbar_form" class="navbar-form -navbar-left" -data-persist="garlic">-->
-                                    <div class="input-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="input-group col-xs-6 col-sm-6 col-md-5 col-lg-6">
                                         <input id="road" type="text" class="form-control" title="Next road" rel="tooltip" [data-typement="top" placeholder="" />
                                         <span class="input-group-addon">
                                             <input id="auto_insert_road" type="checkbox" title="Auto insertion" rel="tooltip" [data-typement="top">
@@ -3660,8 +3660,7 @@ label .glyphicon-question-sign {
     .roadbook [data-addr-type="locality"],
     .roadbook [data-addr-type="municipality"],
     .roadbook [data-addr-type="isolated_dwelling"],
-    .roadbook [data-addr-type="neighbourhood"],
-    .roadbook [data-class="boundary"][data-type="administrative"] {
+    .roadbook [data-addr-type="neighbourhood"] {
         color: #888;
     }
 
