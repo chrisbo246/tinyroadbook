@@ -19,47 +19,6 @@ var importModule = (function () {
 
 
     /**
-     * Extract the body from an imported HTML roadbook and populate the editor
-     * @private
-     * @param {String} htmlDoc - HTML document content
-     */
-    /*var importRoadbook = function (htmlDoc) {
-
-        var html = $('<div>').append(htmlDoc).find('.roadbook').html();
-        var roadbookEditor = roadbookModule.getEditor();
-        roadbookEditor.setHTML(html);
-
-    };*/
-
-
-
-    /**
-     * Extract the body from an imported HTML roadbook
-     * @public
-     * @return {String} HTML roadbook
-     */
-    var extractRoadbook = function (htmlDoc) {
-
-        return $('<div>').append(htmlDoc).find('.roadbook').html();
-
-    };
-
-
-
-    /**
-     * Extract styles from imported HTML
-     * @param {String} htmlDoc - Imported file content
-     * @return {String} CSS style
-     */
-    var extractStyle = function (htmlDoc) {
-
-        return $('<div>').append(htmlDoc).find('style').html();
-
-    };
-
-
-
-    /**
      * Import a roadbook
      * @private
      * @param {Object} files - File(s) returned by input type="file"
@@ -69,9 +28,9 @@ var importModule = (function () {
         commonsModule.reader(files, function (result) {
 
             swal({
-                title: 'Are you sure?',
+                title: 'Replace roadbook',
                 text: 'Current roadbook and / or style will be replaced.\nDo you really want to continue?',
-                type: 'warning',
+                type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Yes replace',
                 cancelButtonText: 'No cancel',
@@ -79,17 +38,29 @@ var importModule = (function () {
             }, function(isConfirm) {
                 if (isConfirm) {
 
+                    var html = $('<div>').append(result);
+                    var content;
+
                     if ($('#import_html').is(':checked')) {
-                        var html = extractRoadbook(result);
+
+                        content = html.find('.roadbook').html();
                         var roadbookEditor = roadbookModule.getEditor();
-                        roadbookEditor.setHTML(html);
+                        roadbookEditor.setHTML(content);
+
+                        content = html.find('title').text();
+                        $('#roadbook_title').val(content).trigger('change');
+
+                        content = html.find('meta[name="description"]').attr('content');
+                        $('#roadbook_description').val(content).trigger('change');
+
                         //roadbookModule.replaceHtmlAlert(html);
                     }
 
                     if ($('#import_style').is(':checked')) {
-                        var text = extractStyle(result);
+                        //var text = extractStyle(result);
+                        content = html.find('style').html();
                         var styleEditor = styleModule.getEditor();
-                        styleEditor.setText(text);
+                        styleEditor.setText(content);
                         styleModule.updateStyle();
                         //styleModule.replaceTextAlert(text);
                     }

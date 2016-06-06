@@ -14,7 +14,9 @@ var bootstrapModule = (function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var settings = {
+    var defaults = {
+        debug: false,
+        useHash: true,
         basil: {
             namespace: 'bootstrap'
         },
@@ -31,8 +33,13 @@ var bootstrapModule = (function () {
         tooltip: {
             toggleSelector: '[data-toggle="tooltip"]', //, [rel="tooltip"]
             options: {}
+        },
+        switchButton: {
+            togglerSelector: '.btn-switch'
         }
     };
+
+    var settings = defaults;
 
 
 
@@ -46,57 +53,61 @@ var bootstrapModule = (function () {
      */
     var restoreActiveTab = function () {
 
-        if (typeof Basil !== 'undefined' && typeof ($.fn.tab) !== 'undefined') {
+        if (typeof window.Basil === 'undefined') {
+            console.warn('Basil is not loaded');
+            return false;
+        }
 
-            var basil = new window.Basil(settings.basil);
-            var $tabs = $(settings.tab.toggleSelector);
-            var storageKey = 'activeTab';
-            var storageValue;
+        if (typeof $.fn.tab === 'undefined') {
+            console.warn('Bootstrap tab plugin is not loaded');
+            return false;
+        }
 
-            if ($tabs) {
+        var basil = new window.Basil(settings.basil);
+        var $tabs = $(settings.tab.toggleSelector);
+        var storageKey = 'activeTab';
+        var storageValue;
 
-                // Try to detect which tab to open
-                if (!settings.tab.useHash && basil) {
-                    // The stored hash
-                    storageValue = basil.get(storageKey);
-                    console.log('Hash restored', storageValue);
-                } else {
-                    // Or the URL hash
-                    storageValue = location.hash;
-                    console.log('URL hash detected', storageValue);
-                }
+        if ($tabs) {
 
-                // Show the tab according to the defined hash
-                if (storageValue) {
-                    var $tab = $tabs.filter('[href="' + storageValue + '"]').first();
-                    $tab.tab('show');
-                    console.log('Last active tab restored', storageValue);
-                }
-
-                // Then watch tab changes
-                $tabs.on('shown.bs.tab', function (e) {
-
-                    // Get the selected tab hash
-                    storageValue = e.target.hash;
-
-                    if (storageValue) {
-                        if (!settings.tab.useHash && basil) {
-                            // Save the current tab hash to local storage
-                            basil.set(storageKey, storageValue);
-                            console.log('Active tab stored', storageValue);
-                        } else {
-                            // If URL hash use is allowed, append hash to the URL
-                            location.hash = storageValue;
-                            console.log('Active tab hash added to URL', storageValue);
-                        }
-                    }
-
-                });
-
+            // Try to detect which tab to open
+            if (!settings.tab.useHash && basil) {
+                // The stored hash
+                storageValue = basil.get(storageKey);
+                console.log('Hash restored', storageValue);
+            } else {
+                // Or the URL hash
+                storageValue = location.hash;
+                console.log('URL hash detected', storageValue);
             }
 
-        } else {
-            console.warn('Bootstrap tab plugin is not loaded');
+            // Show the tab according to the defined hash
+            if (storageValue) {
+                var $tab = $tabs.filter('[href="' + storageValue + '"]').first();
+                $tab.tab('show');
+                console.log('Last active tab restored', storageValue);
+            }
+
+            // Then watch tab changes
+            $tabs.on('shown.bs.tab', function (e) {
+
+                // Get the selected tab hash
+                storageValue = e.target.hash;
+
+                if (storageValue) {
+                    if (!settings.tab.useHash && basil) {
+                        // Save the current tab hash to local storage
+                        basil.set(storageKey, storageValue);
+                        console.log('Active tab stored', storageValue);
+                    } else {
+                        // If URL hash use is allowed, append hash to the URL
+                        location.hash = storageValue;
+                        console.log('Active tab hash added to URL', storageValue);
+                    }
+                }
+
+            });
+
         }
 
     };
@@ -120,11 +131,6 @@ var bootstrapModule = (function () {
             $togglers.on('click', function () {
                 $('.dropdown-menu').find('.active').removeClass('active');
             });
-
-            // Restore the last active modal
-            if (settings.storeActive) {
-                //restoreActiveTab();
-            }
 
         }
 
@@ -201,19 +207,18 @@ var bootstrapModule = (function () {
             // Display only the section according to data-section value
             if (data) {
 
-                if (data.targetSection) {
-                    var $sections = $modal.find('[data-section]');
-                    console.log('Targeted section', data.targetSection);
+                if (data.filter) {
+                    var $sections = $modal.find('section');
+                    console.log('Modal section filter', data.filter);
                     var $section;
                     if ($sections) {
                         $sections.each(function () {
                             $section = $(this);
-                            if ($section.data('section') === data.targetSection) {
+                            //if ($section.data('section') === data.targetSection) {
+                            if ($section.is(data.filter)) {
                                 $section.show();
-                                console.log('Show section', $section.data('section'));
                             } else {
                                 $section.hide();
-                                console.log('Hide section', $section.data('section'));
                             }
                         });
                     }
@@ -250,13 +255,11 @@ var bootstrapModule = (function () {
      * Build the list of files loaded by reader
      * @public
      * @param {Array} files - File list returned by the input change event (e.target.files)
-     * @param {String} selector - Container for the list
+     * @return {String} The file list (HTML)
      */
-    var inputFileList = function (files, selector) {
+    var buildFileList = function (files) {
 
-        var $container = $(selector);
-
-        if (!$container || !files) {
+        if (!files) {
             return false;
         }
 
@@ -270,7 +273,7 @@ var bootstrapModule = (function () {
             + '<span></li>');
         });
 
-        $container.html('<ul class="list-group">' + listItems.join('') + '</ul>');
+        return '<ul class="list-group">' + listItems.join('') + '</ul>';
 
     };
 
@@ -307,22 +310,26 @@ var bootstrapModule = (function () {
      */
     var rangeValueTooltip = function () {
 
-        var $input = $('input[type="range"]');
-        if ($input) {
+        var $input;
+
+        $('input[type="range"]').each(function () {
+
+            $input = $(this);
 
             // Initially define the tooltip title with the default value
             $input.attr('data-original-title', $input.val());
 
             // Watch changes, update the title and show up the tooltip
-            $input.on('input', function () {
-                $input.attr('data-original-title', $input.val()).tooltip('show');
+            $input.on('input', function (e) {
+                $(this).attr('data-original-title', e.target.value).tooltip('show');
             });
 
             // Show the tooltip when user focus the field
             $input.on('focus', function () {
-                $input.tooltip('show');
+                $(this).tooltip('show');
             });
-        }
+
+        });
 
     };
 
@@ -349,19 +356,28 @@ var bootstrapModule = (function () {
      */
     var debug = function () {
 
+        if (!settings.debug) {
+            commonsModule.hideLogs();
+            return false;
+        }
+
+        console.log('Bootstrap debug started');
+
         if ($().tab) {
+            console.log('Tab plugin loaded');
             var $tabs = $(settings.tab.toggleSelector);
-            $tabs.on('shown.bs.tab', function (e) {
-                var paneId = $(e.target).attr('href');
-                console.log('Tab shown', paneId);
+            console.log($tabs.length + ' tab(s) found');
+            $tabs.on('shown.bs.tab hidden.bs.tab', function (e) {
+                console.log(e.target.href + ' tab ' + e.type, e);
             });
         }
 
         if ($().modal) {
+            console.log('Modal plugin loaded');
             var $modals = $(settings.modal.modalSelector);
-            $modals.on('shown.bs.modal', function (e) {
-                var modalId = '#' + e.target.id;
-                console.log('Modal shown', modalId);
+            console.log($modals.length + ' modal(s) found');
+            $modals.on('shown.bs.modal hidden.bs.modal', function (e) {
+                console.log('#' + e.target.id + ' modal ' + e.type, e);
             });
         }
 
@@ -394,10 +410,59 @@ var bootstrapModule = (function () {
 
 
     /**
+     * Open the tab / modal when user use internal link in URL
+     * @public
+     */
+    var useHash = function () {
+
+       if(window.location.hash) {
+            var hash = window.location.hash;
+            console.log('Use hash', hash);
+
+            var $link = $('a[href="' + hash + '"]');
+            var $target = $(hash);
+
+            if ($().tab && $link && $link.is(settings.tab.toggleSelector)) {
+                $link.tab('show');
+            }
+
+            if ($().modal && $link && $link.is(settings.modal.toggleSelector) && $target) {
+                $target.modal('show');
+            }
+
+        }
+
+    };
+
+
+
+    /**
+     * Keep clicked buttons active
+     * @private
+     */
+    var watchSwitchButtons = function () {
+
+        $(settings.switchButton.togglerSelector).click(function () {
+
+            var $button = $(this);
+
+            // If the button is in a button group, start by removing .active buttons
+            $(this).parents('.btn-group').find(settings.switchButton.togglerSelector).filter('.active').removeClass('active');
+
+            // Then add the .active class to the clicked button
+            $button.toggleClass('active');
+
+        });
+
+    };
+
+
+
+    /**
      * Data persistence inputs
      * @public
      */
-    var storeButtonState = function () {
+    var storeSwitchButtonState = function () {
 
         if (typeof Basil === 'undefined') {
             return false;
@@ -407,15 +472,14 @@ var bootstrapModule = (function () {
 
         var $button, $buttons, value, id;
 
-        $('.btn').filter('[id]').each(function () {
+        $(settings.switchButton.togglerSelector).filter('[id]').each(function () {
             $button = $(this);
 
             // Store changes
             $button.on('click', function () {
 
                 // If the button is in a button group, reset all stored values
-                $buttons = $(this).parent('.btn-group').find('.btn').filter('[id]');
-                console.log('Button group length', $buttons.length);
+                $buttons = $(this).parents('.btn-group').find(settings.switchButton.togglerSelector).filter('[id]');
                 if (!$buttons.length) {
                     $buttons = $(this);
                 }
@@ -447,30 +511,66 @@ var bootstrapModule = (function () {
     };
 
 
-
     /**
-     * Document ready
+     * Initialization
+     * @public
      */
-    $(function () {
+    var init = function (options) {
 
+        // Merge default and custom settings
+        settings = $.extend(true, {}, defaults, options);
 
+        debug();
 
-    });
+        $(function () {
+
+            if (settings.useHash) {
+                useHash();
+            }
+
+            if ($().tooltip && settings.tooltip) {
+                tooltip();
+                rangeValueTooltip();
+            }
+
+            if ($().tab && settings.tab) {
+                tab();
+                if (settings.basil) {
+                    restoreActiveTab();
+                }
+            }
+
+            if ($().modal && settings.modal) {
+                modalTogglerAttributs();
+                //restoreActiveModal();
+            }
+
+            if ($().button && settings.switchButton) {
+                watchSwitchButtons();
+                if (typeof Basil === 'function' && settings.basil) {
+                    storeSwitchButtonState();
+                }
+            }
+
+        });
+
+    };
 
 
     return {
-        debug: debug,
-        inputFileList: inputFileList,
-        modalTogglerAttributs: modalTogglerAttributs,
-        tab: tab,
+        //debug: debug,
+        //modalTogglerAttributs: modalTogglerAttributs,
+        //restoreActiveTab: restoreActiveTab,
+        //storeSwitchButtonState: storeSwitchButtonState,
+        //tab: tab,
+        //tooltip: tooltip,
+        buildFileList: buildFileList,
+        hideHashOnShown: hideHashOnShown,
+        init: init,
         oneShownHiddenTab: oneShownHiddenTab,
         rangeValueTooltip: rangeValueTooltip,
-        settings: settings,
-        restoreActiveTab: restoreActiveTab,
         restoreActiveModal: restoreActiveModal,
-        storeButtonState: storeButtonState,
-        tooltip: tooltip,
-        hideHashOnShown: hideHashOnShown
+        settings: settings
     };
 
 })();

@@ -1,5 +1,5 @@
 
-.roadbook [data-addr-type]:before,
+.roadbook [data-address-type]:before,
 .roadbook [data-icon]:before {
     display: inline-block;
     vertical-align: middle;
@@ -13,7 +13,7 @@
 
 
 
-.roadbook [data-addr-type="alpinehut"]:before,
+.roadbook [data-address-type="alpinehut"]:before,
 .roadbook [data-icon="accommodation_alpinehut"]:before {
     content: "";
     width: 20px;
@@ -21,7 +21,7 @@
     background-position: -5px -5px;
 }
 
-.roadbook [data-addr-type="bed_and_breakfast"]:before,
+.roadbook [data-address-type="bed_and_breakfast"]:before,
 .roadbook [data-icon="accommodation_bed_and_breakfast"]:before {
     content: "";
     width: 20px;
@@ -29,7 +29,7 @@
     background-position: -35px -5px;
 }
 
-.roadbook [data-addr-type="camping"]:before,
+.roadbook [data-address-type="camping"]:before,
 .roadbook [data-icon="accommodation_camping"]:before {
     content: "";
     width: 20px;
@@ -37,7 +37,7 @@
     background-position: -65px -5px;
 }
 
-.roadbook [data-addr-type="caravan_park"]:before,
+.roadbook [data-address-type="caravan_park"]:before,
 .roadbook [data-icon="accommodation_caravan_park"]:before {
     content: "";
     width: 20px;
@@ -45,7 +45,7 @@
     background-position: -95px -5px;
 }
 
-.roadbook [data-addr-type="hotel"]:before,
+.roadbook [data-address-type="hotel"]:before,
 .roadbook [data-icon="accommodation_hotel"]:before {
     content: "";
     width: 20px;
@@ -53,7 +53,7 @@
     background-position: -125px -5px;
 }
 
-.roadbook [data-addr-type="hotel2"]:before,
+.roadbook [data-address-type="hotel2"]:before,
 .roadbook [data-icon="accommodation_hotel2"]:before {
     content: "";
     width: 20px;
@@ -61,7 +61,7 @@
     background-position: -155px -5px;
 }
 
-.roadbook [data-addr-type="shelter"]:before,
+.roadbook [data-address-type="shelter"]:before,
 .roadbook [data-icon="accommodation_shelter"]:before {
     content: "";
     width: 20px;
@@ -69,7 +69,7 @@
     background-position: -185px -5px;
 }
 
-.roadbook [data-addr-type="shelter2"]:before,
+.roadbook [data-address-type="shelter2"]:before,
 .roadbook [data-icon="accommodation_shelter2"]:before {
     content: "";
     width: 20px;
@@ -77,7 +77,7 @@
     background-position: -215px -5px;
 }
 
-.roadbook [data-addr-type="youth_hostel"]:before,
+.roadbook [data-address-type="youth_hostel"]:before,
 .roadbook [data-icon="accommodation_youth_hostel"]:before {
     content: "";
     width: 20px;
@@ -85,7 +85,7 @@
     background-position: -245px -5px;
 }
 
-.roadbook [data-addr-type="bench"]:before,
+.roadbook [data-address-type="bench"]:before,
 .roadbook [data-icon="amenity_bench"]:before {
     content: "";
     width: 20px;
@@ -93,7 +93,7 @@
     background-position: -275px -5px;
 }
 
-.roadbook [data-addr-type="court"]:before,
+.roadbook [data-address-type="court"]:before,
 .roadbook [data-icon="amenity_court"]:before {
     content: "";
     width: 20px;
@@ -101,7 +101,7 @@
     background-position: -305px -5px;
 }
 
-.roadbook [data-addr-type="firestation"]:before,
+.roadbook [data-address-type="firestation"]:before,
 .roadbook [data-icon="amenity_firestation"]:before {
     content: "";
     width: 20px;
@@ -109,7 +109,7 @@
     background-position: -335px -5px;
 }
 
-.roadbook [data-addr-type="firestation2"]:before,
+.roadbook [data-address-type="firestation2"]:before,
 .roadbook [data-icon="amenity_firestation2"]:before {
     content: "";
     width: 20px;
@@ -117,7 +117,7 @@
     background-position: -365px -5px;
 }
 
-.roadbook [data-addr-type="firestation3"]:before,
+.roadbook [data-address-type="firestation3"]:before,
 .roadbook [data-icon="amenity_firestation3"]:before {
     content: "";
     width: 20px;
@@ -125,7 +125,7 @@
     background-position: -395px -5px;
 }
 
-.roadbook [data-addr-type="fountain"]:before,
+.roadbook [data-address-type="fountain"]:before,
 .roadbook [data-icon="amenity_fountain"]:before {
     content: "";
     width: 20px;
@@ -133,7 +133,7 @@
     background-position: -5px -35px;
 }
 
-.roadbook [data-addr-type="information"]:before,
+.roadbook [data-address-type="information"]:before,
 .roadbook [data-icon="amenity_information"]:before {
     content: "";
     width: 20px;
@@ -141,7 +141,7 @@
     background-position: -35px -35px;
 }
 
-.roadbook [data-addr-type="library"]:before,
+.roadbook [data-address-type="library"]:before,
 .roadbook [data-icon="amenity_library"]:before {
     content: "";
     width: 20px;
@@ -149,7 +149,7 @@
     background-position: -65px -35px;
 }
 
-.roadbook [data-addr-type="police"]:before,
+.roadbook [data-address-type="police"]:before,
 .roadbook [data-icon="amenity_police"]:before {
     content: "";
     width: 20px;
@@ -157,7 +157,7 @@
     background-position: -95px -35px;
 }
 
-.roadbook [data-addr-type="police2"]:before,
+.roadbook [data-address-type="police2"]:before,
 .roadbook [data-icon="amenity_police2"]:before {
     content: "";
     width: 20px;
@@ -165,7 +165,7 @@
     background-position: -125px -35px;
 }
 
-.roadbook [data-addr-type="post_box"]:before,
+.roadbook [data-address-type="post_box"]:before,
 .roadbook [data-icon="amenity_post_box"]:before {
     content: "";
     width: 20px;
@@ -173,7 +173,7 @@
     background-position: -155px -35px;
 }
 
-.roadbook [data-addr-type="post_office"]:before,
+.roadbook [data-address-type="post_office"]:before,
 .roadbook [data-icon="amenity_post_office"]:before {
     content: "";
     width: 20px;
@@ -181,7 +181,7 @@
     background-position: -185px -35px;
 }
 
-.roadbook [data-addr-type="prison"]:before,
+.roadbook [data-address-type="prison"]:before,
 .roadbook [data-icon="amenity_prison"]:before {
     content: "";
     width: 20px;
@@ -189,7 +189,7 @@
     background-position: -215px -35px;
 }
 
-.roadbook [data-addr-type="recycling"]:before,
+.roadbook [data-address-type="recycling"]:before,
 .roadbook [data-icon="amenity_recycling"]:before {
     content: "";
     width: 20px;
@@ -197,7 +197,7 @@
     background-position: -245px -35px;
 }
 
-.roadbook [data-addr-type="survey_point"]:before,
+.roadbook [data-address-type="survey_point"]:before,
 .roadbook [data-icon="amenity_survey_point"]:before {
     content: "";
     width: 20px;
@@ -205,7 +205,7 @@
     background-position: -275px -35px;
 }
 
-.roadbook [data-addr-type="telephone"]:before,
+.roadbook [data-address-type="telephone"]:before,
 .roadbook [data-icon="amenity_telephone"]:before {
     content: "";
     width: 20px;
@@ -213,7 +213,7 @@
     background-position: -305px -35px;
 }
 
-.roadbook [data-addr-type="toilets"]:before,
+.roadbook [data-address-type="toilets"]:before,
 .roadbook [data-icon="amenity_toilets"]:before {
     content: "";
     width: 20px;
@@ -221,7 +221,7 @@
     background-position: -335px -35px;
 }
 
-.roadbook [data-addr-type="toilets_disabled"]:before,
+.roadbook [data-address-type="toilets_disabled"]:before,
 .roadbook [data-icon="amenity_toilets_disabled"]:before {
     content: "";
     width: 20px;
@@ -229,7 +229,7 @@
     background-position: -365px -35px;
 }
 
-.roadbook [data-addr-type="toilets_men"]:before,
+.roadbook [data-address-type="toilets_men"]:before,
 .roadbook [data-icon="amenity_toilets_men"]:before {
     content: "";
     width: 20px;
@@ -237,7 +237,7 @@
     background-position: -395px -35px;
 }
 
-.roadbook [data-addr-type="toilets_women"]:before,
+.roadbook [data-address-type="toilets_women"]:before,
 .roadbook [data-icon="amenity_toilets_women"]:before {
     content: "";
     width: 20px;
@@ -245,7 +245,7 @@
     background-position: -5px -65px;
 }
 
-.roadbook [data-addr-type="waste_bin"]:before,
+.roadbook [data-address-type="waste_bin"]:before,
 .roadbook [data-icon="amenity_waste_bin"]:before {
     content: "";
     width: 20px;
@@ -253,7 +253,7 @@
     background-position: -35px -65px;
 }
 
-.roadbook [data-addr-type="bollard"]:before,
+.roadbook [data-address-type="bollard"]:before,
 .roadbook [data-icon="barrier_bollard"]:before {
     content: "";
     width: 20px;
@@ -261,7 +261,7 @@
     background-position: -65px -65px;
 }
 
-.roadbook [data-addr-type="enterance"]:before,
+.roadbook [data-address-type="enterance"]:before,
 .roadbook [data-icon="barrier_enterance"]:before {
     content: "";
     width: 20px;
@@ -269,7 +269,7 @@
     background-position: -95px -65px;
 }
 
-.roadbook [data-addr-type="gate"]:before,
+.roadbook [data-address-type="gate"]:before,
 .roadbook [data-icon="barrier_gate"]:before {
     content: "";
     width: 20px;
@@ -277,7 +277,7 @@
     background-position: -125px -65px;
 }
 
-.roadbook [data-addr-type="lift_gate"]:before,
+.roadbook [data-address-type="lift_gate"]:before,
 .roadbook [data-icon="barrier_lift_gate"]:before {
     content: "";
     width: 20px;
@@ -285,7 +285,7 @@
     background-position: -155px -65px;
 }
 
-.roadbook [data-addr-type="stile"]:before,
+.roadbook [data-address-type="stile"]:before,
 .roadbook [data-icon="barrier_stile"]:before {
     content: "";
     width: 20px;
@@ -293,7 +293,7 @@
     background-position: -185px -65px;
 }
 
-.roadbook [data-addr-type="toll_booth"]:before,
+.roadbook [data-address-type="toll_booth"]:before,
 .roadbook [data-icon="barrier_toll_booth"]:before {
     content: "";
     width: 20px;
@@ -301,7 +301,7 @@
     background-position: -215px -65px;
 }
 
-.roadbook [data-addr-type="nursery"]:before,
+.roadbook [data-address-type="nursery"]:before,
 .roadbook [data-icon="education_nursery"]:before {
     content: "";
     width: 20px;
@@ -309,7 +309,7 @@
     background-position: -245px -65px;
 }
 
-.roadbook [data-addr-type="school"]:before,
+.roadbook [data-address-type="school"]:before,
 .roadbook [data-icon="education_school"]:before {
     content: "";
     width: 20px;
@@ -317,7 +317,7 @@
     background-position: -275px -65px;
 }
 
-.roadbook [data-addr-type="university"]:before,
+.roadbook [data-address-type="university"]:before,
 .roadbook [data-icon="education_university"]:before {
     content: "";
     width: 20px;
@@ -325,7 +325,7 @@
     background-position: -305px -65px;
 }
 
-.roadbook [data-addr-type="bar"]:before,
+.roadbook [data-address-type="bar"]:before,
 .roadbook [data-icon="food_bar"]:before {
     content: "";
     width: 20px;
@@ -333,7 +333,7 @@
     background-position: -335px -65px;
 }
 
-.roadbook [data-addr-type="cafe"]:before,
+.roadbook [data-address-type="cafe"]:before,
 .roadbook [data-icon="food_cafe"]:before {
     content: "";
     width: 20px;
@@ -341,7 +341,7 @@
     background-position: -365px -65px;
 }
 
-.roadbook [data-addr-type="drinkingtap"]:before,
+.roadbook [data-address-type="drinkingtap"]:before,
 .roadbook [data-icon="food_drinkingtap"]:before {
     content: "";
     width: 20px;
@@ -349,7 +349,7 @@
     background-position: -395px -65px;
 }
 
-.roadbook [data-addr-type="fastfood"]:before,
+.roadbook [data-address-type="fastfood"]:before,
 .roadbook [data-icon="food_fastfood"]:before {
     content: "";
     width: 20px;
@@ -357,7 +357,7 @@
     background-position: -5px -95px;
 }
 
-.roadbook [data-addr-type="fastfood2"]:before,
+.roadbook [data-address-type="fastfood2"]:before,
 .roadbook [data-icon="food_fastfood2"]:before {
     content: "";
     width: 20px;
@@ -365,7 +365,7 @@
     background-position: -35px -95px;
 }
 
-.roadbook [data-addr-type="pub"]:before,
+.roadbook [data-address-type="pub"]:before,
 .roadbook [data-icon="food_pub"]:before {
     content: "";
     width: 20px;
@@ -373,7 +373,7 @@
     background-position: -65px -95px;
 }
 
-.roadbook [data-addr-type="restaurant"]:before,
+.roadbook [data-address-type="restaurant"]:before,
 .roadbook [data-icon="food_restaurant"]:before {
     content: "";
     width: 20px;
@@ -381,7 +381,7 @@
     background-position: -95px -95px;
 }
 
-.roadbook [data-addr-type="dentist"]:before,
+.roadbook [data-address-type="dentist"]:before,
 .roadbook [data-icon="health_dentist"]:before {
     content: "";
     width: 20px;
@@ -389,7 +389,7 @@
     background-position: -125px -95px;
 }
 
-.roadbook [data-addr-type="doctors"]:before,
+.roadbook [data-address-type="doctors"]:before,
 .roadbook [data-icon="health_doctors"]:before {
     content: "";
     width: 20px;
@@ -397,7 +397,7 @@
     background-position: -155px -95px;
 }
 
-.roadbook [data-addr-type="hospital"]:before,
+.roadbook [data-address-type="hospital"]:before,
 .roadbook [data-icon="health_hospital"]:before {
     content: "";
     width: 20px;
@@ -405,7 +405,7 @@
     background-position: -185px -95px;
 }
 
-.roadbook [data-addr-type="hospital_emergency"]:before,
+.roadbook [data-address-type="hospital_emergency"]:before,
 .roadbook [data-icon="health_hospital_emergency"]:before {
     content: "";
     width: 20px;
@@ -413,7 +413,7 @@
     background-position: -215px -95px;
 }
 
-.roadbook [data-addr-type="hospital_emergency2"]:before,
+.roadbook [data-address-type="hospital_emergency2"]:before,
 .roadbook [data-icon="health_hospital_emergency2"]:before {
     content: "";
     width: 20px;
@@ -421,7 +421,7 @@
     background-position: -245px -95px;
 }
 
-.roadbook [data-addr-type="opticians"]:before,
+.roadbook [data-address-type="opticians"]:before,
 .roadbook [data-icon="health_opticians"]:before {
     content: "";
     width: 20px;
@@ -429,7 +429,7 @@
     background-position: -275px -95px;
 }
 
-.roadbook [data-addr-type="pharmacy"]:before,
+.roadbook [data-address-type="pharmacy"]:before,
 .roadbook [data-icon="health_pharmacy"]:before {
     content: "";
     width: 20px;
@@ -437,7 +437,7 @@
     background-position: -305px -95px;
 }
 
-.roadbook [data-addr-type="pharmacy_dispensing"]:before,
+.roadbook [data-address-type="pharmacy_dispensing"]:before,
 .roadbook [data-icon="health_pharmacy_dispensing"]:before {
     content: "";
     width: 20px;
@@ -445,7 +445,7 @@
     background-position: -335px -95px;
 }
 
-.roadbook [data-addr-type="veterinary"]:before,
+.roadbook [data-address-type="veterinary"]:before,
 .roadbook [data-icon="health_veterinary"]:before {
     content: "";
     width: 20px;
@@ -453,7 +453,7 @@
     background-position: -365px -95px;
 }
 
-.roadbook [data-addr-type="coniferous"]:before,
+.roadbook [data-address-type="coniferous"]:before,
 .roadbook [data-icon="landuse_coniferous"]:before {
     content: "";
     width: 20px;
@@ -461,7 +461,7 @@
     background-position: -395px -95px;
 }
 
-.roadbook [data-addr-type="coniferous_and_deciduous"]:before,
+.roadbook [data-address-type="coniferous_and_deciduous"]:before,
 .roadbook [data-icon="landuse_coniferous_and_deciduous"]:before {
     content: "";
     width: 20px;
@@ -469,7 +469,7 @@
     background-position: -5px -125px;
 }
 
-.roadbook [data-addr-type="deciduous"]:before,
+.roadbook [data-address-type="deciduous"]:before,
 .roadbook [data-icon="landuse_deciduous"]:before {
     content: "";
     width: 20px;
@@ -477,7 +477,7 @@
     background-position: -35px -125px;
 }
 
-.roadbook [data-addr-type="grass"]:before,
+.roadbook [data-address-type="grass"]:before,
 .roadbook [data-icon="landuse_grass"]:before {
     content: "";
     width: 20px;
@@ -485,7 +485,7 @@
     background-position: -65px -125px;
 }
 
-.roadbook [data-addr-type="grasssvg"]:before,
+.roadbook [data-address-type="grasssvg"]:before,
 .roadbook [data-icon="landuse_grasssvg"]:before {
     content: "";
     width: 20px;
@@ -493,7 +493,7 @@
     background-position: -95px -125px;
 }
 
-.roadbook [data-addr-type="hills"]:before,
+.roadbook [data-address-type="hills"]:before,
 .roadbook [data-icon="landuse_hills"]:before {
     content: "";
     width: 20px;
@@ -501,7 +501,7 @@
     background-position: -125px -125px;
 }
 
-.roadbook [data-addr-type="quary"]:before,
+.roadbook [data-address-type="quary"]:before,
 .roadbook [data-icon="landuse_quary"]:before {
     content: "";
     width: 20px;
@@ -509,7 +509,7 @@
     background-position: -155px -125px;
 }
 
-.roadbook [data-addr-type="scrub"]:before,
+.roadbook [data-address-type="scrub"]:before,
 .roadbook [data-icon="landuse_scrub"]:before {
     content: "";
     width: 20px;
@@ -517,7 +517,7 @@
     background-position: -185px -125px;
 }
 
-.roadbook [data-addr-type="swamp"]:before,
+.roadbook [data-address-type="swamp"]:before,
 .roadbook [data-icon="landuse_swamp"]:before {
     content: "";
     width: 20px;
@@ -525,7 +525,7 @@
     background-position: -215px -125px;
 }
 
-.roadbook [data-addr-type="atm"]:before,
+.roadbook [data-address-type="atm"]:before,
 .roadbook [data-icon="money_atm"]:before {
     content: "";
     width: 20px;
@@ -533,7 +533,7 @@
     background-position: -245px -125px;
 }
 
-.roadbook [data-addr-type="atm2"]:before,
+.roadbook [data-address-type="atm2"]:before,
 .roadbook [data-icon="money_atm2"]:before {
     content: "";
     width: 20px;
@@ -541,7 +541,7 @@
     background-position: -275px -125px;
 }
 
-.roadbook [data-addr-type="bank"]:before,
+.roadbook [data-address-type="bank"]:before,
 .roadbook [data-icon="money_bank"]:before {
     content: "";
     width: 20px;
@@ -549,7 +549,7 @@
     background-position: -305px -125px;
 }
 
-.roadbook [data-addr-type="bank2"]:before,
+.roadbook [data-address-type="bank2"]:before,
 .roadbook [data-icon="money_bank2"]:before {
     content: "";
     width: 20px;
@@ -557,7 +557,7 @@
     background-position: -335px -125px;
 }
 
-.roadbook [data-addr-type="currency_exchange"]:before,
+.roadbook [data-address-type="currency_exchange"]:before,
 .roadbook [data-icon="money_currency_exchange"]:before {
     content: "";
     width: 20px;
@@ -565,7 +565,7 @@
     background-position: -365px -125px;
 }
 
-.roadbook [data-addr-type="place_of_worship"]:before,
+.roadbook [data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship"]:before {
     content: "";
     width: 20px;
@@ -573,7 +573,7 @@
     background-position: -395px -125px;
 }
 
-.roadbook [data-religion="bahai"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="bahai"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_bahai"]:before {
     content: "";
     width: 20px;
@@ -581,7 +581,7 @@
     background-position: -5px -155px;
 }
 
-.roadbook [data-religion="bahai3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="bahai3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_bahai3"]:before {
     content: "";
     width: 20px;
@@ -589,7 +589,7 @@
     background-position: -35px -155px;
 }
 
-.roadbook [data-religion="buddhist"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="buddhist"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_buddhist"]:before {
     content: "";
     width: 20px;
@@ -597,7 +597,7 @@
     background-position: -65px -155px;
 }
 
-.roadbook [data-religion="buddhist3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="buddhist3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_buddhist3"]:before {
     content: "";
     width: 20px;
@@ -605,7 +605,7 @@
     background-position: -95px -155px;
 }
 
-.roadbook [data-religion="christian"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="christian"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_christian"]:before {
     content: "";
     width: 20px;
@@ -613,7 +613,7 @@
     background-position: -125px -155px;
 }
 
-.roadbook [data-religion="christian3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="christian3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_christian3"]:before {
     content: "";
     width: 20px;
@@ -621,7 +621,7 @@
     background-position: -155px -155px;
 }
 
-.roadbook [data-religion="hindu"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="hindu"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_hindu"]:before {
     content: "";
     width: 20px;
@@ -629,7 +629,7 @@
     background-position: -185px -155px;
 }
 
-.roadbook [data-religion="hindu3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="hindu3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_hindu3"]:before {
     content: "";
     width: 20px;
@@ -637,7 +637,7 @@
     background-position: -215px -155px;
 }
 
-.roadbook [data-religion="islamic"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="islamic"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_islamic"]:before {
     content: "";
     width: 20px;
@@ -645,7 +645,7 @@
     background-position: -245px -155px;
 }
 
-.roadbook [data-religion="islamic3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="islamic3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_islamic3"]:before {
     content: "";
     width: 20px;
@@ -653,7 +653,7 @@
     background-position: -275px -155px;
 }
 
-.roadbook [data-religion="jain"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="jain"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_jain"]:before {
     content: "";
     width: 20px;
@@ -661,7 +661,7 @@
     background-position: -305px -155px;
 }
 
-.roadbook [data-religion="jain3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="jain3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_jain3"]:before {
     content: "";
     width: 20px;
@@ -669,7 +669,7 @@
     background-position: -335px -155px;
 }
 
-.roadbook [data-religion="jewish"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="jewish"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_jewish"]:before {
     content: "";
     width: 20px;
@@ -677,7 +677,7 @@
     background-position: -365px -155px;
 }
 
-.roadbook [data-religion="jewish3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="jewish3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_jewish3"]:before {
     content: "";
     width: 20px;
@@ -685,7 +685,7 @@
     background-position: -395px -155px;
 }
 
-.roadbook [data-religion="shinto"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="shinto"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_shinto"]:before {
     content: "";
     width: 20px;
@@ -693,7 +693,7 @@
     background-position: -5px -185px;
 }
 
-.roadbook [data-religion="shinto3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="shinto3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_shinto3"]:before {
     content: "";
     width: 20px;
@@ -701,7 +701,7 @@
     background-position: -35px -185px;
 }
 
-.roadbook [data-religion="sikh"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="sikh"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_sikh"]:before {
     content: "";
     width: 20px;
@@ -709,7 +709,7 @@
     background-position: -65px -185px;
 }
 
-.roadbook [data-religion="sikh3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="sikh3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_sikh3"]:before {
     content: "";
     width: 20px;
@@ -717,7 +717,7 @@
     background-position: -95px -185px;
 }
 
-.roadbook [data-religion="unknown3"][data-addr-type="place_of_worship"]:before,
+.roadbook [data-religion="unknown3"][data-address-type="place_of_worship"]:before,
 .roadbook [data-icon="place_of_worship_unknown3"]:before {
     content: "";
     width: 20px;
@@ -725,7 +725,7 @@
     background-position: -125px -185px;
 }
 
-.roadbook [data-addr-type="boundary_administrative"]:before,
+.roadbook [data-address-type="boundary_administrative"]:before,
 .roadbook [data-icon="poi_boundary_administrative"]:before {
     content: "";
     width: 20px;
@@ -733,7 +733,7 @@
     background-position: -155px -185px;
 }
 
-.roadbook [data-addr-type="bunker"]:before,
+.roadbook [data-address-type="bunker"]:before,
 .roadbook [data-icon="poi_bunker"]:before {
     content: "";
     width: 20px;
@@ -741,7 +741,7 @@
     background-position: -185px -185px;
 }
 
-.roadbook [data-addr-type="cave"]:before,
+.roadbook [data-address-type="cave"]:before,
 .roadbook [data-icon="poi_cave"]:before {
     content: "";
     width: 20px;
@@ -749,7 +749,7 @@
     background-position: -215px -185px;
 }
 
-.roadbook [data-addr-type="embassy"]:before,
+.roadbook [data-address-type="embassy"]:before,
 .roadbook [data-icon="poi_embassy"]:before {
     content: "";
     width: 20px;
@@ -757,7 +757,7 @@
     background-position: -245px -185px;
 }
 
-.roadbook [data-addr-type="embassy2"]:before,
+.roadbook [data-address-type="embassy2"]:before,
 .roadbook [data-icon="poi_embassy2"]:before {
     content: "";
     width: 20px;
@@ -765,7 +765,7 @@
     background-position: -275px -185px;
 }
 
-.roadbook [data-addr-type="military_bunker"]:before,
+.roadbook [data-address-type="military_bunker"]:before,
 .roadbook [data-icon="poi_military_bunker"]:before {
     content: "";
     width: 20px;
@@ -773,7 +773,7 @@
     background-position: -305px -185px;
 }
 
-.roadbook [data-addr-type="mine"]:before,
+.roadbook [data-address-type="mine"]:before,
 .roadbook [data-icon="poi_mine"]:before {
     content: "";
     width: 20px;
@@ -781,7 +781,7 @@
     background-position: -335px -185px;
 }
 
-.roadbook [data-addr-type="mine_abandoned"]:before,
+.roadbook [data-address-type="mine_abandoned"]:before,
 .roadbook [data-icon="poi_mine_abandoned"]:before {
     content: "";
     width: 20px;
@@ -789,7 +789,7 @@
     background-position: -365px -185px;
 }
 
-.roadbook [data-addr-type="peak"]:before,
+.roadbook [data-address-type="peak"]:before,
 .roadbook [data-icon="poi_peak"]:before {
     content: "";
     width: 20px;
@@ -797,7 +797,7 @@
     background-position: -395px -185px;
 }
 
-.roadbook [data-addr-type="city"]:before,
+.roadbook [data-address-type="city"]:before,
 .roadbook [data-icon="poi_place_city"]:before {
     content: "";
     width: 20px;
@@ -805,7 +805,7 @@
     background-position: -5px -215px;
 }
 
-.roadbook [data-addr-type="town"]:before,
+.roadbook [data-address-type="town"]:before,
 .roadbook [data-icon="poi_place_town"]:before {
     content: "";
     width: 20px;
@@ -813,7 +813,7 @@
     background-position: -35px -215px;
 }
 
-.roadbook [data-addr-type="village"]:before,
+.roadbook [data-address-type="village"]:before,
 .roadbook [data-icon="poi_place_village"]:before {
     content: "";
     width: 20px;
@@ -821,7 +821,7 @@
     background-position: -65px -215px;
 }
 
-.roadbook [data-addr-type="point_of_interest"]:before,
+.roadbook [data-address-type="point_of_interest"]:before,
 .roadbook [data-icon="poi_point_of_interest"]:before {
     content: "";
     width: 20px;
@@ -829,7 +829,7 @@
     background-position: -95px -215px;
 }
 
-.roadbook [data-addr-type="tower_communications"]:before,
+.roadbook [data-address-type="tower_communications"]:before,
 .roadbook [data-icon="poi_tower_communications"]:before {
     content: "";
     width: 20px;
@@ -837,7 +837,7 @@
     background-position: -125px -215px;
 }
 
-.roadbook [data-addr-type="tower_power"]:before,
+.roadbook [data-address-type="tower_power"]:before,
 .roadbook [data-icon="poi_tower_power"]:before {
     content: "";
     width: 20px;
@@ -845,7 +845,7 @@
     background-position: -155px -215px;
 }
 
-.roadbook [data-addr-type="tower_water"]:before,
+.roadbook [data-address-type="tower_water"]:before,
 .roadbook [data-icon="poi_tower_water"]:before {
     content: "";
     width: 20px;
@@ -853,7 +853,7 @@
     background-position: -185px -215px;
 }
 
-.roadbook [data-addr-type="alcohol"]:before,
+.roadbook [data-address-type="alcohol"]:before,
 .roadbook [data-icon="shopping_alcohol"]:before {
     content: "";
     width: 20px;
@@ -861,7 +861,7 @@
     background-position: -215px -215px;
 }
 
-.roadbook [data-addr-type="bakery"]:before,
+.roadbook [data-address-type="bakery"]:before,
 .roadbook [data-icon="shopping_bakery"]:before {
     content: "";
     width: 20px;
@@ -869,7 +869,7 @@
     background-position: -245px -215px;
 }
 
-.roadbook [data-addr-type="bicycle"]:before,
+.roadbook [data-address-type="bicycle"]:before,
 .roadbook [data-icon="shopping_bicycle"]:before {
     content: "";
     width: 20px;
@@ -877,7 +877,7 @@
     background-position: -275px -215px;
 }
 
-.roadbook [data-addr-type="book"]:before,
+.roadbook [data-address-type="book"]:before,
 .roadbook [data-icon="shopping_book"]:before {
     content: "";
     width: 20px;
@@ -885,7 +885,7 @@
     background-position: -305px -215px;
 }
 
-.roadbook [data-addr-type="butcher"]:before,
+.roadbook [data-address-type="butcher"]:before,
 .roadbook [data-icon="shopping_butcher"]:before {
     content: "";
     width: 20px;
@@ -893,7 +893,7 @@
     background-position: -335px -215px;
 }
 
-.roadbook [data-addr-type="car"]:before,
+.roadbook [data-address-type="car"]:before,
 .roadbook [data-icon="shopping_car"]:before {
     content: "";
     width: 20px;
@@ -901,7 +901,7 @@
     background-position: -365px -215px;
 }
 
-.roadbook [data-addr-type="car_repair"]:before,
+.roadbook [data-address-type="car_repair"]:before,
 .roadbook [data-icon="shopping_car_repair"]:before {
     content: "";
     width: 20px;
@@ -909,7 +909,7 @@
     background-position: -395px -215px;
 }
 
-.roadbook [data-addr-type="clothes"]:before,
+.roadbook [data-address-type="clothes"]:before,
 .roadbook [data-icon="shopping_clothes"]:before {
     content: "";
     width: 20px;
@@ -917,7 +917,7 @@
     background-position: -5px -245px;
 }
 
-.roadbook [data-addr-type="confectionery"]:before,
+.roadbook [data-address-type="confectionery"]:before,
 .roadbook [data-icon="shopping_confectionery"]:before {
     content: "";
     width: 20px;
@@ -925,7 +925,7 @@
     background-position: -35px -245px;
 }
 
-.roadbook [data-addr-type="convenience"]:before,
+.roadbook [data-address-type="convenience"]:before,
 .roadbook [data-icon="shopping_convenience"]:before {
     content: "";
     width: 20px;
@@ -933,7 +933,7 @@
     background-position: -65px -245px;
 }
 
-.roadbook [data-addr-type="diy"]:before,
+.roadbook [data-address-type="diy"]:before,
 .roadbook [data-icon="shopping_diy"]:before {
     content: "";
     width: 20px;
@@ -941,7 +941,7 @@
     background-position: -95px -245px;
 }
 
-.roadbook [data-addr-type="estateagent"]:before,
+.roadbook [data-address-type="estateagent"]:before,
 .roadbook [data-icon="shopping_estateagent"]:before {
     content: "";
     width: 20px;
@@ -949,7 +949,7 @@
     background-position: -125px -245px;
 }
 
-.roadbook [data-addr-type="estateagent2"]:before,
+.roadbook [data-address-type="estateagent2"]:before,
 .roadbook [data-icon="shopping_estateagent2"]:before {
     content: "";
     width: 20px;
@@ -957,7 +957,7 @@
     background-position: -155px -245px;
 }
 
-.roadbook [data-addr-type="estateagent3"]:before,
+.roadbook [data-address-type="estateagent3"]:before,
 .roadbook [data-icon="shopping_estateagent3"]:before {
     content: "";
     width: 20px;
@@ -965,7 +965,7 @@
     background-position: -185px -245px;
 }
 
-.roadbook [data-addr-type="fish"]:before,
+.roadbook [data-address-type="fish"]:before,
 .roadbook [data-icon="shopping_fish"]:before {
     content: "";
     width: 20px;
@@ -973,7 +973,7 @@
     background-position: -215px -245px;
 }
 
-.roadbook [data-addr-type="garden_centre"]:before,
+.roadbook [data-address-type="garden_centre"]:before,
 .roadbook [data-icon="shopping_garden_centre"]:before {
     content: "";
     width: 20px;
@@ -981,7 +981,7 @@
     background-position: -245px -245px;
 }
 
-.roadbook [data-addr-type="gift"]:before,
+.roadbook [data-address-type="gift"]:before,
 .roadbook [data-icon="shopping_gift"]:before {
     content: "";
     width: 20px;
@@ -989,7 +989,7 @@
     background-position: -275px -245px;
 }
 
-.roadbook [data-addr-type="greengrocer"]:before,
+.roadbook [data-address-type="greengrocer"]:before,
 .roadbook [data-icon="shopping_greengrocer"]:before {
     content: "";
     width: 20px;
@@ -997,7 +997,7 @@
     background-position: -305px -245px;
 }
 
-.roadbook [data-addr-type="hairdresser"]:before,
+.roadbook [data-address-type="hairdresser"]:before,
 .roadbook [data-icon="shopping_hairdresser"]:before {
     content: "";
     width: 20px;
@@ -1005,7 +1005,7 @@
     background-position: -335px -245px;
 }
 
-.roadbook [data-addr-type="hifi"]:before,
+.roadbook [data-address-type="hifi"]:before,
 .roadbook [data-icon="shopping_hifi"]:before {
     content: "";
     width: 20px;
@@ -1013,7 +1013,7 @@
     background-position: -365px -245px;
 }
 
-.roadbook [data-addr-type="jewelry"]:before,
+.roadbook [data-address-type="jewelry"]:before,
 .roadbook [data-icon="shopping_jewelry"]:before {
     content: "";
     width: 20px;
@@ -1021,7 +1021,7 @@
     background-position: -395px -245px;
 }
 
-.roadbook [data-addr-type="laundrette"]:before,
+.roadbook [data-address-type="laundrette"]:before,
 .roadbook [data-icon="shopping_laundrette"]:before {
     content: "";
     width: 20px;
@@ -1029,7 +1029,7 @@
     background-position: -5px -275px;
 }
 
-.roadbook [data-addr-type="mobile_phone"]:before,
+.roadbook [data-address-type="mobile_phone"]:before,
 .roadbook [data-icon="shopping_mobile_phone"]:before {
     content: "";
     width: 20px;
@@ -1037,7 +1037,7 @@
     background-position: -35px -275px;
 }
 
-.roadbook [data-addr-type="motorcycle"]:before,
+.roadbook [data-address-type="motorcycle"]:before,
 .roadbook [data-icon="shopping_motorcycle"]:before {
     content: "";
     width: 20px;
@@ -1045,7 +1045,7 @@
     background-position: -65px -275px;
 }
 
-.roadbook [data-addr-type="music"]:before,
+.roadbook [data-address-type="music"]:before,
 .roadbook [data-icon="shopping_music"]:before {
     content: "";
     width: 20px;
@@ -1053,7 +1053,7 @@
     background-position: -95px -275px;
 }
 
-.roadbook [data-addr-type="pet"]:before,
+.roadbook [data-address-type="pet"]:before,
 .roadbook [data-icon="shopping_pet"]:before {
     content: "";
     width: 20px;
@@ -1061,7 +1061,7 @@
     background-position: -125px -275px;
 }
 
-.roadbook [data-addr-type="pet2"]:before,
+.roadbook [data-address-type="pet2"]:before,
 .roadbook [data-icon="shopping_pet2"]:before {
     content: "";
     width: 20px;
@@ -1069,7 +1069,7 @@
     background-position: -155px -275px;
 }
 
-.roadbook [data-addr-type="photo"]:before,
+.roadbook [data-address-type="photo"]:before,
 .roadbook [data-icon="shopping_photo"]:before {
     content: "";
     width: 20px;
@@ -1077,7 +1077,7 @@
     background-position: -185px -275px;
 }
 
-.roadbook [data-addr-type="supermarket"]:before,
+.roadbook [data-address-type="supermarket"]:before,
 .roadbook [data-icon="shopping_supermarket"]:before {
     content: "";
     width: 20px;
@@ -1085,7 +1085,7 @@
     background-position: -215px -275px;
 }
 
-.roadbook [data-addr-type="tackle"]:before,
+.roadbook [data-address-type="tackle"]:before,
 .roadbook [data-icon="shopping_tackle"]:before {
     content: "";
     width: 20px;
@@ -1093,7 +1093,7 @@
     background-position: -245px -275px;
 }
 
-.roadbook [data-addr-type="video_rental"]:before,
+.roadbook [data-address-type="video_rental"]:before,
 .roadbook [data-icon="shopping_video_rental"]:before {
     content: "";
     width: 20px;
@@ -1101,7 +1101,7 @@
     background-position: -275px -275px;
 }
 
-.roadbook [data-addr-type="archery"]:before,
+.roadbook [data-address-type="archery"]:before,
 .roadbook [data-icon="sport_archery"]:before {
     content: "";
     width: 20px;
@@ -1109,7 +1109,7 @@
     background-position: -305px -275px;
 }
 
-.roadbook [data-addr-type="baseball"]:before,
+.roadbook [data-address-type="baseball"]:before,
 .roadbook [data-icon="sport_baseball"]:before {
     content: "";
     width: 20px;
@@ -1117,7 +1117,7 @@
     background-position: -335px -275px;
 }
 
-.roadbook [data-addr-type="cricket"]:before,
+.roadbook [data-address-type="cricket"]:before,
 .roadbook [data-icon="sport_cricket"]:before {
     content: "";
     width: 20px;
@@ -1125,7 +1125,7 @@
     background-position: -365px -275px;
 }
 
-.roadbook [data-addr-type="diving"]:before,
+.roadbook [data-address-type="diving"]:before,
 .roadbook [data-icon="sport_diving"]:before {
     content: "";
     width: 20px;
@@ -1133,7 +1133,7 @@
     background-position: -395px -275px;
 }
 
-.roadbook [data-addr-type="golf"]:before,
+.roadbook [data-address-type="golf"]:before,
 .roadbook [data-icon="sport_golf"]:before {
     content: "";
     width: 20px;
@@ -1141,7 +1141,7 @@
     background-position: -5px -305px;
 }
 
-.roadbook [data-addr-type="gym"]:before,
+.roadbook [data-address-type="gym"]:before,
 .roadbook [data-icon="sport_gym"]:before {
     content: "";
     width: 20px;
@@ -1149,7 +1149,7 @@
     background-position: -35px -305px;
 }
 
-.roadbook [data-addr-type="gymnasium"]:before,
+.roadbook [data-address-type="gymnasium"]:before,
 .roadbook [data-icon="sport_gymnasium"]:before {
     content: "";
     width: 20px;
@@ -1157,7 +1157,7 @@
     background-position: -65px -305px;
 }
 
-.roadbook [data-addr-type="gymnasium2"]:before,
+.roadbook [data-address-type="gymnasium2"]:before,
 .roadbook [data-icon="sport_gymnasium2"]:before {
     content: "";
     width: 20px;
@@ -1165,7 +1165,7 @@
     background-position: -95px -305px;
 }
 
-.roadbook [data-addr-type="hillclimbing"]:before,
+.roadbook [data-address-type="hillclimbing"]:before,
 .roadbook [data-icon="sport_hillclimbing"]:before {
     content: "";
     width: 20px;
@@ -1173,7 +1173,7 @@
     background-position: -125px -305px;
 }
 
-.roadbook [data-addr-type="horse_racing"]:before,
+.roadbook [data-address-type="horse_racing"]:before,
 .roadbook [data-icon="sport_horse_racing"]:before {
     content: "";
     width: 20px;
@@ -1181,7 +1181,7 @@
     background-position: -155px -305px;
 }
 
-.roadbook [data-addr-type="iceskating"]:before,
+.roadbook [data-address-type="iceskating"]:before,
 .roadbook [data-icon="sport_iceskating"]:before {
     content: "";
     width: 20px;
@@ -1189,7 +1189,7 @@
     background-position: -185px -305px;
 }
 
-.roadbook [data-addr-type="jetski"]:before,
+.roadbook [data-address-type="jetski"]:before,
 .roadbook [data-icon="sport_jetski"]:before {
     content: "";
     width: 20px;
@@ -1197,7 +1197,7 @@
     background-position: -215px -305px;
 }
 
-.roadbook [data-addr-type="leisure_centre"]:before,
+.roadbook [data-address-type="leisure_centre"]:before,
 .roadbook [data-icon="sport_leisure_centre"]:before {
     content: "";
     width: 20px;
@@ -1205,7 +1205,7 @@
     background-position: -245px -305px;
 }
 
-.roadbook [data-addr-type="motorracing"]:before,
+.roadbook [data-address-type="motorracing"]:before,
 .roadbook [data-icon="sport_motorracing"]:before {
     content: "";
     width: 20px;
@@ -1213,7 +1213,7 @@
     background-position: -275px -305px;
 }
 
-.roadbook [data-addr-type="playground"]:before,
+.roadbook [data-address-type="playground"]:before,
 .roadbook [data-icon="sport_playground"]:before {
     content: "";
     width: 20px;
@@ -1221,7 +1221,7 @@
     background-position: -305px -305px;
 }
 
-.roadbook [data-addr-type="sailing"]:before,
+.roadbook [data-address-type="sailing"]:before,
 .roadbook [data-icon="sport_sailing"]:before {
     content: "";
     width: 20px;
@@ -1229,7 +1229,7 @@
     background-position: -335px -305px;
 }
 
-.roadbook [data-addr-type="skiing_crosscountry"]:before,
+.roadbook [data-address-type="skiing_crosscountry"]:before,
 .roadbook [data-icon="sport_skiing_crosscountry"]:before {
     content: "";
     width: 20px;
@@ -1237,7 +1237,7 @@
     background-position: -365px -305px;
 }
 
-.roadbook [data-addr-type="skiing_downhill"]:before,
+.roadbook [data-address-type="skiing_downhill"]:before,
 .roadbook [data-icon="sport_skiing_downhill"]:before {
     content: "";
     width: 20px;
@@ -1245,7 +1245,7 @@
     background-position: -395px -305px;
 }
 
-.roadbook [data-addr-type="snooker"]:before,
+.roadbook [data-address-type="snooker"]:before,
 .roadbook [data-icon="sport_snooker"]:before {
     content: "";
     width: 20px;
@@ -1253,7 +1253,7 @@
     background-position: -5px -335px;
 }
 
-.roadbook [data-addr-type="soccer"]:before,
+.roadbook [data-address-type="soccer"]:before,
 .roadbook [data-icon="sport_soccer"]:before {
     content: "";
     width: 20px;
@@ -1261,7 +1261,7 @@
     background-position: -35px -335px;
 }
 
-.roadbook [data-addr-type="swimming_indoor"]:before,
+.roadbook [data-address-type="swimming_indoor"]:before,
 .roadbook [data-icon="sport_swimming_indoor"]:before {
     content: "";
     width: 20px;
@@ -1269,7 +1269,7 @@
     background-position: -65px -335px;
 }
 
-.roadbook [data-addr-type="swimming_outdoor"]:before,
+.roadbook [data-address-type="swimming_outdoor"]:before,
 .roadbook [data-icon="sport_swimming_outdoor"]:before {
     content: "";
     width: 20px;
@@ -1277,7 +1277,7 @@
     background-position: -95px -335px;
 }
 
-.roadbook [data-addr-type="tennis"]:before,
+.roadbook [data-address-type="tennis"]:before,
 .roadbook [data-icon="sport_tennis"]:before {
     content: "";
     width: 20px;
@@ -1285,7 +1285,7 @@
     background-position: -125px -335px;
 }
 
-.roadbook [data-addr-type="windsurfing"]:before,
+.roadbook [data-address-type="windsurfing"]:before,
 .roadbook [data-icon="sport_windsurfing"]:before {
     content: "";
     width: 20px;
@@ -1293,7 +1293,7 @@
     background-position: -155px -335px;
 }
 
-.roadbook [data-addr-type="archaeological"]:before,
+.roadbook [data-address-type="archaeological"]:before,
 .roadbook [data-icon="tourist_archaeological"]:before {
     content: "";
     width: 20px;
@@ -1301,7 +1301,7 @@
     background-position: -185px -335px;
 }
 
-.roadbook [data-addr-type="archaeological2"]:before,
+.roadbook [data-address-type="archaeological2"]:before,
 .roadbook [data-icon="tourist_archaeological2"]:before {
     content: "";
     width: 20px;
@@ -1309,7 +1309,7 @@
     background-position: -215px -335px;
 }
 
-.roadbook [data-addr-type="art_gallery"]:before,
+.roadbook [data-address-type="art_gallery"]:before,
 .roadbook [data-icon="tourist_art_gallery"]:before {
     content: "";
     width: 20px;
@@ -1317,7 +1317,7 @@
     background-position: -245px -335px;
 }
 
-.roadbook [data-addr-type="art_gallery2"]:before,
+.roadbook [data-address-type="art_gallery2"]:before,
 .roadbook [data-icon="tourist_art_gallery2"]:before {
     content: "";
     width: 20px;
@@ -1325,7 +1325,7 @@
     background-position: -275px -335px;
 }
 
-.roadbook [data-addr-type="battlefield"]:before,
+.roadbook [data-address-type="battlefield"]:before,
 .roadbook [data-icon="tourist_battlefield"]:before {
     content: "";
     width: 20px;
@@ -1333,7 +1333,7 @@
     background-position: -305px -335px;
 }
 
-.roadbook [data-addr-type="beach"]:before,
+.roadbook [data-address-type="beach"]:before,
 .roadbook [data-icon="tourist_beach"]:before {
     content: "";
     width: 20px;
@@ -1341,7 +1341,7 @@
     background-position: -335px -335px;
 }
 
-.roadbook [data-addr-type="casino"]:before,
+.roadbook [data-address-type="casino"]:before,
 .roadbook [data-icon="tourist_casino"]:before {
     content: "";
     width: 20px;
@@ -1349,7 +1349,7 @@
     background-position: -365px -335px;
 }
 
-.roadbook [data-addr-type="castle"]:before,
+.roadbook [data-address-type="castle"]:before,
 .roadbook [data-icon="tourist_castle"]:before {
     content: "";
     width: 20px;
@@ -1357,7 +1357,7 @@
     background-position: -395px -335px;
 }
 
-.roadbook [data-addr-type="cinema"]:before,
+.roadbook [data-address-type="cinema"]:before,
 .roadbook [data-icon="tourist_cinema"]:before {
     content: "";
     width: 20px;
@@ -1365,7 +1365,7 @@
     background-position: -5px -365px;
 }
 
-.roadbook [data-addr-type="cinema2"]:before,
+.roadbook [data-address-type="cinema2"]:before,
 .roadbook [data-icon="tourist_cinema2"]:before {
     content: "";
     width: 20px;
@@ -1373,7 +1373,7 @@
     background-position: -35px -365px;
 }
 
-.roadbook [data-addr-type="fountain"]:before,
+.roadbook [data-address-type="fountain"]:before,
 .roadbook [data-icon="tourist_fountain"]:before {
     content: "";
     width: 20px;
@@ -1381,7 +1381,7 @@
     background-position: -65px -365px;
 }
 
-.roadbook [data-addr-type="memorial"]:before,
+.roadbook [data-address-type="memorial"]:before,
 .roadbook [data-icon="tourist_memorial"]:before {
     content: "";
     width: 20px;
@@ -1389,7 +1389,7 @@
     background-position: -95px -365px;
 }
 
-.roadbook [data-addr-type="monument"]:before,
+.roadbook [data-address-type="monument"]:before,
 .roadbook [data-icon="tourist_monument"]:before {
     content: "";
     width: 20px;
@@ -1397,7 +1397,7 @@
     background-position: -125px -365px;
 }
 
-.roadbook [data-addr-type="museum"]:before,
+.roadbook [data-address-type="museum"]:before,
 .roadbook [data-icon="tourist_museum"]:before {
     content: "";
     width: 20px;
@@ -1405,7 +1405,7 @@
     background-position: -155px -365px;
 }
 
-.roadbook [data-addr-type="picnic"]:before,
+.roadbook [data-address-type="picnic"]:before,
 .roadbook [data-icon="tourist_picnic"]:before {
     content: "";
     width: 20px;
@@ -1413,7 +1413,7 @@
     background-position: -185px -365px;
 }
 
-.roadbook [data-addr-type="ruin"]:before,
+.roadbook [data-address-type="ruin"]:before,
 .roadbook [data-icon="tourist_ruin"]:before {
     content: "";
     width: 20px;
@@ -1421,7 +1421,7 @@
     background-position: -215px -365px;
 }
 
-.roadbook [data-addr-type="steam_train"]:before,
+.roadbook [data-address-type="steam_train"]:before,
 .roadbook [data-icon="tourist_steam_train"]:before {
     content: "";
     width: 20px;
@@ -1429,7 +1429,7 @@
     background-position: -245px -365px;
 }
 
-.roadbook [data-addr-type="theatre"]:before,
+.roadbook [data-address-type="theatre"]:before,
 .roadbook [data-icon="tourist_theatre"]:before {
     content: "";
     width: 20px;
@@ -1437,7 +1437,7 @@
     background-position: -275px -365px;
 }
 
-.roadbook [data-addr-type="view_point"]:before,
+.roadbook [data-address-type="view_point"]:before,
 .roadbook [data-icon="tourist_view_point"]:before {
     content: "";
     width: 20px;
@@ -1445,7 +1445,7 @@
     background-position: -305px -365px;
 }
 
-.roadbook [data-addr-type="waterwheel"]:before,
+.roadbook [data-address-type="waterwheel"]:before,
 .roadbook [data-icon="tourist_waterwheel"]:before {
     content: "";
     width: 20px;
@@ -1453,7 +1453,7 @@
     background-position: -335px -365px;
 }
 
-.roadbook [data-addr-type="windmill"]:before,
+.roadbook [data-address-type="windmill"]:before,
 .roadbook [data-icon="tourist_windmill"]:before {
     content: "";
     width: 20px;
@@ -1461,7 +1461,7 @@
     background-position: -365px -365px;
 }
 
-.roadbook [data-addr-type="wreck"]:before,
+.roadbook [data-address-type="wreck"]:before,
 .roadbook [data-icon="tourist_wreck"]:before {
     content: "";
     width: 20px;
@@ -1469,7 +1469,7 @@
     background-position: -395px -365px;
 }
 
-.roadbook [data-addr-type="zoo"]:before,
+.roadbook [data-address-type="zoo"]:before,
 .roadbook [data-icon="tourist_zoo"]:before {
     content: "";
     width: 20px;
@@ -1477,7 +1477,7 @@
     background-position: -5px -395px;
 }
 
-.roadbook [data-addr-type="aerodrome"]:before,
+.roadbook [data-address-type="aerodrome"]:before,
 .roadbook [data-icon="transport_aerodrome"]:before {
     content: "";
     width: 20px;
@@ -1485,7 +1485,7 @@
     background-position: -35px -395px;
 }
 
-.roadbook [data-addr-type="aerodrome2"]:before,
+.roadbook [data-address-type="aerodrome2"]:before,
 .roadbook [data-icon="transport_aerodrome2"]:before {
     content: "";
     width: 20px;
@@ -1493,7 +1493,7 @@
     background-position: -65px -395px;
 }
 
-.roadbook [data-addr-type="airport"]:before,
+.roadbook [data-address-type="airport"]:before,
 .roadbook [data-icon="transport_airport"]:before {
     content: "";
     width: 20px;
@@ -1501,7 +1501,7 @@
     background-position: -95px -395px;
 }
 
-.roadbook [data-addr-type="airport2"]:before,
+.roadbook [data-address-type="airport2"]:before,
 .roadbook [data-icon="transport_airport2"]:before {
     content: "";
     width: 20px;
@@ -1509,7 +1509,7 @@
     background-position: -125px -395px;
 }
 
-.roadbook [data-addr-type="bus_station"]:before,
+.roadbook [data-address-type="bus_station"]:before,
 .roadbook [data-icon="transport_bus_station"]:before {
     content: "";
     width: 20px;
@@ -1517,7 +1517,7 @@
     background-position: -155px -395px;
 }
 
-.roadbook [data-addr-type="bus_stop"]:before,
+.roadbook [data-address-type="bus_stop"]:before,
 .roadbook [data-icon="transport_bus_stop"]:before {
     content: "";
     width: 20px;
@@ -1525,7 +1525,7 @@
     background-position: -185px -395px;
 }
 
-.roadbook [data-addr-type="bus_stop2"]:before,
+.roadbook [data-address-type="bus_stop2"]:before,
 .roadbook [data-icon="transport_bus_stop2"]:before {
     content: "";
     width: 20px;
@@ -1533,7 +1533,7 @@
     background-position: -215px -395px;
 }
 
-.roadbook [data-addr-type="car_share"]:before,
+.roadbook [data-address-type="car_share"]:before,
 .roadbook [data-icon="transport_car_share"]:before {
     content: "";
     width: 20px;
@@ -1541,7 +1541,7 @@
     background-position: -245px -395px;
 }
 
-.roadbook [data-addr-type="ford"]:before,
+.roadbook [data-address-type="ford"]:before,
 .roadbook [data-icon="transport_ford"]:before {
     content: "";
     width: 20px;
@@ -1549,7 +1549,7 @@
     background-position: -275px -395px;
 }
 
-.roadbook [data-addr-type="fuel"]:before,
+.roadbook [data-address-type="fuel"]:before,
 .roadbook [data-icon="transport_fuel"]:before {
     content: "";
     width: 20px;
@@ -1557,7 +1557,7 @@
     background-position: -305px -395px;
 }
 
-.roadbook [data-addr-type="fuel_lpg"]:before,
+.roadbook [data-address-type="fuel_lpg"]:before,
 .roadbook [data-icon="transport_fuel_lpg"]:before {
     content: "";
     width: 20px;
@@ -1565,7 +1565,7 @@
     background-position: -335px -395px;
 }
 
-.roadbook [data-addr-type="lighthouse"]:before,
+.roadbook [data-address-type="lighthouse"]:before,
 .roadbook [data-icon="transport_lighthouse"]:before {
     content: "";
     width: 20px;
@@ -1573,7 +1573,7 @@
     background-position: -365px -395px;
 }
 
-.roadbook [data-addr-type="marina"]:before,
+.roadbook [data-address-type="marina"]:before,
 .roadbook [data-icon="transport_marina"]:before {
     content: "";
     width: 20px;
@@ -1581,7 +1581,7 @@
     background-position: -395px -395px;
 }
 
-.roadbook [data-addr-type="parking"]:before,
+.roadbook [data-address-type="parking"]:before,
 .roadbook [data-icon="transport_parking"]:before {
     content: "";
     width: 20px;
@@ -1589,7 +1589,7 @@
     background-position: -425px -5px;
 }
 
-.roadbook [data-addr-type="parking_bicycle"]:before,
+.roadbook [data-address-type="parking_bicycle"]:before,
 .roadbook [data-icon="transport_parking_bicycle"]:before {
     content: "";
     width: 20px;
@@ -1597,7 +1597,7 @@
     background-position: -425px -35px;
 }
 
-.roadbook [data-addr-type="parking_car"]:before,
+.roadbook [data-address-type="parking_car"]:before,
 .roadbook [data-icon="transport_parking_car"]:before {
     content: "";
     width: 20px;
@@ -1605,7 +1605,7 @@
     background-position: -425px -65px;
 }
 
-.roadbook [data-addr-type="parking_car_paid"]:before,
+.roadbook [data-address-type="parking_car_paid"]:before,
 .roadbook [data-icon="transport_parking_car_paid"]:before {
     content: "";
     width: 20px;
@@ -1613,7 +1613,7 @@
     background-position: -425px -95px;
 }
 
-.roadbook [data-addr-type="parking_disabled"]:before,
+.roadbook [data-address-type="parking_disabled"]:before,
 .roadbook [data-icon="transport_parking_disabled"]:before {
     content: "";
     width: 20px;
@@ -1621,7 +1621,7 @@
     background-position: -425px -125px;
 }
 
-.roadbook [data-addr-type="parking_private"]:before,
+.roadbook [data-address-type="parking_private"]:before,
 .roadbook [data-icon="transport_parking_private"]:before {
     content: "";
     width: 20px;
@@ -1629,7 +1629,7 @@
     background-position: -425px -155px;
 }
 
-.roadbook [data-addr-type="parking_private2"]:before,
+.roadbook [data-address-type="parking_private2"]:before,
 .roadbook [data-icon="transport_parking_private2"]:before {
     content: "";
     width: 20px;
@@ -1637,7 +1637,7 @@
     background-position: -425px -185px;
 }
 
-.roadbook [data-addr-type="parking_private3"]:before,
+.roadbook [data-address-type="parking_private3"]:before,
 .roadbook [data-icon="transport_parking_private3"]:before {
     content: "";
     width: 20px;
@@ -1645,7 +1645,7 @@
     background-position: -425px -215px;
 }
 
-.roadbook [data-addr-type="port"]:before,
+.roadbook [data-address-type="port"]:before,
 .roadbook [data-icon="transport_port"]:before {
     content: "";
     width: 20px;
@@ -1653,7 +1653,7 @@
     background-position: -425px -245px;
 }
 
-.roadbook [data-addr-type="rental_bicycle"]:before,
+.roadbook [data-address-type="rental_bicycle"]:before,
 .roadbook [data-icon="transport_rental_bicycle"]:before {
     content: "";
     width: 20px;
@@ -1661,7 +1661,7 @@
     background-position: -425px -275px;
 }
 
-.roadbook [data-addr-type="rental_car"]:before,
+.roadbook [data-address-type="rental_car"]:before,
 .roadbook [data-icon="transport_rental_car"]:before {
     content: "";
     width: 20px;
@@ -1669,7 +1669,7 @@
     background-position: -425px -305px;
 }
 
-.roadbook [data-addr-type="roundabout_anticlockwise"]:before,
+.roadbook [data-address-type="roundabout_anticlockwise"]:before,
 .roadbook [data-icon="transport_roundabout_anticlockwise"]:before {
     content: "";
     width: 20px;
@@ -1677,7 +1677,7 @@
     background-position: -425px -335px;
 }
 
-.roadbook [data-addr-type="roundabout_clockwise"]:before,
+.roadbook [data-address-type="roundabout_clockwise"]:before,
 .roadbook [data-icon="transport_roundabout_clockwise"]:before {
     content: "";
     width: 20px;
@@ -1685,7 +1685,7 @@
     background-position: -425px -365px;
 }
 
-.roadbook [data-addr-type="taxi_rank"]:before,
+.roadbook [data-address-type="taxi_rank"]:before,
 .roadbook [data-icon="transport_taxi_rank"]:before {
     content: "";
     width: 20px;
@@ -1693,7 +1693,7 @@
     background-position: -425px -395px;
 }
 
-.roadbook [data-addr-type="traffic_lights"]:before,
+.roadbook [data-address-type="traffic_lights"]:before,
 .roadbook [data-icon="transport_traffic_lights"]:before {
     content: "";
     width: 20px;
@@ -1701,7 +1701,7 @@
     background-position: -5px -425px;
 }
 
-.roadbook [data-addr-type="train_station"]:before,
+.roadbook [data-address-type="train_station"]:before,
 .roadbook [data-icon="transport_train_station"]:before {
     content: "";
     width: 20px;
@@ -1709,7 +1709,7 @@
     background-position: -35px -425px;
 }
 
-.roadbook [data-addr-type="train_station2"]:before,
+.roadbook [data-address-type="train_station2"]:before,
 .roadbook [data-icon="transport_train_station2"]:before {
     content: "";
     width: 20px;
@@ -1717,7 +1717,7 @@
     background-position: -65px -425px;
 }
 
-.roadbook [data-addr-type="tram_stop"]:before,
+.roadbook [data-address-type="tram_stop"]:before,
 .roadbook [data-icon="transport_tram_stop"]:before {
     content: "";
     width: 20px;

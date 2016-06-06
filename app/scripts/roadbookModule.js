@@ -266,7 +266,7 @@ var roadbookModule = (function () {
 
         if (editor.getLength()) {
             swal({
-                title: 'Replace styles ?',
+                title: 'Replace styles',
                 text: 'The current styles will be overwritten.\nDo you really want to continue?',
                 type: 'warning',
                 confirmButtonText: 'Yes replace',
@@ -293,7 +293,7 @@ var roadbookModule = (function () {
      */
     var toggleButtonStatusEmptyEditor = function () {
 
-        var $buttons = $('#save_roadbook, #copy_roadbook, #print_roadbook, #new_roadbook, #erase_roadbook, [data-target="#style_edition_modal"]');
+        var $buttons = $('.save_roadbook, .copy_roadbook, .print_roadbook, .new_roadbook, .erase_roadbook, [data-target="#style_edition_modal"]');
         var state = (editor.getLength() > 1);
         $buttons
             .attr('disabled', !state)
@@ -342,9 +342,11 @@ var roadbookModule = (function () {
         editor = new Quill('#editor', settings.quill);
 
         $('#editor').find('.ql-editor').addClass('roadbook');
-        editor.addModule('toolbar', {
-            container: '#style_edition_modal'
-        });
+        /*if ($('#style_edition_modal')) {
+            editor.addModule('toolbar', {
+                container: '#style_edition_modal'
+            });
+        }*/
         //var qlMultiCursorModule = editor.addModule('multi-cursor', {
         //    timeout: 10000
         //});
@@ -362,7 +364,7 @@ var roadbookModule = (function () {
         editor.addFormat('tagType', {attribute: 'data-tag-type'});
         editor.addFormat('tagValue', {attribute: 'data-tag-value'});
         editor.addFormat('type', {attribute: 'data-type'});
-        editor.addFormat('addrType', {attribute: 'data-addr-type'});
+        editor.addFormat('addrType', {attribute: 'data-address-type'});
 
         $.each(allowedTags, function(i, v) {
             editor.addFormat(v, {attribute: 'data-' + v}); //.replace(/[_ ]/, '-')
@@ -436,7 +438,7 @@ var roadbookModule = (function () {
         toggleButtonStatusEmptyEditor();
 
         // Watch the print button
-        $('#print_roadbook').click(function (e) {
+        $('.print_roadbook').click(function (e) {
             e.preventDefault();
             print();
         });
@@ -451,29 +453,41 @@ var roadbookModule = (function () {
         });
 
         // Watch the erase button
-        $('#erase_roadbook, #new_roadbook').click(function (e) {
+        $('.erase_roadbook, .new_roadbook').click(function (e) {
             e.preventDefault();
             swal({
-                title: 'Delete roadbook ?',
+                title: 'Delete roadbook',
                 text: 'The current roadbook will be permanently removed.\nDo you really want to continue?',
                 type: 'warning',
                 confirmButtonText: 'Yes delete',
                 cancelButtonText: 'No cancel',
-                showCancelButton: true,
-                closeOnConfirm: false
+                showCancelButton: true
+                //closeOnConfirm: false,
                 //closeOnCancel: false
             }, function (isConfirm) {
                 if (isConfirm) {
                     editor.deleteText(0, editor.getLength() - 1, 'user');
-                    swal({
-                        title: 'Deleted!',
-                        text: 'Your roadbook has been deleted.\nLet\'s start a new one!',
-                        type: 'success',
-                        timer: 3000,
-                        showConfirmButton: false
-                    });
+                    if (e.currentTarget.id === 'new_roadbook') {
+                        //$('#file_settings_modal').modal('show');
+                    } else {
+                        swal({
+                            title: 'Deleted!',
+                            text: 'Your roadbook has been deleted.\nLet\'s start a new one!',
+                            type: 'success',
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+                    }
                 }
             });
+        });
+
+        // Roadbook settings modal
+        $('#file_settings_form').on('submit', function (e) {
+            e.preventDefault();
+            $('#file_settings_modal').modal('hide');
+            appModule.updateSaveLink();
+            $('.save_roadbook').first().trigger('click');
         });
 
     };
@@ -509,6 +523,25 @@ var roadbookModule = (function () {
             $modal.modal('hide');
         });
 
+        // Map / editor width setting
+        $('#map_width').on('change', function (e) {
+
+            var $cols = $('#editor_pane').find('.container-fluid > .row > div');
+            var width = e.target.value;
+
+            // Remove col-md-* classes
+            $cols.removeClass(function (i, css) {
+                return (css.match(/(^|\s)col-md-\S+/g) || []).join(' ');
+            });
+
+            // Add the new col-md-* classes
+            $cols.eq(0).addClass('col-md-' + width);
+            $cols.eq(1).addClass('col-md-' + (12 - width));
+
+            // Trigger a window resize to refresh map size
+            //$(window).trigger('resize');
+
+        }).trigger('change');
 
     });
 

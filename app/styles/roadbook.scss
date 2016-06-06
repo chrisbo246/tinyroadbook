@@ -8,6 +8,11 @@
         line-height: 28px;
         color: #333;
         background-color: #fff;
+        background-image:
+        linear-gradient(90deg, transparent 0px, #abced4 0px, #abced4 2px, transparent 2px),
+        linear-gradient(#eee .1em, transparent .1em);
+        background-size: 100% 29px;
+        background-position: 0 -8px;
     }
 
     /* Paragraphs */

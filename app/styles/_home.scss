@@ -8,6 +8,10 @@
     [data-type="background"] {
         padding-top: 5rem;
         padding-bottom: 5rem;
+        
+        h1, h2 {
+            //text-shadow: 2px 3px 8px;
+        }
     }
 
     [data-type="background"]:first-of-type{

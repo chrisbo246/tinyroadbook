@@ -60,9 +60,9 @@ var styleModule = (function () {
 
         if (editor.getLength()) {
             swal({
-                title: 'Replace styles ?',
+                title: 'Replace styles',
                 text: 'The current styles will be overwritten.\nDo you really want to continue?',
-                type: 'warning',
+                type: 'question',
                 confirmButtonText: 'Yes replace',
                 cancelButtonText: 'No stop !',
                 showCancelButton: true,
@@ -154,13 +154,13 @@ var styleModule = (function () {
         }
 
         // Reset style button
-        $('#reset_style').click(function () {
+        $('.reset_style').click(function () {
             //var style = $(settings.style.containerSelector).html();
             style = $(settings.style.containerSelector).data('default-value');
             editor.setText(style);
             updateStyle();
             swal({
-                title: 'Done!',
+                title: 'Done',
                 text: 'Styles have been reset with the default values.',
                 type: 'success',
                 timer: 3000,

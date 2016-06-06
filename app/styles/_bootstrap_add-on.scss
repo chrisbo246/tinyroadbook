@@ -102,8 +102,11 @@ margin-left: 0;
 margin-right: 0;
 }
 
+.btn-group.no-border-radius .btn,
+.btn-group.no-corner .btn,
+.no-border-radius,
 .no-corner {
-border-radius: 0;
+    border-radius: 0;
 }
 
 /* ===[ Condensed ]=== */
@@ -407,10 +410,11 @@ $screen-lg:                  1200px
 */
 
 /* columns of same height styles */
-
+/*
 @media (max-width: $screen-md) {
     .row-full-height {
       min-height: 100%;
+      height: 100%;
     }
     .col-full-height {
       min-height: 100%;
@@ -424,6 +428,55 @@ $screen-lg:                  1200px
     .col-full-height {
       height: 100%;
       vertical-align: middle;
+    }
+}
+*/
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+@media (max-width: $screen-md) {
+    $grid-size: 100% / $grid-columns;
+    .col-full-height {
+        &.col-md-1 {
+            height: $grid-size * 1;
+        }
+        &.col-md-2 {
+            height: $grid-size * 2;
+        }
+        &.col-md-3 {
+            height: $grid-size * 3;
+        }
+        &.col-md-4 {
+            height: $grid-size * 4;
+        }
+        &.col-md-5 {
+            height: $grid-size * 5;
+        }
+        &.col-md-6 {
+            height: $grid-size * 6;
+        }
+        &.col-md-7 {
+            height: $grid-size * 7;
+        }
+        &.col-md-8 {
+            height: $grid-size * 8;
+        }
+        &.col-md-9 {
+            height: $grid-size * 9;
+        }
+        &.col-md-10 {
+            height: $grid-size * 10;
+        }
+        &.col-md-11 {
+            height: $grid-size * 11;
+        }
+        &.col-md-12 {
+            height: $grid-size * 12;
+        }
     }
 }
 .row-same-height {
@@ -494,7 +547,6 @@ $screen-lg:                  1200px
     box-shadow: none;
 }
 
-
 /* Align */
 
 .vertical-align, .align-vertical {
@@ -533,6 +585,43 @@ $screen-lg:                  1200px
     }
 }
 
+.navbar-center {
+    width: 100%;
+    text-align: center;
+}
+.navbar-center.navbar-brand,
+.navbar-center .navbar-brand {
+    float: none;
+}
+
+
+/* Navbar toggle */
+
+.navbar-toggle.navbar-right {
+    float: right;
+    margin-right: $navbar-padding-horizontal;
+}
+
+.navbar-toggle.navbar-left {
+    float: left;
+    margin-left: $navbar-padding-horizontal;
+}
+
+.navbar-toggle.glyphicon:before {
+    margin: 0 4px;
+}
+
+.navbar-default {
+    .navbar-toggle.glyphicon:before {
+        color: $navbar-default-toggle-icon-bar-bg;
+    }
+}
+
+.navbar-inverse {
+    .navbar-toggle.glyphicon:before {
+        color: $navbar-inverse-toggle-icon-bar-bg;
+    }
+}
 
 /* Advert ------------------------------------------------------------------ */
 
@@ -601,10 +690,11 @@ $ad-gutter: $grid-gutter-width;
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 100px;
+        height: 60px;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
-        padding-bottom: 100px !important;
+        padding-bottom: 60px !important;
+        overflow: auto;
     }
 }
 /* Vertical screen > 768px */
@@ -614,6 +704,7 @@ $ad-gutter: $grid-gutter-width;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 60px !important;
+        overflow: auto;
     }
 }
 /* Vertical screen > 992px */
@@ -623,6 +714,7 @@ $ad-gutter: $grid-gutter-width;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 90px !important;
+        overflow: auto;
     }
 }
 /* Vertical screen > 1200px */
@@ -632,5 +724,38 @@ $ad-gutter: $grid-gutter-width;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 250px !important;
+        overflow: auto;
     }
+}
+
+
+/* Fix - brand enlarge the navbar */
+.navbar-brand {
+  line-height: $line-height-computed - 2px;
+}
+
+
+/* Assorted navbar buttons */
+.navbar-default {
+  .btn-assorted {
+    color: $navbar-default-bg;
+    background-color: $navbar-default-color;
+    border-color: $navbar-default-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: $navbar-default-brand-hover-color;
+    }
+  }
+}
+
+.navbar-inverse {
+  .btn-assorted {
+    color: $navbar-inverse-bg;
+    background-color: $navbar-inverse-color;
+    border-color: $navbar-inverse-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: $navbar-inverse-brand-hover-color;
+    }
+  }
 }

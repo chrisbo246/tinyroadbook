@@ -1,5 +1,5 @@
 
-.roadbook [data-addr-type="books"]:before,
+.roadbook [data-address-type="books"]:before,
 .roadbook [data-icon="shopping_books"]:before {
     content: "";
     width: 20px;
@@ -7,7 +7,7 @@
     background-position: -305px -215px;
 }
 
-.roadbook [data-addr-type="fast_food"]:before,
+.roadbook [data-address-type="fast_food"]:before,
 .roadbook [data-icon="food_fast_food"]:before {
     content: "";
     width: 20px;
@@ -15,7 +15,7 @@
     background-position: -35px -95px;
 }
 
-.roadbook [data-addr-type="florist"]:before,
+.roadbook [data-address-type="florist"]:before,
 .roadbook [data-icon="shopping_florist"]:before {
     content: "";
     width: 20px;
@@ -23,7 +23,7 @@
     background-position: -245px -245px;
 }
 
-.roadbook [data-addr-type="hardware"]:before,
+.roadbook [data-address-type="hardware"]:before,
 .roadbook [data-icon="shopping_hardware"]:before {
     content: "";
     width: 20px;
@@ -31,7 +31,7 @@
     background-position: -95px -245px;
 }
 
-.roadbook [data-addr-type="laundry"]:before,
+.roadbook [data-address-type="laundry"]:before,
 .roadbook [data-icon="shopping_laundry"]:before {
     content: "";
     width: 20px;
@@ -41,7 +41,7 @@
 
 
 
-.roadbook [data-addr-type="taxi"]:before,
+.roadbook [data-address-type="taxi"]:before,
 .roadbook [data-icon="transport_taxi"]:before {
     content: "";
     width: 20px;

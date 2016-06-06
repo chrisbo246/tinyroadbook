@@ -1,88 +1,88 @@
 
 /* Accomodation */
-.roadbook [data-addr-type="hostel"],
+.roadbook [data-address-type="hostel"],
 .roadbook [data-icon="accommodation_hostel"] {
     color: #0092da;
 }
 
 /* Amenity */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="amenity_"] {
     color: #734a08;
 }
 
 /* Barrier */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="barrier_"] {
     color: #666666;
 }
 
 /* Education */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="education_"] {
     color: #39ac39;
 }
 
 /* Food */
-.roadbook [data-addr-type="fast_food"],
+.roadbook [data-address-type="fast_food"],
 .roadbook [data-icon="food_fast_food"] {
     color: #734a08;
 }
 
 /* Health */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="health_"] {
     color: #da0092;
 }
 
 /* Landuse */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="landuse_"] {
     color: #999999;
 }
 
 /* Money */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="money_currency_"] {
     color: #000000;
 }
 
 /* POI */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="poi_"] {
     color: #000000;
 }
 
 /* Shopping */
-.roadbook [data-addr-type="books"],
+.roadbook [data-address-type="books"],
 .roadbook [data-icon="shopping_books"],
-.roadbook [data-addr-type="computer"],
+.roadbook [data-address-type="computer"],
 .roadbook [data-icon="shopping_computer"],
-.roadbook [data-addr-type="florist"],
+.roadbook [data-address-type="florist"],
 .roadbook [data-icon="shopping_florist"],
-.roadbook [data-addr-type="hardware"],
+.roadbook [data-address-type="hardware"],
 .roadbook [data-icon="shopping_hardware"],
-.roadbook [data-addr-type="laundry"],
+.roadbook [data-address-type="laundry"],
 .roadbook [data-icon="shopping_laundry"],
-.roadbook [data-addr-type="shoes"],
+.roadbook [data-address-type="shoes"],
 .roadbook [data-icon="shoes"] {
     color: #ac39ac;
 }
 
 /* Sport */
-.roadbook [data-addr-type=""],
+.roadbook [data-address-type=""],
 .roadbook [data-icon="sport_"] {
     color: #39ac39;
 }
 
 /* Tourist */
-.roadbook [data-addr-type="social_facility"],
+.roadbook [data-address-type="social_facility"],
 .roadbook [data-icon="tourist_social_facility"] {
     color: #734a08;
 }
 
 /* Transport */
-.roadbook [data-addr-type="taxi"],
+.roadbook [data-address-type="taxi"],
 .roadbook [data-icon="transport_taxi"] {
     color: #0093db;
 }

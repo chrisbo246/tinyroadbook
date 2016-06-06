@@ -1,5 +1,5 @@
 /*eslint-env browser, jquery */
-/*global geocodeModule, ol, roadbookModule, swal */
+/*global geocodeModule, ol, swal, roadbookModule, Spinner */
 /**
  * City picker module.
  * @module
@@ -28,9 +28,15 @@ var pickerModule = (function () {
                 'route_master', 'route_rating', 'route_ref', 'route_section', 'runway', 'superroute', 'through_route',
                 'track', 'trail'
             ],
-            poi: ['address26', 'address29', 'house_number']
+            poi: null, //['address26', 'address29', 'house_number']
+            various: null
         },
         disallowedTypes: {
+            admin: null,
+            city: null,
+            suburb: null,
+            road: null,
+            poi: null,
             various: ['country_code', 'postcode', 'neighbourhood']
         }
     };
@@ -46,10 +52,13 @@ var pickerModule = (function () {
     var zoomMin = 0,
         zoomMax = 21,
         zoomDelta = -2,
-        pick = 'city',
+        pickType = 'city',
         language = 'en',
-        geolocationXhr,
-        clickCounter;
+        geolocationXhr;
+
+    var spinner = new Spinner({
+        selector: '#map .spinner'
+    });
 
 
 
@@ -115,8 +124,9 @@ var pickerModule = (function () {
                 street.push(json.address['house_number']);
             }
             /*eslint-enable dot-notation*/
-            if (address.road) {
-                street.push(json.address.road);
+            var road = address.road || address.pedestrian;
+            if (road) {
+                street.push(road);
             }
             if (street.length > 0) {
                 params.street = street.join(' ');
@@ -155,6 +165,8 @@ var pickerModule = (function () {
         } else {
             dfd.resolve(json);
         }
+
+        spinner.addJob(dfd);
 
         return dfd;
 
@@ -268,6 +280,45 @@ var pickerModule = (function () {
 
 
     /**
+     * Auto-insert the stored road before each insertion (excepted roads obviously)
+     * @private
+     */
+    var insertInputRoad = function () {
+
+        var $checkbox = $('#auto_insert_road');
+        if (pickType !== 'road' && $checkbox && $checkbox.is(':checked')) {
+            var $input = $('#road');
+            var storedjson = $input.data('nominatim-reverse');
+            var storedName = $input.val();
+            roadbookModule.insertNominatimResult(storedjson, {
+                    address: {road: storedName},
+                    namedetails: {name: storedName}
+                });
+        }
+
+    };
+
+
+
+    /**
+     * Reset the pick type to default (if defined in settings)
+     * @private
+     */
+    var setDefaultPickType = function () {
+
+        var $input = $('#default_type');
+        if ($input) {
+            var $button = $('[data-pick-type="' + $input.val() + '"]');
+            if ($button) {
+                $button.trigger('click');
+            }
+        }
+
+    };
+
+
+
+    /**
      * Start listening clicks on the map
      * @public
      * @param {Object} map - OL3 map
@@ -275,12 +326,12 @@ var pickerModule = (function () {
     var watchMapClick = function (map) {
 
         var $input;
-        var $spinner = $('#map').find('.spinner');
 
         // Watch map clicks
         map.on('singleclick', function (evt) {
 
-            console.log('Picked', pick);
+            console.log('Pick type', pickType);
+            console.log('Selected pick type', pickType);
 
             // Adjust extraction level
             var view = map.getView();
@@ -298,74 +349,68 @@ var pickerModule = (function () {
             var lat = position[1];
 
             // Stop the previous geolocation task if user click too quickly
-            if (geolocationXhr && geolocationXhr.state() === 'pending') { //&& geolocationXhr.state() === 'pending'
+            /*if (geolocationXhr && geolocationXhr.state() === 'pending') {
                 geolocationXhr.abort();
-                $spinner.fadeOut();
-                /*if (clickCounter > 0) {
-                    swal({
-                        title: 'Slow down!',
-                        text: 'You made a second click before the previous application have been completed.',
-                        type: 'warning',
-                        timer: 2000
-                    });
-                }*/
-                clickCounter = 0;
-            }
+                swal({
+                    title: 'Slow down!',
+                    text: 'You made a second click before the previous application have been completed.',
+                    type: 'warning',
+                    timer: 2000
+                });
+            }*/
 
             // Reverse geocode clicked location
-            if (pick === 'admin') {
+            if (pickType === 'admin') {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
                 //zoom = Math.min(Math.max((zoom + zoomDelta), 0), 9);
                 zoom = Math.min(Math.max((zoom + zoomDelta), 0), 15);
 
                 getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
                     .done(function (json) {
-                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                        filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
                             .done(function (json2) {
                                 roadbookModule.insertNominatimResult(json2);
+                                insertInputRoad();
+                                setDefaultPickType();
                             });
                     });
 
-            } else if (pick === 'city') {
+            } else if (pickType === 'city') {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
-                zoom = Math.min(Math.max((zoom + zoomDelta), 10), 13);
+                zoom = Math.min(Math.max((zoom + zoomDelta), 10), 16);
 
                 getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
                     .done(function (json) {
-                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                        filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
                             .done(function (json2) {
                                 roadbookModule.insertNominatimResult(json2);
+                                insertInputRoad();
+                                setDefaultPickType();
                             });
                     });
             /*
-            } else if (pick === 'suburb') {
+            } else if (pickType === 'suburb') {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
                 zoom = Math.min(Math.max((zoom + zoomDelta), 14), 15);
 
                 getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
                     .done(function (json) {
-                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                        filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
                             .done(function (json2) {
                                 roadbookModule.insertNominatimResult(json2);
+                                insertInputRoad();
+                                setDefaultPickType();
                             });
                     });
             */
-            } else if (pick === 'road') {
+            } else if (pickType === 'road') {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
                 zoom = Math.min(Math.max((zoom + zoomDelta), 16), 17);
 
                 getPlace(lon, lat, {'osm_type': 'way', zoom: zoom})
                     .done(function (json) {
 
-                        filterNominatimResult(json, settings.allowedTypes[pick], null, {zoom: zoom})
+                        filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
                             .done(function (json2) {
 
                                 // Copy road name in the input field for a further use
@@ -381,68 +426,40 @@ var pickerModule = (function () {
                                             address: {road: name},
                                             namedetails: {name: name}
                                         });
+                                    setDefaultPickType();
                                 }
 
                             });
 
                     });
 
-            } else if (pick === 'poi') {
+            } else if (pickType === 'poi') {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
                 zoom = Math.min(Math.max((zoom + zoomDelta), 18), 21);
 
                 getPlace(lon, lat, {'osm_type': 'node', zoom: zoom})
                     .done(function (json) {
-                        filterNominatimResult(json, settings.allowedTypes[pick], settings.disallowedTypes[pick], {zoom: zoom})
+                        filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
                             .done(function (json2) {
                                 //storeRoad(json2);
                                 roadbookModule.insertNominatimResult(json2);
+                                insertInputRoad();
+                                setDefaultPickType();
                             });
                     });
 
             } else {
 
-                $spinner.fadeIn();
-                clickCounter = clickCounter + 1;
                 zoom = Math.min(Math.max((zoom + zoomDelta), zoomMin), zoomMax);
 
                 getPlace(lon, lat, {zoom: zoom})
                     .done(function (json2) {
                         storeRoad(json2);
                         roadbookModule.insertNominatimResult(json2);
+                        insertInputRoad();
+                        setDefaultPickType();
                     });
 
-            }
-
-            // Stop the spinner and reduce the click counter once the geolocation task completed
-            if (geolocationXhr) {
-                geolocationXhr.always(function () {
-                        $spinner.fadeOut();
-                        clickCounter = clickCounter - 1;
-                    });
-            }
-
-            // Auto-insert the stored road before each insertion (excepted roads obviously)
-            var $el = $('#auto_insert_road');
-            if (pick !== 'road' && $el && $el.is(':checked')) {
-                $input = $('#road');
-                var storedjson = $input.data('nominatim-reverse');
-                var storedName = $input.val();
-                roadbookModule.insertNominatimResult(storedjson, {
-                        address: {road: storedName},
-                        namedetails: {name: storedName}
-                    });
-            }
-
-            // Reset active button
-            $input = $('#default_type');
-            if ($input) {
-                var $button = $('#pick_' + $input.val());
-                if ($button) {
-                    $button.trigger('click');
-                }
             }
 
         });
@@ -476,7 +493,10 @@ var pickerModule = (function () {
         console.log('getPlace options', options);
         $.extend(params, options);
 
+
         geolocationXhr = geocodeModule.nominatimReverse(params);
+
+        spinner.addJob(geolocationXhr);
 
         return geolocationXhr;
 
@@ -506,20 +526,15 @@ var pickerModule = (function () {
             language = $(this).val();
         }).trigger('change');
 
-        // Hide the spinner
-        var $spinner = $('#map').find('.spinner');
-        $spinner.hide();
-
         // Activate the default pick button
-        var $buttons = $('#pick_buttons').find('button');
-        $buttons.filter('[data-type="' + pick + '"]').addClass('active');
+        var $buttons = $('[data-pick-type]');
+        $buttons.filter('[data-pick-type="' + pickType + '"]').trigger('click');
+        console.log('Pick type initialized', pickType);
 
         // Watch pick buttons clicks
         $buttons.click(function () {
-            pick = $(this).data('type');
-            console.log('Pick mode', pick);
-            $buttons.removeClass('active');
-            $(this).addClass('active');
+            pickType = $(this).data('pick-type');
+            console.log('Pick type changed', pickType);
         });
 
         var $input = $('#road');
@@ -532,6 +547,7 @@ var pickerModule = (function () {
     });
 
     return {
+        geolocationXhr: geolocationXhr,
         watchMapClick: watchMapClick
     };
 

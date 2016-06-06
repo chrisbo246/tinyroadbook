@@ -1,6 +1,8 @@
 //$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 $icon-font-path: '../fonts/';
 
+//@import "./_bootswatch_variables";
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
@@ -20,16 +22,64 @@ html, body {
 
 body {
     padding-top: $navbar-height;
-    //background: url(../images/backgrounds/route_planner.jpg) 0 0 fixed;
-    //background-size: cover;
-    //min-height: 100%;
+    background-image: url(../images/backgrounds/pw_maze_white.png);
+    //background-size: 100%;
+}
+
+.navbar {
+    background-image: url(../images/backgrounds/pw_maze_black.png);
+}
+
+/* Reversed TINY */
+.navbar-brand {
+    span {
+        small {
+            position: relative;
+            top: -.2em;
+            font-size: 60%;
+            padding: .1em .1em .1em .2em;
+        }
+        /*span {
+            position: relative;
+            margin-left: 2px;
+        }
+        span:before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -2px;
+            height: 50px;
+            transform: rotate(10deg);
+            border-left: dashed 3px;          
+        }*/
+    }
+}
+.navbar-inverse {
+    .navbar-brand small {
+        color: $navbar-inverse-bg;
+        background-color: $navbar-inverse-brand-color;
+    }
+    .navbar-brand:hover small,
+    .navbar-brand:focus small {
+        background-color: $navbar-inverse-brand-hover-color;
+    }
+}
+.navbar-default {
+    .navbar-brand small {
+        color: $navbar-default-bg;
+        background-color: $navbar-default-brand-color;
+    }
+    .navbar-brand:hover small,
+    .navbar-brand:focus small {
+        background-color: $navbar-default-brand-hover-color;
+    }
 }
 
 body > .tab-content {
     height: 100%;
     > .tab-pane {
         height: 100%;
-        /*
+
         > div:first-of-type,
         > section:first-of-type {
             padding-top: 20px;
@@ -40,7 +90,7 @@ body > .tab-content {
         > section:last-of-type {
             padding-bottom: 20px;
         }
-        */
+
         /*
         @media (max-width: $screen-md) {
             .col-full-height:last-of-type {
@@ -97,3 +147,8 @@ code.ql-container {
     //background: transparent !important;
     //background: $navbar-inverse-bg  !important;
 }
+
+.modal-title a[data-toggle="modal"] {
+    display: none;
+}
+  

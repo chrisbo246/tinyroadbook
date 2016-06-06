@@ -1,5 +1,5 @@
 /*eslint-env browser, jquery */
-/*global adsbygoogle:true, bootstrapModule, swal */
+/*global adsbygoogle:true, bootstrapModule, swal, Spinner */
 /**
  * Common web helpers.
  * @module
@@ -14,12 +14,16 @@ var commonsModule = (function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
-    var settings = {
-        basil: {
+    var defaults = {
+        debug: false,
+        disabledLogs: ['log', 'time', 'timeEnd'], // , info, warn
+        hideHash: true,
+
+        selector: {
+            userLanguage: '#user_language, #language, #lang'
         },
-        debug: {
-            debugMode: ((parseInt($.urlParam('debug'))) ? true : false), // (document.domain === 'localhost')
-            disabledLogs: ['log', 'time', 'timeEnd'] // , info, warn
+        basil: {
+
         },
         adsense: {
             containers: '.adsbygoogle',
@@ -52,7 +56,7 @@ var commonsModule = (function () {
             }
         },
         materialDesign: {
-            iconsSelector: '.material-icons'
+            iconsSelector: '.material-icons' // mdi
         },
         parallax: {
             selector: '[data-type="background"]'
@@ -78,14 +82,21 @@ var commonsModule = (function () {
         sortable: {
             events: 'sortactivate sortbeforeStop sortchange sortcreate sortdeactivate sortout sortover sortreceive sortremove sort sortstart sortstop sortupdate'
         },
-        reset: {
+        dataReset: {
             formsSelector: 'form',
-            toggleSelector: '#reset_all',
+            toggleSelector: '.delete_data'
+        },
+        inputReset: {
+            formsSelector: 'form',
+            toggleSelector: '.reset_inputs',
             defaultAttribut: 'default-value'
         },
+        spinner: {
+            selector: '.spinner'
+        },
         swal: {
-            resetWarning: {
-                title: 'Reset everything?',
+            resetData: {
+                title: 'Reset everything',
                 text: 'This will erase your roadbook, reset settings and delete all local data stored by this application.',
                 type: 'warning',
                 confirmButtonText: 'Yes reset',
@@ -93,22 +104,24 @@ var commonsModule = (function () {
                 showCancelButton: true,
                 closeOnConfirm: false
                 //closeOnCancel: false
-            }/*,
-            resetConfirmation: {
-                title: 'Cancelled',
-                text: 'You can continue where you left off.',
-                type: 'error',
+            },
+            inputReset: {
+                title: 'Done',
+                text: 'All inputs have been reset to their default values.',
+                type: 'success',
                 timer: 3000,
                 showConfirmButton: false
-            }*/
+            }
         }
     };
 
+    var settings = defaults;
+
     var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
 
-    if (typeof Basil === 'function') {
-        var basil = new window.Basil(settings.basil);
-    }
+    var basil;
+
+    var spinner = new Spinner(settings.spinner);
 
 
 
@@ -161,27 +174,6 @@ var commonsModule = (function () {
         //insertAdsInHiddenPanes(selector, settings.adsense);
 
     };
-
-
-
-    /**
-     * Search Bootstrap hidden tabs
-     * @private
-     * @param {string} selector - Div selector from where to start ad block search
-     * @param {string} settings - Adsense settings
-     */
-    /*var insertAdsInHiddenPanes = function (selector, settings) {
-
-        var $block = $(selector);
-        if (!$block) return false;
-        // Seach for hidden tabs
-        $block.find(settings.tabLinksSelector).filter(':not(.active)').each(function (i, tab) {
-            $(tab).one('shown.bs.tab', function (e) {
-                var paneId = $(e.target).attr('href');
-                insertAdsenseAds(paneId, settings);
-            });
-        });
-    };*/
 
 
 
@@ -311,13 +303,143 @@ var commonsModule = (function () {
 
 
     /**
+     * Get input value according to type
+     * @public
+     * @param {Object} input - Input DOM
+     * @return {string} Input type
+     */
+    var getInputType = function (input) {
+
+        var inputType;
+
+        var $input = $(input);
+        if ($input) {
+
+            inputType = $input.attr('type');
+            if (!inputType || inputType === 'undefined') {
+                inputType = $input.prop('tagName').toLowerCase();
+            }
+
+        }
+
+        return inputType;
+
+    };
+
+
+
+    /**
+     * Get input value according to type
+     * @public
+     * @param {Object} input - Input DOM
+     * @return {String|number|boolean} Input value
+     */
+    var getInputValue = function (input) {
+
+        var value;
+
+        var $input = $(input);
+        if ($input) {
+
+            var inputType = getInputType($input);
+
+            if ($.inArray(inputType, ['radio', 'checkbox']) !== -1) {
+                value = $input.prop('checked');
+                if (value && $input.attr('value')) {
+                    value = $input.attr('value');
+                }
+            } else if (inputType === 'file') {
+                value = $input.prop('files');
+            } else if ($.inArray(inputType, ['text', 'password', 'select', 'textarea', 'hidden',
+                'color', 'date', 'datetime', 'datetime-local', 'email', 'month', 'number', 'range',
+                'search', 'tel', 'time', 'url', 'week']) !== -1) {
+                value = $input.val();
+            } else {
+                // 'image' , 'button', 'reset', 'submit' , etc...
+                value = $input.html();
+            }
+
+            /*if (inputType === 'checkbox' || inputType) === 'radio') {
+                value = (input.checked);
+            } else if (inputType === 'file') {
+                value = input.files;
+            } else {
+                value = input.value;
+            }*/
+
+        }
+
+        return value;
+
+    };
+
+
+
+    /**
+     * Set input value according to type
+     * @public
+     * @param {Object} input - Input DOM
+     * @param {String|number|boolean} [value] - Input value
+     * @param {Boolean} [trigger] - If false, do not trigger change
+     */
+    var setInputValue = function (input, value, trigger) {
+
+        var $input = $(input);
+        if ($input) {
+
+            var inputType = getInputType($input);
+
+            // If value is an array, use the first element
+            if ($.isArray(value) && inputType !== 'textarea') {
+                value = value[0] || null;
+            }
+
+            if ($.inArray(inputType, ['radio', 'checkbox']) !== -1) {
+                //if (value === true || value === false) {
+                    $input.prop('checked', value);
+                //} else {
+                //    $input.val(value);
+                //    $input.prop('checked', (value !== null) ? true : false);
+                //}
+            } else if (inputType === 'file') {
+                if ($.type(value) === 'FileList') {
+                    $input.attr('files', value);
+                }
+            } else if (inputType === 'textarea') {
+                if ($.isArray(value)) {
+                    value = value.join('\n');
+                }
+                $input.val(value);
+            } else if ($.inArray(inputType, ['text', 'password', 'select', 'hidden',
+                'color', 'date', 'datetime', 'datetime-local', 'email', 'month', 'number', 'range',
+                'search', 'tel', 'time', 'url', 'week']) !== -1) {
+                $input.val(value);
+            } else {
+                $input.html(value);
+            }
+
+            if (trigger !== false) {
+                $input.trigger('change');
+            }
+
+        }
+
+    };
+
+
+
+    /**
      * Data persistence inputs
      * @public
      */
-    var storeForms = function () {
+    var storeInputChanges = function () {
 
         if (!basil) {
-            return false;
+            if (typeof Basil === 'function') {
+                basil = new window.Basil(settings.basil);
+            } else {
+                return false;
+            }
         }
 
         var $form, $input, value, id;
@@ -325,41 +447,22 @@ var commonsModule = (function () {
         $(settings.garlic.formsSelector).each(function () {
 
             $form = $(this);
-
-            $form.find(':input').not(':file').not(':button').not('[type="submit"]').not('[type="reset"]').filter('[id]').each(function () {
+            $form.find(':input').not(':button, [type="submit"], [type="reset"]').filter('[id]').each(function () {
                 $input = $(this);
-
-                // Copy the default value to a data-default-value attribut (for reset function)
-                /*if (settings.reset.defaultAttribut) {
-                    if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') {
-                        value = $input.prop('checked');
-                    } else {
-                        value = $input.val();
-                    }
-                    $input.attr('data-' + settings.reset.defaultAttribut, value);
-                }*/
 
                 // Restore value if a stored value exists
                 id = $input.attr('id');
                 value = basil.get(id);
                 if (value !== null) {
-                    if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') {
-                        $input.prop('checked', value).trigger('change');
-                    } else {
-                        $input.val(value).trigger('change');
-                    }
+                    setInputValue($input, value, false);
                     console.log('#' + id + ' value restored', value);
                 }
 
                 // Store changes
-                $input.on('change', function () {
-                    $input = $(this);
-                    if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') {
-                        value = $input.prop('checked');
-                    } else {
-                        value = $input.val();
-                    }
-                    id = $input.attr('id');
+                $input.on('change', function (e) {
+                    var input = e.target;
+                    value = getInputValue(input);
+                    id = input.id;
                     basil.set(id, value);
                     console.log('#' + id + ' value stored', value);
                 });
@@ -378,31 +481,22 @@ var commonsModule = (function () {
      */
     var fixInputValues = function (selector) {
 
-        if (!settings.reset.defaultAttribut) {
+        if (!settings.inputReset.defaultAttribut) {
             return false;
         }
 
         if (!selector) {
-            selector = settings.reset.formsSelector;
+            selector = settings.dataReset.formsSelector;
         }
 
-        var $input, value, type;
+        var $input, value;
 
         $(selector).find(':input')
-        .not(':file').not(':button').not('[type="submit"]').not('[type="reset"]')
+        .not(':file, :button, [type="submit"], [type="reset"]')
         .each(function () {
-
             $input = $(this);
-            type = $input.attr('type');
-
-            // Copy the default value to a data-default-value attribut (for reset function)
-            if (type === 'checkbox' || type === 'radio') {
-                value = $input.prop('checked');
-            } else {
-                value = $input.val();
-            }
-            $input.attr('data-' + settings.reset.defaultAttribut, value);
-
+            value = getInputValue(this);
+            $input.attr('data-' + settings.inputReset.defaultAttribut, value);
         });
 
     };
@@ -416,32 +510,27 @@ var commonsModule = (function () {
      */
     var resetInputValues = function (selector) {
 
-        var $input, id, type, value;
+        var $input, id, value;
 
-        if (!settings.reset.defaultAttribut) {
+        if (!settings.inputReset.defaultAttribut) {
             return false;
         }
 
         if (!selector) {
-            selector = settings.reset.formsSelector;
+            selector = settings.inputReset.formsSelector;
         }
 
-        $(selector).find(':input').filter('[data-' + settings.reset.defaultAttribut + ']').each(function () {
+        $(selector).find(':input').filter('[data-' + settings.inputReset.defaultAttribut + ']').each(function () {
 
             $input = $(this);
             id = $input.attr('id');
-            type = $input.attr('type');
-            value = $input.data(settings.reset.defaultAttribut);
+            value = $input.data(settings.inputReset.defaultAttribut);
 
             if (id) {
-                if (type === 'checkbox' || type === 'radio') {
-                    $input.prop('checked', value);
-                } else {
-                    $input.val(value);
-                }
                 if (basil) {
                     basil.remove(id);
                 }
+                setInputValue(this, value);
             }
 
         });
@@ -455,26 +544,37 @@ var commonsModule = (function () {
      * Display a warning alert when user click the button, then reset cookies and local storage and reload
      * @public
      */
-    var resetButton = function () {
+    var watchResetDataButton = function () {
 
-        $(function () {
+        $(settings.dataReset.toggleSelector).click(function () {
+            if (swal) {
+                swal(settings.swal.resetData, function (isConfirm) {
+                    if (isConfirm) {
+                        clearLocalStorage();
+                        location.reload();
+                    }
+                });
+            } else {
+                clearLocalStorage();
+                location.reload();
+            }
+        });
 
-            $(settings.reset.toggleSelector).click(function () {
-                if (swal) {
-                    swal(settings.swal.resetWarning, function (isConfirm) {
-                        if (isConfirm) {
-                            clearLocalStorage();
-                            location.reload();
-                        }/* else {
-                            swal(settings.swal.resetConfirmation);
-                        }*/
-                    });
-                } else {
-                    clearLocalStorage();
-                    location.reload();
-                }
-            });
+    };
 
+
+
+    /**
+     * Watch input reset button
+     * @public
+     */
+    var watchInputResetButton = function () {
+
+        $(settings.inputReset.toggleSelector).click(function () {
+            resetInputValues();
+            if (swal) {
+                swal(settings.swal.inputReset);
+            }
         });
 
     };
@@ -519,10 +619,16 @@ var commonsModule = (function () {
 
         $.extend(true, settings.googleFonts, options);
 
-        // WebFontConfig must be defined globally at the top of this file
-        window.WebFontConfig = {};
-        // Define the webfont loader config
-        $.extend(true, window.WebFontConfig, settings.webFontLoader.config);
+        // WebFontConfig must be defined globally
+        if (!window.WebFontConfig) {
+            if (settings.webFontLoader.config) {
+                window.WebFontConfig = {};
+                $.extend(true, window.WebFontConfig, settings.webFontLoader.config);
+            } else {
+                console.warn('Global variable WebFontConfig is not defined');
+                return false;
+            }
+        }
 
         (function (d) {
             // Hide material design icons until font was loaded
@@ -538,25 +644,37 @@ var commonsModule = (function () {
 
 
     /**
+     * Disable most logs
+     * @public
+     */
+    var hideLogs = function () {
+
+        console.log = function () {};
+        console.time = function () {};
+        console.timeEnd = function () {};
+
+        settings.disabledLogs.forEach(function (element) {
+            console[element] = function () {};
+        });
+
+    };
+
+
+
+    /**
      * Print some global logs or hide them for production
      * @public
      * @param {Object} settings - See defaults
      */
     var debug = function () {
 
-        if (!settings.debug.debugMode) {
-            console.log = function () {};
-            console.time = function () {};
-            console.timeEnd = function () {};
-            // @param element, index, array
-            settings.debug.disabledLogs.forEach(function (element) {
-                console[element] = function () {};
-            });
+        if (!settings.debug) {
+            hideLogs();
             $('.debug-only').hide();
             return false;
         } else {
             $('.debug-only').show();
-            console.log('Debug mode', settings.debug.debugMode);
+            console.log('Debug', settings.debug);
         }
 
         // All inputs
@@ -567,17 +685,16 @@ var commonsModule = (function () {
             if ($().bootstrapSwitch) { events = events + settings.bootstrapSwitch.events; }
 
             $(':input').on(events, function (e) {
-                var $input = $(this);
                 var strings = [];
-                strings.push('"' + e.type + '" event fired on "' + $input.prop('tagName') + '" element');
-                if ($input.attr('type')) { strings.push('[type="' + $input.attr('type') + '"]'); }
-                if ($input.attr('id')) { strings.push('[id="' + $input.attr('id') + '"]'); }
-                if ($input.attr('name')) { strings.push('[name="' + $input.attr('name') + '"]'); }
+                strings.push('"' + e.type + '" event fired on "' + e.target.tagName + '" element');
+                if (e.target.type) { strings.push('[type="' + e.target.type + '"]'); }
+                if (e.target.id) { strings.push('[id="' + e.target.id + '"]'); }
+                if (e.target.name) { strings.push('[name="' + e.target.name + '"]'); }
                 if (e.type === 'input' || e.type === 'change') {
-                    strings.push('value="' + $input.val() + '"');
-                    if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') { strings.push('checked="' + this.checked + '"'); }
+                    strings.push('value="' + e.target.value + '"');
+                    if (e.target.type === 'checkbox' || e.target.type === 'radio') { strings.push('checked="' + e.target.checked + '"'); }
                 }
-                console.log(strings.join(' '));
+                console.log(strings.join(' '), e);
             });
         }
 
@@ -595,21 +712,13 @@ var commonsModule = (function () {
             console.timeEnd('Images, frames and objects are loaded');
         });
 
-        // URL infos
-        console.log('location.hostname', location.hostname);
-        console.log('document.location.hostname', document.location.hostname);
-        console.log('window.location.hostname', window.location.hostname);
-        console.log('window.location.protocol', window.location.protocol);
+        // Infos
         console.log('document.domain', document.domain);
         console.log('document.URL', document.URL);
-        console.log('document.location.href', document.location.href);
-        console.log('document.location.origin', document.location.origin);
-        console.log('document.location.host', document.location.host);
-        console.log('document.location.pathname', document.location.pathname);
-
-        // Language
-        console.log('navigator.language', navigator.language);
-        console.log('navigator.userLanguage', navigator.userLanguage);
+        console.log('location', location);
+        console.log('navigator', navigator);
+        //console.log('window.location', window.location);
+        //console.log('document.location', document.location);
 
         // jQuery UI sortable events
         if ($().sortable && settings.sortable.events) {
@@ -709,6 +818,8 @@ var commonsModule = (function () {
         var dfd = new $.Deferred();
         var n = 0;
 
+        spinner.addJob(dfd);
+
         options = $.extend(true, {}, {
             format: 'text',
             encoding: 'UTF-8',
@@ -784,21 +895,6 @@ var commonsModule = (function () {
     /**
      * Prevent URL hash display with internal links
      * @public
-     */
-    var hideHash = function () {
-
-        var hash = location.hash.replace('#', '');
-        if(hash !== '') {
-            location.hash = '';
-        }
-
-    };
-
-
-
-    /**
-     * Prevent URL hash display with internal links
-     * @public
      * @param {String} [selector='body'] - Container selector
      */
     var hideHashOnClick = function (selector) {
@@ -811,7 +907,10 @@ var commonsModule = (function () {
                 $link = $(this);
                 console.log('Watching internal links clicks', $(el).attr('href'));
                 $link.on('click', function (e) {
-                    hideHash();
+                    var hash = location.hash.replace('#', '');
+                    if(hash !== '') {
+                        location.hash = '';
+                    }
                     console.log('URL hash hidden', e.currentTarget.hash);
                 });
             });
@@ -822,50 +921,145 @@ var commonsModule = (function () {
 
 
     /**
+     * Check if object is an instance a class
+     * @public
+     * @param {Object} instance - Object instance
+     * @param {Object} ofTheClass - Static class
+     * @param {Array} childes - Possible children names
+     * @return {Array} Object Classes
+     */
+    var getInstancesOf = function (instance, ofTheClass, children) {
+
+        var types = [];
+
+        children.forEach(function (v) {
+            if (ofTheClass[v]) {
+                if (instance instanceof ofTheClass[v]) {
+                    types.push(v);
+                }
+            } else {
+                console.log(v + ' is not defined');
+            }
+        });
+
+        return types;
+
+    };
+
+
+
+    /**
+     * Try to define user language and populate language inputs
+     * @public
+     * @param {String} [language] - Language code ISO2
+     */
+    var setUserLanguage = function (language) {
+
+        var value = language || navigator.language || navigator.userLanguage || navigator.languages[0] || 'en';
+        console.log('User language defined', value);
+
+        $(settings.selector.userLanguage).each(function () {
+            $(this).val(value).trigger('change');
+        });
+
+    };
+
+
+
+    /**
      * Apply all
      * @public
      */
-    var init = function () {
+    var init = function (options) {
+
+        // Merge default and custom settings
+        settings = $.extend(true, {}, defaults, options);
+
         // Show a lot of information in console
-        debug();
+        if (settings.debug) {
+            debug();
+        }
         // Load Google fonts asynchronously (+ Material design icons)
-        loadWebFonts();
-        // Initialize Adsense ads in hidden tabs
-        adsense();
-        // Save input values to a data attribute (used for live reset)
-        fixInputValues();
-        // Make form fields persistent
-        storeForms();
-        // Add a disabled class to unsuported field types
-        disableUnsupported();
-        // A simple parallax function
-        parallax();
-        // Watch the reset button clicks and clear cookies / local storage
-        resetButton();
+        if (settings.webFontLoader) {
+            loadWebFonts();
+        }
+
+        $(function () {
+
+            // Try to define user language then populate select input
+            setUserLanguage();
+
+            // Save input values to a data attribute and watch the "live-reset-all" button
+            if (settings.inputReset) {
+                fixInputValues();
+                watchInputResetButton();
+            }
+
+            // Make form fields persistent
+            if (typeof Basil === 'function' && settings.basil) {
+                storeInputChanges();
+            }
+
+            // Watch the reset button clicks and clear cookies / local storage
+            if (settings.dataReset) {
+                watchResetDataButton();
+            }
+
+            // Hide hash in URL when user click a link
+            if (settings.hideHash) {
+                hideHashOnClick();
+            }
+
+            // Add a disabled class to unsuported field types
+            disableUnsupported();
+
+            // Scroll to internal link
+            if (settings.scrollTo) {
+                scrollTo();
+            }
+
+            // A simple parallax function
+            if (settings.parallax) {
+                parallax();
+            }
+
+            // Initialize Adsense ads in hidden tabs
+            if (settings.adsense) {
+                adsense();
+            }
+
+        });
+
     };
 
 
 
     // Public functions
     return {
-        init: init,
-        adsense: adsense,
-        insertAdsenseAds: insertAdsenseAds,
+        //adsense: adsense,
+        //debug: debug,
+        //disableUnsupported: disableUnsupported,
+        //fixInputValues: fixInputValues,
+        //hideHashOnClick: hideHashOnClick,
+        //loadWebFonts: loadWebFonts,
+        //parallax: parallax,
+        //resetButton: resetButton,
+        //scrollTo: scrollTo,
+        storeInputChanges: storeInputChanges,
         basil: basil,
-        debug: debug,
-        disableUnsupported: disableUnsupported,
-        loadWebFonts: loadWebFonts,
-        parallax: parallax,
-        storeForms: storeForms,
+        getInputType: getInputType,
+        getInputValue: getInputValue,
+        getInstancesOf: getInstancesOf,
+        hideLogs: hideLogs,
+        init: init,
+        insertAdsenseAds: insertAdsenseAds,
         reader: reader,
-        resetButton: resetButton,
-        scrollTo: scrollTo,
-        storeHash: storeHash,
-        hideHash: hideHash,
-        hideHashOnClick: hideHashOnClick,
+        resetInputValues: resetInputValues,
         restoreHash: restoreHash,
-        fixInputValues: fixInputValues,
-        resetInputValues: resetInputValues
+        setInputValue: setInputValue,
+        setUserLanguage: setUserLanguage,
+        storeHash: storeHash,
+        watchInputResetButton: watchInputResetButton
     };
 
 })();
