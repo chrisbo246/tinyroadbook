@@ -274,7 +274,7 @@ var appModule = function () {
                 mapMod1.setCenterOnPosition();
                 mapMod1.map.getView().setZoom(12);
             }
-             // Check map events and store changes to local storage
+            // Check map events and store changes to local storage
             mapMod1.storeMapChanges();
             */
 
