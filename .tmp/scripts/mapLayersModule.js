@@ -920,6 +920,7 @@ var mapLayersModule = function () {
             type: 'base',
             //maxResolution: 76.43702828517625, //Z11
             source: new ol.source.XYZ({
+                maxZoom: 12,
                 urls: ['http://www.maps-for-free.com/layer/relief/z{z}/row{y}/{z}_{x}-{y}.jpg']
             })
         });
@@ -965,7 +966,6 @@ var mapLayersModule = function () {
             name: 'googleBike',
             title: 'Cycling roads<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             visible: true,
-            opacity: 1,
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous',
                 url: protocol + '//mts0.google.com/vt/lyrs=h@239000000,bike&hl=en&src=app&x={x}&y={y}&z={z}&s=1'
@@ -978,7 +978,6 @@ var mapLayersModule = function () {
             name: 'googleHybrid',
             title: 'Roads + labels<small> (by <a href="https://www.google.com/maps/">Google</a>)</small>',
             visible: true,
-            opacity: 1,
             source: new ol.source.XYZ({
                 crossOrigin: 'anonymous',
                 url: protocol + '//mt1.google.com/vt/lyrs=h@239000000&hl=en&x={x}&y={y}&z={z}&s=1'
@@ -1080,8 +1079,8 @@ var mapLayersModule = function () {
         return new ol.layer.Tile({
             name: 'uniHeidelbergAsterh',
             title: 'Hillshade<small> (by <a href="http://korona.geog.uni-heidelberg.de">uni-heidelberg.de</a>)</small>',
-            opacity: 1,
             source: new ol.source.XYZ({
+                maxZoom: 18,
                 url: 'http://korona.geog.uni-heidelberg.de/tiles/asterh/x={x}&y={y}&z={z}'
             })
         });

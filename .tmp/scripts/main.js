@@ -59,13 +59,16 @@ var appModule = function () {
     var googleMapLayer = mapLayersModule.create('googleMap');
     var googleTerrainLayer = mapLayersModule.create('googleTerrain');
     var googleSatelliteLayer = mapLayersModule.create('googleSatellite');
+    var mapquestOSMLayer = mapLayersModule.create('mapquestOSM');
+    var mapquestSatLayer = mapLayersModule.create('mapquestSat');
 
     // Define map overlays
-    var gpxFileLayer = mapLayersModule.create('gpxFile', { zIndex: 7 });
-    var googleHybridLayer = mapLayersModule.create('googleHybrid', { zIndex: 6 });
-    var googleBikeLayer = mapLayersModule.create('googleBike', { zIndex: 5 });
-    var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling', { zIndex: 4 });
-    var lonviaHikingLayer = mapLayersModule.create('lonviaHiking', { zIndex: 3 });
+    var gpxFileLayer = mapLayersModule.create('gpxFile', { zIndex: 8 });
+    var googleHybridLayer = mapLayersModule.create('googleHybrid', { zIndex: 7 });
+    var googleBikeLayer = mapLayersModule.create('googleBike', { zIndex: 6 });
+    var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling', { zIndex: 5 });
+    var lonviaHikingLayer = mapLayersModule.create('lonviaHiking', { zIndex: 4 });
+    var mapquestHybLayer = mapLayersModule.create('mapquestHyb', { zIndex: 3 });
     var uniHeidelbergAsterhLayer = mapLayersModule.create('uniHeidelbergAsterh', { zIndex: 2 });
     var customOverlayLayer = mapLayersModule.create('customOverlay', { zIndex: 1 });
 
@@ -189,21 +192,21 @@ var appModule = function () {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [customBaseLayerLayer, mapsForFreeReliefLayer, openCycleMapLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer, mapquestSatLayer, openCycleMapLayer, mapquestOSMLayer, openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, lonviaHikingLayer, lonviaCyclingLayer, gpxFileLayer]
+                layers: [customOverlayLayer, mapquestHybLayer, lonviaHikingLayer, lonviaCyclingLayer, gpxFileLayer]
             })];
         } else {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [customBaseLayerLayer, googleSatelliteLayer, googleTerrainLayer, mapsForFreeReliefLayer, openCycleMapLayer, googleMapLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer, googleSatelliteLayer, mapquestSatLayer, googleTerrainLayer, mapsForFreeReliefLayer, openCycleMapLayer, googleMapLayer, mapquestOSMLayer, openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, uniHeidelbergAsterhLayer, lonviaHikingLayer, lonviaCyclingLayer, googleBikeLayer, googleHybridLayer, gpxFileLayer]
+                layers: [customOverlayLayer, uniHeidelbergAsterhLayer, mapquestHybLayer, lonviaHikingLayer, lonviaCyclingLayer, googleBikeLayer, googleHybridLayer, gpxFileLayer]
             })];
         }
         var controls = ol.control.defaults({
@@ -223,7 +226,8 @@ var appModule = function () {
                 minZoom: 2,
                 maxZoom: 19
             }),
-            controls: controls
+            controls: controls,
+            logo: false
         });
     };
 
@@ -327,6 +331,8 @@ var appModule = function () {
                 $modal.modal('hide');
             });
 
+            commonsModule.hideHashOnClick('#map .layer-switcher');
+
             // Add a link to settings beside each layer labels (layerswitcher)
             /*$('.layer-switcher').find('input').filter('[data-layer]').each(function () {
                 $input = $(this);
@@ -336,7 +342,9 @@ var appModule = function () {
             });*/
 
             // Force the Bootstrap modal API to initialize the layerswitcher links
-            $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function () {
+            $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function (e) {
+                e.preventDefault();
+                //window.location.hash = '';
                 $(this).trigger('click.bs.modal.data-api');
             });
         });

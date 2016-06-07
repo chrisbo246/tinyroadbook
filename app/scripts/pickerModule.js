@@ -1,10 +1,9 @@
 /*eslint-env browser, jquery */
-/*global geocodeModule, ol, swal, roadbookModule, Spinner */
+/*global ol, swal, roadbookModule, Spinner */
 /**
  * City picker module.
  * @module
  * @external $
- * @external geocodeModule
  * @external ol
  * @external roadbookModule
  * @external swal
@@ -56,9 +55,70 @@ var pickerModule = (function () {
         language = 'en',
         geolocationXhr;
 
+    var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
+
     var spinner = new Spinner({
         selector: '#map .spinner'
     });
+
+
+
+    /**
+     * Geocode search using Openstreetmap Nominatim
+     * @private
+     * @param {object} params - Request parameters
+     * @param {string} query - Formated address
+     * @return {Object} jqHXR
+     */
+    var nominatimSearch = function (params, query) {
+
+        console.time('Nominatim geocoding complete');
+
+        var url = protocol + '//nominatim.openstreetmap.org/search/' + encodeURI(query) + '?' + $.param(params);
+        console.log('Nominatim geocoding request', url);
+
+        return $.ajax({
+                url: url
+            })
+            .done(function (json) {
+                console.log('Nominatim geocoding result', JSON.stringify(json));
+            })
+            .fail(function () {
+                console.warn('Nominatim geocoding failed');
+            })
+            .always(function () {
+                console.timeEnd('Nominatim geocoding complete');
+            });
+    };
+
+
+
+    /**
+     * Reverse geocode using Openstreetmap Nominatim
+     * @private
+     * @param {Object} params - Request parameters
+     * @return {Object} jqXHR
+     */
+    var nominatimReverse = function (params) {
+
+        console.time('Nominatim reverse geocoding complete');
+
+        var url = protocol + '//nominatim.openstreetmap.org/reverse?' + $.param(params);
+        console.log('Nominatim reverse geocoding request', url);
+
+        return $.ajax({
+                url: url
+            })
+            .done(function (json) {
+                console.log('Nominatim reverse geocoding result', JSON.stringify(json));
+            })
+            .fail(function () {
+                console.warn('Nominatim reverse geocoding failed');
+            })
+            .always(function () {
+                console.timeEnd('Nominatim reverse geocoding complete');
+            });
+    };
 
 
 
@@ -154,7 +214,7 @@ var pickerModule = (function () {
             //    query.push(json.address.postcode);
             //}
 
-            geolocationXhr = geocodeModule.nominatimSearch(params, $.unique(query))
+            geolocationXhr = nominatimSearch(params, $.unique(query))
                 .done(function (json2) {
                     dfd.resolve(json2);
                 })
@@ -494,7 +554,7 @@ var pickerModule = (function () {
         $.extend(params, options);
 
 
-        geolocationXhr = geocodeModule.nominatimReverse(params);
+        geolocationXhr = nominatimReverse(params);
 
         spinner.addJob(geolocationXhr);
 

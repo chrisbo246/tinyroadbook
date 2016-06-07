@@ -18,7 +18,6 @@ var commonsModule = (function () {
         debug: false,
         disabledLogs: ['log', 'time', 'timeEnd'], // , info, warn
         hideHash: true,
-
         selector: {
             userLanguage: '#user_language, #language, #lang'
         },
@@ -269,34 +268,6 @@ var commonsModule = (function () {
         }
         if (basil) {
             basil.reset();
-        }
-    };
-
-
-
-    /**
-     * Get stored hash from local storage
-     * @private
-     */
-    var restoreHash = function(key, useHash) {
-        var hash = location.hash;
-        if (!useHash && basil) {
-            hash = basil.get(key);
-        }
-        return hash;
-    };
-
-
-
-    /**
-     * Set hash to local storage
-     * @private
-     */
-    var storeHash = function (key, value, useHash) {
-        if (!useHash && basil) {
-            basil.set(key, value);
-        } else {
-            location.hash = value;
         }
     };
 
@@ -713,6 +684,8 @@ var commonsModule = (function () {
         });
 
         // Infos
+        console.log('window', window);
+        console.log('document', document);
         console.log('document.domain', document.domain);
         console.log('document.URL', document.URL);
         console.log('location', location);
@@ -902,14 +875,13 @@ var commonsModule = (function () {
         var $container = $(selector || 'body');
 
         if ($container) {
-            $container.find('a[href^="#"]').each(function () {
-                $(this).on('click', function (e) {
-                    var hash = location.hash.replace('#', '');
-                    if(hash !== '') {
-                        location.hash = '';
-                    }
+            $container.on('click', 'a[href^="#"]', function () {
+                window.location.hash = '';
+                /*var hash = e.currentTarget.hash.replace('#', '');
+                if(hash !== '') {
+                    window.location.hash = '';
                     console.log('URL hash hidden', e.currentTarget.hash);
-                });
+                }*/
             });
         }
 
@@ -1037,7 +1009,7 @@ var commonsModule = (function () {
         //debug: debug,
         //disableUnsupported: disableUnsupported,
         //fixInputValues: fixInputValues,
-        //hideHashOnClick: hideHashOnClick,
+        hideHashOnClick: hideHashOnClick,
         //loadWebFonts: loadWebFonts,
         //parallax: parallax,
         //resetButton: resetButton,
@@ -1052,10 +1024,8 @@ var commonsModule = (function () {
         insertAdsenseAds: insertAdsenseAds,
         reader: reader,
         resetInputValues: resetInputValues,
-        restoreHash: restoreHash,
         setInputValue: setInputValue,
         setUserLanguage: setUserLanguage,
-        storeHash: storeHash,
         watchInputResetButton: watchInputResetButton
     };
 

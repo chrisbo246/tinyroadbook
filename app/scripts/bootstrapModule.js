@@ -16,19 +16,18 @@ var bootstrapModule = (function () {
 
     var defaults = {
         debug: false,
-        useHash: true,
+        useHash: true, // Open tab / modal according to URL hash
+        showHash: false, // Update URL hash when user open a tab / modal or when a tab is restored form the local storage
         basil: {
             namespace: 'bootstrap'
         },
         modal: {
             modalSelector: '.modal',
-            toggleSelector: '[data-toggle="modal"]',
-            storeActive: false
+            toggleSelector: '[data-toggle="modal"]'
         },
         tab: {
             toggleSelector: '[data-toggle="tab"]',
-            storeActive: true,
-            useHash: false
+            storeActive: true
         },
         tooltip: {
             toggleSelector: '[data-toggle="tooltip"]', //, [rel="tooltip"]
@@ -39,7 +38,14 @@ var bootstrapModule = (function () {
         }
     };
 
+
     var settings = defaults;
+
+    var basil;
+
+    if (typeof Basil !== 'undefined') {
+        basil = new window.Basil(settings.basil);
+    }
 
 
 
@@ -53,38 +59,35 @@ var bootstrapModule = (function () {
      */
     var restoreActiveTab = function () {
 
-        if (typeof window.Basil === 'undefined') {
-            console.warn('Basil is not loaded');
-            return false;
-        }
-
         if (typeof $.fn.tab === 'undefined') {
             console.warn('Bootstrap tab plugin is not loaded');
             return false;
         }
 
-        var basil = new window.Basil(settings.basil);
         var $tabs = $(settings.tab.toggleSelector);
         var storageKey = 'activeTab';
         var storageValue;
 
         if ($tabs) {
 
-            // Try to detect which tab to open
-            if (!settings.tab.useHash && basil) {
-                // The stored hash
-                storageValue = basil.get(storageKey);
-                console.log('Hash restored', storageValue);
-            } else {
-                // Or the URL hash
+            // If a hash is present in URL, and hash use is allowed, and if target is a modal
+            if (settings.useHash && location.hash && $(location.hash) && $tabs.filter('[href="' + location.hash + '"]').length > 0) {
                 storageValue = location.hash;
                 console.log('URL hash detected', storageValue);
+            } else if (basil) {
+                // Else use the stored hash
+                storageValue = basil.get(storageKey);
+                console.log('Hash restored', storageValue);
             }
 
             // Show the tab according to the defined hash
             if (storageValue) {
                 var $tab = $tabs.filter('[href="' + storageValue + '"]').first();
                 $tab.tab('show');
+                // Store active tab
+                if (basil) {
+                    basil.set(storageKey, storageValue);
+                }
                 console.log('Last active tab restored', storageValue);
             }
 
@@ -95,14 +98,14 @@ var bootstrapModule = (function () {
                 storageValue = e.target.hash;
 
                 if (storageValue) {
-                    if (!settings.tab.useHash && basil) {
-                        // Save the current tab hash to local storage
-                        basil.set(storageKey, storageValue);
-                        console.log('Active tab stored', storageValue);
-                    } else {
+                    if (settings.showHash) {
                         // If URL hash use is allowed, append hash to the URL
                         location.hash = storageValue;
                         console.log('Active tab hash added to URL', storageValue);
+                    } else if (basil) {
+                        // Save the current tab hash to local storage
+                        basil.set(storageKey, storageValue);
+                        console.log('Active tab stored', storageValue);
                     }
                 }
 
@@ -148,37 +151,50 @@ var bootstrapModule = (function () {
      */
     var restoreActiveModal = function () {
 
-        if (typeof Basil !== 'undefined' && typeof ($.fn.modal) !== 'undefined') {
+        if (typeof $.fn.modal === 'undefined') {
+            console.warn('Bootstrap modal plugin is not loaded');
+            return false;
+        }
 
-            var basil = new window.Basil(settings.basil);
+        var $modals = $(settings.modal.modalSelector);
+        var storageKey = 'activeModal';
+        var storageValue = basil.get(storageKey);
 
-            var $modals = $(settings.modal.modalSelector);
-            var storageKey = 'activeModal';
-            var storageValue = basil.get(storageKey);
+        if ($modals) {
 
-            if ($modals) {
-
-                if (storageValue) {
-                    var $modal = $(storageValue);
-                    $modal.modal('show');
-                    console.log('Last active modal restored', storageValue);
-                }
-
-                $modals.on('shown.bs.modal', function (e) {
-                    storageValue = '#' + e.target.id;
-                    if (storageValue) {
-                        basil.set(storageKey, storageValue);
-                        console.log('Active modal stored', storageValue);
-                    }
-                });
-                $modals.on('hidden.bs.modal', function () {
-                    basil.set(storageKey, null);
-                    console.log('Active modal stored', null);
-                });
+            // If a hash is present in URL, and hash use is allowed, and if target is a modal
+            if (settings.useHash && location.hash && $(location.hash) && $modals.filter(location.hash).length > 0) {
+                storageValue = location.hash;
+                console.log('URL hash detected', storageValue);
+            } else if (basil) {
+                // Else use the stored hash
+                storageValue = basil.get(storageKey);
+                console.log('Hash restored', storageValue);
             }
 
-        } else {
-            console.warn('Bootstrap modal plugin is not loaded');
+            // Show the tab according to the defined hash
+            if (storageValue) {
+                var $modal = $(storageValue);
+                $modal.modal('show');
+                if (basil) {
+                    basil.set(storageKey, storageValue);
+                }
+                console.log('Last active modal restored', storageValue);
+            }
+
+            $modals.on('shown.bs.modal', function (e) {
+                storageValue = '#' + e.target.id;
+                if (basil && storageValue) {
+                    basil.set(storageKey, storageValue);
+                    console.log('Active modal stored', storageValue);
+                }
+            });
+            $modals.on('hidden.bs.modal', function () {
+                if (basil) {
+                    basil.set(storageKey, null);
+                    console.log('Active modal stored', null);
+                }
+            });
         }
 
     };
@@ -413,7 +429,7 @@ var bootstrapModule = (function () {
      * Open the tab / modal when user use internal link in URL
      * @public
      */
-    var useHash = function () {
+    /*var useHash = function () {
 
        if(window.location.hash) {
             var hash = window.location.hash;
@@ -432,7 +448,7 @@ var bootstrapModule = (function () {
 
         }
 
-    };
+    };*/
 
 
 
@@ -464,11 +480,9 @@ var bootstrapModule = (function () {
      */
     var storeSwitchButtonState = function () {
 
-        if (typeof Basil === 'undefined') {
+        if (!basil) {
             return false;
         }
-
-        var basil = new window.Basil(settings.basil);
 
         var $button, $buttons, value, id;
 
@@ -525,7 +539,7 @@ var bootstrapModule = (function () {
         $(function () {
 
             if (settings.useHash) {
-                useHash();
+                //useHash();
             }
 
             if ($().tooltip && settings.tooltip) {
@@ -535,7 +549,7 @@ var bootstrapModule = (function () {
 
             if ($().tab && settings.tab) {
                 tab();
-                if (settings.basil) {
+                if (settings.tab.storeActive) {
                     restoreActiveTab();
                 }
             }
