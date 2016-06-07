@@ -900,13 +900,10 @@ var commonsModule = (function () {
     var hideHashOnClick = function (selector) {
 
         var $container = $(selector || 'body');
-        var $link;
 
         if ($container) {
-            $container.find('a[href^="#"]').each(function (i, el) {
-                $link = $(this);
-                console.log('Watching internal links clicks', $(el).attr('href'));
-                $link.on('click', function (e) {
+            $container.find('a[href^="#"]').each(function () {
+                $(this).on('click', function (e) {
                     var hash = location.hash.replace('#', '');
                     if(hash !== '') {
                         location.hash = '';

@@ -43,12 +43,11 @@ var mapLayersModule = (function () {
         //'attributions': 'getAttributions', 'logo': 'getLogo', 'projection': 'getProjection',
         //'tileGrid': 'getTileGrid', 'tileLoadFunction': 'getTileLoadFunction', 'tileUrlFunction': 'getTileUrlFunction'
     //var olSourceSetters = {'revision': 'setRevision', 'state': 'setState', 'urls': 'setUrls', 'url': 'setUrl'};
-    var olStyleGetters = {'fill': 'getFill', 'geometry': 'getGeometry', 'geometryFunction': 'getGeometryFunction', 'image': 'getImage',
-        'stroke': 'getStroke', 'text': 'getText', 'zIndex': 'getZIndex'};
-    var olStyleTypeGetters = {'color': 'getColor', 'lineCap': 'getLineCap', 'lineDash': 'getLineDash',
-        'lineJoin': 'getLineJoin', 'miterLimit': 'getMiterLimit', 'width': 'getWidth'};
-    var olStyleTypeSetters = {'color': 'setColor', 'lineCap': 'setLineCap', 'lineDash': 'setLineDash',
-        'lineJoin': 'setLineJoin', 'miterLimit': 'setMiterLimit', 'width': 'setWidth'};
+    var olStyleTypeGetters = {'Fill': 'getFill', 'Image': 'getImage', 'Stroke': 'getStroke', 'Text': 'getText'};
+    var olStylePropertyGetters = {'color': 'getColor', 'lineCap': 'getLineCap', 'geometry': 'getGeometry', 'geometryFunction': 'getGeometryFunction', 'lineDash': 'getLineDash',
+        'lineJoin': 'getLineJoin', 'miterLimit': 'getMiterLimit', 'width': 'getWidth', 'zIndex': 'getZIndex'};
+    var olStylePropertySetters = {'color': 'setColor', 'lineCap': 'setLineCap', 'geometry': 'setGeometry', 'geometryFunction': 'setGeometryFunction', 'lineDash': 'setLineDash',
+        'lineJoin': 'setLineJoin', 'miterLimit': 'setMiterLimit', 'width': 'setWidth', 'zIndex': 'getZIndex'};
 
 
     var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
@@ -56,6 +55,10 @@ var mapLayersModule = (function () {
     var layers = {};
     var selectedLayer;
     var basil;
+
+    if (typeof Basil === 'function') {
+        basil = new window.Basil(settings.basil);
+    }
 
 
 
@@ -92,47 +95,50 @@ var mapLayersModule = (function () {
      * @private
      * @param {Object} layer - ol.layer
      */
-    var storeLayer = function (layer) {
-
-        // Initialise Basil if not already
-        if (!basil) {
-            if (typeof Basil === 'function') {
-                basil = new window.Basil(settings.basil);
-            } else {
-                return false;
-            }
-        }
-
-        var namespace = layer.get('name');
-        if (!namespace) {
-            return false;
-        }
-
-        // Restore properties from the local storage
-        var key = 'properties';
-        var value = basil.get(key, namespace);
-        if (value !== null) {
-            layer.setProperties(value);
-            console.log(namespace + ' ' + key + ' restored', value);
-        }
+    var watchLayerChanges = function (layer) {
 
         // Store layer properties changes
         layer.on('propertychange', function () {
 
-            namespace = layer.get('name');
+            var namespace = layer.get('name');
             if (namespace) {
 
                 var properties = layer.getProperties();
-                key = 'properties';
-                value = {
+                var key = 'properties';
+                var value = {
+                    visible: properties.visible,
                     zIndex: properties.zIndex,
                     opacity: properties.opacity
                 };
-                basil.set(key, value, namespace);
+                basil.set(key, value, {'namespace': namespace});
                 console.log(namespace + ' properties stored', value);
 
             }
+
         });
+
+    };
+
+
+
+    /**
+     * Restore all layers properties from the local storage
+     * @private
+     * @param {Object} layer - ol.layer
+     */
+    var restoreLayer = function (layer) {
+
+        var namespace = layer.get('name');
+        if (namespace) {
+
+            var key = 'properties';
+            var value = basil.get(key, {'namespace': namespace});
+            if (value !== null) {
+                layer.setProperties(value);
+                console.log(namespace + ' ' + key + ' restored', value);
+            }
+
+        }
 
     };
 
@@ -168,7 +174,10 @@ var mapLayersModule = (function () {
                 + '<span class="glyphicon glyphicon-cog"></span></a>');
         }
 
-        storeLayer(layer);
+        if (basil) {
+            restoreLayer(layer);
+            watchLayerChanges(layer);
+        }
 
         return layer;
     };
@@ -233,7 +242,7 @@ var mapLayersModule = (function () {
                 }
 
                 // Update source features
-                if ($input.is('[data-ol-source="features"][data-ol-format="gpx"]')) {
+                if ($input.is('[data-ol-source="Vector"][data-ol-format="GPX"]')) {
                     value = commonsModule.getInputValue($input);
                     loadFileFeatures(selectedLayer, value, {
                         dataProjection: 'EPSG:4326',
@@ -247,11 +256,11 @@ var mapLayersModule = (function () {
                     key = $input.data('ol-property');
                     value = commonsModule.getInputValue($input);
                     type = $input.data('ol-style');
-                    if (typeof selectedLayer.getStyle()[olStyleGetters[type]]) {
-                        style = selectedLayer.getStyle()[olStyleGetters[type]]();
-
-                        if (typeof style[olStyleTypeSetters[key]]) {
-                            style[olStyleTypeSetters[key]](value);
+                    style = selectedLayer.getStyle();
+                    if (olStyleTypeGetters[type] && typeof style[olStyleTypeGetters[type]]) {
+                        style = style[olStyleTypeGetters[type]]();
+                        if (olStylePropertySetters[key] && typeof style[olStylePropertySetters[key]]) {
+                            style[olStylePropertySetters[key]](value);
                         }
                     }
                 }
@@ -305,9 +314,9 @@ var mapLayersModule = (function () {
         var types = layerTypes;
         types.push('*');
         types.forEach(function (type) {
-            $groups = $formGroups.has('[data-ol-layer="' + type.toLowerCase() + '"]');
+            $groups = $formGroups.has('[data-ol-layer="' + type + '"]');
             layerKeys.forEach(function (key2) {
-                $groups.has('[data-ol-property="' + key2.toLowerCase() + '"]').show()
+                $groups.has('[data-ol-property="' + key2 + '"]').show()
                     .find('label small').html('(' + type + ')');
             });
         });
@@ -347,13 +356,13 @@ var mapLayersModule = (function () {
             types = sourceTypes;
             types.push('*');
             types.forEach(function (type) {
-                $groups = $formGroups.has('[data-ol-source="' + type.toLowerCase() + '"]');
+                $groups = $formGroups.has('[data-ol-source="' + type + '"]');
                 sourceKeys.forEach(function (key2) {
-                    $groups.has('[data-ol-property="' + key2.toLowerCase() + '"]').show()
+                    $groups.has('[data-ol-property="' + key2 + '"]').show()
                         .find('label small').html('(' + type + ')');
                 });
                 $.each(sourceExtraProperties, function (key2) {
-                    $groups.has('[data-ol-property="' + key2.toLowerCase() + '"]').show()
+                    $groups.has('[data-ol-property="' + key2 + '"]').show()
                         .find('label small').html('(' + type + ')');
                 });
                 //if (sourceUrls) {
@@ -372,7 +381,7 @@ var mapLayersModule = (function () {
                 types = formatTypes;
                 types.push('*');
                 types.forEach(function (type) {
-                    $groups = $formGroups.has('[data-ol-format="' + type.toLowerCase() + '"]');
+                    $groups = $formGroups.has('[data-ol-format="' + type + '"]');
                     $groups.show()
                         .find('label small').html('(' + type + ')');
                 });
@@ -415,7 +424,7 @@ var mapLayersModule = (function () {
 
             var styleProperties = {};
 
-            $.each(olStyleGetters, function (key2, getter2) {
+            $.each(olStyleTypeGetters, function (key2, getter2) {
                 if (typeof style[getter2] === 'function') {
 
                     styleProperties[key2] = {};
@@ -433,14 +442,14 @@ var mapLayersModule = (function () {
                             types = styleTypes;
                             types.push('*');
                             types.forEach(function (type) {
-                                $groups = $formGroups.has('[data-ol-style="' + type.toLowerCase() + '"]');
+                                $groups = $formGroups.has('[data-ol-style="' + type + '"]');
 
-                                $.each(olStyleTypeGetters, function (key3, getter3) {
+                                $.each(olStylePropertyGetters, function (key3, getter3) {
                                     if (typeof value[getter3] === 'function') {
                                         value = value[getter3]();
                                         //console.log(key2 + ' ' + key3 + '(' + (typeof value) + ')', value);
                                         styleProperties[key2][key3] = value;
-                                        $groups.has('[data-ol-property="' + key3.toLowerCase() + '"]').show()
+                                        $groups.has('[data-ol-property="' + key3 + '"]').show()
                                             .find('label small').html('(' + type + ')');
                                     }
                                 });
@@ -504,7 +513,7 @@ var mapLayersModule = (function () {
         }*/
 
         if (formatTypes) {
-            $formGroups.find(':input').filter('[data-ol-source="features"]').each(function () {
+            $formGroups.find(':input').filter('[data-ol-source="Vector"][data-ol-format="GPX"]').each(function () {
                 console.log('Layer input "file" ready', value);
             });
         }

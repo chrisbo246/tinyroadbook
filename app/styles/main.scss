@@ -61,7 +61,7 @@ body {
     }
     .navbar-brand:hover small,
     .navbar-brand:focus small {
-        background-color: $navbar-inverse-brand-hover-color;
+        color: $navbar-inverse-brand-hover-color;
     }
 }
 .navbar-default {
@@ -71,7 +71,7 @@ body {
     }
     .navbar-brand:hover small,
     .navbar-brand:focus small {
-        background-color: $navbar-default-brand-hover-color;
+        color: $navbar-default-brand-hover-color;
     }
 }
 

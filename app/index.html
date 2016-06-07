@@ -89,10 +89,10 @@
                     <div class="form-group">
                         <div class="btn-toolbar" role="toolbar" aria-label="">
                             <div class="btn-group" role="group" aria-label="">
-                                <a class="btn btn-default btn-assorted" href="#editor_pane" data-toggle="tab" role="button">
+                                <a class="btn -btn-default btn-assorted" href="#editor_pane" data-toggle="tab" role="button">
                                     <span class="glyphicon glyphicon-pencil" -title="Edit" -data-toggle="tooltip" data-placement="left"></span> Edit
                                 </a>
-                                <button type="button" class="btn btn-default btn-assorted dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-assorted dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
@@ -103,10 +103,10 @@
                                 </ul>
                             </div>
                             <div class="btn-group" role="group" aria-label="">
-                                <a class="btn btn-default btn-assorted" href="#export_pane" data-toggle="tab" role="button">
+                                <a class="btn btn-assorted" href="#export_pane" data-toggle="tab" role="button">
                                     <span class="glyphicon glyphicon-file" -title="File" -data-toggle="tooltip" data-placement="left"></span> File
                                 </a>
-                                <button type="button" class="btn btn-default btn-assorted dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-assorted dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
@@ -134,9 +134,9 @@
                                 </ul>
                             </div>
                             <div class="btn-group" role="group" aria-label="">
-                                <a class="btn btn-default btn-assorted" href="#settings_pane" data-toggle="tab" role="button">
+                                <a class="btn btn-assorted" href="#settings_pane" data-toggle="tab" role="button">
                                     <span class="glyphicon glyphicon-cog" -title="Settings" -data-toggle="tooltip" ></span></a>
-                                <a class="btn btn-default btn-assorted" href="#home_pane" data-toggle="tab" role="button">
+                                <a class="btn btn-assorted" href="#home_pane" data-toggle="tab" role="button">
                                     <span class="glyphicon glyphicon-info-sign" -title="About" -data-toggle="tooltip" ></span></a>
                             </div>
                         </div>
@@ -1399,7 +1399,7 @@
                                 <span class="help-block"></span>
                             </div>
                             <div class="form-group">
-                                <label for="roadbook_description">Description <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You can optionally provide some details about your trip."></span></label>
+                                <label for="roadbook_description">Description <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You can optionally provide some details about your trip. Starting point and arrival, main way-points, crossed countries, etc..."></span></label>
                                 <textarea id="roadbook_description" class="form-control"></textarea>
                                 <span class="help-block"></span>
                             </div>
@@ -1873,7 +1873,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="layer_zindex">Level<span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You can change layers order providing a positive or negative z-index (1 by default)."></span></label>
-                                <input id="layer_zindex" class="form-control" data-ol-layer="*" data-ol-property="zIndex" type="number" value="0" required="" />
+                                <input id="layer_zindex" class="form-control" data-ol-layer="*" data-ol-property="zIndex" type="number" value="0" />
                                 <span class="help-block"></span>
                             </div>
                         </fieldset>
@@ -1885,19 +1885,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="layer_style_stroke_color">Color <small></small> <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Change line color."></span></label>
-                                <input id="layer_style_stroke_color" class="form-control" data-ol-style="stroke" data-ol-property="color" type="color" />
+                                <input id="layer_style_stroke_color" class="form-control" data-ol-style="Stroke" data-ol-property="color" type="color" />
                                 <span class="help-block"></span>
                             </div>
                             <div class="form-group">
                                 <label for="layer_style_stroke_width">Width <small></small> <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Change line color."></span></label>
-                                <input id="layer_style_stroke_width" class="form-control" data-ol-style="stroke" data-ol-property="width" type="number" min="1"/>
+                                <input id="layer_style_stroke_width" class="form-control" data-ol-style="Stroke" data-ol-property="width" type="number" min="1"/>
                                 <span class="help-block"></span>
                             </div>
                         </fieldset>
                         <fieldset>
                             <div class="form-group">
                                 <label for="gpx_file">File <small></small> <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Select a files from your device. Many vector formats are supported (GPX, XML, KML, GeoJSON, etc...)."></span></label>
-                                <input id="gpx_file" class="form-control" data-ol-source="features" data-ol-format="gpx" type="file" accept=".gpx" multiple="" required="" />
+                                <input id="gpx_file" class="form-control" data-ol-source="Vector" data-ol-format="GPX" type="file" accept=".gpx" multiple="" required="" />
                                 <span class="help-block"></span>
                                 <output id="gpx_file_output"></output>
                             </div>

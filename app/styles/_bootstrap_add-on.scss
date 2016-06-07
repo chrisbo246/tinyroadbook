@@ -735,27 +735,22 @@ $ad-gutter: $grid-gutter-width;
 }
 
 
-/* Assorted navbar buttons */
+/* Navbar button variants */
+
 .navbar-default {
-  .btn-assorted {
-    color: $navbar-default-bg;
-    background-color: $navbar-default-color;
-    border-color: $navbar-default-toggle-border-color;
-    &:hover,
-    &:focus {
-      background-color: $navbar-default-brand-hover-color;
+    .btn-assorted {
+        @include button-variant($navbar-default-bg, $navbar-default-color, $navbar-default-toggle-border-color);
     }
-  }
+    .btn-transparent {
+        @include button-variant($navbar-default-toggle-icon-bar-bg, transparent, $navbar-default-toggle-border-color);
+    }
 }
 
 .navbar-inverse {
-  .btn-assorted {
-    color: $navbar-inverse-bg;
-    background-color: $navbar-inverse-color;
-    border-color: $navbar-inverse-toggle-border-color;
-    &:hover,
-    &:focus {
-      background-color: $navbar-inverse-brand-hover-color;
+    .btn-assorted {
+        @include button-variant($navbar-inverse-bg, $navbar-inverse-color, $navbar-inverse-toggle-border-color);
     }
-  }
+    .btn-transparent {
+        @include button-variant($navbar-inverse-toggle-icon-bar-bg, transparent, $navbar-inverse-toggle-border-color);
+    }
 }
