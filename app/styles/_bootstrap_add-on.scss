@@ -631,28 +631,27 @@ $ad-gutter: $grid-gutter-width;
 .ad_container {
     //z-index: $zindex-navbar-fixed;
     //z-index: 1030;
+    display: none;
     overflow: hidden;
     background: $body-bg;
 }
 
-/* Horizontal screen < 768px */
+/* Horizontal screen 0px > 319px (none) */
 @media (orientation: landscape) {
     .ad_container {
         position: fixed;
         left: 0;
         top: 0;
         height: 100%;
-        width: 120px + $ad-gutter;
-        //padding-top: $navbar-height;
     }
     .container,
     .container-fluid {
-        padding-left: 120px + $ad-gutter + floor(($gutter / 2));
     }
 }
-/* Horizontal screen > 768px */
-@media (orientation: landscape) and (min-width: $screen-sm-min) {
+/* Horizontal screen 568px > 767px (120x240) */
+@media (orientation: landscape) and (min-width: 568px) and (min-height: 240px) {
     .ad_container {
+        display: block;
         width: 120px + $ad-gutter;
     }
     .container,
@@ -660,9 +659,32 @@ $ad-gutter: $grid-gutter-width;
         padding-left: 120px + $ad-gutter + floor(($gutter / 2));
     }
 }
-/* Horizontal screen > 992px */
-@media (orientation: landscape) and (min-width: $screen-md-min) {
+/* Horizontal screen 768px > 991px (120x600) */
+@media (orientation: landscape) and (min-width: $screen-sm-min) and (min-height: 600px) {
     .ad_container {
+        display: block;
+        width: 120px + $ad-gutter;
+    }
+    .container,
+    .container-fluid {
+        padding-left: 120px + $ad-gutter + floor(($gutter / 2));
+    }
+}
+/* Horizontal screen 992px > 1199px (120x600) */
+@media (orientation: landscape) and (min-width: $screen-md-min) and (min-height: 600px) {
+    .ad_container {
+        display: block;
+        width: 120px + $ad-gutter;
+    }
+    .container,
+    .container-fluid {
+        padding-left: 120px + $ad-gutter + floor(($gutter / 2));
+    }
+}
+/* Horizontal screen 1200px > 1979px (160x600) */
+@media (orientation: landscape) and (min-width: $screen-lg-min) and (min-height: 600px) {
+    .ad_container {
+        display: block;
         width: 160px + $ad-gutter;
     }
     .container,
@@ -670,64 +692,95 @@ $ad-gutter: $grid-gutter-width;
         padding-left: 160px + $ad-gutter + floor(($gutter / 2));
     }
 }
-/* Horizontal screen > 1200px */
-@media (orientation: landscape) and (min-width: $screen-lg-min) {
+/* Horizontal screen 1920px > + (300x600) */
+@media (orientation: landscape) and (min-width: 1920px) and (min-height: 600px) {
     .ad_container {
-        //width: 300px + $ad-gutter;
-        width: 160px + $ad-gutter;
+        display: block;
+        width: 300px + $ad-gutter;
     }
     .container,
     .container-fluid {
-        //padding-left: 300px + $ad-gutter + floor(($gutter / 2));
-        padding-left: 160px + $ad-gutter + floor(($gutter / 2));
+        padding-left: 300px + $ad-gutter + floor(($gutter / 2));
+    }
+}
+/* Horizontal screen 1920px (300x1050) */
+@media (orientation: landscape) and (min-width: 1920px) and (min-height: 1050px) {
+    .ad_container {
+        display: block;
+        width: 300px + $ad-gutter;
+    }
+    .container,
+    .container-fluid {
+        padding-left: 300px + $ad-gutter + floor(($gutter / 2));
     }
 }
 
-/* Vertical screen < 768px */
+/* Vertical screen 0px > 319px (none) */
 @media (orientation: portrait) {
     .ad_container {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
+    }
+    body > .tab-content > .tab-pane > div:last-of-type {
+        overflow: auto;
+    }
+}
+/* Vertical screen 320px > 639px (320x50) */
+@media (orientation: portrait) and (min-width: 320px) and (min-height: 280px) {
+    .ad_container {
+        display: block;
+        height: 50px;
+    }
+    body > .tab-content > .tab-pane > div:last-of-type {
+        padding-bottom: 50px !important;
+    }
+}
+/* Vertical screen 468px > 727px (468x60) */
+@media (orientation: portrait) and (min-width: 468px) and (min-height: 374px) {
+    .ad_container {
+        display: block;
         height: 60px;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 60px !important;
-        overflow: auto;
     }
 }
-/* Vertical screen > 768px */
-@media (orientation: portrait) and (min-width: $screen-sm-min) {
+/* Vertical screen 728px > 969px (728x90) */
+@media (orientation: portrait) and (min-width: 728px) and (min-height: 550px) {
     .ad_container {
-        height: 60px;
-    }
-    body > .tab-content > .tab-pane > div:last-of-type {
-        padding-bottom: 60px !important;
-        overflow: auto;
-    }
-}
-/* Vertical screen > 992px */
-@media (orientation: portrait) and (min-width: $screen-md-min) {
-    .ad_container {
+        display: block;
         height: 90px;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 90px !important;
-        overflow: auto;
     }
 }
-/* Vertical screen > 1200px */
-@media (orientation: portrait) and (min-width: $screen-lg-min) {
+/* Vertical screen 970px > 1199px (970x90) */
+@media (orientation: portrait) and (min-width: 970px) and (min-height: 687px) {
     .ad_container {
+        display: block;
+        height: 90px;
+    }
+    body > .tab-content > .tab-pane > div:last-of-type {
+        padding-bottom: 90px !important;
+    }
+}
+/* Vertical screen > 1200px (970x250) */
+@media (orientation: portrait) and (min-width: $screen-lg-min) and (min-height: 976px) {
+    .ad_container {
+        display: block;
         height: 250px;
     }
     body > .tab-content > .tab-pane > div:last-of-type {
         padding-bottom: 250px !important;
-        overflow: auto;
     }
 }
 
+
+
+/* ------------------------------------------------------------------------- */
 
 /* Fix - brand enlarge the navbar */
 .navbar-brand {
@@ -752,5 +805,13 @@ $ad-gutter: $grid-gutter-width;
     }
     .btn-transparent {
         @include button-variant($navbar-inverse-toggle-icon-bar-bg, transparent, $navbar-inverse-toggle-border-color);
+    }
+}
+
+/* Hide some element on extra small screens */
+
+@media (orientation: landscape) and (min-width: $screen-sm-min) {
+    .navbar-brand {
+        display: none;
     }
 }
