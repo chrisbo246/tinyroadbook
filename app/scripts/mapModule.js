@@ -333,11 +333,20 @@ var MapModule = function (map, settings) {
         map.updateSize();
 
         //var $map = $('#' + map.get('target'));
-        console.log('Map size', $map.width() + 'x' + $map.height());
-        console.log('Map inner', $map.innerWidth() + 'x' + $map.innerHeight());
-        console.log('Map outer', $map.outerWidth() + 'x' + $map.outerHeight());
-        $map.toggleClass('narrow', ($map.width() < settings.narrowWidth));
-        $map.toggleClass('flat', ($map.height() < settings.flatHeight));
+
+        //$map.toggleClass('narrow', ($map.width() < settings.narrowWidth));
+        //$map.toggleClass('flat', ($map.height() < settings.flatHeight));
+
+        var $el = $map.find('.layer-switcher');
+        if ($el) {
+            $map.toggleClass('inline-layer-switcher', ($map.height() >= 200 && $map.height() < 500));
+            $map.toggleClass('no-layer-switcher', ($map.width() < 300 || $map.height() < 200));
+        }
+
+        $el = $map.find('.ol-zoomslider');
+        if ($el) {
+            $map.toggleClass('no-zoomslider', ($map.height() < 300));
+        }
 
     };
 

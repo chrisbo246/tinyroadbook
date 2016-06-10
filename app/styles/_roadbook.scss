@@ -83,61 +83,60 @@ $editor-bottom-navbar-height: 0;
 
 }
 
-#visual_editor_pane {
-
-}
-
-#map {
+.map {
     .spinner {
         opacity: .2;
         z-index: 1;
         width: 1em;
         height: 1em;
     }
+    /* Setting link */
+    .layer-switcher li.layer {
+        width: 100%;
+    }
+    .layer-switcher a[href="#layer_settings_modal"] {
+        font-size: 1em;
+        //float: right;
+        margin-left: .5em;
+    }
+    /* Layer-switcher */
+        &.no-layer-switcher .layer-switcher {
+        display: none;
+    }
+    &.inline-layer-switcher .layer-switcher {
+        .panel {
+            overflow-x: hidden;
+        }
+        .group {
+            float: left;
+            padding-bottom: .5em;
+        }
+    }
+    /* Zoom slider */
     .ol-zoomslider {
+        background-color: transparent;
+        top: 2.3em;
+    }
+    .ol-touch .ol-zoomslider {
         top: 2.75em;
     }
     .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
     .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
         top: 3px;
     }
-    .ol-zoomslider {
-        background-color: transparent;
-        top: 2.3em;
-    }
-    .layer-switcher label {
-
-    }
-    .layer-switcher a[href="#layer_settings_modal"] {
-        font-size: 1em;
-    }
-    &.narrow {
-        .layer-switcher {
-            display: none;
-        }
-    }
-    &.flat .layer-switcher .group {
-        float: left;
-        padding-bottom: .5em;
-    }
-    &.flat {
-        .ol-zoomslider {
-            display: none;
-        }
-        .ol-control.layer-switcher {
-            display: none;
-        }
-    }
-    &:not(.flat) {
+    &:not(.no-zoomslider) {
         .ol-zoom .ol-zoom-out {
             margin-top: 204px;
         }
-        .ol-zoom .ol-zoom-out {
+        .ol-touch .ol-zoom .ol-zoom-out {
             margin-top: 212px;
         }
-        .ol-zoom .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
-        .ol-zoom .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+        .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+        .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
             top: 232px;
         }
+    }
+    &.no-zoomslider .ol-zoomslider {
+        display: none;
     }
 }
