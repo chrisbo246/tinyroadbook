@@ -22,7 +22,7 @@ var MapModule = function MapModule(map, settings) {
         ol: {},
         basil: {},
         narrowWidth: 300,
-        flatHeight: 300,
+        flatHeight: 200,
         centerOnPosition: true,
         debug: true
     };
@@ -296,6 +296,9 @@ var MapModule = function MapModule(map, settings) {
         map.updateSize();
 
         //var $map = $('#' + map.get('target'));
+        console.log('Map size', $map.width() + 'x' + $map.height());
+        console.log('Map inner', $map.innerWidth() + 'x' + $map.innerHeight());
+        console.log('Map outer', $map.outerWidth() + 'x' + $map.outerHeight());
         $map.toggleClass('narrow', $map.width() < settings.narrowWidth);
         $map.toggleClass('flat', $map.height() < settings.flatHeight);
     };

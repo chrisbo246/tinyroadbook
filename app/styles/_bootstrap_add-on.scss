@@ -780,15 +780,7 @@ $ad-gutter: $grid-gutter-width;
 
 
 
-/* ------------------------------------------------------------------------- */
-
-/* Fix - brand enlarge the navbar */
-.navbar-brand {
-  line-height: $line-height-computed - 2px;
-}
-
-
-/* Navbar button variants */
+/* Navbar button variants -------------------------------------------------- */
 
 .navbar-default {
     .btn-assorted {
@@ -808,10 +800,11 @@ $ad-gutter: $grid-gutter-width;
     }
 }
 
-/* Hide some element on extra small screens */
 
-@media (orientation: landscape) and (min-width: $screen-sm-min) {
-    .navbar-brand {
-        display: none;
-    }
+
+/* Various fix ------------------------------------------------------------- */
+
+/* Fix - brand enlarge the navbar */
+.navbar-brand {
+  line-height: $line-height-computed - 2px;
 }
