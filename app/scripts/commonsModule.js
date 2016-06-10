@@ -58,7 +58,7 @@ var commonsModule = (function () {
             iconsSelector: '.material-icons' // mdi
         },
         parallax: {
-            selector: '[data-type="background"]'
+            speedDataAttribute: 'layer-speed'
         },
         scrollTo: {
             toggleSelector: '.scroll'
@@ -214,12 +214,12 @@ var commonsModule = (function () {
 
         $(function () {
             var $window = $(window);
-            $(settings.parallax.selector).each(function () {
+            $('[data-' + settings.parallax.speedDataAttribute + ']').each(function () {
                 var $scroll = $(this);
                 $window.scroll(function () {
-                    var yPos = -($window.scrollTop() / $scroll.data('speed'));
+                    var yPos = -($window.scrollTop() / $scroll.data(settings.parallax.speedDataAttribute));
                     var coords = '50% ' + yPos + 'px';
-                    $scroll.css({ backgroundPosition: coords });
+                    $scroll.css({backgroundPosition: coords});
                 });
             });
         });
