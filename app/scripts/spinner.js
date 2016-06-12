@@ -22,7 +22,7 @@ var Spinner = function (settings) {
     settings = $.extend(true, {}, defaults, settings);
 
     var dfd;
-    var deferreds = [];
+    var queue = [];
     var $spinner = $(settings.selector);
 
     $spinner.fadeOut();
@@ -38,19 +38,19 @@ var Spinner = function (settings) {
         // Add the deferred to the pending deferreds array
         // (but first, check if this is a deferred)
         if (typeof deferred.state !== 'undefined') {
-          deferreds.push(deferred);
+            queue.push(deferred);
         } else {
-          console.warn('Parameter shoud be a deferred');
-          return false;
+            console.warn('Parameter shoud be a deferred');
+            return false;
         }
 
         // Check pending deferreds state only
         // once the previous queue end
         // and if there are pending deferreds of course
         if (!dfd || dfd.state() !== 'pending') {
-          $spinner.fadeIn();
-          dfd = new $.Deferred();
-          checkPendingDeferreds();
+            $spinner.fadeIn();
+            dfd = new $.Deferred();
+            checkQueue();
         }
 
     };
@@ -60,23 +60,32 @@ var Spinner = function (settings) {
     /**
      * Check the pending list and hide the spinner when everything is resolved
      */
-    var checkPendingDeferreds = function () {
+    var checkQueue = function () {
 
-        var array = deferreds;
-        deferreds = [];
+        // Reset the main queue and check pending deferreds
+        var currentQueue = queue;
+        var unresolved = currentQueue.length;
+        queue = [];
 
-        $.when.apply($, array).always(function () {
+        $.each(currentQueue, function (i, d) {
+            $.when(d).always(function () {
 
-            // Check if there are pending deferreds
-            // If yes, check theme
-            // else hide the spinner
-            if (deferreds.length > 0) {
-                checkPendingDeferreds();
-            } else {
-                dfd.resolve();
-                $spinner.fadeOut();
-            }
+                unresolved = unresolved - arguments.length;
 
+                // If the current queue has been treated
+                if (unresolved === 0) {
+                    // If the main queue is not empty, check it
+                    if (queue.length > 0) {
+                        checkQueue();
+                    } else {
+                        // Else resolve the main deferred
+                        // and hide the spinner
+                        dfd.resolve();
+                        $spinner.fadeOut();
+                    }
+                }
+
+            });
         });
 
     };

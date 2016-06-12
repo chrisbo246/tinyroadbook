@@ -56,6 +56,11 @@ $editor-bottom-navbar-height: 0;
         //line-height: $line-height-base;
         //color: $pre-color;
         //padding-bottom: $editor-ad-height;
+        background-color: #fff;
+        //background-image: radial-gradient(rgba(0, 100, 255, 0.1) 5%, transparent 6%), radial-gradient(rgba(0, 100, 255, 0.1) 5%, transparent 6%);
+        background-image: radial-gradient(rgba(0, 0, 0, 0.05) 5%, transparent 6%), radial-gradient(rgba(0, 0, 0, 0.05) 5%, transparent 6%);
+        background-size: 28px 28px;
+        background-position: 0 0, 14px 14px;
     }
     .ql-container, pre, textarea {
         height: 100%;
@@ -91,16 +96,16 @@ $editor-bottom-navbar-height: 0;
         height: 1em;
     }
     /* Setting link */
-    .layer-switcher li.layer {
-        width: 100%;
-    }
     .layer-switcher a[href="#layer_settings_modal"] {
         font-size: 1em;
         //float: right;
         margin-left: .5em;
     }
     /* Layer-switcher */
-        &.no-layer-switcher .layer-switcher {
+    .layer-switcher .panel {
+        //max-height: none;
+    }
+    &.no-layer-switcher .layer-switcher {
         display: none;
     }
     &.inline-layer-switcher .layer-switcher {
@@ -110,6 +115,9 @@ $editor-bottom-navbar-height: 0;
         .group {
             float: left;
             padding-bottom: .5em;
+        }
+        .layer {
+            //width: 100%;
         }
     }
     /* Zoom slider */

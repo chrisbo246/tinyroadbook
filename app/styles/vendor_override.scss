@@ -5,7 +5,7 @@
 //@import "./_bootswatch_variables";
 
 @import "./_bootstrap_add-on";
-
+@import "./_material_design_icons";
 
 /* Bootstrap (fix) */
 
@@ -59,16 +59,25 @@
     position: relative;
 }
 
+.wf-materialicons-n4-active .layer-switcher button {
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+
 .wf-materialicons-n4-active .layer-switcher button:before {
-    //font-family: 'Material Icons';
-    font-family: 'Glyphicons Halflings';
+    content: "\F328";
     position: absolute;
     line-height: 1.44em;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    content: "\e236";
+    //font-family: 'Glyphicons Halflings';
+    //content: "\e236";
 }
 
 .layer-switcher small {

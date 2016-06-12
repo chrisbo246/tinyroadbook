@@ -21,6 +21,7 @@ var commonsModule = (function () {
         selector: {
             userLanguage: '#user_language, #language, #lang'
         },
+        // https://github.com/Wisembly/basil.js
         basil: {
 
         },
@@ -30,32 +31,28 @@ var commonsModule = (function () {
             adSlot: '3723415549', // Default ad slot when attribut is missing
             adFormat: 'auto' // Default ad format when attribut is missing
         },
+        // http://garlicjs.org/
         garlic: {
             fieldsSelector: '.garlic-auto-save',
             formsSelector: '[data-persist="garlic"]'
         },
+        // http://parsleyjs.org/
         parsley: {
             fieldsSelector: '[data-parsley-id]',
             formsSelector: '[data-parsley-validate]'
         },
+        // https://github.com/typekit/webfontloader
         webFontLoader: {
             version: '1.6.16',
             config: {
                 google: {
                     families: ['Material+Icons']
                 }
-                //loading: function() {},
-                //active: function() {
-                //    //toogleMaterialDesignIconVisibility('show');
-                //},
-                //inactive: function() {},
-                //fontloading: function(familyName, fvd) {},
-                //fontactive: function(familyName, fvd) {},
-                //fontinactive: function(familyName, fvd) {}
             }
         },
+        // https://materialdesignicons.com/
         materialDesign: {
-            iconsSelector: '.material-icons' // mdi
+            iconsSelector: '.material-icons, .mdi'
         },
         parallax: {
             speedDataAttribute: 'layer-speed'
@@ -63,21 +60,25 @@ var commonsModule = (function () {
         scrollTo: {
             toggleSelector: '.scroll'
         },
+        // https://mixitup.kunkalabs.com/
         mixitup: {
             selector: '#disabled_priorities, #faq_list'
         },
+        // http://i18next.com/
         i18next: {
             instance: null
         },
         input: {
             events: 'input change click'
         },
+        // https://harvesthq.github.io/chosen/
         chosen: {
             events: 'chosen:updated chosen:maxselected'
         },
         bootstrapSwitch: {
             events: ' switchChange.bootstrapSwitch'
         },
+        // https://jqueryui.com/sortable/
         sortable: {
             events: 'sortactivate sortbeforeStop sortchange sortcreate sortdeactivate sortout sortover sortreceive sortremove sort sortstart sortstop sortupdate'
         },
@@ -93,6 +94,7 @@ var commonsModule = (function () {
         spinner: {
             selector: '.spinner'
         },
+        // https://limonte.github.io/sweetalert2/
         swal: {
             resetData: {
                 title: 'Reset everything',
@@ -596,7 +598,7 @@ var commonsModule = (function () {
                 window.WebFontConfig = {};
                 $.extend(true, window.WebFontConfig, settings.webFontLoader.config);
             } else {
-                console.warn('Global variable WebFontConfig is not defined');
+                //console.warn('Global variable WebFontConfig is not defined');
                 return false;
             }
         }

@@ -22,8 +22,8 @@ html, body {
 
 body {
     padding-top: $navbar-height;
-    background-image: url(../images/backgrounds/pw_maze_white.png);
-    //background-size: 100%;
+    //background-image: url(../images/backgrounds/pw_maze_white.png);
+    //background-size: 46px 23px;
 }
 
 .navbar {
@@ -45,7 +45,12 @@ body {
 }
 
 /* Hide brand on extra small screens */
-@media (max-width: 319px) {
+@media (orientation: portrait) and (max-width: 240px) {
+    .navbar-brand {
+        display: none;
+    }
+}
+@media (orientation: landscape) and (max-width: 320px) {
     .navbar-brand {
         display: none;
     }
@@ -91,7 +96,7 @@ body > .tab-content {
         > div:first-of-type,
         > section:first-of-type {
             padding-top: 20px;
-            height: 100%;
+            overflow: hidden;
         }
 
         > div:last-of-type,
