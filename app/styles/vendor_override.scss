@@ -46,48 +46,37 @@
 .layer-switcher {
     top: 2.75em;
 }
+
 .layer-switcher button {
     height: 1.375em;
     width: 1.375em;
-    background-size: 100%;
-    background-position: 0;
+    background-size: 80%;
+    background-color: rgba(0, 60, 136, .5);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAYAAAAGAB4TKWmAAABM0lEQVRIx+XUu0qDQRCG4RgJRBALxSqN9mk8YJ02rZ21IF6AvVp4AekFvQFLg2BtF7FNFbGzEBQsFEJ4LJzgYjT5/xhB8INhYXbmnd3ZQ6Hwb4QyjsPKk4Yvo+VDLSxPCl7Hg0E9oP4TcBH76PlevYgp5oUvoCm7mljICl9FJwe8rw5WR8G38TIGvK8XbKfMfL3L2OFRu1jD7ZgtWvmtQz7HfFb4bIxFHMhxTfu5w+CbeMRhkjTyoWEaR3jC5rACe+gG4ELcbe9fxXUCb2Ep5hZxGf4u9kbtoob7SLjDevgHPjtsRIzIqWU9hwquIvEVO1/E7MaciK1kgieAEhpJW04wE3aa+Bso5YJ/KrSF54DdhAnf1tjgT0WqaCerbqM6EXhSZA5nYXMThSdFpjD1K/A/qzc8CQrNybQgPAAAAABJRU5ErkJggg==');
 }
-
+/*
 .wf-materialicons-n4-active .layer-switcher button {
     background-image: none;
-    background-color: rgba(0, 60, 136, .5);
     position: relative;
 }
 
 .wf-materialicons-n4-active .layer-switcher button {
-    font: normal normal normal 24px/1 "Material Design Icons";
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0);
+    font: normal normal normal 1.14em "Material Design Icons";
 }
 
 .wf-materialicons-n4-active .layer-switcher button:before {
     content: "\F328";
-    position: absolute;
-    line-height: 1.44em;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     //font-family: 'Glyphicons Halflings';
     //content: "\e236";
 }
-
-.layer-switcher small {
+*/
+.layer-switcher .layer label small {
     font-size: .6em;
-}
-
-.layer-switcher small,
-.layer-switcher small a {
-    color: #888;
     font-weight: normal;
+    &,
+    & a {
+        color: #888;
+    }
 }
 
 /* Google Adsense */

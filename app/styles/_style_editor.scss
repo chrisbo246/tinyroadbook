@@ -1,0 +1,11 @@
+
+#style_pane {
+    .row > div:first-of-type {
+        padding-top: 20px;
+    }
+    .row > div:last-of-type {
+        pre {
+            margin: 0;
+        }
+    }
+}
