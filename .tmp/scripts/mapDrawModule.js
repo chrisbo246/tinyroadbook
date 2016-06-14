@@ -3,11 +3,11 @@
 /*eslint-env browser, jquery */
 /*global ol */
 /**
- * OL3 draw module.
- * @module
- * @external ol
- * @return {Object} Public functions / variables
- */
+* OL3 draw module.
+* @module
+* @external ol
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var mapDrawModule = function () {
     /*eslint-enable no-unused-vars*/
@@ -17,8 +17,8 @@ var mapDrawModule = function () {
     var features = new ol.Collection();
 
     /**
-     * Modify interaction
-     */
+    * Modify interaction
+    */
     var modify = new ol.interaction.Modify({
         features: features,
         // the SHIFT key must be pressed to delete vertices, so
@@ -30,8 +30,8 @@ var mapDrawModule = function () {
     });
 
     /**
-     * Features vector layer
-     */
+    * Features vector layer
+    */
     var featureOverlay = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: features
@@ -54,21 +54,21 @@ var mapDrawModule = function () {
     });
 
     /**
-     * Add the draw interaction to the map
-     * @public
-     * @param {Object} map - OL3 map
-     */
+    * Add the draw interaction to the map
+    * @public
+    * @param {Object} map - OL3 map
+    */
     var init = function init(map) {
         featureOverlay.setMap(map);
         map.addInteraction(modify);
     };
 
     /**
-     * Add a draw interaction to the map
-     * @public
-     * @param {string} type - Interaction type
-     * @param {Object} OL3 map
-     */
+    * Add a draw interaction to the map
+    * @public
+    * @param {string} type - Interaction type
+    * @param {Object} OL3 map
+    */
     var drawInteraction = function drawInteraction(type, map) {
         if (type) {
             draw = new ol.interaction.Draw({
@@ -80,11 +80,11 @@ var mapDrawModule = function () {
     };
 
     /**
-     * Let user change the geometry type.
-     * @public
-     * @param {string} id - Select input ID
-     * @param {Object} map - OL3 map
-     */
+    * Let user change the geometry type.
+    * @public
+    * @param {string} id - Select input ID
+    * @param {Object} map - OL3 map
+    */
     var addDrawTypeSwitcher = function addDrawTypeSwitcher(id, map) {
         var typeSelect = document.getElementById(id);
         typeSelect.onchange = function () {

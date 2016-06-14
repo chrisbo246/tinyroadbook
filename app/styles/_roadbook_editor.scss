@@ -31,7 +31,7 @@ $editor-bottom-navbar-height: 0;
     padding-top: $editor-top-navbar-height;
     //padding-bottom: $editor-bottom-navbar-height + 13px;
     @media (min-width: 768px) {
-    //    padding-bottom: $editor-bottom-navbar-height + 2px;
+        //    padding-bottom: $editor-bottom-navbar-height + 2px;
     }
 
     & > .btn-toolbar:first-of-type {
@@ -77,13 +77,13 @@ $editor-bottom-navbar-height: 0;
         }
     }
     /*.ad_container {
-        width: 98%;
-        min-height: 50px;
-        max-height: $editor-ad-height;
-        position: absolute;
-        bottom: $editor-bottom-navbar-height;
-        overflow: hidden;
-        background-color: $body-bg;
-    }*/
+    width: 98%;
+    min-height: 50px;
+    max-height: $editor-ad-height;
+    position: absolute;
+    bottom: $editor-bottom-navbar-height;
+    overflow: hidden;
+    background-color: $body-bg;
+}*/
 
 }

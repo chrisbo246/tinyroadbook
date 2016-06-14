@@ -1,16 +1,16 @@
 /*eslint-env browser, jquery */
 /*global ol */
 /**
- * OL3 module.
- * @see {@link http://openlayers.org/en/v3.12.1/apidoc/}
- * @class
- * @external $
- * @external Basil
- * @external ol
- * @param {Object} map - ol initialized map
- * @param {Object} settings - Module settings override
- * @return {Object} Public functions / variables
- */
+* OL3 module.
+* @see {@link http://openlayers.org/en/v3.12.1/apidoc/}
+* @class
+* @external $
+* @external Basil
+* @external ol
+* @param {Object} map - ol initialized map
+* @param {Object} settings - Module settings override
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var MapModule = function (map, settings) {
     /*eslint-enable no-unused-vars*/
@@ -33,9 +33,9 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Save map state using cookies or local storage
-     * @public
-     */
+    * Save map state using cookies or local storage
+    * @public
+    */
     var storeMapChanges = function () {
 
         if (!basil) {
@@ -69,10 +69,10 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Save map state using cookies or local storage
-     * @public
-     * @return {Boolean} Restore success
-     */
+    * Save map state using cookies or local storage
+    * @public
+    * @return {Boolean} Restore success
+    */
     var restoreMapProperties = function () {
 
         if (!basil) {
@@ -107,9 +107,9 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Display event logs
-     * @public
-     */
+    * Display event logs
+    * @public
+    */
     var debug = function () {
 
         var view = map.getView();
@@ -141,38 +141,38 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Return the selected base layer name
-     * @public
-     */
+    * Return the selected base layer name
+    * @public
+    */
     var getSelectedBaseLayer = function () {
 
-      var layers = map.getLayers();
+        var layers = map.getLayers();
 
-      $.each(layers, function (i, l) {
-        //var BL = l.get('baselayer');
-        if (l.getVisible()) {
-            console.log('Selected layer', l.get('name'));
-        } else {
-            console.log('Unselected layer', l.get('name'));
-        }
-        l.on('change:visible', function () {
-            // this.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
-            if (this.getVisible()) {
-                console.log('Selected layer', this.get('name'));
+        $.each(layers, function (i, l) {
+            //var BL = l.get('baselayer');
+            if (l.getVisible()) {
+                console.log('Selected layer', l.get('name'));
+            } else {
+                console.log('Unselected layer', l.get('name'));
             }
+            l.on('change:visible', function () {
+                // this.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
+                if (this.getVisible()) {
+                    console.log('Selected layer', this.get('name'));
+                }
+            });
         });
-      });
     };
 
 
 
     /**
-     * Finds recursively the layer with the specified key and value.
-     * @param {ol.layer.Base} layer
-     * @param {String} key
-     * @param {any} value
-     * @returns {ol.layer.Base}
-     */
+    * Finds recursively the layer with the specified key and value.
+    * @param {ol.layer.Base} layer
+    * @param {String} key
+    * @param {any} value
+    * @returns {ol.layer.Base}
+    */
     var findLayerBy = function (layer, key, value) {
 
         // If it's a single layer and the value was found, return the layer
@@ -200,11 +200,11 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Center the map at a given position and make a zoom
-     * @public
-     * @param {number} longitude - Longitude at EPSG:4326 projection
-     * @param {number} latitude - Latitude at EPSG:4326 projection
-     */
+    * Center the map at a given position and make a zoom
+    * @public
+    * @param {number} longitude - Longitude at EPSG:4326 projection
+    * @param {number} latitude - Latitude at EPSG:4326 projection
+    */
     var setCenter = function (longitude, latitude) {
 
         var view = map.getView();
@@ -216,9 +216,9 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Try to geolocate user and center map on the position
-     * @public
-     */
+    * Try to geolocate user and center map on the position
+    * @public
+    */
     var setCenterOnPosition = function () {
 
         var view = map.getView();
@@ -236,10 +236,10 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Change zoom level
-     * @public
-     * @param {Integer} zoom - Zoom level from 0 to 21
-     */
+    * Change zoom level
+    * @public
+    * @param {Integer} zoom - Zoom level from 0 to 21
+    */
     var setZoom = function (zoom) {
 
         zoom = parseInt(zoom);
@@ -252,9 +252,9 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Zoom out and adjust center to fit the view extent
-     * @public
-     */
+    * Zoom out and adjust center to fit the view extent
+    * @public
+    */
     var fitView = function () {
 
         var view = map.getView();
@@ -266,9 +266,9 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Zoom out and adjust center to fit all layers in the map viewport
-     * @public
-     */
+    * Zoom out and adjust center to fit all layers in the map viewport
+    * @public
+    */
     var fitLayers = function () {
 
         var view = map.getView();
@@ -283,10 +283,10 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Zoom out and adjust center to fit the layer features
-     * @public
-     * @param {Object} ol3 vector layer
-     */
+    * Zoom out and adjust center to fit the layer features
+    * @public
+    * @param {Object} ol3 vector layer
+    */
     var fitVectorLayer = function (layer) {
 
         var extent = layer.getSource().getExtent();
@@ -297,13 +297,13 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Zoom out and adjust center to fil a vectore layer feature
-     * @see {@link http://openlayers.org/en/v3.4.0/examples/center.html}
-     * @public
-     * @param {String} id - Feature id
-     * @param {Object} layer - Vector layer
-     * @param {Object} options - ol3 fit function parameters
-     */
+    * Zoom out and adjust center to fil a vectore layer feature
+    * @see {@link http://openlayers.org/en/v3.4.0/examples/center.html}
+    * @public
+    * @param {String} id - Feature id
+    * @param {Object} layer - Vector layer
+    * @param {Object} options - ol3 fit function parameters
+    */
     var fitLayerGeometry = function (id, layer, options) {
 
         var source = layer.getSource();
@@ -324,10 +324,10 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Add a .flat and .narrow class to the map container according to map size
-     * @param {Number} width - Map width
-     * @param {Number} height - Map height
-     */
+    * Add a .flat and .narrow class to the map container according to map size
+    * @param {Number} width - Map width
+    * @param {Number} height - Map height
+    */
     var updateSize = function () {
 
         map.updateSize();
@@ -353,136 +353,136 @@ var MapModule = function (map, settings) {
 
 
     /**
-     * Get all tiles in rectangle area
-     * @public
-     * @param {Array} coord - Longitude, latitude
-     * @param {Integer} zoom - Zoom
-     * @return {Array}
-     */
+    * Get all tiles in rectangle area
+    * @public
+    * @param {Array} coord - Longitude, latitude
+    * @param {Integer} zoom - Zoom
+    * @return {Array}
+    */
     /*var getTileURL = function (coord, zoom) {
 
-        var cor = transform2(coord[0], coord[1]);
-        var lon = cor[0];
-        var lat = cor[1];
-        var out = [];
-        var xtile = parseInt(Math.floor((lon + 180) / 360 * (1 << zoom)));
-        var ytile = parseInt(Math.floor((1 - Math.log(Math.tan(lat.toRad()) + 1 / Math.cos(lat.toRad())) / Math.PI) / 2 * (1 << zoom)));
-        console.log('>> ' + zoom + '/' + xtile + '/' + ytile);
-        out[0] = zoom;
-        out[1] = xtile;
-        out[2] = ytile;
+    var cor = transform2(coord[0], coord[1]);
+    var lon = cor[0];
+    var lat = cor[1];
+    var out = [];
+    var xtile = parseInt(Math.floor((lon + 180) / 360 * (1 << zoom)));
+    var ytile = parseInt(Math.floor((1 - Math.log(Math.tan(lat.toRad()) + 1 / Math.cos(lat.toRad())) / Math.PI) / 2 * (1 << zoom)));
+    console.log('>> ' + zoom + '/' + xtile + '/' + ytile);
+    out[0] = zoom;
+    out[1] = xtile;
+    out[2] = ytile;
 
-        return out;
+    return out;
 
-    };*/
-
-
-
-    /**
-     * Get all tiles in rectangle area
-     * @public
-     * @param {Array} coord1 - Longitude, latitude
-     * @param {Array} coord2 - Longitude, latitude
-     */
-    /*var getAllTiles = function (coord1, coord2) {
-
-        var out1 = getTileURL(coord1, 10);
-        var out2 = getTileURL(coord2, 10);
-        var outTmp1;
-
-        if(out1[1] > out2[1]) {
-            outTmp1 = out1[1];
-            out1[1] = out2[1];
-            out2[1] = outTmp1;
-        }
-        if(out1[2] > out2[2]) {
-            outTmp1 = out1[2];
-            out1[2] = out2[2];
-            out2[2] = outTmp1;
-        }
-
-        console.log('zoom' + out1[0] + ' from ' + out1[1] + ' to ' + out2[1] + ' from ' + out1[2] + ' to ' + out2[2]);
-        while(out1[1] <= out2[1]) {
-            while(out1[2] <= out2[2]) {
-                console.log('*** ' + out1[1] + '/' + out1[2]);
-                out1[2]++;
-            }
-            out1[1]++;
-        }
-
-    };*/
+};*/
 
 
 
-    /**
-     * Execute common tasks after map initialisation
-     * @private
-     */
-    var init = function () {
+/**
+* Get all tiles in rectangle area
+* @public
+* @param {Array} coord1 - Longitude, latitude
+* @param {Array} coord2 - Longitude, latitude
+*/
+/*var getAllTiles = function (coord1, coord2) {
 
-        // Merge default and custom settings
-        settings = $.extend(true, {}, defaults, settings);
+var out1 = getTileURL(coord1, 10);
+var out2 = getTileURL(coord2, 10);
+var outTmp1;
 
-        // Define map container
-        $map = $('#' + map.get('target'));
+if(out1[1] > out2[1]) {
+outTmp1 = out1[1];
+out1[1] = out2[1];
+out2[1] = outTmp1;
+}
+if(out1[2] > out2[2]) {
+outTmp1 = out1[2];
+out1[2] = out2[2];
+out2[2] = outTmp1;
+}
 
-        // Redraw the map when the screen size change
-        window.onresize = function () {
-            updateSize();
-        };
+console.log('zoom' + out1[0] + ' from ' + out1[1] + ' to ' + out2[1] + ' from ' + out1[2] + ' to ' + out2[2]);
+while(out1[1] <= out2[1]) {
+while(out1[2] <= out2[2]) {
+console.log('*** ' + out1[1] + '/' + out1[2]);
+out1[2]++;
+}
+out1[1]++;
+}
 
-        // Add a .flat and .narrow class to the map container according to map size
+};*/
+
+
+
+/**
+* Execute common tasks after map initialisation
+* @private
+*/
+var init = function () {
+
+    // Merge default and custom settings
+    settings = $.extend(true, {}, defaults, settings);
+
+    // Define map container
+    $map = $('#' + map.get('target'));
+
+    // Redraw the map when the screen size change
+    window.onresize = function () {
         updateSize();
-
-        // Init Basil
-        if (typeof window.Basil !== 'undefined') {
-            // Define an unique namespace to store map data
-            if (!settings.basil.namespace) {
-                settings.basil.namespace = map.get('target');
-            }
-            basil = new window.Basil(settings.basil);
-
-            // Try to restore map center and zoom from the local storage
-            if (!restoreMapProperties()) {
-                // Or center map on user position and set a default zoom
-                if (settings.centerOnPosition) {
-                    setCenterOnPosition();
-                    map.getView().setZoom(12);
-                }
-            }
-
-            // Check map events and store changes to local storage
-            storeMapChanges();
-
-        }
-
-        if (settings.debug) {
-            debug();
-        }
-
     };
 
+    // Add a .flat and .narrow class to the map container according to map size
+    updateSize();
+
+    // Init Basil
+    if (typeof window.Basil !== 'undefined') {
+        // Define an unique namespace to store map data
+        if (!settings.basil.namespace) {
+            settings.basil.namespace = map.get('target');
+        }
+        basil = new window.Basil(settings.basil);
+
+        // Try to restore map center and zoom from the local storage
+        if (!restoreMapProperties()) {
+            // Or center map on user position and set a default zoom
+            if (settings.centerOnPosition) {
+                setCenterOnPosition();
+                map.getView().setZoom(12);
+            }
+        }
+
+        // Check map events and store changes to local storage
+        storeMapChanges();
+
+    }
+
+    if (settings.debug) {
+        debug();
+    }
+
+};
 
 
-    init();
+
+init();
 
 
 
-    return {
-        findLayerBy: findLayerBy,
-        fitLayerGeometry: fitLayerGeometry,
-        fitLayers: fitLayers,
-        fitVectorLayer: fitVectorLayer,
-        fitView: fitView,
-        getSelectedBaseLayer: getSelectedBaseLayer,
-        map: map,
-        restoreMapProperties: restoreMapProperties,
-        setCenter: setCenter,
-        setCenterOnPosition: setCenterOnPosition,
-        settings: settings,
-        setZoom: setZoom,
-        storeMapChanges: storeMapChanges,
-        updateSize: updateSize
-    };
+return {
+    findLayerBy: findLayerBy,
+    fitLayerGeometry: fitLayerGeometry,
+    fitLayers: fitLayers,
+    fitVectorLayer: fitVectorLayer,
+    fitView: fitView,
+    getSelectedBaseLayer: getSelectedBaseLayer,
+    map: map,
+    restoreMapProperties: restoreMapProperties,
+    setCenter: setCenter,
+    setCenterOnPosition: setCenterOnPosition,
+    settings: settings,
+    setZoom: setZoom,
+    storeMapChanges: storeMapChanges,
+    updateSize: updateSize
+};
 
 };

@@ -5,12 +5,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /*eslint-env browser, jquery */
 /*global console, $, ol, Basil, parsley, commonsModule */
 /**
- * OL3 layers module.
- * @module
- * @external $
- * @external ol
- * @return {Object} Public functions / variables
- */
+* OL3 layers module.
+* @module
+* @external $
+* @external ol
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var mapLayersModule = function () {
     /*eslint-enable no-unused-vars*/
@@ -55,10 +55,10 @@ var mapLayersModule = function () {
     }
 
     /**
-     * Display some logs about layer events
-     * @private
-     * @param {Object} layer - ol.layer
-     */
+    * Display some logs about layer events
+    * @private
+    * @param {Object} layer - ol.layer
+    */
     var debug = function debug(layer) {
 
         if (!settings.debug) {
@@ -79,10 +79,10 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Restore some properties from the local storage and save changes
-     * @private
-     * @param {Object} layer - ol.layer
-     */
+    * Restore some properties from the local storage and save changes
+    * @private
+    * @param {Object} layer - ol.layer
+    */
     var watchLayerChanges = function watchLayerChanges(layer) {
 
         // Store layer properties changes
@@ -105,10 +105,10 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Restore all layers properties from the local storage
-     * @private
-     * @param {Object} layer - ol.layer
-     */
+    * Restore all layers properties from the local storage
+    * @private
+    * @param {Object} layer - ol.layer
+    */
     var restoreLayer = function restoreLayer(layer) {
 
         var namespace = layer.get('name');
@@ -124,12 +124,12 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Create a new layer using predefined settings
-     * @public
-     * @param {string} name - Predefined layer (variable name)
-     * @param {Object} [properties] - Layer custom parameters
-     * @return {Object} OL3 layer
-     */
+    * Create a new layer using predefined settings
+    * @public
+    * @param {string} name - Predefined layer (variable name)
+    * @param {Object} [properties] - Layer custom parameters
+    * @return {Object} OL3 layer
+    */
     var create = function create(name, properties) {
 
         if (!layers[name]) {
@@ -160,11 +160,11 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Apply a function on (nested) layers
-     * @public
-     * @param {Object} layer - Map object or layer group
-     * @param {function} fn - Function with layer as parameter, to apply to each layer
-     */
+    * Apply a function on (nested) layers
+    * @public
+    * @param {Object} layer - Map object or layer group
+    * @param {function} fn - Function with layer as parameter, to apply to each layer
+    */
     var treatLayers = function treatLayers(layer, fn) {
 
         $.each(layers, function (i, l) {
@@ -177,10 +177,10 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Live update layer values once a field was validated by Parsley
-     * @public
-     * @param {Object} layer - Map object or layer group
-     */
+    * Live update layer values once a field was validated by Parsley
+    * @public
+    * @param {Object} layer - Map object or layer group
+    */
     var validateSettingsForm = function validateSettingsForm(formSelector) {
 
         var $input, key, value, style, type;
@@ -242,10 +242,10 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Edit layer
-     * @public
-     * @param {Object} layer - Map object or layer group
-     */
+    * Edit layer
+    * @public
+    * @param {Object} layer - Map object or layer group
+    */
     var initSettingsForm = function initSettingsForm(layer, formSelector, formGroupSelector) {
 
         var $input, $groups, key, value;
@@ -352,22 +352,22 @@ var mapLayersModule = function () {
 
             /*
             if (typeof source.getFeatures === 'function'') {
-                var features = source.getFeatures();
+            var features = source.getFeatures();
             }
-             if (features) {
-                $.each(features, function (i, feature) {
-                     var id = feature.getId();
-                    console.log('Feature id', id);
-                    var keys = feature.getKeys();
-                    console.log('Feature keys', keys);
-                     if (typeof feature.getFormat === 'function') {
-                        format = feature.getFormat();
-                    }
-                     if (format) {
-                        var types = commonsModule.getInstancesOf(format, ol.format, olFormatTypes);
-                        console.log('Feature format types', types);
-                    }
-                 });
+            if (features) {
+            $.each(features, function (i, feature) {
+            var id = feature.getId();
+            console.log('Feature id', id);
+            var keys = feature.getKeys();
+            console.log('Feature keys', keys);
+            if (typeof feature.getFormat === 'function') {
+            format = feature.getFormat();
+            }
+            if (format) {
+            var types = commonsModule.getInstancesOf(format, ol.format, olFormatTypes);
+            console.log('Feature format types', types);
+            }
+            });
             }
             */
         }
@@ -453,12 +453,12 @@ var mapLayersModule = function () {
             });
         }
         /*if (sourceUrls) {
-            $formGroups.find(':input').filter('[data-ol-source][data-ol-property="urls"]').each(function () {
-                $input = $(this);
-                value = sourceUrls;
-                commonsModule.setInputValue($input, value);
-                console.log('Layer input "URL" populated', value);
-            });
+        $formGroups.find(':input').filter('[data-ol-source][data-ol-property="urls"]').each(function () {
+        $input = $(this);
+        value = sourceUrls;
+        commonsModule.setInputValue($input, value);
+        console.log('Layer input "URL" populated', value);
+        });
         }*/
 
         if (formatTypes) {
@@ -487,11 +487,11 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Update layer source url
-     * @public
-     * @param {Object} layer - OL3 layer
-     * @param {String|array} url - URL
-     */
+    * Update layer source url
+    * @public
+    * @param {Object} layer - OL3 layer
+    * @param {String|array} url - URL
+    */
     var updateSourceUrl = function updateSourceUrl(layer, url) {
 
         if (!layer) {
@@ -514,12 +514,12 @@ var mapLayersModule = function () {
     };
 
     /**
-     * Update the GPX layer with the input file values
-     * @private
-     * @param {Object} layer - OL layer
-     * @param {Object} files - Input file [files]
-     * @param {Object} featuresOptions - Features options
-     */
+    * Update the GPX layer with the input file values
+    * @private
+    * @param {Object} layer - OL layer
+    * @param {Object} files - Input file [files]
+    * @param {Object} featuresOptions - Features options
+    */
     var loadFileFeatures = function loadFileFeatures(layer, files, featuresOptions) {
 
         if (files.length === 0) {
@@ -553,10 +553,10 @@ var mapLayersModule = function () {
 
     // Styles ______________________________________________________________________________________
     /**
-     * Timezones layer style
-     * @see http://openlayers.org/en/v3.4.0/examples/kml-timezones.html
-     * @private
-     */
+    * Timezones layer style
+    * @see http://openlayers.org/en/v3.4.0/examples/kml-timezones.html
+    * @private
+    */
     var timezonesStyle = function timezonesStyle(feature) {
         // feature, resolution
         var offset = 0;
@@ -929,34 +929,34 @@ var mapLayersModule = function () {
     // Err
     layers.stamenBurningMap = function () {
     return new ol.layer.Tile({
-        name: 'stamenBurningMap',
-        title: 'Burning map<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
-        type: 'base',
-        source: new ol.source.Stamen({
-            layer: 'burningmap'
-        })
+    name: 'stamenBurningMap',
+    title: 'Burning map<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
+    type: 'base',
+    source: new ol.source.Stamen({
+    layer: 'burningmap'
+    })
     });
     };
     // Err
     layers.stamenMars = function () {
     return new ol.layer.Tile({
-        name: 'stamenMars',
-        title: 'Mars<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
-        type: 'base',
-        source: new ol.source.Stamen({
-            layer: 'mars'
-        })
+    name: 'stamenMars',
+    title: 'Mars<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
+    type: 'base',
+    source: new ol.source.Stamen({
+    layer: 'mars'
+    })
     });
     };
     // Err
     layers.stamenTreesCabsCrime = function () {
     return new ol.layer.Tile({
-        name: 'stamenTreesCabsCrime',
-        title: 'Trees Cabs Crime<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
-        type: 'base',
-        source: new ol.source.Stamen({
-            layer: 'trees-cabs-crime'
-        })
+    name: 'stamenTreesCabsCrime',
+    title: 'Trees Cabs Crime<small> (by <a href="http://maps.stamen.com">Stamen</a>)</small>',
+    type: 'base',
+    source: new ol.source.Stamen({
+    layer: 'trees-cabs-crime'
+    })
     });
     };
     */
@@ -1107,20 +1107,20 @@ var mapLayersModule = function () {
     };
 
     /**
-     *
-     */
+    *
+    */
     var ImageData = function ImageData() {
         console.warm('ImageData function in development');
     };
 
     /**
-     * Generates a shaded relief image given elevation data.  Uses a 3x3
-     * neighborhood for determining slope and aspect.
-     * @private
-     * @param {Array.<ImageData>} inputs Array of input images.
-     * @param {Object} data Data added in the "beforeoperations" event.
-     * @return {ImageData} Output image.
-     */
+    * Generates a shaded relief image given elevation data.  Uses a 3x3
+    * neighborhood for determining slope and aspect.
+    * @private
+    * @param {Array.<ImageData>} inputs Array of input images.
+    * @param {Object} data Data added in the "beforeoperations" event.
+    * @return {ImageData} Output image.
+    */
     var shade = function shade(inputs, data) {
         var elevationImage = inputs[0];
         var width = elevationImage.width;
@@ -1269,19 +1269,19 @@ var mapLayersModule = function () {
     /*
     layers.toolserverHillShading = function () {
     return new ol.layer.Tile({
-        name: 'toolserverHillShading',
-        title: 'Toolserver hill shading',
-        minZoom: 2,
-        maxZoom: 15,
-        source: new ol.source.XYZ({
-            // crossOrigin: null,
-            urls: [
-                // 'http://toolserver.org/~cmarqu/hill/{z}/{x}/{y}.png',
-                'http://a.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
-                'http://b.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
-                'http://c.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
-            ]
-        })
+    name: 'toolserverHillShading',
+    title: 'Toolserver hill shading',
+    minZoom: 2,
+    maxZoom: 15,
+    source: new ol.source.XYZ({
+    // crossOrigin: null,
+    urls: [
+    // 'http://toolserver.org/~cmarqu/hill/{z}/{x}/{y}.png',
+    'http://a.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
+    'http://b.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
+    'http://c.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
+    ]
+    })
     });
     };
     */
@@ -1303,103 +1303,112 @@ var mapLayersModule = function () {
     // _____________________________________________________________________________________________
 
     /**
-     * Update layer source url from a file input
-     * <input id="gpx_file" type="file" accept=".gpx" />
-     * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
-     * @public
-     * @param {string} selector - File input ID
-     * @param {Object} layer - OL3 vector layer
-     */
+    * Update layer source url from a file input
+    * <input id="gpx_file" type="file" accept=".gpx" />
+    * @see {@link http://www.html5rocks.com/en/tutorials/file/dndfiles/}
+    * @public
+    * @param {string} selector - File input ID
+    * @param {Object} layer - OL3 vector layer
+    */
     /*
     var GPXFileSource = function (selector, layer) {
-        if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-            $(selector).addClass('disabled');
-            console.warn('The File APIs are not fully supported by your browser.');
-            return false;
-        }
-        var gpxFormat = new ol.format.GPX();
-        var gpxFeatures;
-         var $filePath = $(selector);
-        $filePath.on('change', function (e) {
-             var files = e.target.files;
-            var output = [];
-            for (var i = 0, f; f = files[i]; i++) {
-                var reader = new FileReader();
-                reader.readAsText(f); //, 'UTF-8'
-                //reader.readAsDataURL(f);
-                 reader.onload = function (e) {
-                     gpxFeatures = gpxFormat.readFeatures(e.target.result, {
-                        dataProjection: 'EPSG:4326',
-                        featureProjection: 'EPSG:3857'
-                    });
-                    layer.getSource().addFeatures(gpxFeatures);
-                     layer.setProperties({
-                        visible: true
-                    });
-                 };
-                 reader.onloadstart = function (e) {
-                    //console.log('GPX tracks loading...');
-                };
-                reader.onloadend = function (e) {
-                    console.log('GPX tracks loaded');
-                };
-                reader.onerror = function (e) {
-                    swal({title: 'Oups!', text: 'An error occured while trying to read your file.', type: 'warning'});
-                };
-                 // Build the list of loaded files
-                output.push('<li class="list-group-item">'
-                + escape(f.name) + ' <span class="badge">'
-                + formatBytes(f.size)
-                + (' ' + f.type || '')
-                //+ (f.lastModifiedDate ? ' last modified: ' + f.lastModifiedDate.toLocaleDateString() : '')
-                + '<span></li>');
-            };
-             var $list = $(selector + '_list');
-            if ($list) {
-                $list.html('<ul class="list-group">' + output.join('') + '</ul>');
-            }
-        });
+    if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+    $(selector).addClass('disabled');
+    console.warn('The File APIs are not fully supported by your browser.');
+    return false;
+    }
+    var gpxFormat = new ol.format.GPX();
+    var gpxFeatures;
+    
+    var $filePath = $(selector);
+    $filePath.on('change', function (e) {
+    
+    var files = e.target.files;
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+    var reader = new FileReader();
+    reader.readAsText(f); //, 'UTF-8'
+    //reader.readAsDataURL(f);
+    
+    reader.onload = function (e) {
+    
+    gpxFeatures = gpxFormat.readFeatures(e.target.result, {
+    dataProjection: 'EPSG:4326',
+    featureProjection: 'EPSG:3857'
+    });
+    layer.getSource().addFeatures(gpxFeatures);
+    
+    layer.setProperties({
+    visible: true
+    });
+    
+    };
+    
+    reader.onloadstart = function (e) {
+    //console.log('GPX tracks loading...');
+    };
+    reader.onloadend = function (e) {
+    console.log('GPX tracks loaded');
+    };
+    reader.onerror = function (e) {
+    swal({title: 'Oups!', text: 'An error occured while trying to read your file.', type: 'warning'});
+    };
+    
+    // Build the list of loaded files
+    output.push('<li class="list-group-item">'
+    + escape(f.name) + ' <span class="badge">'
+    + formatBytes(f.size)
+    + (' ' + f.type || '')
+    //+ (f.lastModifiedDate ? ' last modified: ' + f.lastModifiedDate.toLocaleDateString() : '')
+    + '<span></li>');
+    };
+    
+    var $list = $(selector + '_list');
+    if ($list) {
+    $list.html('<ul class="list-group">' + output.join('') + '</ul>');
+    }
+    });
     };
     */
 
     // Set default properties
     /*$.each(layers, function (i, layer) {
-        layer().setProperties(defaultProperties);
+    layer().setProperties(defaultProperties);
     });*/
     /*
     // Translate layer and group titles once i18next plugin initialized
     $.when(deferred.init.i18next).done(function () {
-        roadBaselayers.setProperties({
-            title: $.t('sections:roadLayers.title')
-        });
-        reliefBaselayers.setProperties({
-            title: $.t('sections:roadWithReliefLayers.title')
-        });
-        aerialBaselayers.setProperties({
-            title: $.t('sections:satelliteLayers.title')
-        });
-        baselayers.setProperties({
-            title: $.t('sections:baseLayer.title')
-        });
-        roadOverlays.setProperties({
-            title: $.t('sections:roadLayers.title')
-        });
-        informationOverlays.setProperties({
-            title: $.t('sections:infoLayers.title')
-        });
-        //terrainOverlays.setProperties({
-        //    title: $.t('sections:reliefLayers.title')
-        //});
-        userOverlays.setProperties({
-            title: $.t('sections:myLayers.title')
-        });
-        overlays.setProperties({
-            title: $.t('sections:layers.title')
-        });
-        informationOverlays.setProperties({
-            title: $.t('sections:infoLayers.title')
-        });
-        console.log('Map layers translated');
+    roadBaselayers.setProperties({
+    title: $.t('sections:roadLayers.title')
+    });
+    reliefBaselayers.setProperties({
+    title: $.t('sections:roadWithReliefLayers.title')
+    });
+    aerialBaselayers.setProperties({
+    title: $.t('sections:satelliteLayers.title')
+    });
+    baselayers.setProperties({
+    title: $.t('sections:baseLayer.title')
+    });
+    roadOverlays.setProperties({
+    title: $.t('sections:roadLayers.title')
+    });
+    informationOverlays.setProperties({
+    title: $.t('sections:infoLayers.title')
+    });
+    //terrainOverlays.setProperties({
+    //    title: $.t('sections:reliefLayers.title')
+    //});
+    userOverlays.setProperties({
+    title: $.t('sections:myLayers.title')
+    });
+    overlays.setProperties({
+    title: $.t('sections:layers.title')
+    });
+    informationOverlays.setProperties({
+    title: $.t('sections:infoLayers.title')
+    });
+    console.log('Map layers translated');
     });
     */
 

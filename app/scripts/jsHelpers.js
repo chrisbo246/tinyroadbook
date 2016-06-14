@@ -2,15 +2,15 @@
 /*global window */
 /* exported numberToName, formatBytes, escapeHtml */
 /**
- * Convert a number to a name according to the range of values
- * @public
- * @param {number} number - The number to convert
- * @param {number} min - The minimal value the number can have
- * @param {number} min - The minimal value the number can have
- * @param {array} values - Possible returned values sorted from the smallest to the biggest
- * @param {integer} index - Default value (array index starting from 0)
- * @return {string} One of the possible values
- */
+* Convert a number to a name according to the range of values
+* @public
+* @param {number} number - The number to convert
+* @param {number} min - The minimal value the number can have
+* @param {number} min - The minimal value the number can have
+* @param {array} values - Possible returned values sorted from the smallest to the biggest
+* @param {integer} index - Default value (array index starting from 0)
+* @return {string} One of the possible values
+*/
 window.numberToName = function (number, min, max, values, index) {
     'use strict';
     //if (!$.isNumeric(number)) return values[index];
@@ -29,32 +29,32 @@ window.numberToName = function (number, min, max, values, index) {
 
 
 /**
- * Convert bytes to string size
- * @public
- * @param {integer} bytes - Size in bytes
- * @param {integer} decimals - Round number to n decimals
- * @return {string} The formatted value
- */
+* Convert bytes to string size
+* @public
+* @param {integer} bytes - Size in bytes
+* @param {integer} decimals - Round number to n decimals
+* @return {string} The formatted value
+*/
 window.formatBytes = function (bytes, decimals) {
-   'use strict';
-   if (bytes === 0) {
-       return '0 Byte';
-   }
-   var k = 1000;
-   var dm = decimals + 1 || 3;
-   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-   var i = Math.floor(Math.log(bytes) / Math.log(k));
-   return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+    'use strict';
+    if (bytes === 0) {
+        return '0 Byte';
+    }
+    var k = 1000;
+    var dm = decimals + 1 || 3;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
+    return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
 };
 
 
 
 /**
- * Convert a HTML string to escaped text
- * @public
- * @param {String} html - HTML code
- * @return {String} HTML code ready for display in <pre><code></code></pre>
- */
+* Convert a HTML string to escaped text
+* @public
+* @param {String} html - HTML code
+* @return {String} HTML code ready for display in <pre><code></code></pre>
+*/
 window.escapeHtml = function (html) {
     'use strict';
 

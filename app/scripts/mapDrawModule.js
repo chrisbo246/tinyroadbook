@@ -1,11 +1,11 @@
 /*eslint-env browser, jquery */
 /*global ol */
 /**
- * OL3 draw module.
- * @module
- * @external ol
- * @return {Object} Public functions / variables
- */
+* OL3 draw module.
+* @module
+* @external ol
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var mapDrawModule = (function () {
     /*eslint-enable no-unused-vars*/
@@ -17,8 +17,8 @@ var mapDrawModule = (function () {
 
 
     /**
-     * Modify interaction
-     */
+    * Modify interaction
+    */
     var modify = new ol.interaction.Modify({
         features: features,
         // the SHIFT key must be pressed to delete vertices, so
@@ -26,15 +26,15 @@ var mapDrawModule = (function () {
         // of existing vertices
         deleteCondition: function (event) {
             return ol.events.condition.shiftKeyOnly(event) &&
-                    ol.events.condition.singleClick(event);
+            ol.events.condition.singleClick(event);
         }
     });
 
 
 
     /**
-     * Features vector layer
-     */
+    * Features vector layer
+    */
     var featureOverlay = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: features
@@ -59,10 +59,10 @@ var mapDrawModule = (function () {
 
 
     /**
-     * Add the draw interaction to the map
-     * @public
-     * @param {Object} map - OL3 map
-     */
+    * Add the draw interaction to the map
+    * @public
+    * @param {Object} map - OL3 map
+    */
     var init = function (map) {
         featureOverlay.setMap(map);
         map.addInteraction(modify);
@@ -71,11 +71,11 @@ var mapDrawModule = (function () {
 
 
     /**
-     * Add a draw interaction to the map
-     * @public
-     * @param {string} type - Interaction type
-     * @param {Object} OL3 map
-     */
+    * Add a draw interaction to the map
+    * @public
+    * @param {string} type - Interaction type
+    * @param {Object} OL3 map
+    */
     var drawInteraction = function (type, map) {
         if (type) {
             draw = new ol.interaction.Draw({
@@ -89,11 +89,11 @@ var mapDrawModule = (function () {
 
 
     /**
-     * Let user change the geometry type.
-     * @public
-     * @param {string} id - Select input ID
-     * @param {Object} map - OL3 map
-     */
+    * Let user change the geometry type.
+    * @public
+    * @param {string} id - Select input ID
+    * @param {Object} map - OL3 map
+    */
     var addDrawTypeSwitcher = function (id, map) {
         var typeSelect = document.getElementById(id);
         typeSelect.onchange = function () {

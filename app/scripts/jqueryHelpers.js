@@ -4,18 +4,18 @@
 /*eslint-disable no-unused-vars, no-use-before-define, no-extend-native*/
 
 /**
- * Parse an URL and return query string parameters as a JSON object
- * @return {Object} Query string parameters
- */
+* Parse an URL and return query string parameters as a JSON object
+* @return {Object} Query string parameters
+*/
 if (typeof $.urlParam === 'undefined') {
     $.urlParam = function (name) {
         'use strict';
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
         if (results === null) {
-           return null;
+            return null;
         }
         else{
-           return results[1] || 0;
+            return results[1] || 0;
         }
     };
 }
@@ -25,8 +25,8 @@ if (typeof $.urlParam === 'undefined') {
 // String ---------------------------------------------------------------------
 
 /**
- * Convert the first letter to upper case
- */
+* Convert the first letter to upper case
+*/
 if (typeof String.prototype.toUpperCaseFirst === 'undefined') {
     String.prototype.toUpperCaseFirst = function() {
         'use strict';
@@ -35,34 +35,34 @@ if (typeof String.prototype.toUpperCaseFirst === 'undefined') {
 }
 
 /**
- * Convert the first letter of each words to upper case
- */
+* Convert the first letter of each words to upper case
+*/
 /*if (typeof(String.prototype.toUpperCaseWords) === 'undefined') {
-    String.prototype.toUpperCaseWords = function (array) {
-        'use strict';
-        return this.replace(/([\w\p])([\W\P])/g, function (g) {
-                return g[0] + g[1].toUpperCase();
-            });
-    };
+String.prototype.toUpperCaseWords = function (array) {
+'use strict';
+return this.replace(/([\w\p])([\W\P])/g, function (g) {
+return g[0] + g[1].toUpperCase();
+});
+};
 }*/
 
 /**
- * Convert hyphen string to camelcase
- */
+* Convert hyphen string to camelcase
+*/
 if (typeof toCamel === 'undefined') {
     var toCamel = function () {
         'use strict';
         return this.toLowerCase().replace(/[^a-zA-Z0-9]([a-zA-Z0-9])?/g, function (g) {
-                return (g[1]) ? g[1].toUpperCase() : '';
-            });
+            return (g[1]) ? g[1].toUpperCase() : '';
+        });
     };
 }
 if (typeof String.prototype.toCamel === 'undefined') {
     String.prototype.toCamel = function (array) {
         'use strict';
         return this.toLowerCase().replace(/[^a-zA-Z0-9]([a-zA-Z0-9])?/g, function (g) {
-                return (g[1]) ? g[1].toUpperCase() : '';
-            });
+            return (g[1]) ? g[1].toUpperCase() : '';
+        });
     };
 }
 
@@ -71,8 +71,8 @@ if (typeof String.prototype.toCamel === 'undefined') {
 // ARRAY ----------------------------------------------------------------------
 
 /**
- * Function to get the Maximum value in Array
- */
+* Function to get the Maximum value in Array
+*/
 if (typeof Array.prototype.max === 'undefined') {
     Array.prototype.max = function (array) {
         'use strict';
@@ -82,8 +82,8 @@ if (typeof Array.prototype.max === 'undefined') {
 
 
 /**
- * Function to get the Minimum value in Array
- */
+* Function to get the Minimum value in Array
+*/
 if (typeof Array.prototype.min === 'undefined') {
     Array.prototype.min = function (array) {
         'use strict';
@@ -94,14 +94,14 @@ if (typeof Array.prototype.min === 'undefined') {
 
 
 /**
- * Array intersection
- */
+* Array intersection
+*/
 
 /*$.intersect = function (a, b) {
-    'use strict';
-    return $.grep(a, function (i) {
-        return $.inArray(i, b) > -1;
-    });
+'use strict';
+return $.grep(a, function (i) {
+return $.inArray(i, b) > -1;
+});
 };*/
 
 
@@ -109,8 +109,8 @@ if (typeof Array.prototype.min === 'undefined') {
 // MATH -----------------------------------------------------------------------
 
 /**
- * Convert degrees to radians
- */
+* Convert degrees to radians
+*/
 if (typeof degToRad === 'undefined') {
     var degToRad = function (deg) {
         'use strict';
@@ -125,8 +125,8 @@ if (typeof Number.prototype.toRad === 'undefined') {
 }
 
 /**
- * Convert radians to degrees
- */
+* Convert radians to degrees
+*/
 if (typeof radToDeg === 'undefined') {
     var radToDeg = function (rad) {
         'use strict';
@@ -142,8 +142,8 @@ if (typeof Number.prototype.toDeg === 'undefined') {
 
 
 /**
- * Modulo for negative values
- */
+* Modulo for negative values
+*/
 if (typeof mod === 'undefined') {
     var mod = function (n) {
         'use strict';
@@ -160,11 +160,11 @@ if (typeof Number.prototype.mod === 'undefined') {
 
 
 /**
- * Convert bytes to string size
- * @param {integer} bytes - Size in bytes
- * @param {integer} decimals - Round number to n decimals
- * @returns {string} The formatted value
- */
+* Convert bytes to string size
+* @param {integer} bytes - Size in bytes
+* @param {integer} decimals - Round number to n decimals
+* @returns {string} The formatted value
+*/
 if (typeof formatBytes === 'undefined') {
     var formatBytes = function (bytes, decimals) {
         'use strict';
@@ -184,13 +184,13 @@ if (typeof formatBytes === 'undefined') {
 // EVENT ----------------------------------------------------------------------
 
 /**
- * Return all events binded on an element
- * The result
- * @return string Events list separated with a space, can be used with $(element).on(result, ...
- */
- // jQuery._data(jQuery('.chosen-select')[0], 'events')
- if (typeof getAllEvents === 'undefined') {
-     var getAllEvents = function (element) {
+* Return all events binded on an element
+* The result
+* @return string Events list separated with a space, can be used with $(element).on(result, ...
+*/
+// jQuery._data(jQuery('.chosen-select')[0], 'events')
+if (typeof getAllEvents === 'undefined') {
+    var getAllEvents = function (element) {
         'use strict';
         var result = [];
         for (var key in element) {

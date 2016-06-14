@@ -1,13 +1,13 @@
 /*eslint-env browser, jquery */
 /*global  Quill, roadbookModule */
 /**
- * HTML editor module.
- * @module
- * @external $
- * @external Quill
- * @external roadbookModule
- * @return {Object} Public functions / variables
- */
+* HTML editor module.
+* @module
+* @external $
+* @external Quill
+* @external roadbookModule
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var htmlEditorModule = (function () {
     /*eslint-enable no-unused-vars*/
@@ -18,8 +18,8 @@ var htmlEditorModule = (function () {
 
 
     /**
-     * Return editor instance
-     */
+    * Return editor instance
+    */
     var getEditor = function () {
         return editor;
     };
@@ -27,8 +27,8 @@ var htmlEditorModule = (function () {
 
 
     /**
-     * Synchronize the HTML editor with the visual editor
-     */
+    * Synchronize the HTML editor with the visual editor
+    */
     var syncWithRoadbookEditor = function () {
 
         var roadbookEditor = roadbookModule.getEditor();
@@ -55,8 +55,8 @@ var htmlEditorModule = (function () {
 
 
     /**
-     * Initialize the HTML editor
-     */
+    * Initialize the HTML editor
+    */
     var init = function () {
 
         editor = new Quill('#roadbook_editor_html', {});

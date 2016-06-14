@@ -3,11 +3,11 @@
 /*eslint-env browser, jquery */
 /*global ol */
 /**
- * OL3 controls module.
- * @module
- * @external ol
- * @return {Object} Public functions / variables
- */
+* OL3 controls module.
+* @module
+* @external ol
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var mapControlsModule = function () {
     /*eslint-enable no-unused-vars*/
@@ -16,11 +16,11 @@ var mapControlsModule = function () {
     var controls = {};
 
     /**
-     * Create a new control using predefined settings
-     * @public
-     * @param {string} name - Predefined control
-     * @return {Object} - OL3 control
-     */
+    * Create a new control using predefined settings
+    * @public
+    * @param {string} name - Predefined control
+    * @return {Object} - OL3 control
+    */
     var create = function create(name) {
         if (!controls[name]) {
             console.warn(name + ' control definition is not defined');
@@ -30,7 +30,7 @@ var mapControlsModule = function () {
         /*
         control.setProperties(settings.properties);
         if (properties) {
-            control.setProperties(properties);
+        control.setProperties(properties);
         }
         */
         return control;

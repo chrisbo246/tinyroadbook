@@ -1,30 +1,30 @@
 /*eslint-env browser, jquery */
-/*global Base64, bootstrapModule, ol, commonsModule, htmlEditorModule, importModule, mapControlsModule, mapLayersModule, MapModule, pickerModule, roadbookModule, styleModule, swal */
+/*global Base64, bootstrapHelpers, ol, commonsModule, htmlEditorModule, importModule, mapControlsModule, mapLayersModule, MapModule, pickerModule, roadbookModule, styleModule, swal */
 /**
- * @fileOverview TinyRoadbook application
- * @author Christophe Boisier
- * @version: 0.1.9
- */
+* @fileOverview TinyRoadbook application
+* @author Christophe Boisier
+* @version: 0.1.9
+*/
 
 /**
- * Main module.
- * @module
- * @external $
- * @external Base64
- * @external bootstrapModule
- * @external commonsModule
- * @external htmlEditorModule
- * @external importModule
- * @external mapControlsModule
- * @external mapLayersModule
- * @external MapModule
- * @external ol
- * @external pickerModule
- * @external roadbookModule
- * @external styleModule
- * @external swal
- * @return {Object} Public functions / variables
- */
+* Main module.
+* @module
+* @external $
+* @external Base64
+* @external bootstrapHelpers
+* @external commonsModule
+* @external htmlEditorModule
+* @external importModule
+* @external mapControlsModule
+* @external mapLayersModule
+* @external MapModule
+* @external ol
+* @external pickerModule
+* @external roadbookModule
+* @external styleModule
+* @external swal
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var appModule = (function () {
     /*eslint-enable no-unused-vars*/
@@ -84,9 +84,9 @@ var appModule = (function () {
 
 
     /**
-     * Load the Addthis widget library and update parameters when the roadbook change
-     * @private
-     */
+    * Load the Addthis widget library and update parameters when the roadbook change
+    * @private
+    */
     var initAddthisWidget = function () {
 
         // Default config
@@ -101,26 +101,26 @@ var appModule = (function () {
         //$.getScript('https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5689e8d8b9037927', function () {
         //    console.log('Addthis widget library loaded');
 
-            // Watch roadbook editor changes
-            var editor = roadbookModule.getEditor();
-            editor.on('text-change', function () {
+        // Watch roadbook editor changes
+        var editor = roadbookModule.getEditor();
+        editor.on('text-change', function () {
 
-                // Update Addthis widget data attributs
-                // http://support.addthis.com/customer/portal/topics/38604-customizing-addthis/articles
-                var description = editor.getText();
-                $.extend(addthis_share, {
-                        description: description.substring(0, 100) + ((description.length > 100) ? '...' : '')
-                        //image: (canvas ? canvas.toDataURL('image/png') : '')
-                    });
-
-                //$('.addthis_sharing_toolbox')
-                //    .attr('data-title', 'I\'m doing a tiny road book for my next tour')
-                //    .attr('data-title', 'I\'m doing a tiny road book for my next tour');
-                //$('meta[property="og:title"]').attr('content', addthis_share.title);
-                //$('meta[property="og:url"]').attr('content', addthis_share.url);
-                //$('meta[property="og:description"]').attr('content', editor.getHTML());
-
+            // Update Addthis widget data attributs
+            // http://support.addthis.com/customer/portal/topics/38604-customizing-addthis/articles
+            var description = editor.getText();
+            $.extend(addthis_share, {
+                description: description.substring(0, 100) + ((description.length > 100) ? '...' : '')
+                //image: (canvas ? canvas.toDataURL('image/png') : '')
             });
+
+            //$('.addthis_sharing_toolbox')
+            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour')
+            //    .attr('data-title', 'I\'m doing a tiny road book for my next tour');
+            //$('meta[property="og:title"]').attr('content', addthis_share.title);
+            //$('meta[property="og:url"]').attr('content', addthis_share.url);
+            //$('meta[property="og:description"]').attr('content', editor.getHTML());
+
+        });
 
         //});
 
@@ -129,10 +129,10 @@ var appModule = (function () {
 
 
     /**
-     * Build a valid HTML file with the editor content
-     * @public
-     * @return {String} HTML file content
-     */
+    * Build a valid HTML file with the editor content
+    * @public
+    * @return {String} HTML file content
+    */
     var buildExport = function () {
 
         var htmlDoc = '';
@@ -155,21 +155,21 @@ var appModule = (function () {
 
         if (roadbookEditor && styleEditor && mapIconsStyle) {
             htmlDoc = '<html>\n'
-                + '<head>\n'
-                + '<title>' + title + '</title>\n'
-                + '<meta content="text/html; charset=UTF-8" http-equiv="content-type">\n'
-                + '<meta name="description" content="' + description + '">\n'
-                + '<style type="text/css">\n'
-                + styleEditor.getText() + '\n'
-                + mapIconsStyle + '\n'
-                + '</style>\n'
-                + '</head>\n'
-                + '<body>\n'
-                + '<div class="roadbook">\n'
-                + roadbookEditor.getHTML() + '\n'
-                + '</div>\n'
-                + '</body>\n'
-                + '</html>';
+            + '<head>\n'
+            + '<title>' + title + '</title>\n'
+            + '<meta content="text/html; charset=UTF-8" http-equiv="content-type">\n'
+            + '<meta name="description" content="' + description + '">\n'
+            + '<style type="text/css">\n'
+            + styleEditor.getText() + '\n'
+            + mapIconsStyle + '\n'
+            + '</style>\n'
+            + '</head>\n'
+            + '<body>\n'
+            + '<div class="roadbook">\n'
+            + roadbookEditor.getHTML() + '\n'
+            + '</div>\n'
+            + '</body>\n'
+            + '</html>';
 
             dfd.resolve(htmlDoc);
         }
@@ -181,10 +181,10 @@ var appModule = (function () {
 
 
     /**
-     * Rebuild the save link URL
-     * @public
-     * @return {String} HTML file content
-     */
+    * Rebuild the save link URL
+    * @public
+    * @return {String} HTML file content
+    */
     var updateSaveLink = function () {
 
         buildExport().done(function (htmlDoc) {
@@ -204,11 +204,11 @@ var appModule = (function () {
 
 
     /**
-     * Initialize an OL3 map
-     * @private
-     * @param {target} target - Map div selector
-     * @return {object} - The map object
-     */
+    * Initialize an OL3 map
+    * @private
+    * @param {target} target - Map div selector
+    * @return {object} - The map object
+    */
     var initMap = function (target) {
 
         var layers;
@@ -306,13 +306,13 @@ var appModule = (function () {
 
 
     /**
-     * Document ready
-     */
+    * Document ready
+    */
     $(function () {
 
         // Initialize mandatory modules
         console.time('Bootstrap module initialized');
-        bootstrapModule.init({
+        bootstrapHelpers.init({
             debug: debug
         });
 
@@ -348,137 +348,137 @@ var appModule = (function () {
             /*
             // Try to restore map center and zoom from the local storage
             if (!mapMod1.restoreMapProperties()) {
-                // Or center map on user position and set a default zoom
-                mapMod1.setCenterOnPosition();
-                mapMod1.map.getView().setZoom(12);
+            // Or center map on user position and set a default zoom
+            mapMod1.setCenterOnPosition();
+            mapMod1.map.getView().setZoom(12);
+        }
+        // Check map events and store changes to local storage
+        mapMod1.storeMapChanges();
+        */
+
+        // Redraw the map and update classes when the map width input value change
+        $('#map_width').on('change', function () {
+            $tabs.filter('[href="#editor_pane"]').one('shown.bs.tab', function () {
+                mapMod1.updateSize();
+            });
+        });
+
+        // Initialize the picker module
+        pickerModule.watchMapClick(mapMod1.map);
+
+        // On layer change, adjust zoom delta depending on selected base layer
+        // zoomDelta = -2;
+
+        // Select the layer passed to the modal
+        $('#layer_settings_modal').on('show.bs.modal', function (e) {
+            var $modal = $(this);
+
+            // Select the layer passed as link attribute
+            var layerVarName = $(e.relatedTarget).data('layer') + 'Layer';
+            if (typeof layerVarName !== 'undefined') {
+                /*eslint-disable no-eval*/
+                selectedLayer = eval(layerVarName);
+                /*eslint-enable no-eval*/
             }
-            // Check map events and store changes to local storage
-            mapMod1.storeMapChanges();
-            */
 
-            // Redraw the map and update classes when the map width input value change
-            $('#map_width').on('change', function () {
-                $tabs.filter('[href="#editor_pane"]').one('shown.bs.tab', function () {
-                    mapMod1.updateSize();
-                });
-            });
+            if (selectedLayer) {
 
-            // Initialize the picker module
-            pickerModule.watchMapClick(mapMod1.map);
+                // Populate fields with the selected layer properties
+                // hide unwanted field groups
+                // validate form and update layer values
+                mapLayersModule.initSettingsForm(selectedLayer, '#layer_settings_form', '.form-group');
+                //mapLayersModule.initSettingsForm(selectedLayer, '#layer_settings_form', '.form-group, fieldset');
 
-            // On layer change, adjust zoom delta depending on selected base layer
-            // zoomDelta = -2;
+                // Change modal title
+                var title = selectedLayer.get('title');
+                $modal.find('.modal-title').html(title);
 
-            // Select the layer passed to the modal
-            $('#layer_settings_modal').on('show.bs.modal', function (e) {
-                var $modal = $(this);
-
-                // Select the layer passed as link attribute
-                var layerVarName = $(e.relatedTarget).data('layer') + 'Layer';
-                if (typeof layerVarName !== 'undefined') {
-                    /*eslint-disable no-eval*/
-                    selectedLayer = eval(layerVarName);
-                    /*eslint-enable no-eval*/
-                }
-
-                if (selectedLayer) {
-
-                    // Populate fields with the selected layer properties
-                    // hide unwanted field groups
-                    // validate form and update layer values
-                    mapLayersModule.initSettingsForm(selectedLayer, '#layer_settings_form', '.form-group');
-                    //mapLayersModule.initSettingsForm(selectedLayer, '#layer_settings_form', '.form-group, fieldset');
-
-                    // Change modal title
-                    var title = selectedLayer.get('title');
-                    $modal.find('.modal-title').html(title);
-
-                    // Initialize tooltip for range inputs
-                    bootstrapModule.rangeValueTooltip();
-                }
-
-            });
-
-            // Update map overlay when user click ok
-            $('#layer_settings_form').on('submit', function (e) {
-                e.preventDefault();
-                var $modal = $('#layer_settings_modal');
-                $modal.modal('hide');
-            });
-
-            commonsModule.hideHashOnClick('#map .layer-switcher');
-
-            // Add a link to settings beside each layer labels (layerswitcher)
-            /*$('.layer-switcher').find('input').filter('[data-layer]').each(function () {
-                $input = $(this);
-                var layerName = $input.data('layer');
-                $input.next('label').append(' <a href="#layer_settings_modal" data-toggle="modal" data-layer="' + layerName + '">'
-                + '<span class="glyphicon glyphicon-cog"></span></a>');
-            });*/
-
-            // Force the Bootstrap modal API to initialize the layerswitcher links
-            $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function (e) {
-                e.preventDefault();
-                //window.location.hash = '';
-                $(this).trigger('click.bs.modal.data-api');
-            });
+                // Initialize tooltip for range inputs
+                bootstrapHelpers.rangeValueTooltip();
+            }
 
         });
 
-        // Initialize the settings pane functionalities only when visible for the first time
-        $tabs.filter('[href="#settings_pane"]').one('shown.bs.tab', function () {
-
+        // Update map overlay when user click ok
+        $('#layer_settings_form').on('submit', function (e) {
+            e.preventDefault();
+            var $modal = $('#layer_settings_modal');
+            $modal.modal('hide');
         });
 
-        // Initialize the style pane functionalities only when visible for the first time
-        $tabs.filter('[href="#style_pane"]').one('shown.bs.tab', function () {
+        commonsModule.hideHashOnClick('#map .layer-switcher');
 
-        });
+        // Add a link to settings beside each layer labels (layerswitcher)
+        /*$('.layer-switcher').find('input').filter('[data-layer]').each(function () {
+        $input = $(this);
+        var layerName = $input.data('layer');
+        $input.next('label').append(' <a href="#layer_settings_modal" data-toggle="modal" data-layer="' + layerName + '">'
+        + '<span class="glyphicon glyphicon-cog"></span></a>');
+    });*/
 
-        // Hide the modal when the form is submited
-        /*var $modal;
-        $('.modal').each(function () {
-            $modal = $(this);
-            $modal.find('form').on('submit', function (e) {
-                e.preventDefault();
-                $modal.modal('hide');
-            });
-        });*/
-
-        // Load icon styles if not already
-        $.get('styles/poi.css', function(data) {
-            mapIconsStyle = data;
-            updateSaveLink();
-        });
-
-        // Build a file list preview when input change
-        $input = $('#gpx_file');
-        $input.on('change', function (e) {
-            var files = e.target.files;
-            var output = bootstrapModule.buildFileList(files);
-            $('#' + $input.attr('id') + '_output').html(output);
-        });
-
-        // Clone the file settings to the modal body
-        //$('#file_settings_modal .modal-body').html($('#file_settings').clone(true, true));
-        /*$('#file_settings_modal')
-            .on('show.bs.modal', function () {
-                var $modal = $(this);
-                $modal.find('.modal-body').html($('#file_settings').clone(true, true));
-            })
-            .on('hide.bs.modal', function () {
-               var $modal = $(this);
-               $('#file_settings').html($modal.find('.modal-body').clone());
-            });*/
-
+    // Force the Bootstrap modal API to initialize the layerswitcher links
+    $('.layer-switcher').on('click', 'a[data-toggle="modal"]', function (e) {
+        e.preventDefault();
+        //window.location.hash = '';
+        $(this).trigger('click.bs.modal.data-api');
     });
 
+});
+
+// Initialize the settings pane functionalities only when visible for the first time
+$tabs.filter('[href="#settings_pane"]').one('shown.bs.tab', function () {
+
+});
+
+// Initialize the style pane functionalities only when visible for the first time
+$tabs.filter('[href="#style_pane"]').one('shown.bs.tab', function () {
+
+});
+
+// Hide the modal when the form is submited
+/*var $modal;
+$('.modal').each(function () {
+$modal = $(this);
+$modal.find('form').on('submit', function (e) {
+e.preventDefault();
+$modal.modal('hide');
+});
+});*/
+
+// Load icon styles if not already
+$.get('styles/osm.css', function(data) {
+    mapIconsStyle = data;
+    updateSaveLink();
+});
+
+// Build a file list preview when input change
+$input = $('#gpx_file');
+$input.on('change', function (e) {
+    var files = e.target.files;
+    var output = bootstrapHelpers.buildFileList(files);
+    $('#' + $input.attr('id') + '_output').html(output);
+});
+
+// Clone the file settings to the modal body
+//$('#file_settings_modal .modal-body').html($('#file_settings').clone(true, true));
+/*$('#file_settings_modal')
+.on('show.bs.modal', function () {
+var $modal = $(this);
+$modal.find('.modal-body').html($('#file_settings').clone(true, true));
+})
+.on('hide.bs.modal', function () {
+var $modal = $(this);
+$('#file_settings').html($modal.find('.modal-body').clone());
+});*/
+
+});
 
 
-    return {
-        mapMod1: mapMod1,
-        buildExport: buildExport,
-        updateSaveLink: updateSaveLink
-    };
+
+return {
+    mapMod1: mapMod1,
+    buildExport: buildExport,
+    updateSaveLink: updateSaveLink
+};
 
 })();

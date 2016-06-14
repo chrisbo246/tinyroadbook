@@ -1,16 +1,16 @@
 /*eslint-env browser, jquery */
 /*global commonsModule, Quill, roadbookModule, styleModule, swal */
 /**
- * Roadbook import.
- * @module
- * @external $
- * @external commonsModule
- * @external Quill
- * @external roadbookModule
- * @external styleModule
- * @external swal
- * @return {Object} Public functions / variables
- */
+* Roadbook import.
+* @module
+* @external $
+* @external commonsModule
+* @external Quill
+* @external roadbookModule
+* @external styleModule
+* @external swal
+* @return {Object} Public functions / variables
+*/
 /*eslint-disable no-unused-vars*/
 var importModule = (function () {
     /*eslint-enable no-unused-vars*/
@@ -19,10 +19,10 @@ var importModule = (function () {
 
 
     /**
-     * Import a roadbook
-     * @private
-     * @param {Object} files - File(s) returned by input type="file"
-     */
+    * Import a roadbook
+    * @private
+    * @param {Object} files - File(s) returned by input type="file"
+    */
     var importFile = function (files) {
 
         commonsModule.reader(files, function (result) {
@@ -83,9 +83,9 @@ var importModule = (function () {
 
 
     /**
-     * Start Watching the import form submition
-     * @public
-     */
+    * Start Watching the import form submition
+    * @public
+    */
     var init = function () {
 
         $('#import_form').on('submit', function (e) {

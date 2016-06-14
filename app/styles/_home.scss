@@ -27,67 +27,60 @@
 
     // Call to action button
     /*a[href="#editor_pane"] {
-        //color: rgba($link-color, .9);
-        //text-shadow: 1px 2px 1px #000, 0 0 0 #fff;
-        text-shadow: 1px 2px 1px rgba(0, 0, 0, .25);
-    }*/
-    a[href="#editor_pane"]:hover {
-        //color: rgba($link-hover-color, .9);
-        //text-shadow: 0px 1px 1px #fff, 0 0 0 #000;
-        text-shadow: none;
-    }
+    //color: rgba($link-color, .9);
+    //text-shadow: 1px 2px 1px #000, 0 0 0 #fff;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, .25);
+}*/
+a[href="#editor_pane"]:hover {
+    //color: rgba($link-hover-color, .9);
+    //text-shadow: 0px 1px 1px #fff, 0 0 0 #000;
+    text-shadow: none;
+}
 
-    /* Parallax layers */
-    [data-layer-speed] {
-        z-index: 0;
-        background-size: cover;
-        //background-repeat: no-repeat;
-        background-position: 50% 0;
-        background-attachment: fixed;
-        box-shadow: inset 0px 40px 90px -60px;
-        h1, h2 {
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, .25);
-            margin-top: 0;
-        }
+/* Parallax layers */
+[data-layer-speed] {
+    z-index: 0;
+    background-size: cover;
+    //background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-attachment: fixed;
+    box-shadow: inset 0px 40px 90px -60px;
+    h1, h2 {
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, .25);
+        margin-top: 0;
     }
+}
 
-    /* Parallax background images */
-    .image-overlay:first-of-type {
-        background-image: url(../images/backgrounds/road.jpg);
-    }
-    .image-overlay:nth-of-type(3) {
-        background-image: url(../images/backgrounds/road.jpg);
-    }
-    .image-overlay:nth-of-type(5) {
-        background-image: url(../images/backgrounds/road.jpg);
-    }
-    .image-overlay:last-of-type {
-        background-image: url(../images/backgrounds/road.jpg);
-    }
+/* Parallax background images */
+.image-overlay:first-of-type {
+    background-image: url(../images/backgrounds/road.jpg);
+}
+.image-overlay:nth-of-type(3) {
+    background-image: url(../images/backgrounds/road.jpg);
+}
+.image-overlay:nth-of-type(5) {
+    background-image: url(../images/backgrounds/road.jpg);
+}
+.image-overlay:last-of-type {
+    background-image: url(../images/backgrounds/road.jpg);
+}
 
-    /* Sections padding */
+/* Sections padding */
+& > div {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+@media (min-width: $screen-sm-min) {
     & > div {
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
-    @media (min-width: $screen-sm-min) {
-        & > div {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
+}
+@media (min-width: $screen-md-min) {
+    & > div {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
     }
-    @media (min-width: $screen-md-min) {
-        & > div {
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-        }
-    }
-
-    /* Icon colors */
-    .mdi-pharmacy,
-    .mdi-check-all,
-    .mdi-copyright {
-        color: $brand-primary;
-    }
+}
 
 }
