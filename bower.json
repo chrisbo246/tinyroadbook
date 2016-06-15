@@ -5,7 +5,7 @@
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
     "basil.js": "^0.4.4",
-    "bower-ol3": "^3.4.0",
+    "OpenLayers": "^3.16.0",
     "ol3-layerswitcher": "^1.1.0",
     "quill": "^0.20.1",
     "sweetalert": "^1.1.3",

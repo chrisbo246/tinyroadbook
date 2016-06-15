@@ -1,8 +1,10 @@
-# [TINY]ROADBOOK
+# [TINY]ROADBOOK [![Build Status](https://secure.travis-ci.org/chrisbo246/tinyroadbook.svg?branch=master)](http://travis-ci.org/chrisbo246/tinyroadbook) [![Coverage Status](https://coveralls.io/repos/chrisbo246/tinyroadbook/badge.png?branch=master)](https://coveralls.io/r/chrisbo246/tinyroadbook?branch=master)
+
+[website](https://www.tinyroadbook.tk) | [twitter](https://twitter.com/tinyroadbook)
 
 Edit a compact paper roadbook with just few clicks on a map. Always on hand, battery free and costless. That's all you need for long way road trips!
 
-![[TINY]ROADBOOK](https://pbs.twimg.com/media/CZiTQIPWwAEaUWX.jpg)
+![[TINY]ROADBOOK](screenshot.png)
 
 <dl class="dl-horizontal">
     <dt>Geocoding</dt>
@@ -52,12 +54,14 @@ gulp build
 Then upload the **dist** directory content to your web server.
 
 <!--
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
 -->
+
+## Bugs
+
+Please use the [GitHub issue tracker](https://github.com/chrisbo246/tinyroadbook/issues) for all bugs and feature requests. Before creating a new issue, do a quick search to see if the problem has been reported already.
 
 ## Author
 
@@ -66,9 +70,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 See also the list of [contributors](https://github.com/chrisbo246/tinyroadbook/contributors) who participated in this project.
 
 <!--
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 -->
