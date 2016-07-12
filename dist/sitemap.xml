@@ -5,8 +5,14 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
+        <loc>https://www.tinyroadbook.tk</loc>
+        <lastmod>2016-06-14T15:45:33+00:00</lastmod>
+        <priority>1.0</priority>
+    </url>
+    <url>
         <loc>https://www.tinyroadbook.tk/#editor_pane</loc>
         <lastmod>2016-06-14T15:45:33+00:00</lastmod>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.tinyroadbook.tk/#style_pane</loc>
