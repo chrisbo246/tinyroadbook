@@ -3,4 +3,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: sitemap.xml
+Sitemap: https://www.tinyroadbook.tk/sitemap.xml
