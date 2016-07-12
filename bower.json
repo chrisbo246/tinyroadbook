@@ -12,7 +12,8 @@
     "cookieconsent2": "^1.0.10",
     "js-base64": "^2.1.9",
     "parsleyjs": "^2.3.13",
-    "bootstrap-helpers": "chrisbo246/bootstrap-helpers"
+    "bootstrap-helpers": "chrisbo246/bootstrap-helpers",
+    "webapp-helpers": "chrisbo246/webapp-helpers"
   },
   "overrides": {
     "bootstrap-sass": {

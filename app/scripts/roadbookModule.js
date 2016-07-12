@@ -352,7 +352,7 @@ var initEditor = function () {
 //});
 
 //editor.addFormat('place', {attribute: '[data-type'});
-editor.addFormat('capital', {attribute: 'data-capital'});
+//editor.addFormat('capital', {attribute: 'data-capital'});
 editor.addFormat('class', {attribute: 'data-class'});
 editor.addFormat('icon', {attribute: 'data-icon'});
 editor.addFormat('latitude', {attribute: 'data-latitude'});

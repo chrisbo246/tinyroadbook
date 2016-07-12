@@ -264,6 +264,7 @@ var clearLocalStorage = function () {
     }
     if (localStorage) {
         localStorage.clear();
+        //sessionStorage.clear();
     }
     if ($().garlic) {
         $(settings.garlic.fieldsSelector).garlic('destroy');
