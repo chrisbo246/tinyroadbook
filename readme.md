@@ -1,6 +1,9 @@
-# [TINY]ROADBOOK [![Build Status](https://secure.travis-ci.org/chrisbo246/tinyroadbook.svg?branch=master)](http://travis-ci.org/chrisbo246/tinyroadbook) [![Coverage Status](https://coveralls.io/repos/chrisbo246/tinyroadbook/badge.png?branch=master)](https://coveralls.io/r/chrisbo246/tinyroadbook?branch=master)
+# [TINY]ROADBOOK
+<!--
+[![Build Status](https://secure.travis-ci.org/chrisbo246/tinyroadbook.svg?branch=master)](http://travis-ci.org/chrisbo246/tinyroadbook) [![Coverage Status](https://coveralls.io/repos/chrisbo246/tinyroadbook/badge.png?branch=master)](https://coveralls.io/r/chrisbo246/tinyroadbook?branch=master)
+-->
 
-[website](https://www.tinyroadbook.tk) | [twitter](https://twitter.com/tinyroadbook)
+[website](https://chrisbo246.github.io/tinyroadbook/) | [twitter](https://twitter.com/tinyroadbook)
 
 Edit a compact paper roadbook with just few clicks on a map. Always on hand, battery free and costless. That's all you need for long way road trips!
 
