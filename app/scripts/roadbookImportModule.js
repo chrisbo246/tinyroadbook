@@ -12,7 +12,7 @@
 * @return {Object} Public functions / variables
 */
 /*eslint-disable no-unused-vars*/
-var importModule = (function () {
+var roadbookImportModule = (function () {
     /*eslint-enable no-unused-vars*/
     'use strict';
 
@@ -28,9 +28,9 @@ var importModule = (function () {
         commonsModule.reader(files, function (result) {
 
             swal({
-                title: 'Replace roadbook',
-                text: 'Current roadbook and / or style will be replaced.\nDo you really want to continue?',
-                type: 'question',
+                title: 'Replace roadbook?',
+                text: 'Roadbook and/or style will be replaced.\nDo you really want to continue?',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes replace',
                 cancelButtonText: 'No cancel',
@@ -39,7 +39,12 @@ var importModule = (function () {
                 if (isConfirm) {
 
                     var html = $('<div>').append(result);
+                    //var html = $.parseHTML(result);
+                    //var html = $(result);
+                    //var html = $('<div>').replaceWith(result);
                     var content;
+                    console.log('dom', $(document));
+                    //console.log('result', result);
 
                     if ($('#import_html').is(':checked')) {
 
@@ -52,6 +57,12 @@ var importModule = (function () {
 
                         content = html.find('meta[name="description"]').attr('content');
                         $('#roadbook_description').val(content).trigger('change');
+
+                        var matches = result.match(/<html[^>]* lang="([^"]*)"[^>]*>/gi);
+                        if (matches.length > 0) {
+                            content = matches[0].replace(/<html[^>]* lang="([^"]*)"[^>]*>/, '$1');
+                        }
+                        $('#roadbook_language').val(content).trigger('change');
 
                         //roadbookModule.replaceHtmlAlert(html);
                     }

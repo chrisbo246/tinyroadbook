@@ -1017,7 +1017,7 @@ layers.mapsForFreeRelief = function () {
         type: 'base',
         //maxResolution: 76.43702828517625, //Z11
         source: new ol.source.XYZ({
-            maxZoom: 12,
+            maxZoom: 11,
             urls: [
                 'http://www.maps-for-free.com/layer/relief/z{z}/row{y}/{z}_{x}-{y}.jpg'
             ]

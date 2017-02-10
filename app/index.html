@@ -1636,38 +1636,9 @@
                                 <textarea id="roadbook_description" class="form-control"></textarea>
                                 <span class="help-block"></span>
                             </div>
-                        </form>
-                        <br/>
-                        <div class="text-center">
-                            <small class="text-muted">Think to share with your friends!</small>
-                            <!--<div class="addthis_sharing_toolbox"></div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="settings_pane" class="tab-pane fade in">
-            <div class="container">
-                <form id="settings_form" data-persist="garlic" data-parsley-validate="" data-parsley-trigger="change">
-                    <div class="row">
-                        <fieldset class="col-sm-6 col-md-4">
-                            <legend><span class="glyphicon glyphicon-globe"></span> Map</legend>
-                            <div class="form-group">
-                                <label for="zoom_delta">Zoom delta <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You may want to adjust this value when the map labels are visible too late or too early. This may occur when you change the base map."></span></label>
-                                <input id="zoom_delta" class="form-control" data-toggle="tooltip" type="range" min="-4" max="4" step="1" value="-1">
-                                <span class="help-block"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="map_width">Map width <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Reduce the map width for a larger edition area or increase it for a comfy exploration. 1 step = 1/12 screen width."></span></label>
-                                <input id="map_width" class="form-control" data-toggle="tooltip" type="range" min="2" max="10" step="1" value="6">
-                                <span class="help-block"></span>
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-sm-6 col-md-4">
-                            <legend><span class="glyphicon glyphicon-edit"></span> Editor</legend>
                             <div class="form-group">
                                 <label>Translation <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="If available, also append the translation to the local name."></span></label>
-                                <select id="user_language" class="form-control">
+                                <select id="roadbook_language" class="form-control">
                                     <option value="">&nbsp;</option>
                                     <option value="ab">Abkhazian</option>
                                     <option value="aa">Afar</option>
@@ -1856,6 +1827,35 @@
                                 </select>
                                 <span class="help-block"></span>
                             </div>
+                        </form>
+                        <br/>
+                        <div class="text-center">
+                            <small class="text-muted">Think to share with your friends!</small>
+                            <!--<div class="addthis_sharing_toolbox"></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="settings_pane" class="tab-pane fade in">
+            <div class="container">
+                <form id="settings_form" data-persist="garlic" data-parsley-validate="" data-parsley-trigger="change">
+                    <div class="row">
+                        <fieldset class="col-sm-6 col-md-4">
+                            <legend><span class="glyphicon glyphicon-globe"></span> Map</legend>
+                            <div class="form-group">
+                                <label for="zoom_delta">Zoom delta <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="You may want to adjust this value when the map labels are visible too late or too early. This may occur when you change the base map."></span></label>
+                                <input id="zoom_delta" class="form-control" data-toggle="tooltip" type="range" min="-4" max="4" step="1" value="-1">
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="map_width">Map width <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="Reduce the map width for a larger edition area or increase it for a comfy exploration. 1 step = 1/12 screen width."></span></label>
+                                <input id="map_width" class="form-control" data-toggle="tooltip" type="range" min="2" max="10" step="1" value="6">
+                                <span class="help-block"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="col-sm-6 col-md-4">
+                            <legend><span class="glyphicon glyphicon-edit"></span> Picker</legend>
                             <div class="form-group">
                                 <label>Default filter <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" title="The filter will be reseted with this value after each insertion allowing you to make quick changes. Leave blank if you prefer manual changes."></span></label>
                                 <select id="default_type" class="form-control">
@@ -2151,12 +2151,12 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="/bower_components/OpenLayers/dist/ol.css" />
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/ol3/ol.css" />
     <link rel="stylesheet" href="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.css" />
     <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="/bower_components/cookieconsent/build/cookieconsent.min.css" />
     <!-- endbower -->
-    <link rel="stylesheet" href="/bower_components/cookieconsent2/build/dark-bottom.css" />
     <link rel="stylesheet" href="/bower_components/quill/dist/quill.base.css" />
     <!-- endbuild -->
     <!-- build:css styles/vendor_override.css -->
@@ -2210,16 +2210,16 @@
             , errorTemplate: '<div></div>'
         };
     </script>
-    <script src="/bower_components/OpenLayers/dist/ol.js"></script>
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/basil.js/src/basil.js"></script>
+    <script src="/bower_components/ol3/ol.js"></script>
     <script src="/bower_components/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
     <script src="/bower_components/quill/dist/quill.js"></script>
     <script src="/bower_components/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/bower_components/cookieconsent2/cookieconsent.js"></script>
     <script src="/bower_components/js-base64/base64.js"></script>
     <script src="/bower_components/parsleyjs/dist/parsley.js"></script>
+    <script src="/bower_components/cookieconsent/build/cookieconsent.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/plugins.js -->
@@ -2253,7 +2253,7 @@
     <script src="scripts/styleModule.js"></script>
     <script src="scripts/roadbookModule.js"></script>
     <script src="scripts/htmlEditorModule.js"></script>
-    <script src="scripts/importModule.js"></script>
+    <script src="scripts/roadbookImportModule.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
 </body>

@@ -60,9 +60,9 @@ var replaceTextAlert = function (text) {
 
     if (editor.getLength()) {
         swal({
-            title: 'Replace styles',
-            text: 'The current styles will be overwritten.\nDo you really want to continue?',
-            type: 'question',
+            title: 'Replace styles?',
+            text: 'Styles will be overwritten.\nDo you really want to continue?',
+            type: 'warning',
             confirmButtonText: 'Yes replace',
             cancelButtonText: 'No stop !',
             showCancelButton: true,

@@ -72,8 +72,8 @@ var mapControlsModule = function () {
             //layers: [
             //    mapLayersModule.baselayers
             //],
-            collapseLabel: '«',
-            label: '»',
+            collapseLabel: '\xAB',
+            label: '\xBB',
             collapsed: true
             //tipLabel: $.t('buttons:olOverviewmap.label')
         });

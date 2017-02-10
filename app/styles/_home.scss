@@ -22,7 +22,6 @@
             background: $body-bg;
             opacity: .5;
         }
-        filter: saturate(0);
     }
 
     // Call to action button
@@ -52,18 +51,69 @@ a[href="#editor_pane"]:hover {
 }
 
 /* Parallax background images */
-.image-overlay:first-of-type {
+/*
+.image-overlay {
+  position: relative;
+  -webkit-filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+  filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+}
+.image-overlay::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+}
+*/
+
+/* Overlays */
+.image-overlay:before,
+.image-overlay:after {
+   content: "";
+   display: block;
+   height: 100%;
+   width: 100%;
+   top: 0;
+   left: 0;
+   position: absolute;
+   z-index: -1;
+   overflow: hidden;
+   /*pointer-events: none;
+   mix-blend-mode: screen;*/
+}
+
+/* Background image */
+.image-overlay:before {
+   background-size: cover;
+   filter: brightness(200%) saturate(10%);
+}
+
+/* Background overlay */
+.image-overlay:after {
+   background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+      linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+   background-size: 4px 4px;
+   background-position: 0 0, 2px 2px;
+   opacity: .05;
+}
+
+.image-overlay:first-of-type:before {
     background-image: url(../images/backgrounds/road.jpg);
 }
-.image-overlay:nth-of-type(3) {
+.image-overlay:nth-of-type(3):before {
     background-image: url(../images/backgrounds/road.jpg);
 }
-.image-overlay:nth-of-type(5) {
+.image-overlay:nth-of-type(5):before {
     background-image: url(../images/backgrounds/road.jpg);
 }
-.image-overlay:last-of-type {
+.image-overlay:last-of-type:before {
     background-image: url(../images/backgrounds/road.jpg);
 }
+
 
 /* Sections padding */
 & > div {

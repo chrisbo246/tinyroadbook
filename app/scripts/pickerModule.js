@@ -424,7 +424,7 @@ var pickerModule = (function () {
         //zoom = Math.min(Math.max((zoom + zoomDelta), 0), 9);
         zoom = Math.min(Math.max((zoom + zoomDelta), 0), 15);
 
-        getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+        getPlace(lon, lat, {'osm_type': 'R', zoom: zoom})
         .done(function (json) {
             filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
             .done(function (json2) {
@@ -438,7 +438,7 @@ var pickerModule = (function () {
 
         zoom = Math.min(Math.max((zoom + zoomDelta), 10), 16);
 
-        getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+        getPlace(lon, lat, {'osm_type': 'R', zoom: zoom})
         .done(function (json) {
             filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
             .done(function (json2) {
@@ -452,7 +452,7 @@ var pickerModule = (function () {
 
     zoom = Math.min(Math.max((zoom + zoomDelta), 14), 15);
 
-    getPlace(lon, lat, {'osm_type': 'relation', zoom: zoom})
+    getPlace(lon, lat, {'osm_type': 'R', zoom: zoom})
     .done(function (json) {
     filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
     .done(function (json2) {
@@ -466,7 +466,7 @@ var pickerModule = (function () {
 
     zoom = Math.min(Math.max((zoom + zoomDelta), 16), 17);
 
-    getPlace(lon, lat, {'osm_type': 'way', zoom: zoom})
+    getPlace(lon, lat, {'osm_type': 'W', zoom: zoom})
     .done(function (json) {
 
         filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
@@ -496,7 +496,7 @@ var pickerModule = (function () {
 
     zoom = Math.min(Math.max((zoom + zoomDelta), 18), 21);
 
-    getPlace(lon, lat, {'osm_type': 'node', zoom: zoom})
+    getPlace(lon, lat, {'osm_type': 'N', zoom: zoom})
     .done(function (json) {
         filterNominatimResult(json, settings.allowedTypes[pickType], settings.disallowedTypes[pickType], {zoom: zoom})
         .done(function (json2) {
@@ -542,7 +542,7 @@ var getPlace = function (lon, lat, options) {
         lon: lon,
         lat: lat,
         //zoom: zoom,
-        //'osm_type': 'relation',
+        //'osm_type': 'R',
         addressdetails: 1,
         extratags: 1,
         namedetails: 1,
@@ -581,7 +581,7 @@ $(function () {
         zoomMin = parseInt($(this).val());
     }).trigger('change');
 
-    $('#user_language').on('change', function () {
+    $('#roadbook_language').on('change', function () {
         language = $(this).val();
     }).trigger('change');
 

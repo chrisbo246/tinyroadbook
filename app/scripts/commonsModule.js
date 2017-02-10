@@ -19,7 +19,7 @@ var commonsModule = (function () {
         disabledLogs: ['log', 'time', 'timeEnd'], // , info, warn
         hideHash: true,
         selector: {
-            userLanguage: '#user_language, #language, #lang'
+            userLanguage: '#roadbook_language, #user_language, #language, #lang'
         },
         // https://github.com/Wisembly/basil.js
         basil: {

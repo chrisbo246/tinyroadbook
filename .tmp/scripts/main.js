@@ -1,7 +1,7 @@
 'use strict';
 
 /*eslint-env browser, jquery */
-/*global Base64, bootstrapHelpers, ol, commonsModule, htmlEditorModule, importModule, mapControlsModule, mapLayersModule, MapModule, pickerModule, roadbookModule, styleModule, swal */
+/*global Base64, bootstrapHelpers, ol, commonsModule, htmlEditorModule, roadbookImportModule, mapControlsModule, mapLayersModule, MapModule, pickerModule, roadbookModule, styleModule, swal */
 /**
 * @fileOverview TinyRoadbook application
 * @author Christophe Boisier
@@ -16,7 +16,7 @@
 * @external bootstrapHelpers
 * @external commonsModule
 * @external htmlEditorModule
-* @external importModule
+* @external roadbookImportModule
 * @external mapControlsModule
 * @external mapLayersModule
 * @external MapModule
@@ -59,8 +59,8 @@ var appModule = function () {
     var googleMapLayer = mapLayersModule.create('googleMap');
     var googleTerrainLayer = mapLayersModule.create('googleTerrain');
     var googleSatelliteLayer = mapLayersModule.create('googleSatellite');
-    var mapquestOSMLayer = mapLayersModule.create('mapquestOSM');
-    var mapquestSatLayer = mapLayersModule.create('mapquestSat');
+    //var mapquestOSMLayer = mapLayersModule.create('mapquestOSM');
+    //var mapquestSatLayer = mapLayersModule.create('mapquestSat');
 
     // Define map overlays
     var gpxFileLayer = mapLayersModule.create('gpxFile', { zIndex: 8 });
@@ -68,7 +68,7 @@ var appModule = function () {
     var googleBikeLayer = mapLayersModule.create('googleBike', { zIndex: 6 });
     var lonviaCyclingLayer = mapLayersModule.create('lonviaCycling', { zIndex: 5 });
     var lonviaHikingLayer = mapLayersModule.create('lonviaHiking', { zIndex: 4 });
-    var mapquestHybLayer = mapLayersModule.create('mapquestHyb', { zIndex: 3 });
+    //var mapquestHybLayer = mapLayersModule.create('mapquestHyb', {zIndex: 3});
     var uniHeidelbergAsterhLayer = mapLayersModule.create('uniHeidelbergAsterh', { zIndex: 2 });
     var customOverlayLayer = mapLayersModule.create('customOverlay', { zIndex: 1 });
 
@@ -149,8 +149,14 @@ var appModule = function () {
             description = $input.val();
         }
 
+        var lang = '';
+        $input = $('#roadbook_language');
+        if ($input && $input.val()) {
+            lang = $input.val();
+        }
+
         if (roadbookEditor && styleEditor && mapIconsStyle) {
-            htmlDoc = '<html>\n' + '<head>\n' + '<title>' + title + '</title>\n' + '<meta content="text/html; charset=UTF-8" http-equiv="content-type">\n' + '<meta name="description" content="' + description + '">\n' + '<style type="text/css">\n' + styleEditor.getText() + '\n' + mapIconsStyle + '\n' + '</style>\n' + '</head>\n' + '<body>\n' + '<div class="roadbook">\n' + roadbookEditor.getHTML() + '\n' + '</div>\n' + '</body>\n' + '</html>';
+            htmlDoc = '<!DOCTYPE html>\n' + '<html lang="' + lang + '">\n' + '<head>\n' + '<title>' + title + '</title>\n' + '<meta content="text/html; charset=UTF-8" http-equiv="content-type">\n' + '<meta name="description" content="' + description + '">\n' + '<style type="text/css">\n' + styleEditor.getText() + '\n' + mapIconsStyle + '\n' + '</style>\n' + '</head>\n' + '<body>\n' + '<div class="roadbook">\n' + roadbookEditor.getHTML() + '\n' + '</div>\n' + '</body>\n' + '</html>';
 
             dfd.resolve(htmlDoc);
         }
@@ -192,21 +198,33 @@ var appModule = function () {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [customBaseLayerLayer, mapquestSatLayer, openCycleMapLayer, mapquestOSMLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer,
+                //mapquestSatLayer,
+                openCycleMapLayer,
+                //mapquestOSMLayer,
+                openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, mapquestHybLayer, lonviaHikingLayer, lonviaCyclingLayer, gpxFileLayer]
+                layers: [customOverlayLayer,
+                //mapquestHybLayer,
+                lonviaHikingLayer, lonviaCyclingLayer, gpxFileLayer]
             })];
         } else {
             layers = [new ol.layer.Group({
                 name: 'baseLayers',
                 title: 'Base map',
-                layers: [customBaseLayerLayer, googleSatelliteLayer, mapquestSatLayer, googleTerrainLayer, mapsForFreeReliefLayer, openCycleMapLayer, googleMapLayer, mapquestOSMLayer, openStreetMapLayer]
+                layers: [customBaseLayerLayer, googleSatelliteLayer,
+                //mapquestSatLayer,
+                googleTerrainLayer, mapsForFreeReliefLayer, openCycleMapLayer, googleMapLayer,
+                //mapquestOSMLayer,
+                openStreetMapLayer]
             }), new ol.layer.Group({
                 name: 'overlays',
                 title: 'Overlays',
-                layers: [customOverlayLayer, uniHeidelbergAsterhLayer, mapquestHybLayer, lonviaHikingLayer, lonviaCyclingLayer, googleBikeLayer, googleHybridLayer, gpxFileLayer]
+                layers: [customOverlayLayer, uniHeidelbergAsterhLayer,
+                //mapquestHybLayer,
+                lonviaHikingLayer, lonviaCyclingLayer, googleBikeLayer, googleHybridLayer, gpxFileLayer]
             })];
         }
         var controls = ol.control.defaults({
@@ -245,7 +263,7 @@ var appModule = function () {
         roadbookModule.init();
         htmlEditorModule.init();
         styleModule.init();
-        importModule.init();
+        roadbookImportModule.init();
 
         initAddthisWidget();
 

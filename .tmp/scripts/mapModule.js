@@ -320,7 +320,7 @@ var MapModule = function MapModule(map, settings) {
     * @return {Array}
     */
     /*var getTileURL = function (coord, zoom) {
-     var cor = transform2(coord[0], coord[1]);
+      var cor = transform2(coord[0], coord[1]);
     var lon = cor[0];
     var lat = cor[1];
     var out = [];
@@ -330,7 +330,7 @@ var MapModule = function MapModule(map, settings) {
     out[0] = zoom;
     out[1] = xtile;
     out[2] = ytile;
-     return out;
+      return out;
     };*/
 
     /**

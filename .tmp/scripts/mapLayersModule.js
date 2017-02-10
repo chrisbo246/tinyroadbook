@@ -1,6 +1,6 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*eslint-env browser, jquery */
 /*global console, $, ol, Basil, parsley, commonsModule */
@@ -920,7 +920,7 @@ var mapLayersModule = function () {
             type: 'base',
             //maxResolution: 76.43702828517625, //Z11
             source: new ol.source.XYZ({
-                maxZoom: 12,
+                maxZoom: 11,
                 urls: ['http://www.maps-for-free.com/layer/relief/z{z}/row{y}/{z}_{x}-{y}.jpg']
             })
         });
