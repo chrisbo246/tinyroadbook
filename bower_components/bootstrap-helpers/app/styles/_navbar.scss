@@ -1,0 +1,104 @@
+
+/* Assorted buttons */
+
+.navbar-default {
+    .btn-assorted {
+        @include button-variant($navbar-default-bg, $navbar-default-color, $navbar-default-toggle-border-color);
+    }
+    .btn-transparent {
+        @include button-variant($navbar-default-toggle-icon-bar-bg, transparent, $navbar-default-toggle-border-color);
+    }
+}
+
+.navbar-inverse {
+    .btn-assorted {
+        @include button-variant($navbar-inverse-bg, $navbar-inverse-color, $navbar-inverse-toggle-border-color);
+    }
+    .btn-transparent {
+        @include button-variant($navbar-inverse-toggle-icon-bar-bg, transparent, $navbar-inverse-toggle-border-color);
+    }
+}
+
+
+/* No collapse navbar fix */
+
+.navbar-no-collapse .navbar-nav > li {
+    float: left;
+}
+.navbar-no-collapse .navbar-form .form-group {
+    display: inline-block;
+}
+.navbar-no-collapse .navbar-left {
+    float: left !important;
+}
+.navbar-no-collapse .navbar-right {
+    float: right !important;
+}
+.navbar-no-collapse .navbar-form .form-control {
+    display: inline-block;
+    width: auto;
+}
+.navbar-no-collapse  .navbar-form {
+    width: auto;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+}
+
+/* Navbar */
+
+.navbar-collapse {
+    .navbar-static-bottom & {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.navbar-static-bottom {
+    z-index: $zindex-navbar;
+    border-width: 1px 0 0;
+
+    @media (min-width: $grid-float-breakpoint) {
+        border-radius: 0;
+    }
+}
+
+.navbar-center {
+    width: 100%;
+    text-align: center;
+}
+.navbar-center.navbar-brand,
+.navbar-center .navbar-brand {
+    float: none;
+}
+
+
+/* Navbar toggle */
+
+.navbar-toggle.navbar-right {
+    float: right;
+    margin-right: $navbar-padding-horizontal;
+}
+
+.navbar-toggle.navbar-left {
+    float: left;
+    margin-left: $navbar-padding-horizontal;
+}
+
+.navbar-toggle.glyphicon:before {
+    margin: 0 4px;
+}
+
+.navbar-default {
+    .navbar-toggle.glyphicon:before {
+        color: $navbar-default-toggle-icon-bar-bg;
+    }
+}
+
+.navbar-inverse {
+    .navbar-toggle.glyphicon:before {
+        color: $navbar-inverse-toggle-icon-bar-bg;
+    }
+}

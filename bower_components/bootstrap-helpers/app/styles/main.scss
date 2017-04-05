@@ -1,0 +1,19 @@
+$icon-font-path: '../fonts/';
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import "bootstrap-helpers";
+
+body {
+    padding-top: $navbar-height + floor(($grid-gutter-width / 2));
+    padding-bottom: $navbar-height + floor(($grid-gutter-width / 2));
+}
+
+.ad_container {
+    //background-color: #eee;
+    .adsbygoogle {
+        background-color: #f00;
+    }
+}

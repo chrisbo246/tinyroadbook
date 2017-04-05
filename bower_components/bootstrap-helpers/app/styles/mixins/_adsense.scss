@@ -1,0 +1,29 @@
+
+@mixin vertical-ad-container($ad-width, $ad-height, $ad-gutter-width: 0) {
+    .ad_container {
+        display: block;
+        width: $ad-width + $ad-gutter-width;
+        .adsbygoogle {
+            width: $ad-width;
+            height: $ad-height;
+        }
+    }
+    .container,
+    .container-fluid {
+        padding-left: $ad-width + $ad-gutter-width + floor(($grid-gutter-width / 2));
+    }
+}
+
+@mixin horizontal-ad-container($ad-width, $ad-height, $ad-gutter-width: 0) {
+    .ad_container {
+        display: block;
+        height: $ad-height + $ad-gutter-width;
+        .adsbygoogle {
+            width: $ad-width;
+            height: $ad-height;
+        }
+    }
+    body > div:last-of-type {
+        padding-bottom: $ad-height + $ad-gutter-width !important;
+    }
+}

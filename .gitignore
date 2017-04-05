@@ -1,6 +1,54 @@
-node_modules
-.tmp
+
+# Skip unwanted files created by Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Skip the Jekyll compiled files, Github pages will compile for you
+_site
+
+# Skip Jekyll temp files
 .sass-cache
-bower_components
-test/bower_components
+.jekyll-metadata
+.tmp
 *.log
+
+# Node modules are only useful locally
+node_modules
+
+# Skip Bower dependencies sources, examples, etc...
+bower_components/basil.js/*
+bower_components/bootstrap-helpers/*
+bower_components/bootstrap-sass/*
+bower_components/chai/*
+bower_components/cookieconsent/*
+bower_components/jquery/*
+bower_components/js-base64/*
+bower_components/mocha/*
+bower_components/modernizr/*
+bower_components/ol3/*
+bower_components/ol3-layerswitcher/*
+bower_components/openlayers-helpers/*
+bower_components/parsleyjs/*
+bower_components/quill/*
+bower_components/sweetalert/*
+bower_components/webapp-helpers/*
+
+# Except used files (parent directories must not be exclude)
+!bower_components/basil.js/build
+!bower_components/basil.js/src
+!bower_components/bootstrap-helpers/app
+!bower_components/bootstrap-helpers/dist
+!bower_components/bootstrap-sass/assets
+!bower_components/cookieconsent/build
+!bower_components/jquery/dist
+!bower_components/js-base64/*.js
+!bower_components/modernizr/*.js
+!bower_components/ol3/*.js
+!bower_components/ol3/*.css
+!bower_components/ol3-layerswitcher/src
+!bower_components/openlayers-helpers/dist
+!bower_components/parsleyjs/dist
+!bower_components/quill/dist
+!bower_components/sweetalert/dist
+!bower_components/webapp-helpers/dist

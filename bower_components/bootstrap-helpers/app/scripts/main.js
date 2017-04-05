@@ -1,0 +1,4 @@
+
+bootstrapHelpers.init({
+    debug: true
+});

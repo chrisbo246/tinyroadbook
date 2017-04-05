@@ -1,0 +1,18 @@
+
+.link-unstyled, .link-unstyled:hover, .link-unstyled:focus {
+    color: $text-color;
+    text-decoration: none!important;
+}
+
+.link-unstyled:focus {
+    outline: none;
+}
+
+table a.link-unstyled:not(.btn), .table a.link-unstyled:not(.btn) {
+    color: $text-color;
+}
+
+.link-block {
+    display: block;
+    height: 100%;
+}

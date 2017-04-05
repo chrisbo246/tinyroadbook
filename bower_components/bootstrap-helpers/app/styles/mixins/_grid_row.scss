@@ -1,0 +1,16 @@
+
+@mixin make-grid-row($index, $class, $gutter: $grid-gutter-width) {
+    .row-#{$class}-#{$index} {
+        height: percentage(($index / $grid-columns));
+        margin-left:  ceil(($gutter / -2));
+        margin-right: floor(($gutter / -2));
+        &:before,
+        &:after {
+            content: " ";
+            display: table;
+        }
+        &:after {
+            clear: both;
+        }
+    }
+}

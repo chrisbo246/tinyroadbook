@@ -1,0 +1,102 @@
+
+/* Ad container */
+
+.ad_container {
+    z-index: $zindex-navbar-fixed;
+    display: none;
+    overflow: hidden;
+    background: $ad-bg;
+    padding-left: ceil(($ad-gutter-width / 2));
+    padding-right: floor(($ad-gutter-width / 2));
+    padding-top: ceil(($ad-gutter-width / 2));
+    padding-bottom: floor(($ad-gutter-width / 2));
+}
+
+
+/* Horizontal ad definition ------------------------------------------------ */
+
+// Horizontal screen 0px > 319px (none)
+@media (orientation: landscape) {
+    .ad_container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+}
+
+// Horizontal screen 568px > 767px (120x240)
+@media (orientation: landscape) and (min-width: 568px) and (min-height: 240px + $ad-gutter-width) {
+    @include vertical-ad-container(120px, 240px, $ad-gutter-width);
+}
+
+// Horizontal screen 768px > 991px (120x600)
+@media (orientation: landscape) and (min-width: $screen-sm-min) and (min-height: 600px + $ad-gutter-width) {
+    @include vertical-ad-container(120px, 600px, $ad-gutter-width);
+}
+
+// Horizontal screen 992px > 1199px (120x600)
+@media (orientation: landscape) and (min-width: $screen-md-min) and (min-height: 600px + $ad-gutter-width) {
+    @include vertical-ad-container(120px, 600px, $ad-gutter-width);
+}
+
+// Horizontal screen 1200px > 1979px (160x600)
+@media (orientation: landscape) and (min-width: $screen-lg-min) and (min-height: 600px + $ad-gutter-width) {
+    @include vertical-ad-container(160px, 600px, $ad-gutter-width);
+}
+
+// Horizontal screen 1920px > + (300x600)
+@media (orientation: landscape) and (min-width: 1920px) and (min-height: 600px + $ad-gutter-width) {
+    @include vertical-ad-container(300px, 600px, $ad-gutter-width);
+}
+
+// Horizontal screen 1920px (300x1050)
+@media (orientation: landscape) and (min-width: 1920px) and (min-height: 1050px + $ad-gutter-width) {
+    @include vertical-ad-container(300px, 1050px, $ad-gutter-width);
+}
+
+
+/* Vertical ad definition -------------------------------------------------- */
+
+// Vertical screen 0px > 233px (none)
+@media (orientation: portrait) {
+    .ad_container {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    body > div:last-of-type {
+        overflow: auto;
+    }
+}
+
+// Vertical screen 234px > 319px (234x60)
+@media (orientation: portrait) and (min-width: 234px + $ad-gutter-width) and (min-height: 312px) {
+    @include horizontal-ad-container(234px, 60px, $ad-gutter-width);
+}
+
+// Vertical screen 320px > 467px (320x50, 320x100)
+@media (orientation: portrait) and (min-width: 320px + $ad-gutter-width) and (min-height: 568px) {
+    @include horizontal-ad-container(320px, 50px, $ad-gutter-width);
+}
+
+// Vertical screen 468px > 727px (468x60)
+@media (orientation: portrait) and (min-width: 468px + $ad-gutter-width) and (min-height: 624px) {
+    @include horizontal-ad-container(468px, 60px, $ad-gutter-width);
+}
+
+// Vertical screen 728px > 969px (728x90)
+@media (orientation: portrait) and (min-width: 728px + $ad-gutter-width) and (min-height: 970px) {
+    @include horizontal-ad-container(728px, 90px, $ad-gutter-width);
+}
+
+// Vertical screen 970px > 1199px (970x90)
+@media (orientation: portrait) and (min-width: 970px + $ad-gutter-width) {
+    @include horizontal-ad-container(970px, 90px, $ad-gutter-width);
+}
+
+// Vertical screen > 1200px (970x250)
+@media (orientation: portrait) and (min-width: $screen-lg-min) {
+    @include horizontal-ad-container(970px, 250px, $ad-gutter-width);
+}

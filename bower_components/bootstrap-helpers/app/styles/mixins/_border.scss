@@ -1,0 +1,8 @@
+
+@mixin surrounded-variant($i, $scale) {
+    .list-number-surrounded-#{$i} li:before,
+    .surrounded-#{$i}{
+        width: ceil(($font-size-base * $scale));
+        height: ceil(($font-size-base * $scale));
+    }
+}

@@ -1,0 +1,72 @@
+
+/* ===[ ol with styled numbers ]=== */
+
+.list-number-surrounded {
+    counter-reset: section;
+    list-style-type: none;
+    @media (max-width: $screen-xs) {
+        padding-left: 0;
+    }
+}
+
+.list-number-surrounded li:before {
+    counter-increment: section;
+    content: counter(section) " ";
+    margin-right: 1em;
+    float:left;
+    display: inline-block;
+    //vertical-align: -50%;
+}
+
+
+/* ===[ Surrounded icon or number ]=== */
+
+.list-number-surrounded li:before,
+.surrounded{
+    border: solid 2px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+}
+
+@include surrounded-variant(lg, 4 / 3);
+@include surrounded-variant(2x, 2);
+@include surrounded-variant(3x, 3);
+@include surrounded-variant(4x, 4);
+@include surrounded-variant(5x, 5);
+@include surrounded-variant(6x, 6);
+@include surrounded-variant(7x, 7);
+@include surrounded-variant(8x, 8);
+@include surrounded-variant(9x, 9);
+@include surrounded-variant(10x, 10);
+@include surrounded-variant(15x, 15);
+@include surrounded-variant(20x, 20);
+
+.list-number-surrounded li,
+.list-number li {
+    //float: left;
+    clear: both;
+    padding-bottom: .5em;
+}
+/*
+.list-number-surrounded-lg li {
+line-height: 1.2em;
+}
+.list-number-surrounded-2x li {
+line-height: 2em;
+}
+.list-number-surrounded-3x li {
+line-height: 3em;
+}
+.list-number-surrounded-4x li {
+line-height: 4em;
+}
+.list-number-surrounded-5x li {
+line-height: 5em;
+}
+*/
+.list-number-surrounded-circle li:before,
+.surrounded-circle {
+    border-radius: 50%;
+}

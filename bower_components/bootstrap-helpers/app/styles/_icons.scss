@@ -1,0 +1,87 @@
+
+// Base Class Definition
+// -------------------------
+
+/*.glyphicon {
+display: inline-block;
+font: normal normal normal $icon-font-size-base/1 FontAwesome; // shortening font declaration
+font-size: inherit; // can't have font-size inherit on line above, so need to override
+text-rendering: auto; // optimizelegibility throws things off #1094
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+}*/
+
+// Icon Sizes
+// -------------------------
+.glyphicon-lg {
+    font-size: (4em / 3);
+    line-height: (3em / 4);
+    vertical-align: -15%;
+}
+.glyphicon-2x { font-size: 2em; }
+.glyphicon-3x { font-size: 3em; }
+.glyphicon-4x { font-size: 4em; }
+.glyphicon-5x { font-size: 5em; }
+
+// List Icons
+// -------------------------
+
+.glyphicon-ul {
+    padding-left: 0;
+    margin-left: $icon-li-width;
+    list-style-type: none;
+    > li { position: relative; }
+}
+.glyphicon-li {
+    position: absolute;
+    left: -$icon-li-width;
+    width: $icon-li-width;
+    top: (2em / 14);
+    text-align: center;
+    &.glyphicon-lg {
+        left: (-$icon-li-width + (4em / 14));
+    }
+}
+// Bordered & Pulled
+// -------------------------
+
+.glyphicon-border {
+    padding: .2em .25em .15em;
+    border: solid .08em $icon-border-color;
+    border-radius: .1em;
+}
+
+.glyphicon {
+    &.pull-left { margin-right: .3em; }
+    &.pull-right { margin-left: .3em; }
+}
+
+// Fixed Width Icons
+// -------------------------
+.glyphicon-fw {
+    width: (18em / 14);
+    text-align: center;
+}
+
+
+// Stacked Icons
+// -------------------------
+
+.glyphicon-stack {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+.glyphicon-stack-1x, .glyphicon-stack-2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+.glyphicon-stack-1x { line-height: inherit; }
+.glyphicon-stack-2x { font-size: 2em; }
+.glyphicon-inverse { color: $icon-inverse; }

@@ -1,0 +1,58 @@
+
+@include make-grid-row(1, xs);
+@include make-grid-row(2, xs);
+@include make-grid-row(3, xs);
+@include make-grid-row(4, xs);
+@include make-grid-row(5, xs);
+@include make-grid-row(6, xs);
+@include make-grid-row(7, xs);
+@include make-grid-row(8, xs);
+@include make-grid-row(9, xs);
+@include make-grid-row(10, xs);
+@include make-grid-row(11, xs);
+@include make-grid-row(12, xs);
+
+@media (min-width: $screen-sm-min) {
+    @include make-grid-row(1, sm);
+    @include make-grid-row(2, sm);
+    @include make-grid-row(3, sm);
+    @include make-grid-row(4, sm);
+    @include make-grid-row(5, sm);
+    @include make-grid-row(6, sm);
+    @include make-grid-row(7, sm);
+    @include make-grid-row(8, sm);
+    @include make-grid-row(9, sm);
+    @include make-grid-row(10, sm);
+    @include make-grid-row(11, sm);
+    @include make-grid-row(12, sm);
+}
+
+@media (min-width: $screen-md-min) {
+    @include make-grid-row(1, md);
+    @include make-grid-row(2, md);
+    @include make-grid-row(3, md);
+    @include make-grid-row(4, md);
+    @include make-grid-row(5, md);
+    @include make-grid-row(6, md);
+    @include make-grid-row(7, md);
+    @include make-grid-row(8, md);
+    @include make-grid-row(9, md);
+    @include make-grid-row(10, md);
+    @include make-grid-row(11, md);
+    @include make-grid-row(12, md);
+}
+
+@media (min-width: $screen-lg-min) {
+    @include make-grid-row(1, lg);
+    @include make-grid-row(2, lg);
+    @include make-grid-row(3, lg);
+    @include make-grid-row(4, lg);
+    @include make-grid-row(5, lg);
+    @include make-grid-row(6, lg);
+    @include make-grid-row(7, lg);
+    @include make-grid-row(8, lg);
+    @include make-grid-row(9, lg);
+    @include make-grid-row(10, lg);
+    @include make-grid-row(11, lg);
+    @include make-grid-row(12, lg);
+}

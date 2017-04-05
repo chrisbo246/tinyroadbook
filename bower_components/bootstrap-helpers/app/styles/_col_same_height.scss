@@ -1,0 +1,99 @@
+
+.row.full-height,
+.row-full-height {
+    height: 100%;
+}
+
+.col-full-height {
+    height: 100%;
+    vertical-align: middle;
+}
+
+@media (max-width: $screen-md) {
+    $grid-size: 100% / $grid-columns;
+    .col-full-height {
+        &.col-md-1 {
+            height: $grid-size * 1;
+        }
+        &.col-md-2 {
+            height: $grid-size * 2;
+        }
+        &.col-md-3 {
+            height: $grid-size * 3;
+        }
+        &.col-md-4 {
+            height: $grid-size * 4;
+        }
+        &.col-md-5 {
+            height: $grid-size * 5;
+        }
+        &.col-md-6 {
+            height: $grid-size * 6;
+        }
+        &.col-md-7 {
+            height: $grid-size * 7;
+        }
+        &.col-md-8 {
+            height: $grid-size * 8;
+        }
+        &.col-md-9 {
+            height: $grid-size * 9;
+        }
+        &.col-md-10 {
+            height: $grid-size * 10;
+        }
+        &.col-md-11 {
+            height: $grid-size * 11;
+        }
+        &.col-md-12 {
+            height: $grid-size * 12;
+        }
+    }
+}
+
+.row-same-height {
+    display: table;
+    width: 100%;
+    /* fix overflow */
+    table-layout: fixed;
+}
+
+.col-xs-height {
+    display: table-cell;
+    float: none !important;
+}
+
+@media (min-width: $screen-sm) {
+    .col-sm-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: $screen-md) {
+    .col-md-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: $screen-lg) {
+    .col-lg-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+
+
+
+/* Vertical align */
+
+.col-top {
+    vertical-align: top;
+}
+
+.col-middle {
+    vertical-align: middle;
+}
+
+.col-bottom {
+    vertical-align: bottom;
+}

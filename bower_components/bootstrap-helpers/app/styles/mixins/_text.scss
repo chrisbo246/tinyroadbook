@@ -1,0 +1,15 @@
+
+@mixin text-scale-variant($i, $scale) {
+    .list-number-#{$i} li:before,
+    .text-#{$i}.mdi:before,
+    .text-#{$i} {
+        font-size: ceil(($font-size-base * $scale * 0.75));
+    }
+    @media screen and (min-width: $screen-sm-min) {
+        .list-number-#{$i} li:before,
+        .text-#{$i}.mdi:before,
+        .text-#{$i} {
+            font-size: ceil(($font-size-base * $scale));
+        }
+    }
+}
